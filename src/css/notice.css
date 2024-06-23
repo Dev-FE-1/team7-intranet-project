@@ -1,0 +1,32 @@
+.notice{
+    padding:10px;
+    width:100%;
+    border-radius: 10px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing:border-box;
+}
+.notice__right{
+    display:flex;
+    align-items: center; /*요소 세로 중앙 정렬*/
+    justify-content: end;
+}
+.notice__inputText{
+    color: #9cbbbe;
+    margin-right: 50px;
+}
+.notice__label{
+    top:20px;
+    font-size: 20px;
+    display:flex;
+}
+.notice__container{
+    background-color: azure;
+    padding:50px;
+    box-sizing:border-box;
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+.notice--btn{
+    width:80px;
+}
