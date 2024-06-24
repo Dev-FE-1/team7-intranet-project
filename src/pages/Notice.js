@@ -1,17 +1,16 @@
 export default function Notice(root) {
   root.innerHTML = `
             <div class='notice'>
-            <div class="notice__label">공지사항</div> 
-            <div class="notice__right">  
-              <div class="notice__search">
-                <input type="text" class="inputText notice__inputText" placeholder="검색어를 입력해주세요." />
+            <div class="notice__label">공지사항</div>   
+              <div class="notice__right">
+                <div class="notice__search">
+                  <input type="text" class="inputText notice__inputText" placeholder="검색어를 입력해주세요." />
+                </div>
+                <input type="button" value="등록" class="btn btn--notice"/>
               </div>
-            <input type="button" value="등록" class="btn btn--notice"/>
-            </div>
             <div class="notice__container">
-            
             </div>
-    </div>`;
+        </div>`;
     
   const noticeContainer=document.querySelector('.notice__container');
 
