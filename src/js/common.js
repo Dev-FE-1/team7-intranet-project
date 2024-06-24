@@ -44,7 +44,7 @@ export function renderNav() {
             <img
             src="/public/profile-default.png"
             class="nav__photo"
-            alt="navprofile"
+            alt="navprofile 
             />
             <div>
               <div class="nav__name">OOO님</div>

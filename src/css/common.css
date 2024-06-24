@@ -1,3 +1,9 @@
+/*  font */
+@font-face {
+  font-family: 'pretendard-regular';
+  src: url(/src/assets/fonts/pretendard-regular.woff);
+}
+
 * {
 }
 a {
@@ -14,6 +20,7 @@ body,
   height: 100%;
   display: flex;
   min-height: 600px;
+  font-family: 'pretendard-regular';
 }
 .container {
   width: 100%;
@@ -67,7 +74,7 @@ body,
 }
 .nav__item:hover > a {
   background-color: #11474b;
-  font-family: "s-core5";
+  font-weight: bold;
 }
 .nav__profile {
   width: 310px;
@@ -370,21 +377,17 @@ body,
   box-sizing: border-box;
   cursor: pointer;
 }
-
 .listTable__tr--hover:hover {
   background-color: #f1f1f1;
 }
-
 .listTable__th,
 .listTable__td {
   flex: 1;
 }
-
 .listTable__th:last-child,
 .listTable__td:last-child {
   flex: 2;
 }
-
 .listTable__th {
   font-weight: bold;
 }

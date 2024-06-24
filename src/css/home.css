@@ -1,0 +1,16 @@
+/* home */
+.home {
+  width: 100%;
+  background-color: orange;
+}
+
+/* profileCard */
+.home__profileCard {
+  width: 60%;
+  display: flex;
+  overflow: hidden;
+}
+.home__textBox {
+}
+.home__profileBox {
+}
