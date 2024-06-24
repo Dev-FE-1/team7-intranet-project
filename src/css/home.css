@@ -1,16 +1,126 @@
+/*  font */
+@font-face {
+  font-family: 'cafe24-ohsquare-air';
+  src: url(/src/assets/fonts/cafe24-ohsquare-air.woff);
+}
+
 /* home */
 .home {
   width: 100%;
-  background-color: orange;
+  display: flex;
+  justify-content: space-around;
 }
 
 /* profileCard */
 .home__profileCard {
-  width: 60%;
+  width: 55%;
+  min-width: 630px;
   display: flex;
   overflow: hidden;
+  padding: 30px 40px;
+  font-family: 'cafe24-ohsquare-air';
+  color: #012e33;
 }
 .home__textBox {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.home__today {
+  font-weight: bold;
+}
+.home__week {
+  font-size: 70px;
+}
+.home__date {
+  margin-top: 20px;
+  font-size: 40px;
+}
+.home__welcome {
+  margin-top: 30px;
+  font-size: 25px;
+}
+.home__goodDay {
+  margin-top: 10px;
+  color: #67cdcc;
 }
 .home__profileBox {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.home__profileImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  background-color: #edf6f5;
+}
+.home__dept {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+/* workCard */
+.home__workCard {
+  width: 35%;
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #012e33;
+}
+.home__timeBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.home__time {
+  font-size: 70px;
+  letter-spacing: 10px;
+}
+.home__timeText {
+  width: 70px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 3px;
+}
+.home__second {
+  font-size: 35px;
+  letter-spacing: 5px;
+}
+.home__workBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home__infoBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home__workInfo {
+}
+.home__workBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.home__workBtn:hover .playIcon {
+  color: #fff;
 }

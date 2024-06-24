@@ -119,8 +119,8 @@ body,
   border-radius: 5px;
   padding: 10px 25px;
   color: #333;
-  background-color: #5ab2b2;
-  border: 1px solid #69d0cf;
+  background-color: #69d0cf;
+  border: 1px solid #5ab2b2;
   box-sizing: border-box;
   text-align: center;
 }
@@ -130,7 +130,7 @@ body,
 .btn:hover {
   color: #fff;
   background-color: #012e33;
-  border: 1px solid #69d0cf;
+  border: 1px solid #5ab2b2;
   cursor: pointer;
 }
 
