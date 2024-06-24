@@ -67,7 +67,7 @@ body,
 }
 .nav__item:hover > a {
   background-color: #11474b;
-  font-family: 's-core5';
+  font-family: "s-core5";
 }
 .nav__profile {
   width: 310px;
@@ -356,4 +356,35 @@ body,
 }
 .selectBox__option:hover {
   background-color: #69d0cf;
+}
+
+/* listTable */
+.listTable {
+}
+.listTable__tr {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px 10px;
+  border-bottom: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.listTable__tr--hover:hover {
+  background-color: #f1f1f1;
+}
+
+.listTable__th,
+.listTable__td {
+  flex: 1;
+}
+
+.listTable__th:last-child,
+.listTable__td:last-child {
+  flex: 2;
+}
+
+.listTable__th {
+  font-weight: bold;
 }
