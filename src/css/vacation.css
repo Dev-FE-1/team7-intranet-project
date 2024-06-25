@@ -1,0 +1,97 @@
+/* common.css 이동 */
+input[type='radio'] {
+  cursor: inherit;
+  margin: 0;
+}
+label {
+  cursor: inherit;
+}
+input[disabled] {
+  cursor: initial;
+}
+.modal {
+  display: none;
+}
+/*  reset.css
+input[type='radio'] {
+  background-color: initial;
+  cursor: default;
+  appearance: auto;
+  box-sizing: border-box;
+  margin: 3px 3px 0px 5px;
+  padding: initial;
+  border: initial;
+}
+*/
+
+.selectBox {
+  background-color: #fff;
+}
+
+/* common.css 이동 */
+
+.vacation {
+  width: 100%;
+}
+.vacation__card {
+  width: 100%;
+  height: auto;
+}
+.vacation__pageTitle {
+  font-size: 22px;
+  font-weight: bold;
+}
+.vacation__searchArea {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px 0;
+}
+.vacation__pagination {
+  margin: 40px auto;
+}
+
+.vacation__category,
+.vacation__sDate,
+.vacation__eDate,
+.vacation__outingTime,
+.vacation__reason {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 30px;
+}
+
+.vacatjion__categoryTitle,
+.vacation__sDateTitle,
+.vacation__eDateTitle,
+.vacation__outingTimeTitle,
+.vacation__reasonTitle {
+  min-width: 100px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.vacation__categoryItem {
+  cursor: pointer;
+}
+.vacation__categoryItem:has(input[disabled]) {
+  cursor: initial;
+}
+
+.vacation__outingStimeSelect,
+.vacation__outingEtimeSelect,
+.vacation__inputText {
+  width: 150px;
+}
+.vacation__inputTextarea {
+  width: 330px;
+  height: 80px;
+  padding: 10px;
+}
+
+.vacation__applyModal,
+.vacation__detailModal {
+  z-index: 1;
+}
