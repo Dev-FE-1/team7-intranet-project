@@ -2,7 +2,7 @@ import Home from '/src/pages/Home.js';
 import Notice from '/src/pages/Notice.js';
 import Vacation from '/src/pages/Vacation.js';
 import Employee from '/src/pages/Employee.js';
-import { renderNav, renderSelectBox } from './common';
+import { renderNav } from './common';
 
 const app = () => {
   init();
@@ -13,7 +13,7 @@ const app = () => {
 const init = () => {
   ui();
   window.addEventListener('popstate', route);
-  document.body.addEventListener('click', navigatePage);
+  document.querySelector('.nav').addEventListener('click', navigatePage);
 };
 
 // UI 로직 함수

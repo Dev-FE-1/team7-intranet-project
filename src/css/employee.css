@@ -1,3 +1,4 @@
+/* 임직원 헤더 */
 .employee__search {
   align-items: center;
   justify-content: center;
@@ -55,12 +56,9 @@ input[type='checkbox'] {
   display: block;
 }
 
-div {
-  box-sizing: border-box;
-  border: 1px solid red;
-}
-
+/* 프로필 이미지 */
 .profile__image {
+  border-radius: 15px;
 }
 .profile__image--small {
   display: inline-block;
@@ -72,35 +70,39 @@ div {
   border: 1px solid #e0e0e0;
 }
 
+/* 임직원 리스트 페이지네이션 */
 .employee__footer {
   display: flex;
   justify-content: center;
 }
 
+/* 임직원 모달창 */
+.modal {
+  max-width: 700px;
+}
 .modal__content {
+  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
 .modal__inner {
   width: 50%;
   min-width: 300px;
   align-items: center;
   justify-content: center;
 }
-
-.modal__content {
-  border: 1px solid red;
-  width: 600px;
+.modal__sub {
+  display: flex;
 }
 
+/* 임직원 모달창 프로필 사진 */
 .modal__employeeImage {
   display: relative;
-  border-radius: 15px;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
+  padding-right: 40px;
 }
 .modal__employeeImage--overlay {
   position: absolute;
@@ -118,14 +120,10 @@ div {
   opacity: 0;
   transition: opacity 0.3s;
 }
-
 .profile__image--modal:hover .modal__employeeImage--overlay {
   opacity: 1;
 }
-
 .profile__image--Modal {
-  display: flex;
-  align-items: center;
 }
 .modal__employeeText {
   display: flex;
@@ -143,22 +141,24 @@ div {
   height: 30px;
 }
 
+/* 임직원 모달창 정보 */
 .employee__form {
   display: relative;
-  flex-grow: 0;
+  flex-grow: 1;
+  padding-bottom: 20px;
 }
-
 .employee__form--group {
   margin-bottom: 10px;
   display: flex;
 }
-
 .employee__form--group label {
   width: 80px;
   text-align: left;
   margin-right: 10px;
+  vertical-align: middle;
+  margin-top: auto;
+  margin-bottom: auto;
 }
-
 .employee__form--group input {
   width: calc(100% - 90px);
   padding: 5px;
