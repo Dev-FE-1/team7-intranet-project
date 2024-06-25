@@ -1,0 +1,167 @@
+.employee__search {
+  align-items: center;
+  justify-content: center;
+}
+
+.employee {
+  margin: 30 auto;
+}
+
+.employee__title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.inputText {
+  width: 15vw;
+  height: 30px;
+}
+
+.employee__search {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+table {
+  min-width: 60vw;
+  margin-bottom: 20px;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+table,
+th,
+td {
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+}
+
+th,
+td {
+  padding: 8px;
+}
+
+thead {
+  background-color: #edf6f5;
+}
+
+input[type='checkbox'] {
+  border: #e0e0e0;
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+}
+
+div {
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+
+.profile__image {
+}
+.profile__image--small {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  margin-right: 10px;
+  vertical-align: middle;
+  border: 1px solid #e0e0e0;
+}
+
+.employee__footer {
+  display: flex;
+  justify-content: center;
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__inner {
+  width: 50%;
+  min-width: 300px;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__content {
+  border: 1px solid red;
+  width: 600px;
+}
+
+.modal__employeeImage {
+  display: relative;
+  border-radius: 15px;
+  width: 250px;
+  height: 250px;
+}
+.modal__employeeImage--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 48px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profile__image--modal:hover .modal__employeeImage--overlay {
+  opacity: 1;
+}
+
+.profile__image--Modal {
+  display: flex;
+  align-items: center;
+}
+.modal__employeeText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+.inputText__employee {
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  vertical-align: middle;
+  width: 200px;
+  height: 30px;
+}
+
+.employee__form {
+  display: relative;
+  flex-grow: 0;
+}
+
+.employee__form--group {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.employee__form--group label {
+  width: 80px;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.employee__form--group input {
+  width: calc(100% - 90px);
+  padding: 5px;
+  border: 1px solid #69d0cf;
+  border-radius: 5px;
+}
