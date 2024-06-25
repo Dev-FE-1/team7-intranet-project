@@ -8,13 +8,18 @@
 .home {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+}
+
+/* firstLine */
+.home__firstLine {
+  width: 100%;
+  display: flex;
+  gap: 30px;
 }
 
 /* profileCard */
 .home__profileCard {
-  width: 55%;
-  min-width: 630px;
+  flex: 1.8;
   display: flex;
   overflow: hidden;
   padding: 30px 40px;
@@ -26,21 +31,21 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  justify-content: center;
 }
 .home__today {
   font-weight: bold;
 }
 .home__week {
-  font-size: 70px;
+  font-size: 55px;
 }
 .home__date {
   margin-top: 20px;
-  font-size: 40px;
+  font-size: 30px;
 }
 .home__welcome {
   margin-top: 30px;
-  font-size: 25px;
+  font-size: 22px;
 }
 .home__goodDay {
   margin-top: 10px;
@@ -55,24 +60,24 @@
   flex-direction: column;
 }
 .home__profileImg {
-  width: 200px;
-  height: 200px;
-  border-radius: 15px;
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
   background-color: #edf6f5;
 }
 .home__dept {
-  margin-top: 10px;
-  font-size: 20px;
+  margin-top: 15px;
+  font-size: 18px;
 }
 
 /* workCard */
 .home__workCard {
-  width: 35%;
-  min-width: 350px;
+  flex: 1.2;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #012e33;
+  overflow: hidden;
 }
 .home__timeBox {
   width: 100%;
@@ -84,7 +89,8 @@
   border-bottom: 1px solid #e0e0e0;
 }
 .home__time {
-  font-size: 70px;
+  margin-left: 10px;
+  font-size: 55px;
   letter-spacing: 10px;
 }
 .home__timeText {
@@ -95,6 +101,10 @@
   justify-content: space-around;
   margin-left: 3px;
 }
+.home__now {
+  display: flex;
+  justify-content: center;
+}
 .home__second {
   font-size: 35px;
   letter-spacing: 5px;
@@ -103,24 +113,54 @@
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.home__infoBox {
+.home__notWorkInfo {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .home__workInfo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home__workStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+.home__workEmoji {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #69d0cf;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.home__workText {
+  letter-spacing: 1px;
+  padding-bottom: 40px;
 }
 .home__workBtn {
   width: 100%;
   display: flex;
+  position: absolute;
+  bottom: 0;
   justify-content: center;
 }
-.home__workBtn:hover .playIcon {
+.home__workBtn:hover .home__workIcon {
   color: #fff;
 }
