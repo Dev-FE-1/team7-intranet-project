@@ -60,7 +60,7 @@ export default function Notice(root) {
     const cardData=JSON.parse(card.getAttribute('card-data'));
 
       noticeModal.innerHTML= `
-      <div class="modal--bgWhite"> 
+      <div class="modal modal--lg modal--bgWhite"> 
         <div class="modal__bb"></div>
         <div class="modal__inner">
           <div class="noticeModal__bar">

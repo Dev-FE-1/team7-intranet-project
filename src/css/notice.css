@@ -48,7 +48,7 @@
   margin-left: -45px;
 }
 .notice__label{
-  width:300px;
+  min-width:300px;
   font-size: 25px;
   margin-bottom:8px;
 }
@@ -75,6 +75,12 @@
 /*notice-modal*/
 .modal__hidden{
   visibility: hidden;
+}
+.modal--lg .modal__inner {
+  width: 30%;
+}
+.noticeModal__card{
+  z-index: 1;
 }
 .noticeModal__bar{
   font-size:18px;
