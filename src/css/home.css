@@ -10,6 +10,11 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
 }
 
 /* firstLine */

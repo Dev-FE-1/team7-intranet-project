@@ -47,47 +47,11 @@ export default function Home(root) {
       </div>
     </div>
   </div>
-  
-  <div class="selectBox">
-  <label class="selectBox__label">옵션 1</label>
-  <svg
-    fill=""
-    version="1.1"
-    class="selectBox__arrow"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    viewBox="0 0 24 24"
-    xml:space="preserve"
-    stroke=""
-  >
-    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-    <g
-      id="SVGRepo_tracerCarrier"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    ></g>
-    <g id="SVGRepo_iconCarrier">
-      <style type="text/css">
-        .st0 {
-          fill: none;
-        }
-      </style>
-      <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
-      <rect class="st0" width="24" height="24"></rect>
-      <rect class="st0" width="24" height="24"></rect>
-    </g>
-  </svg>
-  <ul class="selectBox__list selectBox__list--none">
-    <li class="selectBox__option">옵션 1</li>
-    <li class="selectBox__option">옵션 2</li>
-    <li class="selectBox__option">옵션 3</li>
-  </ul>
-</div>
 </div>`;
 
   // 시간 데이터를 1초에 1번씩 실행
-  setInterval(timeRender, 1000);
-  timeRender();
+  setInterval(renderTime, 1000);
+  renderTime();
 
   useSelectBox();
 
@@ -97,7 +61,7 @@ export default function Home(root) {
     .addEventListener('click', workBtnHandler);
 
   // 공지사항 목록 렌더링
-  noticeRender();
+  renderNotice();
 }
 
 // 근무 상태를 관리하기 위한 임시 배열
@@ -129,7 +93,7 @@ const notice = [
 ];
 
 // 시간 데이터를 현재 시간 카드에 렌더링하는 함수
-const timeRender = () => {
+const renderTime = () => {
   document.querySelector('.home__time').innerHTML = `${getTime().hour}:${
     getTime().minute
   }`;
@@ -137,7 +101,7 @@ const timeRender = () => {
 };
 
 // 근무 상태에 맞게 카드 내용을 렌더링하는 함수
-const workRender = () => {
+const renderWork = () => {
   document.querySelector('.home__workBox').innerHTML = work[0]
     ? `<div class="home__notWorkInfo">
   <p class="home__workText">오늘은 아직 근무를 시작하지 않았어요.</p>
@@ -155,7 +119,7 @@ const workRender = () => {
 };
 
 // 공지사항 목록에 공지사항 카드를 렌더링하는 함수
-const noticeRender = () => {
+const renderNotice = () => {
   document.querySelector('.home__noticeList').innerHTML = notice
     .map(
       (n) =>
@@ -202,7 +166,7 @@ const workBtnHandler = (event) => {
   // 현재 클릭한 요소가 workCard 내의 button이 아니라면 return
   if (!event.target.closest('button')) return;
 
-  workRender();
+  renderWork();
 
   // 근무 상태 임시 배열 토글
   work[0] = !work[0];
