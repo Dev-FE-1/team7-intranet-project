@@ -42,24 +42,47 @@ export function renderNav() {
 
 // selectBox 동작 로직
 export function useSelectBox() {
-  const labels = document.querySelectorAll('.selectBox__label');
-  labels.forEach((label) =>
-    label.addEventListener('click', (e) => {
-      const list = e.target.nextElementSibling.nextElementSibling;
+  const selectBoxes = document.querySelectorAll('.selectBox');
 
-      list.className = list.classList.contains('selectBox__list--none')
-        ? 'selectBox__list'
-        : 'selectBox__list selectBox__list--none';
-    })
-  );
+  selectBoxes.forEach((selectBox) => {
+    const label = selectBox.querySelector('.selectBox__label');
+    const list = selectBox.querySelector('.selectBox__list');
 
-  const options = document.querySelectorAll('.selectBox li');
+    // selectBox의 label을 클릭했을 때, 옵션 노출 상태를 토글
+    selectBox.addEventListener('click', (e) => {
+      if (selectBox !== e.target.closest('.selectBox')) return;
 
-  options.forEach((option) => {
-    option.addEventListener('click', (e) => {
-      // console.log(e.target);
-      // label.innerHTML = `${option.textContent}`;
-      // list.className = 'selectBox__list selectBox__list--none';
+      // 클릭 시에 이미 열려 있었던 다른 옵션 노출을 비활성화
+      selectBoxes.forEach((selectBox) => {
+        const selectBoxList = selectBox.querySelector('.selectBox__list');
+
+        if (selectBoxList && selectBoxList !== list) {
+          selectBoxList.classList.add('selectBox__list--none');
+        }
+      });
+
+      // 이벤트 버블링 방지
+      e.stopPropagation();
+
+      list.classList.toggle('selectBox__list--none');
+    });
+
+    // 옵션 중 하나를 선택했을 때, 해당 값을 선택해 label로 설정
+    list.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'LI') return;
+
+      label.innerHTML = e.target.innerHTML;
+    });
+  });
+
+  // 외부 클릭 시 옵션 비활성화 처리
+  document.addEventListener('click', () => {
+    selectBoxes.forEach((selectBox) => {
+      const list = selectBox.querySelector('.selectBox__list');
+
+      if (!list.classList.contains('selectBox__list--none')) {
+        list.classList.toggle('selectBox__list--none');
+      }
     });
   });
 }
