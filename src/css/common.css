@@ -1,4 +1,4 @@
-/*  font */
+/* font */
 @font-face {
   font-family: 'pretendard-regular';
   src: url(/src/assets/fonts/pretendard-regular.woff);
@@ -12,6 +12,16 @@ a {
 img {
   display: block;
   width: 100%;
+}
+input[type='radio'] {
+  cursor: inherit;
+  margin: 0;
+}
+label {
+  cursor: inherit;
+}
+input[disabled] {
+  cursor: initial;
 }
 html,
 body,
@@ -37,6 +47,7 @@ body,
   top: 0;
   left: 0;
   background-color: #5ab2b2;
+  z-index: 10;
 }
 #root {
   display: flex;
@@ -58,7 +69,7 @@ body,
   box-sizing: border-box;
   background-color: #012e33;
   border-radius: 0 10px 10px 0;
-  z-index: 1;
+  z-index: 20;
 }
 .nav__logo {
   width: 150px;
@@ -119,8 +130,8 @@ body,
   border-radius: 5px;
   padding: 10px 25px;
   color: #333;
-  background-color: #69d0cf;
-  border: 1px solid #5ab2b2;
+  background-color: #5ab2b2;
+  border: 1px solid #69d0cf;
   box-sizing: border-box;
   text-align: center;
 }
@@ -130,7 +141,7 @@ body,
 .btn:hover {
   color: #fff;
   background-color: #012e33;
-  border: 1px solid #5ab2b2;
+  border: 1px solid #69d0cf;
   cursor: pointer;
 }
 
@@ -227,6 +238,7 @@ body,
   top: 0;
   left: 0;
   position: fixed;
+  z-index: 30;
 }
 .modal__inner {
   width: 25%;
@@ -292,6 +304,9 @@ body,
   left: 0;
   background: rgba(0, 0, 0, 0.7);
 }
+.modal--none {
+  display: none;
+}
 
 /* inputText */
 .inputText {
@@ -326,6 +341,7 @@ body,
   border: 0 none;
   outline: 0 none;
   cursor: pointer;
+  background-color: #fff;
 }
 .selectBox__label {
   width: 100%;
@@ -340,7 +356,6 @@ body,
   position: absolute;
   right: 5px;
   height: 28px;
-  z-index: -1;
 }
 .selectBox__list {
   width: 250px;
