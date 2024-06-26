@@ -1,35 +1,3 @@
-/* common.css 이동 */
-input[type='radio'] {
-  cursor: inherit;
-  margin: 0;
-}
-label {
-  cursor: inherit;
-}
-input[disabled] {
-  cursor: initial;
-}
-.modal {
-  display: none;
-}
-/*  reset.css
-input[type='radio'] {
-  background-color: initial;
-  cursor: default;
-  appearance: auto;
-  box-sizing: border-box;
-  margin: 3px 3px 0px 5px;
-  padding: initial;
-  border: initial;
-}
-*/
-
-.selectBox {
-  background-color: #fff;
-}
-
-/* common.css 이동 */
-
 .vacation {
   width: 100%;
 }
@@ -89,9 +57,4 @@ input[type='radio'] {
   width: 330px;
   height: 80px;
   padding: 10px;
-}
-
-.vacation__applyModal,
-.vacation__detailModal {
-  z-index: 1;
 }

@@ -1,3 +1,5 @@
+import { useModal, useSelectBox } from '../js/common';
+
 export default function Vacation(root) {
   const data = [
     { type: '연차', sDate: '2024.06.10', eDate: '2024.06.12' },
@@ -21,7 +23,7 @@ export default function Vacation(root) {
   ];
   const listHtml = data
     .map(
-      (d) => `<li class="listTable__tr listTable__tr--hover detailModalShowBtn">
+      (d) => `<li class="listTable__tr listTable__tr--hover modalDetail">
                   <div class="listTable__td">${d.type}</div>
                   <div class="listTable__td">${d.sDate}</div>
                   <div class="listTable__td">${d.eDate}</div>
@@ -34,7 +36,7 @@ export default function Vacation(root) {
             <h2 class="vacation__pageTitle">휴가/외출 관리</h2>
             <div class="vacation__searchArea">
               <input class="inputText" type="text" name="name" value="" />
-              <button class="btn">신청</button>
+              <button class="btn modalApply">신청</button>
             </div>
             <div class="listTable">
               <ul class="listTable__thead">
@@ -66,7 +68,7 @@ export default function Vacation(root) {
           <!-- vacation__card -->
 
           <!-- applyModal -->
-          <div class="vacation__applyModal modal modal--lg">
+          <div class="vacation__applyModal modal modal--lg modal--none">
             <div class="modal__bb"></div>
             <div class="modal__inner">
               <p class="modal__title">신 청</p>
@@ -141,14 +143,14 @@ export default function Vacation(root) {
               </div>
 
               <div class="modal__btns">
-                <button class="btn btn--light">취소</button>
-                <button class="btn">확인</button>
+                <button class="btn btn--light modalClose">취소</button>
+                <button class="btn modalClose">확인</button>
               </div>
             </div>
           </div>
 
           <!-- detailModal -->
-          <div class="vacation__detailModal modal modal--lg">
+          <div class="vacation__detailModal modal modal--lg modal--none">
             <div class="modal__bb"></div>
             <div class="modal__inner">
               <p class="modal__title">상 세</p>
@@ -213,7 +215,7 @@ export default function Vacation(root) {
               </div>
 
               <div class="modal__btns">
-                <button class="btn">확인</button>
+                <button class="btn modalClose">확인</button>
               </div>
             </div>
           </div>
@@ -222,9 +224,14 @@ export default function Vacation(root) {
 
   const categoryItem = root.querySelectorAll('.vacation__categoryItem');
   categoryItem.forEach((item) => item.addEventListener('click', handleRadio));
+  const modalOpen = [
+    { btn: 'modalDetail', modal: 'vacation__detailModal' },
+    { btn: 'modalApply', modal: 'vacation__applyModal' },
+  ];
+  useModal(modalOpen);
 }
 
-//연차,반차,외출 라디오 선택에 따라 제출 폼 변경시켜주는 함수
+// 연차,반차,외출 라디오 선택에 따라 제출 폼 변경시켜주는 함수
 function handleRadio() {
   const checkedType = this.querySelector('input[name="vacationCategory"]').id;
   const vacationDate = root.querySelector('.vacation__date');
@@ -299,6 +306,7 @@ function handleRadio() {
                         </div>
                       </dd>
                     </dl>`;
+    useSelectBox();
   } else if (checkedType === 'type3') {
     vacationDate.innerHTML = `<dl class="vacation__sDate">
                       <dt class="vacation__sDateTitle">시작일</dt>
@@ -387,5 +395,6 @@ function handleRadio() {
                         </div>
                       </dd>
                     </dl>`;
+    useSelectBox();
   }
 }
