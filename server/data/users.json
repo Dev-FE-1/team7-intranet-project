@@ -1,6 +1,5 @@
 {
-  "status": "OK",
-  "data": [
+  "employee": [
     {
       "userId": "001",
       "name": "박보검",
@@ -11,7 +10,9 @@
       "birth": "1980-02-16",
       "dept": "C-level",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "002",
@@ -23,7 +24,9 @@
       "birth": "1959-03-04",
       "dept": "영업팀",
       "leftVaca": "3일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "003",
@@ -35,7 +38,9 @@
       "birth": "1986-12-21",
       "dept": "인사팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "004",
@@ -47,7 +52,9 @@
       "birth": "1955-03-02",
       "dept": "개발팀",
       "leftVaca": "1일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "005",
@@ -59,7 +66,9 @@
       "birth": "1996-11-04",
       "dept": "개발팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "006",
@@ -71,7 +80,9 @@
       "birth": "1994-01-02",
       "dept": "개발팀",
       "leftVaca": "3일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "007",
@@ -83,7 +94,9 @@
       "birth": "1962-04-08",
       "dept": "마케팅팀",
       "leftVaca": "17일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "008",
@@ -95,7 +108,9 @@
       "birth": "2000-08-19",
       "dept": "마케팅팀",
       "leftVaca": "3일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "009",
@@ -107,7 +122,9 @@
       "birth": "1962-09-18",
       "dept": "인사팀",
       "leftVaca": "3일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "010",
@@ -119,7 +136,9 @@
       "birth": "1955-06-24",
       "dept": "재무팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "011",
@@ -131,7 +150,9 @@
       "birth": "1962-03-30",
       "dept": "개발팀",
       "leftVaca": "19일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "012",
@@ -143,7 +164,9 @@
       "birth": "1958-01-22",
       "dept": "마케팅팀",
       "leftVaca": "4일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "013",
@@ -155,7 +178,9 @@
       "birth": "1992-10-12",
       "dept": "C-level",
       "leftVaca": "12일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "014",
@@ -167,7 +192,9 @@
       "birth": "1992-07-07",
       "dept": "영업팀",
       "leftVaca": "15일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "015",
@@ -179,7 +206,9 @@
       "birth": "1980-06-24",
       "dept": "개발팀",
       "leftVaca": "6일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "016",
@@ -191,7 +220,9 @@
       "birth": "1977-07-02",
       "dept": "인사팀",
       "leftVaca": "18일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "017",
@@ -203,7 +234,9 @@
       "birth": "1984-08-20",
       "dept": "영업팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "018",
@@ -215,7 +248,9 @@
       "birth": "1998-01-09",
       "dept": "재무팀",
       "leftVaca": "3일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "019",
@@ -227,7 +262,9 @@
       "birth": "1978-10-20",
       "dept": "개발팀",
       "leftVaca": "15일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "020",
@@ -239,7 +276,9 @@
       "birth": "1961-11-17",
       "dept": "개발팀",
       "leftVaca": "19일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "021",
@@ -251,7 +290,9 @@
       "birth": "1995-09-05",
       "dept": "인사팀",
       "leftVaca": "6일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "022",
@@ -263,7 +304,9 @@
       "birth": "1975-10-28",
       "dept": "C-level",
       "leftVaca": "11일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "023",
@@ -275,7 +318,9 @@
       "birth": "1973-07-21",
       "dept": "마케팅팀",
       "leftVaca": "12일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "024",
@@ -287,7 +332,9 @@
       "birth": "1976-08-17",
       "dept": "개발팀",
       "leftVaca": "4일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "025",
@@ -299,7 +346,9 @@
       "birth": "1996-08-25",
       "dept": "개발팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "026",
@@ -311,7 +360,9 @@
       "birth": "1989-10-18",
       "dept": "인사팀",
       "leftVaca": "6일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "027",
@@ -323,7 +374,9 @@
       "birth": "1990-06-29",
       "dept": "개발팀",
       "leftVaca": "11일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "028",
@@ -335,7 +388,9 @@
       "birth": "1989-04-06",
       "dept": "재무팀",
       "leftVaca": "4일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "029",
@@ -347,7 +402,9 @@
       "birth": "1988-11-10",
       "dept": "재무팀",
       "leftVaca": "10일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "030",
@@ -359,7 +416,9 @@
       "birth": "1978-07-05",
       "dept": "영업팀",
       "leftVaca": "6일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "031",
@@ -371,7 +430,9 @@
       "birth": "1992-08-12",
       "dept": "재무팀",
       "leftVaca": "7일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "032",
@@ -383,7 +444,9 @@
       "birth": "1967-05-20",
       "dept": "인사팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "033",
@@ -395,7 +458,9 @@
       "birth": "1996-06-25",
       "dept": "개발팀",
       "leftVaca": "7일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "034",
@@ -407,7 +472,9 @@
       "birth": "1990-08-30",
       "dept": "마케팅팀",
       "leftVaca": "18일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "035",
@@ -419,7 +486,9 @@
       "birth": "1987-07-31",
       "dept": "개발팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "036",
@@ -431,7 +500,9 @@
       "birth": "1982-05-21",
       "dept": "마케팅팀",
       "leftVaca": "20일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "037",
@@ -443,7 +514,9 @@
       "birth": "1979-06-03",
       "dept": "C-level",
       "leftVaca": "0일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "038",
@@ -455,7 +528,9 @@
       "birth": "1965-08-14",
       "dept": "마케팅팀",
       "leftVaca": "8일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "039",
@@ -467,7 +542,9 @@
       "birth": "1974-08-14",
       "dept": "개발팀",
       "leftVaca": "17일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "040",
@@ -479,7 +556,9 @@
       "birth": "1971-01-10",
       "dept": "개발팀",
       "leftVaca": "16일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "041",
@@ -491,7 +570,9 @@
       "birth": "1996-05-03",
       "dept": "C-level",
       "leftVaca": "10일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "042",
@@ -503,7 +584,9 @@
       "birth": "1956-08-20",
       "dept": "재무팀",
       "leftVaca": "10일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "043",
@@ -515,7 +598,9 @@
       "birth": "1974-07-11",
       "dept": "인사팀",
       "leftVaca": "20일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "044",
@@ -527,7 +612,9 @@
       "birth": "1964-11-02",
       "dept": "인사팀",
       "leftVaca": "10일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "045",
@@ -539,7 +626,9 @@
       "birth": "1966-06-19",
       "dept": "인사팀",
       "leftVaca": "14일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "046",
@@ -551,7 +640,9 @@
       "birth": "1986-05-01",
       "dept": "마케팅팀",
       "leftVaca": "4일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "047",
@@ -563,7 +654,9 @@
       "birth": "1957-10-17",
       "dept": "마케팅팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "048",
@@ -575,7 +668,9 @@
       "birth": "1996-03-04",
       "dept": "개발팀",
       "leftVaca": "15일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "049",
@@ -587,7 +682,9 @@
       "birth": "1954-01-31",
       "dept": "재무팀",
       "leftVaca": "14일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "050",
@@ -599,7 +696,9 @@
       "birth": "1958-08-04",
       "dept": "인사팀",
       "leftVaca": "8일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "051",
@@ -611,7 +710,9 @@
       "birth": "1972-05-28",
       "dept": "인사팀",
       "leftVaca": "19일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "052",
@@ -623,7 +724,9 @@
       "birth": "1966-03-20",
       "dept": "인사팀",
       "leftVaca": "16일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "053",
@@ -635,7 +738,9 @@
       "birth": "1967-05-09",
       "dept": "마케팅팀",
       "leftVaca": "6일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "054",
@@ -647,7 +752,9 @@
       "birth": "1988-01-07",
       "dept": "마케팅팀",
       "leftVaca": "9일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "055",
@@ -659,7 +766,9 @@
       "birth": "1963-10-20",
       "dept": "개발팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "056",
@@ -671,7 +780,9 @@
       "birth": "1996-07-28",
       "dept": "마케팅팀",
       "leftVaca": "6일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "057",
@@ -683,7 +794,9 @@
       "birth": "1964-08-12",
       "dept": "마케팅팀",
       "leftVaca": "0일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "058",
@@ -695,7 +808,9 @@
       "birth": "1987-10-24",
       "dept": "영업팀",
       "leftVaca": "16일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "059",
@@ -707,7 +822,9 @@
       "birth": "1964-09-05",
       "dept": "마케팅팀",
       "leftVaca": "2일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "060",
@@ -719,7 +836,9 @@
       "birth": "1984-07-25",
       "dept": "마케팅팀",
       "leftVaca": "15일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "061",
@@ -731,7 +850,9 @@
       "birth": "1959-01-20",
       "dept": "영업팀",
       "leftVaca": "4일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "062",
@@ -743,7 +864,9 @@
       "birth": "1963-01-16",
       "dept": "마케팅팀",
       "leftVaca": "14일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "063",
@@ -755,7 +878,9 @@
       "birth": "1979-11-30",
       "dept": "마케팅팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "064",
@@ -767,7 +892,9 @@
       "birth": "1960-02-19",
       "dept": "인사팀",
       "leftVaca": "17일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "065",
@@ -779,7 +906,9 @@
       "birth": "1984-09-01",
       "dept": "영업팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "066",
@@ -791,7 +920,9 @@
       "birth": "1980-09-29",
       "dept": "영업팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "067",
@@ -803,7 +934,9 @@
       "birth": "1979-04-20",
       "dept": "마케팅팀",
       "leftVaca": "9일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "068",
@@ -815,7 +948,9 @@
       "birth": "2000-08-13",
       "dept": "마케팅팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "069",
@@ -827,7 +962,9 @@
       "birth": "1960-10-31",
       "dept": "마케팅팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "070",
@@ -839,7 +976,9 @@
       "birth": "2000-07-14",
       "dept": "재무팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "071",
@@ -851,7 +990,9 @@
       "birth": "1958-05-10",
       "dept": "재무팀",
       "leftVaca": "20일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "072",
@@ -863,7 +1004,9 @@
       "birth": "1991-12-02",
       "dept": "인사팀",
       "leftVaca": "9일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "073",
@@ -875,7 +1018,9 @@
       "birth": "1954-09-29",
       "dept": "인사팀",
       "leftVaca": "10일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "074",
@@ -887,7 +1032,9 @@
       "birth": "1987-09-21",
       "dept": "영업팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "075",
@@ -899,7 +1046,9 @@
       "birth": "1953-01-02",
       "dept": "마케팅팀",
       "leftVaca": "2일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "076",
@@ -911,7 +1060,9 @@
       "birth": "1962-09-30",
       "dept": "개발팀",
       "leftVaca": "19일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "077",
@@ -923,7 +1074,9 @@
       "birth": "1969-08-14",
       "dept": "영업팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "078",
@@ -935,7 +1088,9 @@
       "birth": "1980-10-09",
       "dept": "재무팀",
       "leftVaca": "9일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "079",
@@ -947,7 +1102,9 @@
       "birth": "1986-05-25",
       "dept": "개발팀",
       "leftVaca": "9일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "080",
@@ -959,7 +1116,9 @@
       "birth": "1985-06-06",
       "dept": "마케팅팀",
       "leftVaca": "2일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "081",
@@ -971,7 +1130,9 @@
       "birth": "1989-11-24",
       "dept": "재무팀",
       "leftVaca": "18일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "082",
@@ -983,7 +1144,9 @@
       "birth": "1978-09-03",
       "dept": "마케팅팀",
       "leftVaca": "4일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "083",
@@ -995,7 +1158,9 @@
       "birth": "1989-12-13",
       "dept": "인사팀",
       "leftVaca": "2일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "084",
@@ -1007,7 +1172,9 @@
       "birth": "1976-08-17",
       "dept": "영업팀",
       "leftVaca": "14일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "085",
@@ -1019,7 +1186,9 @@
       "birth": "1988-01-10",
       "dept": "인사팀",
       "leftVaca": "18일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "086",
@@ -1031,7 +1200,9 @@
       "birth": "1990-06-07",
       "dept": "개발팀",
       "leftVaca": "8일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "087",
@@ -1043,7 +1214,9 @@
       "birth": "1954-04-27",
       "dept": "영업팀",
       "leftVaca": "5일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "088",
@@ -1055,7 +1228,9 @@
       "birth": "1967-01-17",
       "dept": "인사팀",
       "leftVaca": "18일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "089",
@@ -1067,7 +1242,9 @@
       "birth": "1985-01-02",
       "dept": "인사팀",
       "leftVaca": "3일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "090",
@@ -1079,7 +1256,9 @@
       "birth": "1991-09-03",
       "dept": "재무팀",
       "leftVaca": "6일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "091",
@@ -1091,7 +1270,9 @@
       "birth": "1957-07-27",
       "dept": "영업팀",
       "leftVaca": "0일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "092",
@@ -1103,7 +1284,9 @@
       "birth": "1974-10-02",
       "dept": "영업팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "093",
@@ -1115,7 +1298,9 @@
       "birth": "1970-07-17",
       "dept": "마케팅팀",
       "leftVaca": "4일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "094",
@@ -1127,7 +1312,9 @@
       "birth": "1969-02-14",
       "dept": "마케팅팀",
       "leftVaca": "14일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "095",
@@ -1139,7 +1326,9 @@
       "birth": "1975-12-18",
       "dept": "마케팅팀",
       "leftVaca": "17일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "096",
@@ -1151,7 +1340,9 @@
       "birth": "1998-03-08",
       "dept": "개발팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "097",
@@ -1163,7 +1354,9 @@
       "birth": "1986-10-05",
       "dept": "재무팀",
       "leftVaca": "11일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "098",
@@ -1175,7 +1368,9 @@
       "birth": "1970-07-11",
       "dept": "재무팀",
       "leftVaca": "10일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "099",
@@ -1187,7 +1382,9 @@
       "birth": "1990-10-29",
       "dept": "영업팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "100",
@@ -1199,7 +1396,9 @@
       "birth": "1957-10-23",
       "dept": "인사팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "101",
@@ -1211,7 +1410,9 @@
       "birth": "1983-03-24",
       "dept": "인사팀",
       "leftVaca": "20일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "102",
@@ -1223,7 +1424,9 @@
       "birth": "1953-01-26",
       "dept": "인사팀",
       "leftVaca": "18일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "103",
@@ -1235,7 +1438,9 @@
       "birth": "1975-12-29",
       "dept": "재무팀",
       "leftVaca": "3일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "104",
@@ -1247,7 +1452,9 @@
       "birth": "1974-09-06",
       "dept": "마케팅팀",
       "leftVaca": "5일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "105",
@@ -1259,7 +1466,9 @@
       "birth": "1966-11-09",
       "dept": "마케팅팀",
       "leftVaca": "7일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "106",
@@ -1271,7 +1480,9 @@
       "birth": "1957-12-19",
       "dept": "영업팀",
       "leftVaca": "14일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "107",
@@ -1283,7 +1494,9 @@
       "birth": "1961-11-29",
       "dept": "개발팀",
       "leftVaca": "15일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "108",
@@ -1295,7 +1508,9 @@
       "birth": "1952-12-12",
       "dept": "인사팀",
       "leftVaca": "2일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "109",
@@ -1307,7 +1522,9 @@
       "birth": "1994-10-07",
       "dept": "마케팅팀",
       "leftVaca": "17일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "110",
@@ -1319,7 +1536,9 @@
       "birth": "1970-05-14",
       "dept": "재무팀",
       "leftVaca": "12일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "111",
@@ -1331,7 +1550,9 @@
       "birth": "1986-04-27",
       "dept": "개발팀",
       "leftVaca": "5일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "112",
@@ -1343,7 +1564,9 @@
       "birth": "1966-07-28",
       "dept": "재무팀",
       "leftVaca": "16일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "113",
@@ -1355,7 +1578,9 @@
       "birth": "1950-10-03",
       "dept": "마케팅팀",
       "leftVaca": "5일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "114",
@@ -1367,7 +1592,9 @@
       "birth": "1963-11-16",
       "dept": "인사팀",
       "leftVaca": "20일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "115",
@@ -1379,7 +1606,9 @@
       "birth": "1970-03-06",
       "dept": "영업팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "116",
@@ -1391,7 +1620,9 @@
       "birth": "1950-08-21",
       "dept": "재무팀",
       "leftVaca": "15일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "117",
@@ -1403,7 +1634,9 @@
       "birth": "1968-08-22",
       "dept": "마케팅팀",
       "leftVaca": "16일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "118",
@@ -1415,7 +1648,9 @@
       "birth": "1983-10-15",
       "dept": "재무팀",
       "leftVaca": "3일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "119",
@@ -1427,7 +1662,9 @@
       "birth": "1970-08-07",
       "dept": "개발팀",
       "leftVaca": "11일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "120",
@@ -1439,7 +1676,9 @@
       "birth": "1966-09-23",
       "dept": "인사팀",
       "leftVaca": "2일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "121",
@@ -1451,7 +1690,9 @@
       "birth": "1982-04-14",
       "dept": "인사팀",
       "leftVaca": "20일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "122",
@@ -1463,7 +1704,9 @@
       "birth": "1962-08-07",
       "dept": "영업팀",
       "leftVaca": "4일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "123",
@@ -1475,7 +1718,9 @@
       "birth": "1967-06-24",
       "dept": "인사팀",
       "leftVaca": "9일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "124",
@@ -1487,7 +1732,9 @@
       "birth": "1996-02-22",
       "dept": "개발팀",
       "leftVaca": "17일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "125",
@@ -1499,7 +1746,9 @@
       "birth": "1999-09-21",
       "dept": "인사팀",
       "leftVaca": "12일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "126",
@@ -1511,7 +1760,9 @@
       "birth": "1962-09-29",
       "dept": "개발팀",
       "leftVaca": "3일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "127",
@@ -1523,7 +1774,9 @@
       "birth": "1978-04-09",
       "dept": "영업팀",
       "leftVaca": "12일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "128",
@@ -1535,7 +1788,9 @@
       "birth": "1975-12-12",
       "dept": "재무팀",
       "leftVaca": "10일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "129",
@@ -1547,7 +1802,9 @@
       "birth": "1977-11-02",
       "dept": "인사팀",
       "leftVaca": "10일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "130",
@@ -1559,7 +1816,9 @@
       "birth": "1999-02-27",
       "dept": "영업팀",
       "leftVaca": "17일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "131",
@@ -1571,7 +1830,9 @@
       "birth": "1954-08-01",
       "dept": "영업팀",
       "leftVaca": "5일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "132",
@@ -1583,7 +1844,9 @@
       "birth": "1978-01-13",
       "dept": "개발팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "133",
@@ -1595,7 +1858,9 @@
       "birth": "1965-01-09",
       "dept": "개발팀",
       "leftVaca": "15일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "134",
@@ -1607,7 +1872,9 @@
       "birth": "1987-07-01",
       "dept": "재무팀",
       "leftVaca": "10일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "135",
@@ -1619,7 +1886,9 @@
       "birth": "1954-01-11",
       "dept": "마케팅팀",
       "leftVaca": "19일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "136",
@@ -1631,7 +1900,9 @@
       "birth": "1985-04-24",
       "dept": "인사팀",
       "leftVaca": "1일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "137",
@@ -1643,7 +1914,9 @@
       "birth": "1981-06-21",
       "dept": "재무팀",
       "leftVaca": "3일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "138",
@@ -1655,7 +1928,9 @@
       "birth": "1972-10-20",
       "dept": "영업팀",
       "leftVaca": "11일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "139",
@@ -1667,7 +1942,9 @@
       "birth": "1997-02-26",
       "dept": "마케팅팀",
       "leftVaca": "20일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "140",
@@ -1679,7 +1956,9 @@
       "birth": "1977-09-14",
       "dept": "마케팅팀",
       "leftVaca": "12일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "141",
@@ -1691,7 +1970,9 @@
       "birth": "1967-04-05",
       "dept": "개발팀",
       "leftVaca": "19일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "142",
@@ -1703,7 +1984,9 @@
       "birth": "1956-07-25",
       "dept": "개발팀",
       "leftVaca": "1일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "143",
@@ -1715,7 +1998,9 @@
       "birth": "2000-07-23",
       "dept": "마케팅팀",
       "leftVaca": "17일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "144",
@@ -1727,7 +2012,9 @@
       "birth": "1986-08-10",
       "dept": "영업팀",
       "leftVaca": "14일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "145",
@@ -1739,7 +2026,9 @@
       "birth": "1987-04-08",
       "dept": "재무팀",
       "leftVaca": "1일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "146",
@@ -1751,7 +2040,9 @@
       "birth": "1977-05-29",
       "dept": "마케팅팀",
       "leftVaca": "3일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "147",
@@ -1763,7 +2054,9 @@
       "birth": "1952-06-07",
       "dept": "재무팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "148",
@@ -1775,7 +2068,9 @@
       "birth": "1981-05-10",
       "dept": "영업팀",
       "leftVaca": "18일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "149",
@@ -1787,7 +2082,9 @@
       "birth": "1970-07-07",
       "dept": "개발팀",
       "leftVaca": "14일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "150",
@@ -1799,7 +2096,9 @@
       "birth": "1984-06-12",
       "dept": "인사팀",
       "leftVaca": "20일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "151",
@@ -1811,7 +2110,9 @@
       "birth": "1951-12-24",
       "dept": "인사팀",
       "leftVaca": "16일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "152",
@@ -1823,7 +2124,9 @@
       "birth": "1969-09-12",
       "dept": "개발팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "153",
@@ -1835,7 +2138,9 @@
       "birth": "1971-01-24",
       "dept": "재무팀",
       "leftVaca": "7일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "154",
@@ -1847,7 +2152,9 @@
       "birth": "1954-06-19",
       "dept": "인사팀",
       "leftVaca": "13일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "155",
@@ -1859,7 +2166,9 @@
       "birth": "1986-09-05",
       "dept": "인사팀",
       "leftVaca": "15일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "156",
@@ -1871,7 +2180,9 @@
       "birth": "1984-04-07",
       "dept": "영업팀",
       "leftVaca": "2일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "157",
@@ -1883,7 +2194,9 @@
       "birth": "1992-11-08",
       "dept": "영업팀",
       "leftVaca": "4일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "158",
@@ -1895,7 +2208,9 @@
       "birth": "1978-07-19",
       "dept": "재무팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "159",
@@ -1907,7 +2222,9 @@
       "birth": "1954-12-20",
       "dept": "마케팅팀",
       "leftVaca": "1일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "160",
@@ -1919,7 +2236,9 @@
       "birth": "1956-05-03",
       "dept": "마케팅팀",
       "leftVaca": "8일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "161",
@@ -1931,7 +2250,9 @@
       "birth": "1996-10-02",
       "dept": "영업팀",
       "leftVaca": "2일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "162",
@@ -1943,7 +2264,9 @@
       "birth": "2000-10-28",
       "dept": "영업팀",
       "leftVaca": "5일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "163",
@@ -1955,7 +2278,9 @@
       "birth": "1956-10-11",
       "dept": "재무팀",
       "leftVaca": "5일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "164",
@@ -1967,7 +2292,9 @@
       "birth": "1950-12-25",
       "dept": "인사팀",
       "leftVaca": "0일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "165",
@@ -1979,7 +2306,9 @@
       "birth": "1972-12-19",
       "dept": "마케팅팀",
       "leftVaca": "7일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "166",
@@ -1991,7 +2320,9 @@
       "birth": "1974-01-28",
       "dept": "개발팀",
       "leftVaca": "8일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "167",
@@ -2003,7 +2334,9 @@
       "birth": "1999-03-03",
       "dept": "영업팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "168",
@@ -2015,7 +2348,9 @@
       "birth": "1963-03-13",
       "dept": "영업팀",
       "leftVaca": "1일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "169",
@@ -2027,7 +2362,9 @@
       "birth": "1969-01-07",
       "dept": "재무팀",
       "leftVaca": "11일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "170",
@@ -2039,7 +2376,9 @@
       "birth": "1958-12-25",
       "dept": "인사팀",
       "leftVaca": "15일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "171",
@@ -2051,7 +2390,9 @@
       "birth": "1991-03-29",
       "dept": "재무팀",
       "leftVaca": "14일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "172",
@@ -2063,7 +2404,9 @@
       "birth": "1964-07-10",
       "dept": "인사팀",
       "leftVaca": "1일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "173",
@@ -2075,7 +2418,9 @@
       "birth": "1998-10-17",
       "dept": "인사팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "174",
@@ -2087,7 +2432,9 @@
       "birth": "1973-04-09",
       "dept": "개발팀",
       "leftVaca": "11일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "175",
@@ -2099,7 +2446,9 @@
       "birth": "1992-08-25",
       "dept": "영업팀",
       "leftVaca": "18일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "176",
@@ -2111,7 +2460,9 @@
       "birth": "1992-10-12",
       "dept": "인사팀",
       "leftVaca": "1일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "177",
@@ -2123,7 +2474,9 @@
       "birth": "1992-07-19",
       "dept": "마케팅팀",
       "leftVaca": "7일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "178",
@@ -2135,7 +2488,9 @@
       "birth": "1974-05-16",
       "dept": "영업팀",
       "leftVaca": "10일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "179",
@@ -2147,7 +2502,9 @@
       "birth": "1983-01-03",
       "dept": "재무팀",
       "leftVaca": "18일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "180",
@@ -2159,7 +2516,9 @@
       "birth": "1970-10-07",
       "dept": "개발팀",
       "leftVaca": "18일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "181",
@@ -2171,7 +2530,9 @@
       "birth": "1984-06-25",
       "dept": "마케팅팀",
       "leftVaca": "16일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "182",
@@ -2183,7 +2544,9 @@
       "birth": "2000-01-23",
       "dept": "영업팀",
       "leftVaca": "12일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "183",
@@ -2195,7 +2558,9 @@
       "birth": "1952-02-17",
       "dept": "개발팀",
       "leftVaca": "0일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "184",
@@ -2207,7 +2572,9 @@
       "birth": "1989-12-11",
       "dept": "마케팅팀",
       "leftVaca": "4일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "185",
@@ -2219,7 +2586,9 @@
       "birth": "1987-09-04",
       "dept": "마케팅팀",
       "leftVaca": "20일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "186",
@@ -2231,7 +2600,9 @@
       "birth": "1977-03-18",
       "dept": "개발팀",
       "leftVaca": "0일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "187",
@@ -2243,7 +2614,9 @@
       "birth": "1950-09-02",
       "dept": "재무팀",
       "leftVaca": "10일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "188",
@@ -2255,7 +2628,9 @@
       "birth": "1953-09-10",
       "dept": "영업팀",
       "leftVaca": "15일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "189",
@@ -2267,7 +2642,9 @@
       "birth": "1974-10-19",
       "dept": "재무팀",
       "leftVaca": "11일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "190",
@@ -2279,7 +2656,9 @@
       "birth": "1999-10-25",
       "dept": "영업팀",
       "leftVaca": "0일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "191",
@@ -2291,7 +2670,9 @@
       "birth": "1992-07-08",
       "dept": "인사팀",
       "leftVaca": "14일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "192",
@@ -2303,7 +2684,9 @@
       "birth": "1998-05-03",
       "dept": "마케팅팀",
       "leftVaca": "8일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "193",
@@ -2315,7 +2698,9 @@
       "birth": "1959-04-16",
       "dept": "개발팀",
       "leftVaca": "2일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "194",
@@ -2327,7 +2712,9 @@
       "birth": "1976-04-07",
       "dept": "개발팀",
       "leftVaca": "1일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "195",
@@ -2339,7 +2726,9 @@
       "birth": "1984-09-29",
       "dept": "인사팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "196",
@@ -2351,7 +2740,9 @@
       "birth": "1952-12-11",
       "dept": "영업팀",
       "leftVaca": "2일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "197",
@@ -2363,7 +2754,9 @@
       "birth": "1982-11-21",
       "dept": "인사팀",
       "leftVaca": "9일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "198",
@@ -2375,7 +2768,9 @@
       "birth": "1995-01-23",
       "dept": "재무팀",
       "leftVaca": "13일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "199",
@@ -2387,7 +2782,9 @@
       "birth": "1981-08-19",
       "dept": "개발팀",
       "leftVaca": "18일",
-      "admin": "아니오"
+      "admin": false,
+      "joinDate": null,
+      "profile_image": null
     },
     {
       "userId": "200",
@@ -2399,7 +2796,9 @@
       "birth": "1977-11-14",
       "dept": "재무팀",
       "leftVaca": "9일",
-      "admin": "예"
+      "admin": true,
+      "joinDate": null,
+      "profile_image": null
     }
   ]
 }

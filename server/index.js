@@ -9,8 +9,8 @@ app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json());
 
-app.get('/api/users.json', (req, res) => {
-  fs.readFile('./server/data/users.json', 'utf8', (err, data) => {
+app.get('/server/data/users.json', (req, res) => {
+  fs.readFile('/server/data/users.json', 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       return res.status(500).send({

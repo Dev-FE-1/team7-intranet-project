@@ -1,3 +1,5 @@
-export default function Vacation(root) {
-  root.innerHTML = `<div class='vacation'></div>`;
+export default function Login() {
+  return `
+    <div class='login'></div>
+  `;
 }
