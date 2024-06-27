@@ -13,7 +13,7 @@ const app = () => {
 const init = () => {
   ui();
   window.addEventListener('popstate', route);
-  document.querySelector('.nav').addEventListener('click', navigatePage);
+  document.querySelector('body').addEventListener('click', navigatePage);
 };
 
 // UI 로직 함수
@@ -21,8 +21,9 @@ const ui = () => {
   renderNav();
 };
 
-// nav에 위치한 메뉴 탭을 눌렀을 때 URL을 변경시키는 함수
+// body에 위치한 메뉴 탭을 눌렀을 때 URL을 변경시키는 함수
 const navigatePage = (event) => {
+  if (!event.target.closest('a')) return;
   event.preventDefault();
 
   const anchor = event.target.closest('a');

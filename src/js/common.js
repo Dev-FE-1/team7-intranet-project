@@ -97,7 +97,6 @@ export function useModal(opens) {
     modal.addEventListener('click', (e) => {
       const btnClose = e.target.closest('.modalClose');
       if (!btnClose) return;
-      console.log();
       modal.classList.add('modal--none');
     })
   );

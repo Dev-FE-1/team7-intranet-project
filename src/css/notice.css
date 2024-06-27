@@ -43,6 +43,7 @@
   color:#9CBBBE;
 }
 .search_icon{
+  color:#9CBBBE;
   margin-top:5px;
   width:20px;
   height:30px;
@@ -76,8 +77,12 @@
 }
 
 /*notice-modal*/
-.modal--lg .notice__modal__inner {
+.modal .notice__modal__inner {
+  padding: 30px 45px 0; 
   width: 30%;
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 .notice__modal__bar{
   font-size:18px;
@@ -90,6 +95,7 @@
 .notice__modal__date{
   font-size: 15px;
   text-align: right;
+  padding:0px 0px 10px;
   border-bottom: 1px solid #dfdfdf;
 }
 .notice__modal__content{
