@@ -1,3 +1,8 @@
+/*common*/
+.selectBox__list {
+  width: 100%;
+}
+/*common*/
 .vacation {
   width: 100%;
 }
@@ -57,4 +62,9 @@
   width: 330px;
   height: 80px;
   padding: 10px;
+}
+
+.modal__content {
+  min-height: 330px;
+  box-sizing: border-box;
 }

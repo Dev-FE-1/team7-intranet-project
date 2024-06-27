@@ -131,3 +131,6 @@ dist
 
 #macOS에서 파일 시스템에서 생성되는 숨겨진 파일
 .DS_Store
+
+#vscode 디버그파일
+.vscode

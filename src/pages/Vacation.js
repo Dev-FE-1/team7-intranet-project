@@ -223,7 +223,7 @@ export default function Vacation(root) {
         </div>`;
 
   const categoryItem = root.querySelectorAll('.vacation__categoryItem');
-  categoryItem.forEach((item) => item.addEventListener('click', handleRadio));
+  categoryItem.forEach((item) => item.addEventListener('change', handleRadio));
   const modalOpen = [
     { btn: 'modalDetail', modal: 'vacation__detailModal' },
     { btn: 'modalApply', modal: 'vacation__applyModal' },
@@ -232,7 +232,7 @@ export default function Vacation(root) {
 }
 
 // 연차,반차,외출 라디오 선택에 따라 제출 폼 변경시켜주는 함수
-function handleRadio() {
+function handleRadio(e) {
   const checkedType = this.querySelector('input[name="vacationCategory"]').id;
   const vacationDate = root.querySelector('.vacation__date');
   if (checkedType === 'type1') {
