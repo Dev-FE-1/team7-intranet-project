@@ -1,8 +1,7 @@
-/* 임직원 헤더 */
-.employee__search {
-  align-items: center;
-  justify-content: center;
+div {
+  border: 1px solid red;
 }
+/* 임직원 헤더 */
 .employee {
   margin: 30 auto;
 }
@@ -10,11 +9,20 @@
   font-size: 25px;
   font-weight: bold;
 }
+.employee__search {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
 .inputText {
   width: 15vw;
   height: 30px;
 }
-.employee__search {
+.employee__searchIcon {
+  position: absolute;
+  top: 4px;
+  right: 5px;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
@@ -32,10 +40,19 @@
 .listTable__td {
   text-align: center;
 }
-.employee--checkbox {
+.employee__checkbox {
   max-width: 30px;
 }
-.employee--email {
+.employee__profile {
+  display: flex;
+}
+.employee__name {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+.employee__email {
   min-width: 220px;
 }
 input[type='checkbox'] {
@@ -48,17 +65,14 @@ input[type='checkbox'] {
 /* 프로필 이미지 */
 .profile__image {
   border-radius: 15px;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
 }
 .profile__image--small {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  float: left;
   border-radius: 100%;
-  margin-right: 10px;
-  vertical-align: middle;
   border: 1px solid #e0e0e0;
 }
 
@@ -87,7 +101,6 @@ input[type='checkbox'] {
 }
 .modal__sub {
   min-width: 300px;
-
   display: flex;
 }
 

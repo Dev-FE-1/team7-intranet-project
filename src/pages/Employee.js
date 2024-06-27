@@ -1,15 +1,20 @@
+import { useModal } from '../js/common.js';
+
 export default function Employee(root) {
   const employeeHtml = employee
     .map(
       (employee) => `
-          <li class="listTable__tr listTable__tr--hover modalDetail">
-            <div class="listTable__th employee--checkbox"><input type="checkbox" /></div>
-            <div class="listTable__th employee--userID">${employee.userId}</div>
-            <div class="listTable__th employee--name"><img src="/public/001.png" class="profile__image--small">${employee.name}</div>
-            <div class="listTable__th employee--dept">${employee.dept}</div>
-            <div class="listTable__th employee--position">${employee.position}</div>
-            <div class="listTable__th employee--email">${employee.email}</div>
-            <div class="listTable__th employee--phone">${employee.phone}</div>
+          <li data-id="${employee.userId}" class="listTable__tr listTable__tr--hover modalDetail">
+            <div class="listTable__th employee__checkbox"><input type="checkbox" /></div>
+            <div class="listTable__th employee__userID">${employee.userId}</div>
+            <div class="listTable__th employee__profile">
+              <div class="listTable__th employee__img"><img src=${employee.img} class="profile__image--small"></div>
+              <div class="listTable__th employee__name">${employee.name}</div>
+            </div>
+            <div class="listTable__th employee__dept">${employee.dept}</div>
+            <div class="listTable__th employee__position">${employee.position}</div>
+            <div class="listTable__th employee__email">${employee.email}</div>
+            <div class="listTable__th employee__phone">${employee.phone}</div>
           </li>
       `
     )
@@ -20,19 +25,19 @@ export default function Employee(root) {
       <div class="employee__title">직원목록</div>
       <div class="employee__search">
         <input class="inputText" type="text" name="name" placeholder="이름을 입력해주세요."/>
-        <span class="material-icons employee__search">search</span>
+        <span class="material-icons employee__searchIcon">search</span>
       </div>
  
       <div class="listTable">
         <ul class="listTable__thead">
-          <li class="listTable__tr">
-            <div class="listTable__th employee--checkbox"><input type="checkbox" /></div>
-            <div class="listTable__th employee--userID">사원번호</div>
-            <div class="listTable__th employee--name">이름</div>
-            <div class="listTable__th employee--dept">부서</div>
-            <div class="listTable__th employee--position">직급</div>
-            <div class="listTable__th employee--email">이메일</div>
-            <div class="listTable__th employee--phone">전화번호</div>
+          <li class="listTable__tr ">
+            <div class="listTable__th employee__checkbox"><input type="checkbox" /></div>
+            <div class="listTable__th employee__userID">사원번호</div>
+            <div class="listTable__th employee__name">이름</div>
+            <div class="listTable__th employee__dept">부서</div>
+            <div class="listTable__th employee__position">직급</div>
+            <div class="listTable__th employee__email">이메일</div>
+            <div class="listTable__th employee__phone">전화번호</div>
           </li>
         </ul>
         <ul class="listTable__tbody employee__list">
@@ -55,7 +60,7 @@ export default function Employee(root) {
       </div>
 
 
-    <div class="modal" style="display: none">
+    <div class="modal employee__detailModal modal--none">
       <div class="modal__bb"></div>
       <div class="modal__inner">
         <p class="modal__title">직원 정보</p>
@@ -63,52 +68,55 @@ export default function Employee(root) {
           <div class="modal__sub">
             <div class="modal__employeeImage">
               <img
-                src=${employee[0].profile_image}
+                src=${employee[0].img}
                 class="profile__image profile__image--modal" />
           </div>
             <form class="employee__form">
               <div class="employee__form--group">
-                <label for="employee--userID">사원번호</label>
+                <label for="employee__userID">사원번호</label>
                 <input type="text" id="employee-id" value=${employee[0].userId} />
               </div>
               <div class="employee__form--group">
-                <label for="employee--name">이름</label>
+                <label for="employee__name">이름</label>
                 <input type="text" id="employee-name" value=${employee[0].name} />
               </div>
               <div class="employee__form--group">
-                <label for="employee--dept">부서</label>
+                <label for="employee__dept">부서</label>
                 <input type="text" id="employee-dept" value=${employee[0].dept} />
               </div>
               <div class="employee__form--group">
-                <label for="employee--position">직급</label>
+                <label for="employee__position">직급</label>
                 <input type="text" id="employee-position" value=${employee[0].position} />
               </div>
               <div class="employee__form--group">
-                <label for="employee--birth">생년월일</label>
+                <label for="employee__birth">생년월일</label>
                 <input type="date" id="employee-birth" value=${employee[0].birth} />
               </div>
               <div class="employee__form--group">
-                <label for="employee--email">이메일</label>
+                <label for="employee__email">이메일</label>
                 <input type="email" id="employee-email" value=${employee[0].email} />
               </div>
               <div class="employee__form--group">
-                <label for="employee--phone">전화번호</label>
+                <label for="employee__phone">전화번호</label>
                 <input type="tel" id="employee-phone" value=${employee[0].phone} />
               </div>
               <div class="employee__form--group">
-                <label for="employee--date">입사일</label>
+                <label for="employee__date">입사일</label>
                 <input type="date" id="employee-date" value=${employee[0].joinDate} />
               </div>
             </form>
           </div>
           <div class="modal__btns">
-            <button class="btn btn--light">취소</button>
+            <button class="btn btn--light modalClose">취소</button>
             <button class="btn">수정</button>
           </div>
         </div>
       </div>
     </div>
   `;
+
+  const modalOpen = [{ btn: 'modalDetail', modal: 'employee__detailModal' }];
+  useModal(modalOpen);
 }
 
 // DB 샘플
@@ -125,7 +133,7 @@ const employee = [
     leftVaca: '13일',
     admin: false,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/001.jpg',
   },
   {
     userId: '002',
@@ -139,7 +147,7 @@ const employee = [
     leftVaca: '3일',
     admin: false,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/002.jpg',
   },
   {
     userId: '003',
@@ -153,7 +161,7 @@ const employee = [
     leftVaca: '9일',
     admin: false,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/003.jpg',
   },
   {
     userId: '004',
@@ -167,7 +175,7 @@ const employee = [
     leftVaca: '1일',
     admin: false,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/004.jpg',
   },
   {
     userId: '005',
@@ -181,7 +189,7 @@ const employee = [
     leftVaca: '9일',
     admin: false,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/005.jpg',
   },
   {
     userId: '006',
@@ -195,7 +203,7 @@ const employee = [
     leftVaca: '3일',
     admin: true,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/006.jpg',
   },
   {
     userId: '007',
@@ -209,7 +217,7 @@ const employee = [
     leftVaca: '17일',
     admin: true,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/007.jpg',
   },
   {
     userId: '008',
@@ -218,16 +226,16 @@ const employee = [
     email: 'hayun94@77cm.com',
     password: '1aSMpkBs',
     phone: '010-4119-4551',
-    birth: '2000-08-19',
+    birth: '200-08-19',
     dept: '마케팅팀',
     leftVaca: '3일',
     admin: false,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/008.jpg',
   },
   {
     userId: '009',
-    name: '다니엘라',
+    name: '이규성',
     position: '과장',
     email: 'osugja@77cm.com',
     password: '4NUPD6Ll',
@@ -237,11 +245,11 @@ const employee = [
     leftVaca: '3일',
     admin: true,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/009.jpg',
   },
   {
     userId: '010',
-    name: '제이슨 로버트',
+    name: '시아준수',
     position: '대리',
     email: 'hyeonjubag@77cm.com',
     password: 'c33LaWLU',
@@ -251,6 +259,808 @@ const employee = [
     leftVaca: '9일',
     admin: false,
     joinDate: null,
-    profile_image: null,
+    img: '/server/images/profile/010.jpg',
+  },
+  {
+    userId: '011',
+    name: '이수영',
+    position: '대리',
+    email: 'hayungim@77cm.com',
+    password: 'o5CtMasb',
+    phone: '010-3772-4380',
+    birth: '1962-03-30',
+    dept: '개발팀',
+    leftVaca: '19일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/011.jpg',
+  },
+  {
+    userId: '012',
+    name: '장선영',
+    position: '부장',
+    email: 'jeonghoseo@77cm.com',
+    password: 'RKn3lXnp',
+    phone: '010-9672-4406',
+    birth: '1958-01-22',
+    dept: '마케팅팀',
+    leftVaca: '4일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/012.jpg',
+  },
+  {
+    userId: '013',
+    name: '이미숙',
+    position: 'CTO',
+    email: 'anjunyeong@77cm.com',
+    password: 'sqf1fqEj',
+    phone: '010-2594-5588',
+    birth: '1992-10-12',
+    dept: 'C-level',
+    leftVaca: '12일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/013.jpg',
+  },
+  {
+    userId: '014',
+    name: '허지우',
+    position: '사원',
+    email: 'egim@77cm.com',
+    password: 'v2ERt9LD',
+    phone: '010-3615-1216',
+    birth: '1992-07-07',
+    dept: '영업팀',
+    leftVaca: '15일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/014.jpg',
+  },
+  {
+    userId: '015',
+    name: '나현숙',
+    position: '대리',
+    email: 'seohyeon93@77cm.com',
+    password: '7HSYnwSg',
+    phone: '010-2130-7575',
+    birth: '1980-06-24',
+    dept: '개발팀',
+    leftVaca: '6일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/015.jpg',
+  },
+  {
+    userId: '016',
+    name: '문상훈',
+    position: '사원',
+    email: 'yunyeweon@77cm.com',
+    password: 'Om7R9dyu',
+    phone: '010-504-2283',
+    birth: '1977-07-02',
+    dept: '인사팀',
+    leftVaca: '18일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/016.jpg',
+  },
+  {
+    userId: '017',
+    name: '선우정아',
+    position: '대리',
+    email: 'caeweoncoe@77cm.com',
+    password: '3Te2Mq7p',
+    phone: '010-7498-3547',
+    birth: '1984-08-20',
+    dept: '영업팀',
+    leftVaca: '13일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/017.jpg',
+  },
+  {
+    userId: '018',
+    name: '강준호',
+    position: '과장',
+    email: 'sanghun89@77cm.com',
+    password: '3DlebUnL',
+    phone: '010-4197-3243',
+    birth: '1998-01-09',
+    dept: '재무팀',
+    leftVaca: '3일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/018.jpg',
+  },
+  {
+    userId: '019',
+    name: '차민지',
+    position: '부장',
+    email: 'ngim@77cm.com',
+    password: '0AOEn1jR',
+    phone: '010-9593-5475',
+    birth: '1978-10-20',
+    dept: '개발팀',
+    leftVaca: '15일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/019.jpg',
+  },
+  {
+    userId: '020',
+    name: '나주원',
+    position: '대리',
+    email: 'xjeon@77cm.com',
+    password: 'Hb9tAYrf',
+    phone: '010-6799-2799',
+    birth: '1961-11-17',
+    dept: '개발팀',
+    leftVaca: '19일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/020.jpg',
+  },
+  {
+    userId: '021',
+    name: '박서현',
+    position: '과장',
+    email: 'bagminjun@77cm.com',
+    password: 'u3I0MQCw',
+    phone: '010-5853-7865',
+    birth: '1995-09-05',
+    dept: '인사팀',
+    leftVaca: '6일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/021.jpg',
+  },
+  {
+    userId: '022',
+    name: '이미숙',
+    position: 'COO',
+    email: 'wgo@77cm.com',
+    password: '4XaxgV3v',
+    phone: '010-4765-6954',
+    birth: '1975-10-28',
+    dept: 'C-level',
+    leftVaca: '11일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/022.jpg',
+  },
+  {
+    userId: '023',
+    name: '고미경',
+    position: '부장',
+    email: 'xryu@77cm.com',
+    password: '1WUWrJIi',
+    phone: '010-4470-9567',
+    birth: '1973-07-21',
+    dept: '마케팅팀',
+    leftVaca: '12일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/023.jpg',
+  },
+  {
+    userId: '024',
+    name: '이지은',
+    position: '차장',
+    email: 'tgang@77cm.com',
+    password: 'bK0E4Rzv',
+    phone: '010-2778-8439',
+    birth: '1976-08-17',
+    dept: '개발팀',
+    leftVaca: '4일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/024.jpg',
+  },
+  {
+    userId: '025',
+    name: '김성민',
+    position: '차장',
+    email: 'yi@77cm.com',
+    password: '7CiJSDWt',
+    phone: '010-1441-3557',
+    birth: '1996-08-25',
+    dept: '개발팀',
+    leftVaca: '13일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/025.jpg',
+  },
+  {
+    userId: '026',
+    name: '박건우',
+    position: '차장',
+    email: 'boram86@77cm.com',
+    password: 'fn3v8Zac',
+    phone: '010-8324-6723',
+    birth: '1989-10-18',
+    dept: '인사팀',
+    leftVaca: '6일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/026.jpg',
+  },
+  {
+    userId: '027',
+    name: '박순옥',
+    position: '차장',
+    email: 'goyeongmi@77cm.com',
+    password: '0GD42Eon',
+    phone: '010-8214-6136',
+    birth: '1990-06-29',
+    dept: '개발팀',
+    leftVaca: '11일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/027.jpg',
+  },
+  {
+    userId: '028',
+    name: '김명숙',
+    position: '부장',
+    email: 'myeongsuggim@77cm.com',
+    password: '0Zm5SsO',
+    phone: '010-504-2892',
+    birth: '1989-04-06',
+    dept: '재무팀',
+    leftVaca: '4일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/028.jpg',
+  },
+  {
+    userId: '029',
+    name: '이명숙',
+    position: '과장',
+    email: 'seojun87@77cm.com',
+    password: 'H2K6RKyu',
+    phone: '010-9739-3409',
+    birth: '1988-11-10',
+    dept: '재무팀',
+    leftVaca: '10일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/029.jpg',
+  },
+  {
+    userId: '030',
+    name: '송건우',
+    position: '부장',
+    email: 'yejingim@77cm.com',
+    password: 'ScN8AhM1',
+    phone: '010-5689-5619',
+    birth: '1978-07-05',
+    dept: '영업팀',
+    leftVaca: '6일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/030.jpg',
+  },
+  {
+    userId: '031',
+    name: '김영수',
+    position: '사원',
+    email: 'ujinhan@77cm.com',
+    password: 'On7o2NFv',
+    phone: '010-9481-7783',
+    birth: '1992-08-12',
+    dept: '재무팀',
+    leftVaca: '7일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/031.jpg',
+  },
+  {
+    userId: '032',
+    name: '김진우',
+    position: '차장',
+    email: 'ieunyeong@77cm.com',
+    password: 'pR1ztAgw',
+    phone: '010-4796-9810',
+    birth: '1967-05-20',
+    dept: '인사팀',
+    leftVaca: '9일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/032.jpg',
+  },
+  {
+    userId: '033',
+    name: '김순옥',
+    position: '대리',
+    email: 'syun@77cm.com',
+    password: 'Gce1RskH',
+    phone: '010-3850-2513',
+    birth: '1996-06-25',
+    dept: '개발팀',
+    leftVaca: '7일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/033.jpg',
+  },
+  {
+    userId: '034',
+    name: '이명자',
+    position: '차장',
+    email: 'msin@77cm.com',
+    password: 'h0JP5hGE',
+    phone: '010-5461-1126',
+    birth: '1990-08-30',
+    dept: '마케팅팀',
+    leftVaca: '18일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/034.jpg',
+  },
+  {
+    userId: '035',
+    name: '차준호',
+    position: '과장',
+    email: 'seungmin66@77cm.com',
+    password: '4WILRuEe',
+    phone: '010-9212-3988',
+    birth: '1987-07-31',
+    dept: '개발팀',
+    leftVaca: '13일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/035.jpg',
+  },
+  {
+    userId: '036',
+    name: '김채원',
+    position: '대리',
+    email: 'jangsugja@77cm.com',
+    password: '86MQEGbj',
+    phone: '010-4393-2348',
+    birth: '1982-05-21',
+    dept: '마케팅팀',
+    leftVaca: '20일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/036.jpg',
+  },
+  {
+    userId: '037',
+    name: '김영식',
+    position: 'CHO',
+    email: 'yunjunho@77cm.com',
+    password: 'CgU32Myw',
+    phone: '010-7859-1096',
+    birth: '1979-06-03',
+    dept: 'C-level',
+    leftVaca: '0일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/037.jpg',
+  },
+  {
+    userId: '038',
+    name: '전영환',
+    position: '차장',
+    email: 'isangceol@77cm.com',
+    password: '6GtqDzDp',
+    phone: '010-3573-6983',
+    birth: '1965-08-14',
+    dept: '마케팅팀',
+    leftVaca: '8일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/038.jpg',
+  },
+  {
+    userId: '039',
+    name: '류은지',
+    position: '대리',
+    email: 'hwangareum@77cm.com',
+    password: '2mySwyg9',
+    phone: '010-3290-8158',
+    birth: '1974-08-14',
+    dept: '개발팀',
+    leftVaca: '17일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/039.jpg',
+  },
+  {
+    userId: '040',
+    name: '허영진',
+    position: '차장',
+    email: 'caeweonji@77cm.com',
+    password: 'jv5vOQb8',
+    phone: '010-5350-8026',
+    birth: '1971-01-10',
+    dept: '개발팀',
+    leftVaca: '16일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/040.jpg',
+  },
+  {
+    userId: '041',
+    name: '최은지',
+    position: 'CFO',
+    email: 'rgim@77cm.com',
+    password: '3OU0Veci',
+    phone: '010-4794-3458',
+    birth: '1996-05-03',
+    dept: 'C-level',
+    leftVaca: '10일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/041.jpg',
+  },
+  {
+    userId: '042',
+    name: '임지훈',
+    position: '사원',
+    email: 'si@77cm.com',
+    password: 'w91pH0Gd',
+    phone: '010-6460-5331',
+    birth: '1956-08-20',
+    dept: '재무팀',
+    leftVaca: '10일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/042.jpg',
+  },
+  {
+    userId: '043',
+    name: '김은주',
+    position: '과장',
+    email: 'vbag@77cm.com',
+    password: 'Tn9TTvLj',
+    phone: '010-8430-8897',
+    birth: '1974-07-11',
+    dept: '인사팀',
+    leftVaca: '20일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/043.jpg',
+  },
+  {
+    userId: '044',
+    name: '김서연',
+    position: '사원',
+    email: 'sunja80@77cm.com',
+    password: 'J4jM4VSp',
+    phone: '010-2434-8517',
+    birth: '1964-11-02',
+    dept: '인사팀',
+    leftVaca: '10일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/044.jpg',
+  },
+  {
+    userId: '045',
+    name: '김승현',
+    position: '대리',
+    email: 'gimyeeun@77cm.com',
+    password: '0my6Pcmc',
+    phone: '010-5555-2735',
+    birth: '1966-06-19',
+    dept: '인사팀',
+    leftVaca: '14일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/045.jpg',
+  },
+  {
+    userId: '046',
+    name: '박상호',
+    position: '사원',
+    email: 'jia30@77cm.com',
+    password: 'yfH9Up4n',
+    phone: '010-2516-5342',
+    birth: '1986-05-01',
+    dept: '마케팅팀',
+    leftVaca: '4일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/046.jpg',
+  },
+  {
+    userId: '047',
+    name: '박옥순',
+    position: '부장',
+    email: 'coegyeongja@77cm.com',
+    password: 'kb29MDup',
+    phone: '010-6028-3294',
+    birth: '1957-10-17',
+    dept: '마케팅팀',
+    leftVaca: '13일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/047.jpg',
+  },
+  {
+    userId: '048',
+    name: '김민재',
+    position: '차장',
+    email: 'myeongjanam@77cm.com',
+    password: 'o9WPJaFH',
+    phone: '010-5668-3822',
+    birth: '1996-03-04',
+    dept: '개발팀',
+    leftVaca: '15일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/048.jpg',
+  },
+  {
+    userId: '049',
+    name: '박정남',
+    position: '대리',
+    email: 'gimareum@77cm.com',
+    password: '6KKVzXAa',
+    phone: '010-2862-7517',
+    birth: '1954-01-31',
+    dept: '재무팀',
+    leftVaca: '14일',
+    admin: false,
+    joinDate: null,
+    img: '/server/images/profile/049.jpg',
+  },
+  {
+    userId: '050',
+    name: '진정남',
+    position: '차장',
+    email: 'heoeungyeong@77cm.com',
+    password: 'TP35sPo7',
+    phone: '010-7346-9942',
+    birth: '1958-08-04',
+    dept: '인사팀',
+    leftVaca: '8일',
+    admin: true,
+    joinDate: null,
+    img: '/server/images/profile/050.jpg',
+  },
+  {
+    userId: '051',
+    name: '박광수',
+    position: '부장',
+    email: 'tjeong@77cm.com',
+    password: 'lY3tMTjv',
+    phone: '010-7053-7343',
+    birth: '1972-05-28',
+    dept: '인사팀',
+    leftVaca: '19일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '052',
+    name: '이정훈',
+    position: '부장',
+    email: 'bi@77cm.com',
+    password: 'k9yVn4gC',
+    phone: '010-4796-6827',
+    birth: '1966-03-20',
+    dept: '인사팀',
+    leftVaca: '16일',
+    admin: true,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '053',
+    name: '김지연',
+    position: '과장',
+    email: 'gimmiyeong@77cm.com',
+    password: '5KIpsVfH',
+    phone: '010-4153-7263',
+    birth: '1967-05-09',
+    dept: '마케팅팀',
+    leftVaca: '6일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '054',
+    name: '김진우',
+    position: '차장',
+    email: 'yujin09@77cm.com',
+    password: 'J317pQhw',
+    phone: '010-4282-3310',
+    birth: '1988-01-07',
+    dept: '마케팅팀',
+    leftVaca: '9일',
+    admin: true,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '055',
+    name: '송지훈',
+    position: '사원',
+    email: 'jihyeon56@77cm.com',
+    password: 'WHpM8Nqg',
+    phone: '010-1992-4763',
+    birth: '1963-10-20',
+    dept: '개발팀',
+    leftVaca: '13일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '056',
+    name: '김승현',
+    position: '부장',
+    email: 'misuggo@77cm.com',
+    password: '9mPHNCqK',
+    phone: '010-4603-6641',
+    birth: '1996-07-28',
+    dept: '마케팅팀',
+    leftVaca: '6일',
+    admin: true,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '057',
+    name: '오정식',
+    position: '부장',
+    email: 'jeongho04@77cm.com',
+    password: 'x2WpV6Id',
+    phone: '010-5734-4126',
+    birth: '1964-08-12',
+    dept: '마케팅팀',
+    leftVaca: '0일',
+    admin: true,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '058',
+    name: '이수민',
+    position: '과장',
+    email: 'sanghyeon41@77cm.com',
+    password: 'PkRTA1Bh',
+    phone: '010-3148-6023',
+    birth: '1987-10-24',
+    dept: '영업팀',
+    leftVaca: '16일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '059',
+    name: '손정희',
+    position: '대리',
+    email: 'jeongja41@77cm.com',
+    password: '4XyakaXx',
+    phone: '010-4947-1414',
+    birth: '1964-09-05',
+    dept: '마케팅팀',
+    leftVaca: '2일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '060',
+    name: '서주원',
+    position: '차장',
+    email: 'gimmyeongsug@77cm.com',
+    password: '1FkntKgk',
+    phone: '010-2754-6715',
+    birth: '1984-07-25',
+    dept: '마케팅팀',
+    leftVaca: '15일',
+    admin: true,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '061',
+    name: '양현주',
+    position: '차장',
+    email: 'seunghyeon15@77cm.com',
+    password: '0aTW9HTt',
+    phone: '010-4125-2285',
+    birth: '1959-01-20',
+    dept: '영업팀',
+    leftVaca: '4일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '062',
+    name: '김은영',
+    position: '차장',
+    email: 'mgim@77cm.com',
+    password: 'GO2l4XbI',
+    phone: '010-6939-3328',
+    birth: '1963-01-16',
+    dept: '마케팅팀',
+    leftVaca: '14일',
+    admin: true,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '063',
+    name: '이현우',
+    position: '대리',
+    email: 'seohyeon77@77cm.com',
+    password: '9SuGVPym',
+    phone: '010-5773-4721',
+    birth: '1979-11-30',
+    dept: '마케팅팀',
+    leftVaca: '13일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '064',
+    name: '허성수',
+    position: '차장',
+    email: 'minjunhan@77cm.com',
+    password: 'yo4Sz0Vr',
+    phone: '010-3324-7576',
+    birth: '1960-02-19',
+    dept: '인사팀',
+    leftVaca: '17일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '065',
+    name: '이수민',
+    position: '사원',
+    email: 'seonghunno@77cm.com',
+    password: '7QEuhVvT',
+    phone: '010-5984-4826',
+    birth: '1984-09-01',
+    dept: '영업팀',
+    leftVaca: '9일',
+    admin: false,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '066',
+    name: '이예원',
+    position: '사원',
+    email: 'soncunja@77cm.com',
+    password: 'vl9RcZd7',
+    phone: '010-705-2729',
+    birth: '1980-09-29',
+    dept: '영업팀',
+    leftVaca: '13일',
+    admin: true,
+    joinDate: null,
+    img: '/public/profile-default.png',
+  },
+  {
+    userId: '067',
+    name: '고현주',
+    position: '대리',
+    email: 'seongsu66@77cm.com',
+    password: 'q3U9Q2Xu',
+    phone: '010-1902-9125',
+    birth: '1979-04-20',
+    dept: '마케팅팀',
+    leftVaca: '9일',
+    admin: true,
+    joinDate: null,
+    img: '/public/profile-default.png',
   },
 ];
+
+// svg 로 가져오기 아이콘 링크 삭제
+
+// 호버 처리  플러스 생기는거
