@@ -28,11 +28,11 @@ export default function Home(root) {
         </div>
       </div>
       <div class="home__workBox">
-      <div class="home__notWorkInfo">
-        <p class="home__workText">오늘은 아직 근무를 시작하지 않았어요.</p>
+        <div class="home__workInfo">
+          <p class="home__workText">오늘은 아직 근무를 시작하지 않았어요.</p>
+        </div>
         <button class="home__workBtn btn"><svg class="playIcon" width="20" height="20" viewBox="0 0 34 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.5 6.4248V23.9248L26.9688 15.1748L11.5 6.4248Z" fill="currentColor"/></svg>근무 시작</button>
-      </div>
       </div>
     </div>
   </div>
@@ -43,28 +43,33 @@ export default function Home(root) {
         <a class="home__moreNotice" href="/notice">더보기 ></a>
       </div>
       <div class="home__noticeList">
-    
+
       </div>
     </div>
   </div>
 
   <div class="home__workModal modal modal--none">
+      <div class="modal__bb"></div>
+      <div class="modal__inner">
+        <p class="modal__title">알 림</p>
+        <div class="modal__content">
+          <div class="home__modalText modal__contentText">
+          <p class="home__workQuestion">
+            근무를 시작하시겠습니까?
+          </p>
+        </div>
+      </div>
+      <div class="modal__btns">
+        <button class="btn btn--light modalClose">취소</button>
+        <button class="home__workConfirm btn modalClose">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="home__noticeModal modal modal--bgWhite modal--none"> 
         <div class="modal__bb"></div>
-        <div class="modal__inner">
-          <p class="modal__title">알 림</p>
-
-          <div class="modal__content">
-            <div class="modal__contentText">
-              <p class="home__workQuestion">
-                근무를 시작하시겠습니까?
-              </p>
-            </div>
-          </div>
-
-          <div class="modal__btns">
-            <button class="btn btn--light modalClose">취소</button>
-            <button class="btn modalClose">확인</button>
-          </div>
+        <div class="home__noticeModalInner modal__inner">
+          
         </div>
       </div>
 </div>`;
@@ -73,45 +78,20 @@ export default function Home(root) {
   setInterval(renderTime, 1000);
   renderTime();
 
-  // 근무 시작/종료 버튼에 이벤트 적용
+  // 근무 시작/종료 확인 모달에 이벤트 적용
   document
-    .querySelector('.home__workBox')
-    .addEventListener('click', workBtnHandler);
+    .querySelector('.home__workConfirm')
+    .addEventListener('click', workModalBtnHandler);
 
   // 공지사항 목록 렌더링
   renderNotice();
 
   // 모달 사용
-  useModal([{ btn: 'home__workBtn', modal: 'home__workModal' }]);
+  useModal([
+    { btn: 'home__workBtn', modal: 'home__workModal' },
+    { btn: 'home__noticeCard', modal: 'home__noticeModal' },
+  ]);
 }
-
-// 근무 상태를 관리하기 위한 임시 배열
-const work = [false];
-
-// (가장 최근 3개) 공지사항 목록을 관리하기 위한 임시 배열
-const notice = [
-  {
-    id: 1,
-    date: '2024-06-26',
-    title: '새로운 업데이트 공지',
-    content: '2024년 6월 26일에 새로운 업데이트가 진행됩니다.',
-    imgs: '/public/temp-image.jpg',
-  },
-  {
-    id: 2,
-    date: '2024-06-25',
-    title: '정기 점검 안내',
-    content: '2024년 6월 25일에 정기 점검이 있을 예정입니다.',
-    imgs: '/public/temp-image.jpg',
-  },
-  {
-    id: 3,
-    date: '2024-06-24',
-    title: '서비스 개선 사항',
-    content: '2024년 6월 24일에 서비스 개선 사항이 적용됩니다.',
-    imgs: '/public/temp-image.jpg',
-  },
-];
 
 // 시간 데이터를 현재 시간 카드에 렌더링하는 함수
 const renderTime = () => {
@@ -123,27 +103,67 @@ const renderTime = () => {
 
 // 근무 상태에 맞게 카드 내용을 렌더링하는 함수
 const renderWork = () => {
-  document.querySelector('.home__workBox').innerHTML = work[0]
-    ? `<div class="home__notWorkInfo">
-  <p class="home__workText">오늘은 아직 근무를 시작하지 않았어요.</p>
-  <button class="home__workBtn btn"><svg class="home__workIcon" width="20" height="20" viewBox="0 0 34 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M11.5 6.4248V23.9248L26.9688 15.1748L11.5 6.4248Z" fill="currentColor"/></svg>근무 시작</button>
-</div>`
-    : `<div class="home__workInfo">
-        <p class="home__workStatus"><span class="home__workEmoji">🧑‍💻</span> 근무 중</p>
-        <p class="home__workText">${getTime().hour}:${
-        getTime().minute
-      }부터 진행 중</p>
-      <button class="home__workBtn btn"><svg class="home__workIcon" width="20" height="20" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-<path d="M7.5 22.5V7.5H22.5V22.5H7.5Z" fill="currentColor"/></svg>근무 종료</button>
-      </div>`;
+  if (work[0]) {
+    document.querySelector('.home__workInfo').innerHTML = `
+    <p class="home__workStatus"><span class="home__workEmoji">🧑‍💻</span> 근무 중</p>
+    <p class="home__workText">${getTime().hour}:${
+      getTime().minute
+    }부터 진행 중</p>`;
 
-  document.querySelector('.home__workBox').addEventListener('click', () => {});
+    document.querySelector(
+      '.home__workBtn'
+    ).innerHTML = `<button class="home__workBtn btn">
+    <svg
+      class="home__workIcon"
+      width="20"
+      height="20"
+      viewBox="0 0 30 30"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M7.5 22.5V7.5H22.5V22.5H7.5Z" fill="currentColor" />
+    </svg>
+    근무 종료
+  </button>`;
+  } else {
+    document.querySelector('.home__workInfo').innerHTML = `
+    <p class="home__workText">오늘은 아직 근무를 시작하지 않았어요.</p>`;
+
+    document.querySelector('.home__workBtn').innerHTML = `
+    <button class="home__workBtn btn">
+    <svg
+      class="home__workIcon"
+      width="20"
+      height="20"
+      viewBox="0 0 34 30"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11.5 6.4248V23.9248L26.9688 15.1748L11.5 6.4248Z"
+        fill="currentColor"
+      />
+    </svg>
+    근무 시작
+  </button>;
+  `;
+  }
+};
+
+// 근무 상태에 맞게 근무 확인 모달 내용을 렌더링하는 함수
+const renderWorkModal = () => {
+  document.querySelector('.home__modalText').innerHTML = work[0]
+    ? `<p class="home__workQuestion">
+            근무를 종료하시겠습니까?
+          </p>`
+    : `<p class="home__workQuestion">
+            근무를 시작하시겠습니까?
+          </p>`;
 };
 
 // 최근 공지사항 목록에 공지사항 카드를 렌더링하는 함수
 const renderNotice = () => {
-  document.querySelector('.home__noticeList').innerHTML = notice
+  document.querySelector('.home__noticeList').innerHTML = notices
     .map(
       (n) =>
         `<div class="home__noticeCard card card--img" data-id=${n.id}>
@@ -157,6 +177,33 @@ const renderNotice = () => {
       </div>`
     )
     .join('');
+
+  const noticeCards = document.querySelectorAll('.home__noticeCard');
+
+  noticeCards.forEach((noticeCard) => {
+    noticeCard.addEventListener('click', (e) => {
+      const cardId = e.currentTarget.getAttribute('data-id');
+      const data = notices.find((el) => el.id == cardId);
+      renderNoticeModal(data);
+    });
+  });
+};
+
+// 공지사항 모달 내용을 렌더링하는 함수
+const renderNoticeModal = (data) => {
+  document.querySelector('.home__noticeModalInner').innerHTML = `
+    <div class="home__noticeModalBar">
+      <p class="home__noticeModalTitle">${data.title}</p>
+      <p class="home__noticeModalDate">${data.date}</p>
+    </div>
+    <div class="home__noticeModalContent modal__content">
+      <div class="home__noticeModalImg">
+      <img src="${data.imgs}" alt="${data.imgAlt}"/>
+      </div>
+      <div class="home__noticeModalText">${data.content}</div>
+    </div>
+    <button class="home__noticeModalBtn btn modalClose">닫기</button>
+  `;
 };
 
 // 날짜, 요일 데이터를 반환하는 함수
@@ -190,14 +237,40 @@ const getTime = () => {
   return { hour: hour, minute: minute, second: second };
 };
 
-// 근무 시작, 종료 버튼 클릭 시 동작하는 핸들러 함수
-const workBtnHandler = (e) => {
-  // 현재 클릭한 요소가 workCard 내의 button이 아니라면 return
-  if (!e.target.closest('button')) return;
-
-  // 모달 사용
-  useModal([{ btn: 'home__workBtn', modal: 'home__workModal' }]);
-
+// 근무 시작, 종료 확인 모달에서 확인 버튼 클릭 시 동작하는 핸들러 함수
+const workModalBtnHandler = () => {
   // 근무 상태 임시 배열 토글
   work[0] = !work[0];
+
+  renderWork();
+  renderWorkModal();
 };
+
+// 근무 상태를 관리하기 위한 임시 배열
+const work = [false];
+
+// (가장 최근 3개) 공지사항 목록을 관리하기 위한 임시 배열
+const notices = [
+  {
+    id: 1,
+    date: '2024-06-26',
+    title: '새로운 업데이트 공지',
+    content: '2024년 6월 26일에 새로운 업데이트가 진행됩니다.',
+    imgs: '/public/temp-image.jpg',
+  },
+  {
+    id: 2,
+    date: '2024-06-25',
+    title: '정기 점검 안내',
+    content:
+      '2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.2024년 6월 25일에 정기 점검이 있을 예정입니다.',
+    imgs: '/public/temp-image.jpg',
+  },
+  {
+    id: 3,
+    date: '2024-06-24',
+    title: '서비스 개선 사항',
+    content: '2024년 6월 24일에 서비스 개선 사항이 적용됩니다.',
+    imgs: '/public/temp-image.jpg',
+  },
+];
