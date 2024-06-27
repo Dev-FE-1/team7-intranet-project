@@ -1,4 +1,4 @@
-import { useSelectBox } from '../js/common';
+import { useModal } from '/src/js/common';
 
 export default function Home(root) {
   root.innerHTML = `<div class="home">
@@ -40,20 +40,38 @@ export default function Home(root) {
     <div class="home__noticeListCard card">
       <div class="home__labelMore">
         <p class="home__noticeLabel">공지사항</p>
-        <a class="home__moreNotice">더보기 ></a>
+        <a class="home__moreNotice" href="/notice">더보기 ></a>
       </div>
       <div class="home__noticeList">
     
       </div>
     </div>
   </div>
+
+  <div class="home__workModal modal modal--none">
+        <div class="modal__bb"></div>
+        <div class="modal__inner">
+          <p class="modal__title">알 림</p>
+
+          <div class="modal__content">
+            <div class="modal__contentText">
+              <p class="home__workQuestion">
+                근무를 시작하시겠습니까?
+              </p>
+            </div>
+          </div>
+
+          <div class="modal__btns">
+            <button class="btn btn--light modalClose">취소</button>
+            <button class="btn modalClose">확인</button>
+          </div>
+        </div>
+      </div>
 </div>`;
 
   // 시간 데이터를 1초에 1번씩 실행
   setInterval(renderTime, 1000);
   renderTime();
-
-  useSelectBox();
 
   // 근무 시작/종료 버튼에 이벤트 적용
   document
@@ -62,6 +80,9 @@ export default function Home(root) {
 
   // 공지사항 목록 렌더링
   renderNotice();
+
+  // 모달 사용
+  useModal([{ btn: 'home__workBtn', modal: 'home__workModal' }]);
 }
 
 // 근무 상태를 관리하기 위한 임시 배열
@@ -116,15 +137,23 @@ const renderWork = () => {
       <button class="home__workBtn btn"><svg class="home__workIcon" width="20" height="20" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 <path d="M7.5 22.5V7.5H22.5V22.5H7.5Z" fill="currentColor"/></svg>근무 종료</button>
       </div>`;
+
+  document.querySelector('.home__workBox').addEventListener('click', () => {});
 };
 
-// 공지사항 목록에 공지사항 카드를 렌더링하는 함수
+// 최근 공지사항 목록에 공지사항 카드를 렌더링하는 함수
 const renderNotice = () => {
   document.querySelector('.home__noticeList').innerHTML = notice
     .map(
       (n) =>
         `<div class="home__noticeCard card card--img" data-id=${n.id}>
-
+          <div class="home__noticeImg card__img">
+            <img src="/public/temp-image.jpg" alt="notice" />
+          </div>
+            <div class="home__noticeTitle card__title">
+              <p>공지입니다.</p>
+            </div>
+          </div>
       </div>`
     )
     .join('');
@@ -162,14 +191,13 @@ const getTime = () => {
 };
 
 // 근무 시작, 종료 버튼 클릭 시 동작하는 핸들러 함수
-const workBtnHandler = (event) => {
+const workBtnHandler = (e) => {
   // 현재 클릭한 요소가 workCard 내의 button이 아니라면 return
-  if (!event.target.closest('button')) return;
+  if (!e.target.closest('button')) return;
 
-  renderWork();
+  // 모달 사용
+  useModal([{ btn: 'home__workBtn', modal: 'home__workModal' }]);
 
   // 근무 상태 임시 배열 토글
   work[0] = !work[0];
 };
-
-//

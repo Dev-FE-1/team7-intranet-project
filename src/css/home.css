@@ -10,11 +10,6 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-use-select: none;
-  user-select: none;
 }
 
 /* firstLine */
@@ -183,7 +178,7 @@
 /* noticeListCard */
 .home__noticeListCard {
   flex: 1;
-  height: 400px;
+  height: 440px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -208,6 +203,7 @@
 .home__moreNotice {
   margin-right: 10px;
   font-weight: bold;
+  color: #012e33;
 }
 .home__moreNotice:hover {
   cursor: pointer;
@@ -221,4 +217,11 @@
   height: 330px;
   flex: 1;
   margin: 0;
+}
+.home__noticeCard:hover {
+  cursor: pointer;
+}
+
+/* workModal */
+.home__workModal {
 }
