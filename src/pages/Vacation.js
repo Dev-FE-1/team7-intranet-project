@@ -68,7 +68,7 @@ export default function Vacation(root) {
           <!-- vacation__card -->
 
           <!-- applyModal -->
-          <div class="vacation__applyModal modal modal--lg modal--none">
+          <div class="vacation__applyModal modal modal--none">
             <div class="modal__bb"></div>
             <div class="modal__inner">
               <p class="modal__title">신 청</p>
@@ -150,7 +150,7 @@ export default function Vacation(root) {
           </div>
 
           <!-- detailModal -->
-          <div class="vacation__detailModal modal modal--lg modal--none">
+          <div class="vacation__detailModal modal modal--none">
             <div class="modal__bb"></div>
             <div class="modal__inner">
               <p class="modal__title">상 세</p>

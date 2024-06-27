@@ -1,8 +1,3 @@
-/*common*/
-.selectBox__list {
-  width: 100%;
-}
-/*common*/
 .vacation {
   width: 100%;
 }
@@ -67,4 +62,13 @@
 .modal__content {
   min-height: 330px;
   box-sizing: border-box;
+  justify-content: space-between;
+}
+.modal__inner {
+  width: 40%;
+}
+.modal--lg .modal__content {
+}
+.modal__title {
+  text-align: left;
 }
