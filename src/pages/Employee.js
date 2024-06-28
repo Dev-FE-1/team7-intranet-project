@@ -141,7 +141,7 @@ const employee = [
     leftVaca: '13일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/001.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '002',
@@ -155,7 +155,7 @@ const employee = [
     leftVaca: '3일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/002.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '003',
@@ -169,7 +169,7 @@ const employee = [
     leftVaca: '9일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/003.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '004',
@@ -183,7 +183,7 @@ const employee = [
     leftVaca: '1일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/004.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '005',
@@ -197,7 +197,7 @@ const employee = [
     leftVaca: '9일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/005.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '006',
@@ -211,7 +211,7 @@ const employee = [
     leftVaca: '3일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/006.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '007',
@@ -225,7 +225,7 @@ const employee = [
     leftVaca: '17일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/007.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '008',
@@ -239,7 +239,7 @@ const employee = [
     leftVaca: '3일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/008.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '009',
@@ -253,7 +253,7 @@ const employee = [
     leftVaca: '3일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/009.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '010',
@@ -267,7 +267,7 @@ const employee = [
     leftVaca: '9일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/010.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '011',
@@ -281,7 +281,7 @@ const employee = [
     leftVaca: '19일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/011.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '012',
@@ -295,7 +295,7 @@ const employee = [
     leftVaca: '4일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/012.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '013',
@@ -309,7 +309,7 @@ const employee = [
     leftVaca: '12일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/013.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '014',
@@ -323,7 +323,7 @@ const employee = [
     leftVaca: '15일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/014.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '015',
@@ -337,7 +337,7 @@ const employee = [
     leftVaca: '6일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/015.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '016',
@@ -351,7 +351,7 @@ const employee = [
     leftVaca: '18일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/016.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '017',
@@ -365,7 +365,7 @@ const employee = [
     leftVaca: '13일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/017.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '018',
@@ -379,7 +379,7 @@ const employee = [
     leftVaca: '3일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/018.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '019',
@@ -393,7 +393,7 @@ const employee = [
     leftVaca: '15일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/019.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '020',
@@ -407,7 +407,7 @@ const employee = [
     leftVaca: '19일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/020.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '021',
@@ -421,7 +421,7 @@ const employee = [
     leftVaca: '6일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/021.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '022',
@@ -435,7 +435,7 @@ const employee = [
     leftVaca: '11일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/022.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '023',
@@ -449,7 +449,7 @@ const employee = [
     leftVaca: '12일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/023.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '024',
@@ -463,7 +463,7 @@ const employee = [
     leftVaca: '4일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/024.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '025',
@@ -477,7 +477,7 @@ const employee = [
     leftVaca: '13일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/025.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '026',
@@ -491,7 +491,7 @@ const employee = [
     leftVaca: '6일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/026.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '027',
@@ -505,7 +505,7 @@ const employee = [
     leftVaca: '11일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/027.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '028',
@@ -519,7 +519,7 @@ const employee = [
     leftVaca: '4일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/028.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '029',
@@ -533,7 +533,7 @@ const employee = [
     leftVaca: '10일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/029.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '030',
@@ -547,7 +547,7 @@ const employee = [
     leftVaca: '6일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/030.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '031',
@@ -561,7 +561,7 @@ const employee = [
     leftVaca: '7일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/031.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '032',
@@ -575,7 +575,7 @@ const employee = [
     leftVaca: '9일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/032.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '033',
@@ -589,7 +589,7 @@ const employee = [
     leftVaca: '7일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/033.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '034',
@@ -603,7 +603,7 @@ const employee = [
     leftVaca: '18일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/034.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '035',
@@ -617,7 +617,7 @@ const employee = [
     leftVaca: '13일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/035.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '036',
@@ -631,7 +631,7 @@ const employee = [
     leftVaca: '20일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/036.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '037',
@@ -645,7 +645,7 @@ const employee = [
     leftVaca: '0일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/037.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '038',
@@ -659,7 +659,7 @@ const employee = [
     leftVaca: '8일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/038.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '039',
@@ -673,7 +673,7 @@ const employee = [
     leftVaca: '17일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/039.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '040',
@@ -687,7 +687,7 @@ const employee = [
     leftVaca: '16일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/040.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '041',
@@ -701,7 +701,7 @@ const employee = [
     leftVaca: '10일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/041.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '042',
@@ -715,7 +715,7 @@ const employee = [
     leftVaca: '10일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/042.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '043',
@@ -729,7 +729,7 @@ const employee = [
     leftVaca: '20일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/043.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '044',
@@ -743,7 +743,7 @@ const employee = [
     leftVaca: '10일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/044.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '045',
@@ -757,7 +757,7 @@ const employee = [
     leftVaca: '14일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/045.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '046',
@@ -771,7 +771,7 @@ const employee = [
     leftVaca: '4일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/046.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '047',
@@ -785,7 +785,7 @@ const employee = [
     leftVaca: '13일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/047.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '048',
@@ -799,7 +799,7 @@ const employee = [
     leftVaca: '15일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/048.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '049',
@@ -813,7 +813,7 @@ const employee = [
     leftVaca: '14일',
     admin: false,
     joinDate: null,
-    img: '/server/images/profile/049.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '050',
@@ -827,7 +827,7 @@ const employee = [
     leftVaca: '8일',
     admin: true,
     joinDate: null,
-    img: '/server/images/profile/050.jpg',
+    img: '/public/profile-default.png',
   },
   {
     userId: '051',
