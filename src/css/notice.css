@@ -1,0 +1,106 @@
+.btn--notice{
+  width:100px;
+  font-size: 15px;
+  margin-right:20px;
+}
+.btn--notice--cancel{
+  width:100px;
+  margin: 0 auto;
+}
+
+/* notice */
+.notice{
+  padding:10px;
+  width:100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-sizing:border-box;
+}
+.notice__bar{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top:10px;
+  padding:0 20px;
+  box-sizing: border-box;
+  
+}
+.notice__search{
+  display:flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  margin-right: 50px;
+}
+.notice__input{
+  width:250px;
+  margin-right:10px;
+  font-size: 16px;
+
+}
+.notice__input::placeholder{
+  color:#9CBBBE;
+}
+.notice__searchIcon{
+  color:#9CBBBE;
+  margin-top:5px;
+  width:20px;
+  height:30px;
+  flex-shrink: 0;
+  margin-left: -45px;
+}
+.notice__label{
+  min-width:300px;
+  font-size: 25px;
+  margin-bottom:8px;
+}
+.notice__container{
+  padding: 20px;
+  display:flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.notice__card{
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom:20px;
+  flex: 1 1 calc(25% - 10px); /*-10px로 하면 한줄에 카드가 3개 출력됨*/
+}
+.notice__card:hover{
+  cursor:pointer;
+}
+.notice__title{
+  font-size:20px;
+  font-weight: 700;
+}
+
+/*notice-modal*/
+.notice__modalInner {
+  padding: 20px 40px; 
+  width: 30%;
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.notice__modalBar{
+  font-size:18px;
+  font-weight: bold;
+  padding:15px 0;
+}
+.notice__modalTitle{ 
+  text-align: left;
+}
+.notice__modalDate{
+  font-size: 15px;
+  text-align: right;
+  padding:0px 0px 10px;
+  border-bottom: 1px solid #dfdfdf;
+}
+.notice__modalContent{
+  margin-top:20px;
+  font-size:16px;
+  font-weight: 400;
+  line-height: 20px;
+}
