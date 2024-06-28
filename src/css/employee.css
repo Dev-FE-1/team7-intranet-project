@@ -198,9 +198,8 @@ input:read-only {
   border-radius: 5px;
 }
 
-.a1 {
-}
-.a2 {
+/* 모달 이미지 수정 오버레이  */
+.modal__employeeImage--overlay {
   display: none;
   position: absolute;
   top: 50%;
@@ -212,13 +211,11 @@ input:read-only {
   padding: 10px;
   cursor: pointer;
 }
-
-.image__overlay {
+.modal__employeeImage--overlay:hover {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
-
-.edit__button {
+.modal__editButton {
   display: none;
   position: absolute;
   top: 50%;
@@ -229,8 +226,6 @@ input:read-only {
   padding: 10px;
   cursor: pointer;
 }
-
-.modal__employeeImage:hover .image__overlay,
-.modal__employeeImage:hover .edit__button {
+.modal__employeeImage:hover .modal__editButton {
   display: block;
 }

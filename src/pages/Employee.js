@@ -76,7 +76,7 @@ export default function Employee(root) {
           src=${employee[22].img}
           class="profile__image profile__image--modal" />
           <div class="modal__employeeImage--overlay">
-            <button class="edit__button">
+            <button class="modal__editButton">+</button>
                 </div>
               </div>
             </div>
