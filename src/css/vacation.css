@@ -15,6 +15,11 @@
   gap: 10px;
   margin: 20px 0;
 }
+
+.vacation__searchTypeSelect {
+  width: 150px;
+}
+
 .vacation__pagination {
   margin: 40px auto;
 }
