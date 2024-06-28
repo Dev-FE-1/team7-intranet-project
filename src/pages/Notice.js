@@ -1,5 +1,3 @@
-export default function Notice() {
-  return `
-    <div class='notice'></div>
-  `;
+export default function Notice(root) {
+  root.innerHTML = `<div class="notice"></div>`;
 }

@@ -9,8 +9,8 @@ app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json());
 
-app.get('/server/data/users.json', (req, res) => {
-  fs.readFile('/server/data/users.json', 'utf8', (err, data) => {
+app.get('/api/users.json', (req, res) => {
+  fs.readFile('./server/data/users.json', 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       return res.status(500).send({
@@ -19,7 +19,6 @@ app.get('/server/data/users.json', (req, res) => {
         data: null,
       });
     }
-
     try {
       const jsonData = JSON.parse(data);
       res.json(jsonData);
@@ -33,6 +32,8 @@ app.get('/server/data/users.json', (req, res) => {
     }
   });
 });
+
+app.use('/server/images/profile', express.static('path/to/profile/images'));
 
 app.listen(port, () => {
   console.log(`ready to ${port}`);
