@@ -1,4 +1,4 @@
-import { useModal } from '../js/common.js';
+import { useModal } from '../../common.js';
 
 // 임직원 리스트 데이터 html 생성
 export default function Employee(root) {

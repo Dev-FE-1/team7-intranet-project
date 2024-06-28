@@ -1,4 +1,4 @@
-import { useModal, useSelectBox } from '../js/common';
+import { useModal, useSelectBox } from '../../common';
 
 export default function Vacation(root) {
   const data = [
