@@ -94,10 +94,10 @@ export default function Vacation(root) {
           <!-- applyModal -->
           <div class="vacation__applyModal modal modal--none">
             <div class="modal__bb"></div>
-            <div class="modal__inner">
-              <p class="modal__title">신 청</p>
+            <div class="vacation__modalInner modal__inner">
+              <p class="vacation__modalTitle modal__title">신 청</p>
 
-              <div class="modal__content">
+              <div class="vacation__modalContent modal__content">
                 <!-- 이 영역은 매번 바뀌므로 각 페이지에서 수정 -->
                 <div class="vacation__form">
                   <dl class="vacation__category">
@@ -169,10 +169,10 @@ export default function Vacation(root) {
           <!-- detailModal -->
           <div class="vacation__detailModal modal modal--none">
             <div class="modal__bb"></div>
-            <div class="modal__inner">
-              <p class="modal__title">상 세</p>
+            <div class="vacation__modalInner modal__inner">
+              <p class="vacation__modalTitle modal__title">상 세</p>
 
-              <div class="modal__content">
+              <div class="vacation__modalContent modal__content">
                 <!-- 이 영역은 매번 바뀌므로 각 페이지에서 수정 -->
                 <div class="vacation__form">
                   <dl class="vacation__category">

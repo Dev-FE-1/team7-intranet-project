@@ -65,14 +65,14 @@
   resize: none;
 }
 
-.modal__content {
+.vacation__modalContent {
   min-height: 330px;
   box-sizing: border-box;
   justify-content: space-between;
 }
-.modal__inner {
+.vacation__modalInner {
   width: 50%;
 }
-.modal__title {
+.vacation__modalTitle {
   text-align: left;
 }
