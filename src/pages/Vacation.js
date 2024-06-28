@@ -23,11 +23,13 @@ export default function Vacation(root) {
   ];
   const listHtml = data
     .map(
-      (d) => `<li class="listTable__tr listTable__tr--hover modalDetail">
-                  <div class="listTable__td">${d.type}</div>
-                  <div class="listTable__td">${d.sDate}</div>
-                  <div class="listTable__td">${d.eDate}</div>
-                </li>`
+      (
+        d
+      ) => `<li class="listTable__tr listTable__tr--hover modalDetail" data-id="${d.vacaId}">
+              <div class="listTable__td">${d.type}</div>
+              <div class="listTable__td">${d.sDate}</div>
+              <div class="listTable__td">${d.eDate}</div>
+            </li>`
     )
     .join('');
 
@@ -35,7 +37,29 @@ export default function Vacation(root) {
           <div class="vacation__card card">
             <h2 class="vacation__pageTitle">휴가/외출 관리</h2>
             <div class="vacation__searchArea">
-              <input class="inputText" type="text" name="name" value="" />
+              <div class="vacation__searchTypeSelect selectBox">
+                <label class="selectBox__label">구분</label>
+                <svg
+                  fill="" version="1.1" class="selectBox__arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve" stroke="">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <style type="text/css">
+                      .st0 {
+                        fill: none;
+                      }
+                    </style>
+                    <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
+                    <rect class="st0" width="24" height="24"></rect>
+                    <rect class="st0" width="24" height="24"></rect>
+                  </g>
+                </svg>
+                <ul class="selectBox__list selectBox__list--none">
+                  <li class="selectBox__option">연차</li>
+                  <li class="selectBox__option">반차</li>
+                  <li class="selectBox__option">외출</li>
+                </ul>
+              </div>
               <button class="btn modalApply">신청</button>
             </div>
             <div class="listTable">
@@ -79,29 +103,22 @@ export default function Vacation(root) {
                   <dl class="vacation__category">
                     <dt class="vacatjion__categoryTitle">구분</dt>
                     <dd class="vacation__categoryItem">
-                      <input
-                        id="type1"
-                        name="vacationCategory"
-                        type="radio"
-                        checked
-                      />
-                      <label for="type1">연차</label>
+                      <label for="type1">
+                        <input id="type1" name="vacationCategory" type="radio" checked/>
+                        연차
+                      </label>
                     </dd>
                     <dd class="vacation__categoryItem">
-                      <input
-                        id="type2"
-                        name="vacationCategory"
-                        type="radio"
-                      />
-                      <label for="type2">반차</label>
+                      <label for="type2">
+                        <input id="type2" name="vacationCategory" type="radio"/>
+                        반차
+                      </label>
                     </dd>
                     <dd class="vacation__categoryItem">
-                      <input
-                        id="type3"
-                        name="vacationCategory"
-                        type="radio"
-                      />
-                      <label for="type3">외출</label>
+                      <label for="type3">  
+                        <input id="type3" name="vacationCategory" type="radio"/>
+                        외출
+                      </label>
                     </dd>
                   </dl>
 
@@ -229,172 +246,141 @@ export default function Vacation(root) {
     { btn: 'modalApply', modal: 'vacation__applyModal' },
   ];
   useModal(modalOpen);
+  useSelectBox();
 }
 
-// 연차,반차,외출 라디오 선택에 따라 제출 폼 변경시켜주는 함수
-function handleRadio(e) {
-  const checkedType = this.querySelector('input[name="vacationCategory"]').id;
+// 라디오 선택(연차,반차,외출)에 따라 제출 폼 변경시켜주는 함수
+function handleRadio() {
+  const type = this.querySelector('input[name="vacationCategory"]').id;
   const vacationDate = root.querySelector('.vacation__date');
-  if (checkedType === 'type1') {
-    vacationDate.innerHTML = `<dl class="vacation__sDate">
-                    <dt class="vacation__sDateTitle">시작일</dt>
-                    <dd>
-                      <input
-                        class="vacation__inputText inputText"
-                        type="date"
-                      />
-                    </dd>
-                  </dl>
-                  <dl class="vacation__eDate">
-                    <dt class="vacation__eDateTitle">종료일</dt>
-                    <dd>
-                      <input
-                        class="vacation__inputText inputText"
-                        type="date"
-                      />
-                    </dd>
-                  </dl>`;
-  } else if (checkedType === 'type2') {
-    vacationDate.innerHTML = `<dl class="vacation__sDate">
-                      <dt class="vacation__sDateTitle">시작일</dt>
-                      <dd>
-                        <input
-                          class="vacation__inputText inputText"
-                          type="date"
-                        />
-                      </dd>
-                      <dd>
-                        <div class="vacation__sDateSelect selectBox">
-                          <label class="selectBox__label"
-                            >오전 09:00 ~ 14:00</label
-                          >
-                          <svg
-                            fill=""
-                            version="1.1"
-                            class="selectBox__arrow"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                            viewBox="0 0 24 24"
-                            xml:space="preserve"
-                            stroke=""
-                          >
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            ></g>
-                            <g id="SVGRepo_iconCarrier">
-                              <style type="text/css">
-                                .st0 {
-                                  fill: none;
-                                }
-                              </style>
-                              <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
-                              <rect class="st0" width="24" height="24"></rect>
-                              <rect class="st0" width="24" height="24"></rect>
-                            </g>
-                          </svg>
-                          <ul class="selectBox__list selectBox__list--none">
-                            <li class="selectBox__option">
-                              오전 09:00 ~ 14:00
-                            </li>
-                            <li class="selectBox__option">
-                              오후 14:00 ~ 18:00
-                            </li>
-                          </ul>
-                        </div>
-                      </dd>
-                    </dl>`;
-    useSelectBox();
-  } else if (checkedType === 'type3') {
-    vacationDate.innerHTML = `<dl class="vacation__sDate">
-                      <dt class="vacation__sDateTitle">시작일</dt>
-                      <dd>
-                        <input
-                          class="vacation__inputText inputText"
-                          type="date"
-                        />
-                      </dd>
-                    </dl>
-                    <dl class="vacation__outingTime">
-                      <dt class="vacation__outingTimeTitle">외출 시간</dt>
-                      <dd>
-                        <div class="vacation__outingStimeSelect selectBox">
-                          <label class="selectBox__label">시작 시간</label>
-                          <svg
-                            fill=""
-                            version="1.1"
-                            class="selectBox__arrow"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                            viewBox="0 0 24 24"
-                            xml:space="preserve"
-                            stroke=""
-                          >
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            ></g>
-                            <g id="SVGRepo_iconCarrier">
-                              <style type="text/css">
-                                .st0 {
-                                  fill: none;
-                                }
-                              </style>
-                              <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
-                              <rect class="st0" width="24" height="24"></rect>
-                              <rect class="st0" width="24" height="24"></rect>
-                            </g>
-                          </svg>
-                          <ul class="selectBox__list selectBox__list--none">
-                            <li class="selectBox__option">옵션 1</li>
-                            <li class="selectBox__option">옵션 2</li>
-                            <li class="selectBox__option">옵션 3</li>
-                          </ul>
-                        </div>
-                      </dd>
+  switch (type) {
+    case 'type1':
+      vacationDate.innerHTML = `<dl class="vacation__sDate">
+                                  <dt class="vacation__sDateTitle">시작일</dt>
+                                  <dd>
+                                    <input class="vacation__inputText inputText" type="date" />
+                                  </dd>
+                                </dl>
+                                <dl class="vacation__eDate">
+                                  <dt class="vacation__eDateTitle">종료일</dt>
+                                  <dd>
+                                    <input class="vacation__inputText inputText" type="date"/>
+                                  </dd>
+                                </dl>`;
+      break;
 
-                      <dd>
-                        <div class="vacation__outingEtimeSelect selectBox">
-                          <label class="selectBox__label">종료 시간</label>
-                          <svg
-                            fill=""
-                            version="1.1"
-                            class="selectBox__arrow"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                            viewBox="0 0 24 24"
-                            xml:space="preserve"
-                            stroke=""
-                          >
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            ></g>
-                            <g id="SVGRepo_iconCarrier">
-                              <style type="text/css">
-                                .st0 {
-                                  fill: none;
-                                }
-                              </style>
-                              <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
-                              <rect class="st0" width="24" height="24"></rect>
-                              <rect class="st0" width="24" height="24"></rect>
-                            </g>
-                          </svg>
-                          <ul class="selectBox__list selectBox__list--none">
-                            <li class="selectBox__option">옵션 1</li>
-                            <li class="selectBox__option">옵션 2</li>
-                            <li class="selectBox__option">옵션 3</li>
-                          </ul>
-                        </div>
-                      </dd>
-                    </dl>`;
-    useSelectBox();
+    case 'type2':
+      vacationDate.innerHTML = `<dl class="vacation__sDate">
+                                  <dt class="vacation__sDateTitle">시작일</dt>
+                                  <dd>
+                                    <input class="vacation__inputText inputText" type="date"/>
+                                  </dd>
+                                  <dd>
+                                    <div class="vacation__sDateSelect selectBox">
+                                      <label class="selectBox__label">오전 09:00 ~ 14:00</label>
+                                      <svg fill="" version="1.1" class="selectBox__arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve" stroke="">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                          <style type="text/css">
+                                            .st0 {
+                                              fill: none;
+                                            }
+                                          </style>
+                                          <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
+                                          <rect class="st0" width="24" height="24"></rect>
+                                          <rect class="st0" width="24" height="24"></rect>
+                                        </g>
+                                      </svg>
+                                      <ul class="selectBox__list selectBox__list--none">
+                                        <li class="selectBox__option">
+                                          오전 09:00 ~ 14:00
+                                        </li>
+                                        <li class="selectBox__option">
+                                          오후 14:00 ~ 18:00
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </dd>
+                                </dl>`;
+      useSelectBox();
+      break;
+
+    case 'type3':
+      vacationDate.innerHTML = `<dl class="vacation__sDate">
+                                  <dt class="vacation__sDateTitle">시작일</dt>
+                                  <dd>
+                                    <input class="vacation__inputText inputText" type="date"/>
+                                  </dd>
+                                </dl>
+                                <dl class="vacation__outingTime">
+                                  <dt class="vacation__outingTimeTitle">외출 시간</dt>
+                                  <dd>
+                                    <div class="vacation__outingStimeSelect selectBox">
+                                      <label class="selectBox__label">시작 시간</label>
+                                      <svg fill="" version="1.1" class="selectBox__arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve" stroke="">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                          <style type="text/css">
+                                            .st0 {
+                                              fill: none;
+                                            }
+                                          </style>
+                                          <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
+                                          <rect class="st0" width="24" height="24"></rect>
+                                          <rect class="st0" width="24" height="24"></rect>
+                                        </g>
+                                      </svg>
+                                      <ul class="selectBox__list selectBox__list--none">
+                                        <li class="selectBox__option">옵션 1</li>
+                                        <li class="selectBox__option">옵션 2</li>
+                                        <li class="selectBox__option">옵션 3</li>
+                                      </ul>
+                                    </div>
+                                  </dd>
+
+                                  <dd>
+                                    <div class="vacation__outingEtimeSelect selectBox">
+                                      <label class="selectBox__label">종료 시간</label>
+                                      <svg fill="" version="1.1" class="selectBox__arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve" stroke="">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                          <style type="text/css">
+                                            .st0 {
+                                              fill: none;
+                                            }
+                                          </style>
+                                          <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
+                                          <rect class="st0" width="24" height="24"></rect>
+                                          <rect class="st0" width="24" height="24"></rect>
+                                        </g>
+                                      </svg>
+                                      <ul class="selectBox__list selectBox__list--none">
+                                        <li class="selectBox__option">옵션 1</li>
+                                        <li class="selectBox__option">옵션 2</li>
+                                        <li class="selectBox__option">옵션 3</li>
+                                      </ul>
+                                    </div>
+                                  </dd>
+                                </dl>`;
+      useSelectBox();
+      break;
+
+    default:
+      vacationDate.innerHTML = `<dl class="vacation__sDate">
+                                  <dt class="vacation__sDateTitle">시작일</dt>
+                                  <dd>
+                                    <input class="vacation__inputText inputText" type="date" />
+                                  </dd>
+                                </dl>
+                                <dl class="vacation__eDate">
+                                  <dt class="vacation__eDateTitle">종료일</dt>
+                                  <dd>
+                                    <input class="vacation__inputText inputText" type="date"/>
+                                  </dd>
+                                </dl>`;
+      break;
   }
 }
