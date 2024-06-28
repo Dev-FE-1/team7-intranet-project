@@ -1,4 +1,4 @@
-exdivort default function ListTable() {
+export default function ListTable() {
   return `
       <div class="listTable">
         <ul class="listTable__thead">

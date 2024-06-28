@@ -1,7 +1,7 @@
 export default function InputText() {
-  return `
+  `
       <input
-        class="inputText inputText--disabled"
+        class="inputText"
         type="text"
         name="name"
         value=""
