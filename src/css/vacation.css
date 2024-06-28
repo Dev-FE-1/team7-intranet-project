@@ -73,8 +73,6 @@
 .modal__inner {
   width: 50%;
 }
-.modal--lg .modal__content {
-}
 .modal__title {
   text-align: left;
 }
