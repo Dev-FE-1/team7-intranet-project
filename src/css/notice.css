@@ -42,7 +42,7 @@
 .notice__input::placeholder{
   color:#9CBBBE;
 }
-.search_icon{
+.notice__searchIcon{
   color:#9CBBBE;
   margin-top:5px;
   width:20px;
@@ -77,28 +77,28 @@
 }
 
 /*notice-modal*/
-.modal .notice__modal__inner {
+.notice__modalInner {
   padding: 20px 40px; 
   width: 30%;
   max-height: calc(100vh - 50px);
   overflow-y: auto;
   box-sizing: border-box;
 }
-.notice__modal__bar{
+.notice__modalBar{
   font-size:18px;
   font-weight: bold;
   padding:15px 0;
 }
-.notice__modal__title{ 
+.notice__modalTitle{ 
   text-align: left;
 }
-.notice__modal__date{
+.notice__modalDate{
   font-size: 15px;
   text-align: right;
   padding:0px 0px 10px;
   border-bottom: 1px solid #dfdfdf;
 }
-.notice__modal__content{
+.notice__modalContent{
   margin-top:20px;
   font-size:16px;
   font-weight: 400;
