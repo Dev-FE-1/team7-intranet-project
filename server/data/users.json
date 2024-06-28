@@ -9,10 +9,10 @@
       "phone": "010-7107-6358",
       "birth": "1980-02-16",
       "dept": "C-level",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/001.jpg"
     },
     {
       "userId": "002",
@@ -23,10 +23,10 @@
       "phone": "010-4756-2128",
       "birth": "1959-03-04",
       "dept": "영업팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/002.jpg"
     },
     {
       "userId": "003",
@@ -37,10 +37,10 @@
       "phone": "010-2767-9609",
       "birth": "1986-12-21",
       "dept": "인사팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/003.jpg"
     },
     {
       "userId": "004",
@@ -51,10 +51,10 @@
       "phone": "010-9687-8227",
       "birth": "1955-03-02",
       "dept": "개발팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/004.jpg"
     },
     {
       "userId": "005",
@@ -65,10 +65,10 @@
       "phone": "010-4344-9545",
       "birth": "1996-11-04",
       "dept": "개발팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/005.jpg"
     },
     {
       "userId": "006",
@@ -79,10 +79,10 @@
       "phone": "010-1606-4149",
       "birth": "1994-01-02",
       "dept": "개발팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/006.jpg"
     },
     {
       "userId": "007",
@@ -93,10 +93,10 @@
       "phone": "010-6440-7770",
       "birth": "1962-04-08",
       "dept": "마케팅팀",
-      "leftVaca": "17일",
+      "leftVaca": 17,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/007.jpg"
     },
     {
       "userId": "008",
@@ -105,12 +105,12 @@
       "email": "hayun94@77cm.com",
       "password": "1aSMpkBs",
       "phone": "010-4119-4551",
-      "birth": "2000-08-19",
+      "birth": "200-08-19",
       "dept": "마케팅팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/008.jpg"
     },
     {
       "userId": "009",
@@ -121,24 +121,24 @@
       "phone": "010-4464-3177",
       "birth": "1962-09-18",
       "dept": "인사팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/009.jpg"
     },
     {
       "userId": "010",
-      "name": "하서안",
+      "name": "시아준수",
       "position": "대리",
       "email": "hyeonjubag@77cm.com",
       "password": "c33LaWLU",
       "phone": "010-3458-3972",
       "birth": "1955-06-24",
       "dept": "재무팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/010.jpg"
     },
     {
       "userId": "011",
@@ -149,10 +149,10 @@
       "phone": "010-3772-4380",
       "birth": "1962-03-30",
       "dept": "개발팀",
-      "leftVaca": "19일",
+      "leftVaca": 19,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/011.jpg"
     },
     {
       "userId": "012",
@@ -163,10 +163,10 @@
       "phone": "010-9672-4406",
       "birth": "1958-01-22",
       "dept": "마케팅팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/012.jpg"
     },
     {
       "userId": "013",
@@ -177,10 +177,10 @@
       "phone": "010-2594-5588",
       "birth": "1992-10-12",
       "dept": "C-level",
-      "leftVaca": "12일",
+      "leftVaca": 12,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/013.jpg"
     },
     {
       "userId": "014",
@@ -191,10 +191,10 @@
       "phone": "010-3615-1216",
       "birth": "1992-07-07",
       "dept": "영업팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/014.jpg"
     },
     {
       "userId": "015",
@@ -205,10 +205,10 @@
       "phone": "010-2130-7575",
       "birth": "1980-06-24",
       "dept": "개발팀",
-      "leftVaca": "6일",
+      "leftVaca": 6,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/015.jpg"
     },
     {
       "userId": "016",
@@ -216,27 +216,27 @@
       "position": "사원",
       "email": "yunyeweon@77cm.com",
       "password": "Om7R9dyu",
-      "phone": "010-5004-2283",
+      "phone": "010-504-2283",
       "birth": "1977-07-02",
       "dept": "인사팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/016.jpg"
     },
     {
       "userId": "017",
-      "name": "류옥자",
+      "name": "선우정아",
       "position": "대리",
       "email": "caeweoncoe@77cm.com",
       "password": "3Te2Mq7p",
       "phone": "010-7498-3547",
       "birth": "1984-08-20",
       "dept": "영업팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/017.jpg"
     },
     {
       "userId": "018",
@@ -247,10 +247,10 @@
       "phone": "010-4197-3243",
       "birth": "1998-01-09",
       "dept": "재무팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/018.jpg"
     },
     {
       "userId": "019",
@@ -261,10 +261,10 @@
       "phone": "010-9593-5475",
       "birth": "1978-10-20",
       "dept": "개발팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/019.jpg"
     },
     {
       "userId": "020",
@@ -275,10 +275,10 @@
       "phone": "010-6799-2799",
       "birth": "1961-11-17",
       "dept": "개발팀",
-      "leftVaca": "19일",
+      "leftVaca": 19,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/020.jpg"
     },
     {
       "userId": "021",
@@ -289,10 +289,10 @@
       "phone": "010-5853-7865",
       "birth": "1995-09-05",
       "dept": "인사팀",
-      "leftVaca": "6일",
+      "leftVaca": 6,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/021.jpg"
     },
     {
       "userId": "022",
@@ -303,10 +303,10 @@
       "phone": "010-4765-6954",
       "birth": "1975-10-28",
       "dept": "C-level",
-      "leftVaca": "11일",
+      "leftVaca": 11,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/022.jpg"
     },
     {
       "userId": "023",
@@ -317,10 +317,10 @@
       "phone": "010-4470-9567",
       "birth": "1973-07-21",
       "dept": "마케팅팀",
-      "leftVaca": "12일",
+      "leftVaca": 12,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/023.jpg"
     },
     {
       "userId": "024",
@@ -331,10 +331,10 @@
       "phone": "010-2778-8439",
       "birth": "1976-08-17",
       "dept": "개발팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/024.jpg"
     },
     {
       "userId": "025",
@@ -345,10 +345,10 @@
       "phone": "010-1441-3557",
       "birth": "1996-08-25",
       "dept": "개발팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/025.jpg"
     },
     {
       "userId": "026",
@@ -359,10 +359,10 @@
       "phone": "010-8324-6723",
       "birth": "1989-10-18",
       "dept": "인사팀",
-      "leftVaca": "6일",
+      "leftVaca": 6,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/026.jpg"
     },
     {
       "userId": "027",
@@ -373,24 +373,24 @@
       "phone": "010-8214-6136",
       "birth": "1990-06-29",
       "dept": "개발팀",
-      "leftVaca": "11일",
+      "leftVaca": 11,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/027.jpg"
     },
     {
       "userId": "028",
       "name": "김명숙",
       "position": "부장",
       "email": "myeongsuggim@77cm.com",
-      "password": "00Zm5SsO",
-      "phone": "010-5004-2892",
+      "password": "0Zm5SsO",
+      "phone": "010-504-2892",
       "birth": "1989-04-06",
       "dept": "재무팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/028.jpg"
     },
     {
       "userId": "029",
@@ -401,10 +401,10 @@
       "phone": "010-9739-3409",
       "birth": "1988-11-10",
       "dept": "재무팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/029.jpg"
     },
     {
       "userId": "030",
@@ -415,10 +415,10 @@
       "phone": "010-5689-5619",
       "birth": "1978-07-05",
       "dept": "영업팀",
-      "leftVaca": "6일",
+      "leftVaca": 6,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/030.jpg"
     },
     {
       "userId": "031",
@@ -429,10 +429,10 @@
       "phone": "010-9481-7783",
       "birth": "1992-08-12",
       "dept": "재무팀",
-      "leftVaca": "7일",
+      "leftVaca": 7,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/031.jpg"
     },
     {
       "userId": "032",
@@ -443,10 +443,10 @@
       "phone": "010-4796-9810",
       "birth": "1967-05-20",
       "dept": "인사팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/032.jpg"
     },
     {
       "userId": "033",
@@ -457,10 +457,10 @@
       "phone": "010-3850-2513",
       "birth": "1996-06-25",
       "dept": "개발팀",
-      "leftVaca": "7일",
+      "leftVaca": 7,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/033.jpg"
     },
     {
       "userId": "034",
@@ -471,10 +471,10 @@
       "phone": "010-5461-1126",
       "birth": "1990-08-30",
       "dept": "마케팅팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/034.jpg"
     },
     {
       "userId": "035",
@@ -485,10 +485,10 @@
       "phone": "010-9212-3988",
       "birth": "1987-07-31",
       "dept": "개발팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/035.jpg"
     },
     {
       "userId": "036",
@@ -499,10 +499,10 @@
       "phone": "010-4393-2348",
       "birth": "1982-05-21",
       "dept": "마케팅팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/036.jpg"
     },
     {
       "userId": "037",
@@ -513,10 +513,10 @@
       "phone": "010-7859-1096",
       "birth": "1979-06-03",
       "dept": "C-level",
-      "leftVaca": "0일",
+      "leftVaca": 0,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/037.jpg"
     },
     {
       "userId": "038",
@@ -527,10 +527,10 @@
       "phone": "010-3573-6983",
       "birth": "1965-08-14",
       "dept": "마케팅팀",
-      "leftVaca": "8일",
+      "leftVaca": 8,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/038.jpg"
     },
     {
       "userId": "039",
@@ -541,10 +541,10 @@
       "phone": "010-3290-8158",
       "birth": "1974-08-14",
       "dept": "개발팀",
-      "leftVaca": "17일",
+      "leftVaca": 17,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/039.jpg"
     },
     {
       "userId": "040",
@@ -555,10 +555,10 @@
       "phone": "010-5350-8026",
       "birth": "1971-01-10",
       "dept": "개발팀",
-      "leftVaca": "16일",
+      "leftVaca": 16,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/040.jpg"
     },
     {
       "userId": "041",
@@ -569,10 +569,10 @@
       "phone": "010-4794-3458",
       "birth": "1996-05-03",
       "dept": "C-level",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/041.jpg"
     },
     {
       "userId": "042",
@@ -583,10 +583,10 @@
       "phone": "010-6460-5331",
       "birth": "1956-08-20",
       "dept": "재무팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/042.jpg"
     },
     {
       "userId": "043",
@@ -597,10 +597,10 @@
       "phone": "010-8430-8897",
       "birth": "1974-07-11",
       "dept": "인사팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/043.jpg"
     },
     {
       "userId": "044",
@@ -611,10 +611,10 @@
       "phone": "010-2434-8517",
       "birth": "1964-11-02",
       "dept": "인사팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/044.jpg"
     },
     {
       "userId": "045",
@@ -625,10 +625,10 @@
       "phone": "010-5555-2735",
       "birth": "1966-06-19",
       "dept": "인사팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/045.jpg"
     },
     {
       "userId": "046",
@@ -639,10 +639,10 @@
       "phone": "010-2516-5342",
       "birth": "1986-05-01",
       "dept": "마케팅팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/046.jpg"
     },
     {
       "userId": "047",
@@ -653,10 +653,10 @@
       "phone": "010-6028-3294",
       "birth": "1957-10-17",
       "dept": "마케팅팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/047.jpg"
     },
     {
       "userId": "048",
@@ -667,10 +667,10 @@
       "phone": "010-5668-3822",
       "birth": "1996-03-04",
       "dept": "개발팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/048.jpg"
     },
     {
       "userId": "049",
@@ -681,10 +681,10 @@
       "phone": "010-2862-7517",
       "birth": "1954-01-31",
       "dept": "재무팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/049.jpg"
     },
     {
       "userId": "050",
@@ -695,10 +695,10 @@
       "phone": "010-7346-9942",
       "birth": "1958-08-04",
       "dept": "인사팀",
-      "leftVaca": "8일",
+      "leftVaca": 8,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/server/images/profile/050.jpg"
     },
     {
       "userId": "051",
@@ -709,10 +709,10 @@
       "phone": "010-7053-7343",
       "birth": "1972-05-28",
       "dept": "인사팀",
-      "leftVaca": "19일",
+      "leftVaca": 19,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "052",
@@ -723,10 +723,10 @@
       "phone": "010-4796-6827",
       "birth": "1966-03-20",
       "dept": "인사팀",
-      "leftVaca": "16일",
+      "leftVaca": 16,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "053",
@@ -737,10 +737,10 @@
       "phone": "010-4153-7263",
       "birth": "1967-05-09",
       "dept": "마케팅팀",
-      "leftVaca": "6일",
+      "leftVaca": 6,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "054",
@@ -751,10 +751,10 @@
       "phone": "010-4282-3310",
       "birth": "1988-01-07",
       "dept": "마케팅팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "055",
@@ -765,10 +765,10 @@
       "phone": "010-1992-4763",
       "birth": "1963-10-20",
       "dept": "개발팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "056",
@@ -779,10 +779,10 @@
       "phone": "010-4603-6641",
       "birth": "1996-07-28",
       "dept": "마케팅팀",
-      "leftVaca": "6일",
+      "leftVaca": 6,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "057",
@@ -793,10 +793,10 @@
       "phone": "010-5734-4126",
       "birth": "1964-08-12",
       "dept": "마케팅팀",
-      "leftVaca": "0일",
+      "leftVaca": 0,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "058",
@@ -807,10 +807,10 @@
       "phone": "010-3148-6023",
       "birth": "1987-10-24",
       "dept": "영업팀",
-      "leftVaca": "16일",
+      "leftVaca": 16,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "059",
@@ -821,10 +821,10 @@
       "phone": "010-4947-1414",
       "birth": "1964-09-05",
       "dept": "마케팅팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "060",
@@ -835,10 +835,10 @@
       "phone": "010-2754-6715",
       "birth": "1984-07-25",
       "dept": "마케팅팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "061",
@@ -849,10 +849,10 @@
       "phone": "010-4125-2285",
       "birth": "1959-01-20",
       "dept": "영업팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "062",
@@ -863,10 +863,10 @@
       "phone": "010-6939-3328",
       "birth": "1963-01-16",
       "dept": "마케팅팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "063",
@@ -877,10 +877,10 @@
       "phone": "010-5773-4721",
       "birth": "1979-11-30",
       "dept": "마케팅팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "064",
@@ -891,10 +891,10 @@
       "phone": "010-3324-7576",
       "birth": "1960-02-19",
       "dept": "인사팀",
-      "leftVaca": "17일",
+      "leftVaca": 17,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "065",
@@ -905,10 +905,10 @@
       "phone": "010-5984-4826",
       "birth": "1984-09-01",
       "dept": "영업팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "066",
@@ -916,13 +916,13 @@
       "position": "사원",
       "email": "soncunja@77cm.com",
       "password": "vl9RcZd7",
-      "phone": "010-7005-2729",
+      "phone": "010-705-2729",
       "birth": "1980-09-29",
       "dept": "영업팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "067",
@@ -933,10 +933,10 @@
       "phone": "010-1902-9125",
       "birth": "1979-04-20",
       "dept": "마케팅팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "068",
@@ -947,10 +947,10 @@
       "phone": "010-9767-8944",
       "birth": "2000-08-13",
       "dept": "마케팅팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "069",
@@ -961,10 +961,10 @@
       "phone": "010-3628-5200",
       "birth": "1960-10-31",
       "dept": "마케팅팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "070",
@@ -975,10 +975,10 @@
       "phone": "010-9906-9823",
       "birth": "2000-07-14",
       "dept": "재무팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "071",
@@ -989,10 +989,10 @@
       "phone": "010-8532-2852",
       "birth": "1958-05-10",
       "dept": "재무팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "072",
@@ -1003,10 +1003,10 @@
       "phone": "010-5056-1983",
       "birth": "1991-12-02",
       "dept": "인사팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "073",
@@ -1017,10 +1017,10 @@
       "phone": "010-9335-9078",
       "birth": "1954-09-29",
       "dept": "인사팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "074",
@@ -1031,10 +1031,10 @@
       "phone": "010-7136-4080",
       "birth": "1987-09-21",
       "dept": "영업팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "075",
@@ -1045,10 +1045,10 @@
       "phone": "010-5392-3733",
       "birth": "1953-01-02",
       "dept": "마케팅팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "076",
@@ -1059,10 +1059,10 @@
       "phone": "010-9666-7747",
       "birth": "1962-09-30",
       "dept": "개발팀",
-      "leftVaca": "19일",
+      "leftVaca": 19,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "077",
@@ -1073,10 +1073,10 @@
       "phone": "010-8915-5384",
       "birth": "1969-08-14",
       "dept": "영업팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "078",
@@ -1087,10 +1087,10 @@
       "phone": "010-8282-3725",
       "birth": "1980-10-09",
       "dept": "재무팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "079",
@@ -1101,10 +1101,10 @@
       "phone": "010-6988-5425",
       "birth": "1986-05-25",
       "dept": "개발팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "080",
@@ -1115,10 +1115,10 @@
       "phone": "010-9846-9662",
       "birth": "1985-06-06",
       "dept": "마케팅팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "081",
@@ -1129,10 +1129,10 @@
       "phone": "010-9585-4254",
       "birth": "1989-11-24",
       "dept": "재무팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "082",
@@ -1143,10 +1143,10 @@
       "phone": "010-5374-9494",
       "birth": "1978-09-03",
       "dept": "마케팅팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "083",
@@ -1157,10 +1157,10 @@
       "phone": "010-3213-6336",
       "birth": "1989-12-13",
       "dept": "인사팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "084",
@@ -1171,10 +1171,10 @@
       "phone": "010-6858-1387",
       "birth": "1976-08-17",
       "dept": "영업팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "085",
@@ -1185,10 +1185,10 @@
       "phone": "010-6430-1303",
       "birth": "1988-01-10",
       "dept": "인사팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "086",
@@ -1199,10 +1199,10 @@
       "phone": "010-3861-7665",
       "birth": "1990-06-07",
       "dept": "개발팀",
-      "leftVaca": "8일",
+      "leftVaca": 8,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "087",
@@ -1213,10 +1213,10 @@
       "phone": "010-8877-1026",
       "birth": "1954-04-27",
       "dept": "영업팀",
-      "leftVaca": "5일",
+      "leftVaca": 5,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "088",
@@ -1227,10 +1227,10 @@
       "phone": "010-6844-3974",
       "birth": "1967-01-17",
       "dept": "인사팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "089",
@@ -1241,10 +1241,10 @@
       "phone": "010-4484-6569",
       "birth": "1985-01-02",
       "dept": "인사팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "090",
@@ -1255,10 +1255,10 @@
       "phone": "010-6667-9964",
       "birth": "1991-09-03",
       "dept": "재무팀",
-      "leftVaca": "6일",
+      "leftVaca": 6,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "091",
@@ -1269,10 +1269,10 @@
       "phone": "010-7050-2389",
       "birth": "1957-07-27",
       "dept": "영업팀",
-      "leftVaca": "0일",
+      "leftVaca": 0,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "092",
@@ -1283,10 +1283,10 @@
       "phone": "010-8702-4422",
       "birth": "1974-10-02",
       "dept": "영업팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "093",
@@ -1297,10 +1297,10 @@
       "phone": "010-8171-1342",
       "birth": "1970-07-17",
       "dept": "마케팅팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "094",
@@ -1311,10 +1311,10 @@
       "phone": "010-3691-3326",
       "birth": "1969-02-14",
       "dept": "마케팅팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "095",
@@ -1325,10 +1325,10 @@
       "phone": "010-5956-8601",
       "birth": "1975-12-18",
       "dept": "마케팅팀",
-      "leftVaca": "17일",
+      "leftVaca": 17,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "096",
@@ -1339,10 +1339,10 @@
       "phone": "010-2843-6121",
       "birth": "1998-03-08",
       "dept": "개발팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "097",
@@ -1353,10 +1353,10 @@
       "phone": "010-1577-4044",
       "birth": "1986-10-05",
       "dept": "재무팀",
-      "leftVaca": "11일",
+      "leftVaca": 11,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "098",
@@ -1367,10 +1367,10 @@
       "phone": "010-7951-6319",
       "birth": "1970-07-11",
       "dept": "재무팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "099",
@@ -1381,10 +1381,10 @@
       "phone": "010-4651-3031",
       "birth": "1990-10-29",
       "dept": "영업팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "100",
@@ -1395,10 +1395,10 @@
       "phone": "010-7561-5085",
       "birth": "1957-10-23",
       "dept": "인사팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "101",
@@ -1409,10 +1409,10 @@
       "phone": "010-9677-8893",
       "birth": "1983-03-24",
       "dept": "인사팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "102",
@@ -1423,10 +1423,10 @@
       "phone": "010-4993-8149",
       "birth": "1953-01-26",
       "dept": "인사팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "103",
@@ -1437,10 +1437,10 @@
       "phone": "010-9080-1511",
       "birth": "1975-12-29",
       "dept": "재무팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "104",
@@ -1451,10 +1451,10 @@
       "phone": "010-3468-8301",
       "birth": "1974-09-06",
       "dept": "마케팅팀",
-      "leftVaca": "5일",
+      "leftVaca": 5,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "105",
@@ -1465,10 +1465,10 @@
       "phone": "010-5029-6599",
       "birth": "1966-11-09",
       "dept": "마케팅팀",
-      "leftVaca": "7일",
+      "leftVaca": 7,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "106",
@@ -1479,10 +1479,10 @@
       "phone": "010-3928-5443",
       "birth": "1957-12-19",
       "dept": "영업팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "107",
@@ -1493,10 +1493,10 @@
       "phone": "010-6729-7132",
       "birth": "1961-11-29",
       "dept": "개발팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "108",
@@ -1507,10 +1507,10 @@
       "phone": "010-5897-3038",
       "birth": "1952-12-12",
       "dept": "인사팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "109",
@@ -1521,10 +1521,10 @@
       "phone": "010-4060-8936",
       "birth": "1994-10-07",
       "dept": "마케팅팀",
-      "leftVaca": "17일",
+      "leftVaca": 17,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "110",
@@ -1535,10 +1535,10 @@
       "phone": "010-5545-4574",
       "birth": "1970-05-14",
       "dept": "재무팀",
-      "leftVaca": "12일",
+      "leftVaca": 12,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "111",
@@ -1549,10 +1549,10 @@
       "phone": "010-6389-4447",
       "birth": "1986-04-27",
       "dept": "개발팀",
-      "leftVaca": "5일",
+      "leftVaca": 5,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "112",
@@ -1563,10 +1563,10 @@
       "phone": "010-2712-7397",
       "birth": "1966-07-28",
       "dept": "재무팀",
-      "leftVaca": "16일",
+      "leftVaca": 16,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "113",
@@ -1577,10 +1577,10 @@
       "phone": "010-8204-7439",
       "birth": "1950-10-03",
       "dept": "마케팅팀",
-      "leftVaca": "5일",
+      "leftVaca": 5,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "114",
@@ -1591,10 +1591,10 @@
       "phone": "010-8010-9444",
       "birth": "1963-11-16",
       "dept": "인사팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "115",
@@ -1605,10 +1605,10 @@
       "phone": "010-4352-5582",
       "birth": "1970-03-06",
       "dept": "영업팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "116",
@@ -1619,10 +1619,10 @@
       "phone": "010-1385-1590",
       "birth": "1950-08-21",
       "dept": "재무팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "117",
@@ -1633,10 +1633,10 @@
       "phone": "010-4932-3172",
       "birth": "1968-08-22",
       "dept": "마케팅팀",
-      "leftVaca": "16일",
+      "leftVaca": 16,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "118",
@@ -1647,10 +1647,10 @@
       "phone": "010-4467-4094",
       "birth": "1983-10-15",
       "dept": "재무팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "119",
@@ -1661,10 +1661,10 @@
       "phone": "010-2028-1836",
       "birth": "1970-08-07",
       "dept": "개발팀",
-      "leftVaca": "11일",
+      "leftVaca": 11,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "120",
@@ -1675,10 +1675,10 @@
       "phone": "010-2082-9784",
       "birth": "1966-09-23",
       "dept": "인사팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "121",
@@ -1689,10 +1689,10 @@
       "phone": "010-3458-2641",
       "birth": "1982-04-14",
       "dept": "인사팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "122",
@@ -1703,10 +1703,10 @@
       "phone": "010-9563-5776",
       "birth": "1962-08-07",
       "dept": "영업팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "123",
@@ -1717,10 +1717,10 @@
       "phone": "010-1552-3783",
       "birth": "1967-06-24",
       "dept": "인사팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "124",
@@ -1731,10 +1731,10 @@
       "phone": "010-7222-4725",
       "birth": "1996-02-22",
       "dept": "개발팀",
-      "leftVaca": "17일",
+      "leftVaca": 17,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "125",
@@ -1745,10 +1745,10 @@
       "phone": "010-7834-4732",
       "birth": "1999-09-21",
       "dept": "인사팀",
-      "leftVaca": "12일",
+      "leftVaca": 12,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "126",
@@ -1759,10 +1759,10 @@
       "phone": "010-1030-2644",
       "birth": "1962-09-29",
       "dept": "개발팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "127",
@@ -1773,10 +1773,10 @@
       "phone": "010-9133-1340",
       "birth": "1978-04-09",
       "dept": "영업팀",
-      "leftVaca": "12일",
+      "leftVaca": 12,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "128",
@@ -1787,10 +1787,10 @@
       "phone": "010-8931-6127",
       "birth": "1975-12-12",
       "dept": "재무팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "129",
@@ -1801,10 +1801,10 @@
       "phone": "010-2152-8075",
       "birth": "1977-11-02",
       "dept": "인사팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "130",
@@ -1815,10 +1815,10 @@
       "phone": "010-2719-7691",
       "birth": "1999-02-27",
       "dept": "영업팀",
-      "leftVaca": "17일",
+      "leftVaca": 17,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "131",
@@ -1829,10 +1829,10 @@
       "phone": "010-8147-9298",
       "birth": "1954-08-01",
       "dept": "영업팀",
-      "leftVaca": "5일",
+      "leftVaca": 5,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "132",
@@ -1843,10 +1843,10 @@
       "phone": "010-5051-8001",
       "birth": "1978-01-13",
       "dept": "개발팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "133",
@@ -1857,10 +1857,10 @@
       "phone": "010-1433-4268",
       "birth": "1965-01-09",
       "dept": "개발팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "134",
@@ -1871,10 +1871,10 @@
       "phone": "010-5797-6613",
       "birth": "1987-07-01",
       "dept": "재무팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "135",
@@ -1885,10 +1885,10 @@
       "phone": "010-8051-9216",
       "birth": "1954-01-11",
       "dept": "마케팅팀",
-      "leftVaca": "19일",
+      "leftVaca": 19,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "136",
@@ -1899,10 +1899,10 @@
       "phone": "010-9138-8990",
       "birth": "1985-04-24",
       "dept": "인사팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "137",
@@ -1913,10 +1913,10 @@
       "phone": "010-4731-3750",
       "birth": "1981-06-21",
       "dept": "재무팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "138",
@@ -1927,10 +1927,10 @@
       "phone": "010-2835-8935",
       "birth": "1972-10-20",
       "dept": "영업팀",
-      "leftVaca": "11일",
+      "leftVaca": 11,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "139",
@@ -1941,10 +1941,10 @@
       "phone": "010-1553-7963",
       "birth": "1997-02-26",
       "dept": "마케팅팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "140",
@@ -1955,10 +1955,10 @@
       "phone": "010-7119-4938",
       "birth": "1977-09-14",
       "dept": "마케팅팀",
-      "leftVaca": "12일",
+      "leftVaca": 12,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "141",
@@ -1969,10 +1969,10 @@
       "phone": "010-1081-1335",
       "birth": "1967-04-05",
       "dept": "개발팀",
-      "leftVaca": "19일",
+      "leftVaca": 19,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "142",
@@ -1983,10 +1983,10 @@
       "phone": "010-5436-8711",
       "birth": "1956-07-25",
       "dept": "개발팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "143",
@@ -1997,10 +1997,10 @@
       "phone": "010-1715-9320",
       "birth": "2000-07-23",
       "dept": "마케팅팀",
-      "leftVaca": "17일",
+      "leftVaca": 17,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "144",
@@ -2011,10 +2011,10 @@
       "phone": "010-3927-8894",
       "birth": "1986-08-10",
       "dept": "영업팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "145",
@@ -2025,10 +2025,10 @@
       "phone": "010-9083-1571",
       "birth": "1987-04-08",
       "dept": "재무팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "146",
@@ -2039,10 +2039,10 @@
       "phone": "010-5867-1263",
       "birth": "1977-05-29",
       "dept": "마케팅팀",
-      "leftVaca": "3일",
+      "leftVaca": 3,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "147",
@@ -2053,10 +2053,10 @@
       "phone": "010-9072-4370",
       "birth": "1952-06-07",
       "dept": "재무팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "148",
@@ -2067,10 +2067,10 @@
       "phone": "010-1383-3151",
       "birth": "1981-05-10",
       "dept": "영업팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "149",
@@ -2081,10 +2081,10 @@
       "phone": "010-9595-3016",
       "birth": "1970-07-07",
       "dept": "개발팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "150",
@@ -2095,10 +2095,10 @@
       "phone": "010-9587-9440",
       "birth": "1984-06-12",
       "dept": "인사팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "151",
@@ -2109,10 +2109,10 @@
       "phone": "010-1777-2905",
       "birth": "1951-12-24",
       "dept": "인사팀",
-      "leftVaca": "16일",
+      "leftVaca": 16,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "152",
@@ -2123,10 +2123,10 @@
       "phone": "010-2553-9044",
       "birth": "1969-09-12",
       "dept": "개발팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "153",
@@ -2137,10 +2137,10 @@
       "phone": "010-7228-9153",
       "birth": "1971-01-24",
       "dept": "재무팀",
-      "leftVaca": "7일",
+      "leftVaca": 7,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "154",
@@ -2151,10 +2151,10 @@
       "phone": "010-8144-9835",
       "birth": "1954-06-19",
       "dept": "인사팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "155",
@@ -2165,10 +2165,10 @@
       "phone": "010-6409-6146",
       "birth": "1986-09-05",
       "dept": "인사팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "156",
@@ -2179,10 +2179,10 @@
       "phone": "010-7959-7234",
       "birth": "1984-04-07",
       "dept": "영업팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "157",
@@ -2193,10 +2193,10 @@
       "phone": "010-6424-4107",
       "birth": "1992-11-08",
       "dept": "영업팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "158",
@@ -2207,10 +2207,10 @@
       "phone": "010-4398-3353",
       "birth": "1978-07-19",
       "dept": "재무팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "159",
@@ -2221,10 +2221,10 @@
       "phone": "010-7081-9302",
       "birth": "1954-12-20",
       "dept": "마케팅팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "160",
@@ -2235,10 +2235,10 @@
       "phone": "010-9383-1045",
       "birth": "1956-05-03",
       "dept": "마케팅팀",
-      "leftVaca": "8일",
+      "leftVaca": 8,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "161",
@@ -2249,10 +2249,10 @@
       "phone": "010-9530-4598",
       "birth": "1996-10-02",
       "dept": "영업팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "162",
@@ -2263,10 +2263,10 @@
       "phone": "010-3985-8040",
       "birth": "2000-10-28",
       "dept": "영업팀",
-      "leftVaca": "5일",
+      "leftVaca": 5,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "163",
@@ -2277,10 +2277,10 @@
       "phone": "010-8664-3770",
       "birth": "1956-10-11",
       "dept": "재무팀",
-      "leftVaca": "5일",
+      "leftVaca": 5,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "164",
@@ -2291,10 +2291,10 @@
       "phone": "010-3895-5522",
       "birth": "1950-12-25",
       "dept": "인사팀",
-      "leftVaca": "0일",
+      "leftVaca": 0,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "165",
@@ -2305,10 +2305,10 @@
       "phone": "010-5954-8050",
       "birth": "1972-12-19",
       "dept": "마케팅팀",
-      "leftVaca": "7일",
+      "leftVaca": 7,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "166",
@@ -2319,10 +2319,10 @@
       "phone": "010-7217-3936",
       "birth": "1974-01-28",
       "dept": "개발팀",
-      "leftVaca": "8일",
+      "leftVaca": 8,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "167",
@@ -2333,10 +2333,10 @@
       "phone": "010-5693-1708",
       "birth": "1999-03-03",
       "dept": "영업팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "168",
@@ -2347,10 +2347,10 @@
       "phone": "010-9886-5153",
       "birth": "1963-03-13",
       "dept": "영업팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "169",
@@ -2361,10 +2361,10 @@
       "phone": "010-7044-5083",
       "birth": "1969-01-07",
       "dept": "재무팀",
-      "leftVaca": "11일",
+      "leftVaca": 11,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "170",
@@ -2375,10 +2375,10 @@
       "phone": "010-8846-7907",
       "birth": "1958-12-25",
       "dept": "인사팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "171",
@@ -2389,10 +2389,10 @@
       "phone": "010-3652-8635",
       "birth": "1991-03-29",
       "dept": "재무팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "172",
@@ -2403,10 +2403,10 @@
       "phone": "010-4006-1404",
       "birth": "1964-07-10",
       "dept": "인사팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "173",
@@ -2417,10 +2417,10 @@
       "phone": "010-9955-1434",
       "birth": "1998-10-17",
       "dept": "인사팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "174",
@@ -2431,10 +2431,10 @@
       "phone": "010-5713-5908",
       "birth": "1973-04-09",
       "dept": "개발팀",
-      "leftVaca": "11일",
+      "leftVaca": 11,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "175",
@@ -2445,10 +2445,10 @@
       "phone": "010-8919-7521",
       "birth": "1992-08-25",
       "dept": "영업팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "176",
@@ -2459,10 +2459,10 @@
       "phone": "010-7068-2323",
       "birth": "1992-10-12",
       "dept": "인사팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "177",
@@ -2473,10 +2473,10 @@
       "phone": "010-2264-8400",
       "birth": "1992-07-19",
       "dept": "마케팅팀",
-      "leftVaca": "7일",
+      "leftVaca": 7,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "178",
@@ -2487,10 +2487,10 @@
       "phone": "010-8102-9344",
       "birth": "1974-05-16",
       "dept": "영업팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "179",
@@ -2501,10 +2501,10 @@
       "phone": "010-1901-5777",
       "birth": "1983-01-03",
       "dept": "재무팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "180",
@@ -2515,10 +2515,10 @@
       "phone": "010-4039-3628",
       "birth": "1970-10-07",
       "dept": "개발팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "181",
@@ -2529,10 +2529,10 @@
       "phone": "010-7432-4871",
       "birth": "1984-06-25",
       "dept": "마케팅팀",
-      "leftVaca": "16일",
+      "leftVaca": 16,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "182",
@@ -2543,10 +2543,10 @@
       "phone": "010-6209-1661",
       "birth": "2000-01-23",
       "dept": "영업팀",
-      "leftVaca": "12일",
+      "leftVaca": 12,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "183",
@@ -2557,10 +2557,10 @@
       "phone": "010-9910-7489",
       "birth": "1952-02-17",
       "dept": "개발팀",
-      "leftVaca": "0일",
+      "leftVaca": 0,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "184",
@@ -2571,10 +2571,10 @@
       "phone": "010-1610-9598",
       "birth": "1989-12-11",
       "dept": "마케팅팀",
-      "leftVaca": "4일",
+      "leftVaca": 4,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "185",
@@ -2585,10 +2585,10 @@
       "phone": "010-7029-2871",
       "birth": "1987-09-04",
       "dept": "마케팅팀",
-      "leftVaca": "20일",
+      "leftVaca": 20,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "186",
@@ -2599,10 +2599,10 @@
       "phone": "010-7240-8817",
       "birth": "1977-03-18",
       "dept": "개발팀",
-      "leftVaca": "0일",
+      "leftVaca": 0,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "187",
@@ -2613,10 +2613,10 @@
       "phone": "010-2868-4920",
       "birth": "1950-09-02",
       "dept": "재무팀",
-      "leftVaca": "10일",
+      "leftVaca": 10,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "188",
@@ -2627,10 +2627,10 @@
       "phone": "010-7520-7151",
       "birth": "1953-09-10",
       "dept": "영업팀",
-      "leftVaca": "15일",
+      "leftVaca": 15,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "189",
@@ -2641,10 +2641,10 @@
       "phone": "010-7769-3899",
       "birth": "1974-10-19",
       "dept": "재무팀",
-      "leftVaca": "11일",
+      "leftVaca": 11,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "190",
@@ -2655,10 +2655,10 @@
       "phone": "010-8104-9596",
       "birth": "1999-10-25",
       "dept": "영업팀",
-      "leftVaca": "0일",
+      "leftVaca": 0,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "191",
@@ -2669,10 +2669,10 @@
       "phone": "010-4874-6383",
       "birth": "1992-07-08",
       "dept": "인사팀",
-      "leftVaca": "14일",
+      "leftVaca": 14,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "192",
@@ -2683,10 +2683,10 @@
       "phone": "010-1276-9332",
       "birth": "1998-05-03",
       "dept": "마케팅팀",
-      "leftVaca": "8일",
+      "leftVaca": 8,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "193",
@@ -2697,10 +2697,10 @@
       "phone": "010-6688-5111",
       "birth": "1959-04-16",
       "dept": "개발팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "194",
@@ -2711,10 +2711,10 @@
       "phone": "010-9806-2804",
       "birth": "1976-04-07",
       "dept": "개발팀",
-      "leftVaca": "1일",
+      "leftVaca": 1,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "195",
@@ -2725,10 +2725,10 @@
       "phone": "010-6967-7830",
       "birth": "1984-09-29",
       "dept": "인사팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "196",
@@ -2739,10 +2739,10 @@
       "phone": "010-6608-2239",
       "birth": "1952-12-11",
       "dept": "영업팀",
-      "leftVaca": "2일",
+      "leftVaca": 2,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "197",
@@ -2753,10 +2753,10 @@
       "phone": "010-3916-2156",
       "birth": "1982-11-21",
       "dept": "인사팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "198",
@@ -2767,10 +2767,10 @@
       "phone": "010-7148-9838",
       "birth": "1995-01-23",
       "dept": "재무팀",
-      "leftVaca": "13일",
+      "leftVaca": 13,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "199",
@@ -2781,10 +2781,10 @@
       "phone": "010-1122-6199",
       "birth": "1981-08-19",
       "dept": "개발팀",
-      "leftVaca": "18일",
+      "leftVaca": 18,
       "admin": false,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     },
     {
       "userId": "200",
@@ -2795,10 +2795,10 @@
       "phone": "010-3043-3736",
       "birth": "1977-11-14",
       "dept": "재무팀",
-      "leftVaca": "9일",
+      "leftVaca": 9,
       "admin": true,
       "joinDate": null,
-      "img": "/server/images/profile/{user['userId']}.jpg"
+      "img": "/public/profile-default.png"
     }
   ]
 }
