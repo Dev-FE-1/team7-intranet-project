@@ -21,7 +21,7 @@ const ui = () => {
   renderNav();
 };
 
-// body에 위치한 메뉴 탭을 눌렀을 때 URL을 변경시키는 함수
+// body의 a태그를 클릭했을 때 URL을 변경시키는 함수
 const navigatePage = (event) => {
   if (!event.target.closest('a')) return;
   event.preventDefault();
