@@ -1,5 +1,8 @@
 import renderLayout from './utils/common';
 import Home from '/src/pages/Home/Home.js';
+import Notice from '/src/pages/Notice/Notice.js';
+import Vacation from '/src/pages/Vacation/Vacation.js';
+import Employee from '/src/pages/Employee/Employee.js';
 
 const app = () => {
   init();

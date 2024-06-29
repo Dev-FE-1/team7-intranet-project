@@ -1,5 +1,3 @@
-import { useModal, useSelectBox } from '../../common';
-
 export default function Vacation(root) {
   const data = [
     { type: '연차', sDate: '2024.06.10', eDate: '2024.06.12' },

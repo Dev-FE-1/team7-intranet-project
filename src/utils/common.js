@@ -1,5 +1,5 @@
-import Header from '/src/components/Header/Header';
-import Navbar from '/src/components/Navbar/Navbar';
+import Header from '/src/components/Header/Header.js';
+import Navbar from '/src/components/Navbar/Navbar.js';
 
 // Layout 사용 로직
 export default function renderLayout() {

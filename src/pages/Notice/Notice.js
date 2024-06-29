@@ -1,5 +1,3 @@
-import { useModal } from '/src/js/common';
-
 export default function Notice(root) {
   root.innerHTML = `
             <div class="notice">  
