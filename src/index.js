@@ -1,8 +1,5 @@
-import Home from '/src/pages/Home.js';
-import Notice from '/src/pages/Notice.js';
-import Vacation from '/src/pages/Vacation.js';
-import Employee from '/src/pages/Employee.js';
-import { renderNav } from './common';
+import renderLayout from './utils/common';
+import Home from '/src/pages/Home/Home.js';
 
 const app = () => {
   init();
@@ -11,14 +8,8 @@ const app = () => {
 
 // 초기화 함수
 const init = () => {
-  ui();
   window.addEventListener('popstate', route);
   document.querySelector('body').addEventListener('click', navigatePage);
-};
-
-// UI 로직 함수
-const ui = () => {
-  renderNav();
 };
 
 // body의 a태그를 클릭했을 때 URL을 변경시키는 함수
@@ -38,6 +29,9 @@ const navigatePage = (event) => {
 const route = () => {
   const path = window.location.pathname;
   const root = document.querySelector('#root');
+
+  // Layout 렌더링 적용
+  renderLayout();
 
   switch (path) {
     case '/':

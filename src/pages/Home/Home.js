@@ -1,5 +1,3 @@
-import { useModal } from '/src/js/common';
-
 export default function Home(root) {
   root.innerHTML = `<div class="home">
   <div class="home__firstLine">
@@ -10,7 +8,7 @@ export default function Home(root) {
           <p class="home__date">${getToday().today}</p>
         </div>
         <div class="home__welcome">
-          <p class="home__greet">안녕하세요, OOO님!</ㅔ>
+          <p class="home__greet">안녕하세요, OOO님!</p>
           <p class="home__goodDay">오늘도 좋은 하루 보내세요!</p>
         </div>
       </div>
@@ -85,12 +83,6 @@ export default function Home(root) {
 
   // 공지사항 목록 렌더링
   renderNotice();
-
-  // 모달 사용
-  useModal([
-    { btn: 'home__workBtn', modal: 'home__workModal' },
-    { btn: 'home__noticeCard', modal: 'home__noticeModal' },
-  ]);
 }
 
 // 시간 데이터를 현재 시간 카드에 렌더링하는 함수
