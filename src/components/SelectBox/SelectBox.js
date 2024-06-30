@@ -3,7 +3,7 @@ import './SelectBox.css';
 /* 
   {
     class : class 설정 값
-    idName : 선택된 데이터 정보에 대한 id와 name 설정 값
+    id : 선택된 데이터 정보에 대한 id 설정 값
     default : 아무 것도 선택하지 않은 최초 상태에 보여줄 값(입력하지 않을 시, 첫 번째 옵션 적용)
     options : 선택할 수 있는 옵션으로, 배열로 입력 (ex : [딸기, 바나나, 포도])
     disabled : true(비활성화 O), false(비활성화 X)
@@ -11,43 +11,49 @@ import './SelectBox.css';
 */
 export default function SelectBox(props) {
   return `
-  <div class="selectBox${props.class ? ' ' + props.class : ''}">
-  <label class="selectBox_label" id="${props.idName} name="${props.idName}">${
-    props.default ? props.default : props.options[0]
+  <div class="selectBox${props?.class ? ' ' + props.class : ''}${
+    props?.disabled ? ' selectBox_disabled' : ''
+  }">
+    <label class="selectBox_label" ${props.idName ? `id="${props.id}"` : ''}>${
+    props?.default ? props.default : props?.options?.[0] || ''
   }</label>
-        <svg
-          fill=""
-          version="1.1"
-          class="selectBox_arrow"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 0 24 24"
-          xml:space="preserve"
-          stroke=""
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            <style type="text/css">
-              .st0 {
-                fill: none;
-              }
-            </style>
-            <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
-            <rect class="st0" width="24" height="24"></rect>
-            <rect class="st0" width="24" height="24"></rect>
-          </g>
-        </svg>
-        <ul class="selectBox_list selectBox_listNone">
-          ${props.options.map((option) => {
-            `<li class="selectBox_option">${option}</li>`;
-          })}
-        </ul>
-      </div>`;
+    <svg
+      fill=""
+      version="1.1"
+      class="selectBox_arrow"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 24 24"
+      xml:space="preserve"
+      stroke=""
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <style type="text/css">
+          .st0 {
+            fill: none;
+          }
+        </style>
+        <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
+        <rect class="st0" width="24" height="24"></rect>
+        <rect class="st0" width="24" height="24"></rect>
+      </g>
+    </svg>
+    <ul class="selectBox_list selectBox_listNone">
+      ${
+        props?.options
+          ? props.options
+              .map((option) => `<li class="selectBox_option">${option}</li>`)
+              .join('')
+          : ''
+      }
+    </ul>
+  </div>`;
 }
 
 // selectBox 동작 로직

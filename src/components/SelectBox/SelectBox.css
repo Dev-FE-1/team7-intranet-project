@@ -8,8 +8,14 @@
   box-sizing: border-box;
   border: 0 none;
   outline: 0 none;
-  cursor: pointer;
   background-color: #fff;
+}
+.selectBox_disabled {
+  color: #6c6c6c;
+  background-color: #d9d9d9;
+}
+.selectBox_disabled > .selectBox_label {
+  border: 1px solid #bdc3cd;
 }
 .selectBox_label {
   width: 100%;
