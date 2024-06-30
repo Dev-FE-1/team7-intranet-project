@@ -1,13 +1,25 @@
 import './pagination.css';
-// 예시 Pagination({totalCnt:video_list.length, dataPerPage:10, pagingPerPage:5, data:받아올 목록 데이터, pagingContainer: 페이지네이션 감싸는 컨테이너})
-// Pagination({totalCnt:video_list.length, dataPerPage:10, pagingPerPage:5, data:video_list, PagingContainer:'.pagination_container'});
+// Pagination({totalCnt:video_list.length, dataPerPage:10, pagingPerPage:5, data:video_list});
 let currentPage=1;
-export default function Pagination({totalCnt, dataPerPage, pagingPerPage, data, pagingContainer}) {
-  function renderPagination() {
-    const totalCount = Math.ceil(totalCnt / dataPerPage); // 전체 페이지 수
+export default function Pagination(Props) {
+  // totalCnt:데이터의 갯수 (예시 adminlist_length)
+  // dataperPage: 한 페이지에 보여질 데이터의 갯수
+  // pagingPerPage: 한 페이지에 보여질 페이지네이션의 갯수
+  // data: 데이터 배열 (예시 adminlist)
+  const {totalCnt, dataPerPage, pagingPerPage, data, pagingContainer}=Props;
+  
+  renderPagination(totalCnt, currentPage);
+  showList(currentPage);
 
-    let pageGroup = Math.ceil(currentPage/pagingPerPage)
+  // 전체 데이터 갯수와 갱신되는 현재 페이지 수를 받아 페이지네이션을 렌더링 하는 함수
+  function renderPagination(totalCnt, currentPage) {
+    // 전체 페이지 수
+    const totalCount = Math.ceil(totalCnt / dataPerPage); 
+    // 현재페이지가 속한 페이지 그룹
+    let pageGroup = Math.ceil(currentPage/pagingPerPage) 
+    // 현재페이지가 속한 마지막 페이지
     let lastPage = Math.min(pageGroup * pagingPerPage, totalCount)
+    // 현재페이지가 속한 첫 번째 페이지
     let firstPage = Math.max((pageGroup - 1) * pagingPerPage + 1, 1);
 
     let pagingHtml=`
@@ -21,21 +33,17 @@ export default function Pagination({totalCnt, dataPerPage, pagingPerPage, data, 
     <div class="list_container"><div>
     `; 
     
-    //페이지네이션 UI를 위치시킬 컨테이너 
-    const paginationContainer = document.querySelector(pagingContainer)
-      if(paginationContainer!==null){
-        paginationContainer.innerHTML=pagingHtml
-        paginationContainer.style.display = 'flex'; // Flexbox 스타일 적용
-        paginationContainer.style.justifyContent = 'center'; // 중앙 정렬
-        paginationContainer.style.gap = '10px'; // 요소 간 간격 추가
+    //렌더링 되는 페이지네이션 UI를 위치시킬 컨테이너 
+      const paginationContainer = document.querySelector('.pagination_container')
+      paginationContainer.innerHTML=pagingHtml
 
-        let pagingSection = ''
-        for(let i = firstPage; i <= lastPage; i++){
+      let pagingSection = ''
+      for(let i = firstPage; i <= lastPage; i++){
         pagingSection+=`
         <li class="pagination_num ${i === currentPage ? 'active' : ''}" data-id="${i}"><a href="#">${i}</a></li>
         `;
-        }
-
+      }
+      
       // 클릭 가능한 페이징 값 pagigHtml 내 Paging 요소에 넣어주기
       document.querySelector('.paging').innerHTML=pagingSection;
 
@@ -45,17 +53,14 @@ export default function Pagination({totalCnt, dataPerPage, pagingPerPage, data, 
       document.getElementById('next').addEventListener('click', ()=>{gotoPage(Math.min(lastPage + 1, totalCount))})
       document.getElementById('last').addEventListener('click', ()=>{gotoPage(totalCount)})
 
+      //페이지네이션 요소 클릭 시 해당 요소에 해당하는 페이지, 목록 출력
       const paginationItems=document.querySelectorAll('.pagination_num')
       paginationItems.forEach((item)=>{
         item.addEventListener('click', (e)=>{
-          //console.log(e.currentTarget.getAttribute('data-id'))
         let pageNum = Number(e.currentTarget.getAttribute('data-id'));
           gotoPage(pageNum)
         });
       });
-    }else{
-      console.log('error')
-    }
   }
   // function showList(page){
   //   const listContainer = document.querySelector('.list_container'); // 데이터 목록을 표시할 컨테이너
@@ -78,15 +83,11 @@ export default function Pagination({totalCnt, dataPerPage, pagingPerPage, data, 
   //   }
   // }
 
-  //현재 페이지 업데이트, 현재 페이지 기준으로 다시 렌더링
+ //현재 페이지 업데이트, 갱신 된 현재 페이지 기준으로 다시 렌더링
   function gotoPage(page){
-    if (page < 1 || page > totalCnt) return;
-    currentPage=page;
-    //console.log(currentPage)
-    renderPagination();
-    //showList(currentPage)
-    }
-
-  renderPagination();
+  if (page < 1 || page > totalCnt) return;
+  currentPage=page;
+  renderPagination(totalCnt, currentPage);
   //showList(currentPage)
+  }
 }
