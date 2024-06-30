@@ -9,10 +9,10 @@
   border-radius: 0 10px 10px 0;
   z-index: 20;
 }
-.navbar-logo {
+.navbar_logo {
   width: 150px;
 }
-.navbar-item > a {
+.navbar_item > a {
   display: block;
   padding: 20px;
   color: #fff;
@@ -21,11 +21,11 @@
   font-size: 21px;
   box-sizing: border-box;
 }
-.navbar-item:hover > a {
+.navbar_item:hover > a {
   background-color: #11474b;
   font-weight: bold;
 }
-.navbar-profile {
+.navbar_profile {
   width: 310px;
   height: 100px;
   position: absolute;
@@ -39,25 +39,25 @@
   border-top: 1px solid #113a40;
   color: #fff;
 }
-.navbar-photo {
+.navbar_photo {
   background-color: #fff;
   width: 45px;
   height: 45px;
   margin-right: 10px;
   border-radius: 30px;
 }
-.navbar-user {
+.navbar_user {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   font-size: 22px;
 }
-.navbar-logoutBtn {
+.navbar_logoutBtn {
   color: white;
   width: 40px;
   height: 40px;
 }
-.navbar-line {
+.navbar_line {
   width: 100%;
   height: 1px;
   background-color: #113a40;
