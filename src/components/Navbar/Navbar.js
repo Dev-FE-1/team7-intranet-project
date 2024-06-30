@@ -1,7 +1,4 @@
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = 'src/components/Navbar/Navbar.css';
-document.head.appendChild(link);
+import './Navbar.css';
 
 export default function Navbar() {
   return `<div class="navbar_logo">
