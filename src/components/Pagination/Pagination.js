@@ -6,7 +6,7 @@ export default function Pagination(Props) {
   // dataperPage: 한 페이지에 보여질 데이터의 갯수
   // pagingPerPage: 한 페이지에 보여질 페이지네이션의 갯수
   // data: 데이터 배열 (예시 adminlist)
-  const {totalCnt, dataPerPage, pagingPerPage, data, pagingContainer}=Props;
+  const {pagingClass, totalCnt, dataPerPage, pagingPerPage, data}=Props;
   
   renderPagination(totalCnt, currentPage);
   showList(currentPage);
@@ -34,8 +34,7 @@ export default function Pagination(Props) {
     `; 
     
     //렌더링 되는 페이지네이션 UI를 위치시킬 컨테이너 
-      const paginationContainer = document.querySelector('.pagination_container')
-      paginationContainer.innerHTML=pagingHtml
+      document.querySelector(pagingClass).innerHTML=pagingHtml
 
       let pagingSection = ''
       for(let i = firstPage; i <= lastPage; i++){
