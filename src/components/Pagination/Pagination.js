@@ -2,7 +2,7 @@ import './pagination.css';
 
 //const{페이지네이션을 감싸는 컨테이너 클래스, 목록 전체 갯수, 한 페이지에 보여줄 목록의 갯수, 한 페이지에 보여줄 페이지네이션 갯수, 목록 데이터}
 //사용예시
-//<div class = "pagination_test">
+//<div class = "pagination_test">     --> 페이지네이션을 감싸는 컨테이너 클래스를 작업 중인 페이지에서 제작
 //</div>
 //const pagination페이지명 = new Pagination({Props값 넣어서 선언})
 
