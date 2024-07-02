@@ -36,15 +36,16 @@ a {
     width: 40px;
     text-align: center;
     padding-top: 10px;
+    box-sizing: border-box;
 }
 .pagination_arrow:hover {
     color: #012e33;
 }
 .btn {
     text-align: center;
-    height:30px;
-    width: 60px;
-    padding: 5px;
+    height:34px;
+    width: 70px;
+    padding: 8px;
     color: #333;
     background-color: #edf6f5;
     border: 1px solid #69d0cf;
