@@ -1,5 +1,5 @@
 // {
-//   page : { title : String, searchArea : boolean, content: String},
+//   page : { title : String, searchArea : String, content: String},
 //   img : {url : String, text: String },
 //   fill : boolean,
 //   content : String  >> (주의)페이지콘텐츠의 경우 [page]의 value값으로 보내주세요. page:{content:''}
@@ -33,7 +33,11 @@ export default class Card {
       return `
         <div class="card card_page${fill ? ' card_fill' : ''}">
           ${page.title ? `<h2 class="page_title">${page.title}</h2>` : ''}
-          ${page.searchArea ? `<div class="page_searchArea"></div>` : ''}
+          ${
+            page.searchArea
+              ? `<div class="page_searchArea">${page.searchArea}</div>`
+              : ''
+          }
           <div class="page_content">${page.content || ''}</div>
         </div>
       `;
