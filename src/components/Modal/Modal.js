@@ -21,7 +21,7 @@ export default class Modal {
     } = props;
 
     if (!name || !trigger) {
-      alert(`모달컴포넌트 사용 시 name, trigger는 필수 값입니다.
+      alert(`모달 컴포넌트 사용 시 name, trigger는 필수 값입니다.
         Modal({name : '모달이름', trigger : '모달버튼'})`);
       return;
     }
@@ -52,11 +52,13 @@ export default class Modal {
 
   render() {
     return `
-      <div class="modal ${this.name} modal_${this.size} ${this.classList}">
+      <div class="modal ${this.name} modal_${this.size}${
+      this.classList ? ` ${this.classList}` : ''
+    }">
         <div class="modal_bb"></div>
         <div class="modal_inner">
           ${this.title ? `<p class="modal_title">${this.title}</p>` : ''}
-          <div class="modal_content">${this.content}</div>
+          <div class="modal_content">${this.content || ''}</div>
           ${
             this.buttons
               ? `<div class="modal_btns"><button class="btn btn--light modalClose">취소</button><button class="btn modalClose">확인</button></div>`
