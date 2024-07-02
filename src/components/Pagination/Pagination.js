@@ -1,6 +1,6 @@
 import './pagination.css';
 
-//const{페이지네이션 컨테이너 클래스, 목록 전체 갯수, 한 페이지에 보여줄 목록의 갯수, 한 페이지에 보여줄 페이지네이션 갯수, 목록 데이터}
+//const{페이지네이션을 감싸는 컨테이너 클래스, 목록 전체 갯수, 한 페이지에 보여줄 목록의 갯수, 한 페이지에 보여줄 페이지네이션 갯수, 목록 데이터}
 class Pagination {
   constructor(Props) {
     const { pagingClass, totalCnt, dataPerPage, pagingPerPage, data} = Props;
@@ -15,7 +15,7 @@ class Pagination {
     this.showList(1);
   }
 
-  //currentPage에 저장되는 현재 페이지 값에 따라 페이지네이션을 렌더링 시켜주는 함수
+  //화면에 표시될 데이터 값에 맞게 페이지네이션을 렌더링 시켜주는 함수
   renderPagination(currentPage) {
     let totalCount = Math.ceil(this.totalCnt / this.dataPerPage); //8
     let pageGroup = Math.ceil(currentPage / this.pagingPerPage); //1
