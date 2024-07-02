@@ -1,28 +1,18 @@
-import './Button.css';
-class btn {
-  constructor(label) {
-    this.label = label;
-    this.classList = ['btn'];
-  }
+// label : 버튼 안 문구 (*필수값)
+// type : primary 또는 light 로 색상 선택
+// classList : 추가 클래스
 
-  addClass(className) {
-    this.classList.push(className);
+import './Button.css';
+export default class Button {
+  constructor(props) {
+    this.label = props.label;
+    this.type = props.type;
+    this.classList = props.classList;
   }
 
   render() {
-    return `<button class="${this.classList.join(' ')}">${this.label}</button>`;
+    return `<button class="btn btn_${this.type ? this.type : 'primary'} ${
+      this.classList ? this.classList : ''
+    }">${this.label}</button>`;
   }
 }
-
-function BtnGroup() {
-  const btnGroup = document.querySelector('.btn_group');
-  const btnLight = new btn('취소');
-  const btnPrimary = new btn('확인');
-
-  btnLight.addClass('btn_light');
-  btnPrimary.addClass('btn_primary');
-
-  btnGroup.innerHTML = btnLight.render() + ' ' + btnPrimary.render();
-}
-
-document.addEventListener('DOMContentLoaded', BtnGroup);
