@@ -11,8 +11,9 @@ class Pagination {
     this.pagingPerPage = pagingPerPage;
     this.data = data;
 
-    this.renderPagination(1);
-    this.showList(1);
+    this.currentPage=1; //페이지 초기값
+    this.renderPagination(this.currentPage);
+    //this.showList(1);
   }
 
   //화면에 표시될 데이터 값에 맞게 페이지네이션을 렌더링 시켜주는 함수
@@ -74,34 +75,32 @@ class Pagination {
   }
 
   //목록 불러오기 테스트용 
-  showList(page) {
-    const listContainer = document.querySelector('.list_container');
+  // showList(page) {
+  //   const listContainer = document.querySelector('.list_container');
 
-    if (listContainer !== null) {
-      const startIdx = (page - 1) * this.dataPerPage;
-      const endIdx = Math.min(startIdx + this.dataPerPage, this.totalCnt);
-      const pageData = this.data.slice(startIdx, endIdx);
+  //   if (listContainer !== null) {
+  //     const startIdx = (page - 1) * this.dataPerPage;
+  //     const endIdx = Math.min(startIdx + this.dataPerPage, this.totalCnt);
+  //     const pageData = this.data.slice(startIdx, endIdx);
 
-      let listHtml = '<ul>';
-      pageData.forEach(item => {
-        listHtml += `<li>${item.TITLE} - ${item.WRITE_DATE}</li>`;
-      });
-      listHtml += '</ul>';
+  //     let listHtml = '<ul>';
+  //     pageData.forEach(item => {
+  //       listHtml += `<li>${item.TITLE} - ${item.WRITE_DATE}</li>`;
+  //     });
+  //     listHtml += '</ul>';
 
-      listContainer.innerHTML = listHtml;
-    } else {
-      console.log('List container not found');
-    }
-  }
+  //     listContainer.innerHTML = listHtml;
+  //   } else {
+  //     console.log('List container not found');
+  //   }
+  // }
 
   //페이지네이션 내 버튼을 클릭했을 때 버튼 액션에 해당하는 페이지 값을 얻어와서 페이지네이션 렌더링
   gotoPage(page) {
-    console.log(`gotoPage called with page: ${page}`);
     const totalCount = Math.ceil(this.totalCnt / this.dataPerPage);
     if (page < 1 || page > totalCount) return;
     this.renderPagination(page);
-    this.showList(page);
-    console.log(`Navigated to page: ${page}`);
+    //this.showList(page);
   }
 }
 
