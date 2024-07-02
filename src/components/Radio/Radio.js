@@ -1,27 +1,29 @@
 import './radio.css';
 
-//id - 고유 id
+//classList - 추가할 클래스명 
+//labels[] - 선택할 수 있는 옵션 배열
 //name - 그룹으로 묶을 이름
-//label - 라디오 라벨
-//checked - 기본으로 체크 되어있는지 유무
+//checked - 기본으로 체크 되어야할 대상
 //disabled - 활성화/비활성화 유무
 
-// const radio1=new Radio([{id:1, name:'그룹1', label:'연차', checked:true, disabled:true},
-//                        {id:2, name:'그룹1', label:'배차', checked:true, disabled:false} ]);
+//const radio1=new Radio({classList: 'test', labels:['김','박','오'], name:'test', checked : 2, disalbed :false })
 
 class Radio{
-    constructor(Props){
-        this.Props=Props;
+    constructor(props){
+        this.props=props;
     }
 
     render(){
-        return this.Props.map((p)=>`<div class="radioItem">
-        <label for="${p.id}">
-        <input id="${p.id}" name="${p.name}" type="radio" ${p.checked ? 'checked' : ''} ${p.disabled ? 'disabled' : ''}/>
-        ${p.label}
-        </label>
-        </div>`).join('') 
-        ;
+        const {labels, classList, name, checked, disabled} = this.props;
+        return `<div class="radio ${classList}">
+        ${labels.map((label, idx)=>
+            `<label for="${name+(idx+1)}">
+                <input id="${name+(idx+1)}" name="${name}" type="radio" ${checked === idx ? 'checked' : ''} ${disabled ? 'disabled' : ''}/>
+                ${label}
+            </label>`
+        ).join('')
+        }
+        </div>` ;    
     }
 }
 
