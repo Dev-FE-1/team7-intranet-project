@@ -18,15 +18,19 @@ class Pagination {
 
     this.currentPage=1; //페이지 초기값
     this.renderPagination(this.currentPage);
-    //this.showList(1);
+    //this.showList(this.currentPage);
   }
 
   //화면에 표시될 데이터 값에 맞게 페이지네이션을 렌더링 시켜주는 함수
   renderPagination(currentPage) {
-    let totalCount = Math.ceil(this.totalCnt / this.dataPerPage); //8
-    let pageGroup = Math.ceil(currentPage / this.pagingPerPage); //1
-    let lastPage = Math.min(pageGroup * this.pagingPerPage, totalCount); //5
-    let firstPage = Math.max((pageGroup - 1) * this.pagingPerPage + 1, 1); //1
+    //전체 목록 갯수에 따라서 보여질 페이지네이션
+    let totalCount = Math.ceil(this.totalCnt / this.dataPerPage);
+    //페이지네이션 그룹 
+    let pageGroup = Math.ceil(currentPage / this.pagingPerPage); 
+    //그룹 내 마지막 페이지
+    let lastPage = Math.min(pageGroup * this.pagingPerPage, totalCount); 
+    //그룹 내 첫번째 페이지
+    let firstPage = Math.max((pageGroup - 1) * this.pagingPerPage + 1, 1); 
 
     let pagingHtml = `
       <ul class="pagination">
