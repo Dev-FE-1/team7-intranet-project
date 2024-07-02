@@ -1,14 +1,28 @@
 import './Button.css';
+class btn {
+  constructor(label) {
+    this.label = label;
+    this.classList = ['btn'];
+  }
 
-export function btn(label, classList) {
-  if (classList === undefined) {
-    return `<button class="btn btn_primary">${label}</button>`;
-  } else {
-    return `<button class="btn btn_${classList}">${label}</button>`;
+  addClass(className) {
+    this.classList.push(className);
+  }
+
+  render() {
+    return `<button class="${this.classList.join(' ')}">${this.label}</button>`;
   }
 }
 
 function BtnGroup() {
-  const bntGroup = document.querySelector('.btn_group');
-  bntGroup.innerHTML = btn('Left', 'secondary') + ' ' + btn('Right');
+  const btnGroup = document.querySelector('.btn_group');
+  const btnLight = new btn('취소');
+  const btnPrimary = new btn('확인');
+
+  btnLight.addClass('btn_light');
+  btnPrimary.addClass('btn_primary');
+
+  btnGroup.innerHTML = btnLight.render() + ' ' + btnPrimary.render();
 }
+
+document.addEventListener('DOMContentLoaded', BtnGroup);
