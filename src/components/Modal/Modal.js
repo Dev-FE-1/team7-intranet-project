@@ -1,6 +1,7 @@
 import Button from '/src/components/Button/Button.js';
 import '/src/components/Button/Button.css';
 import '/src/components/Card/Card.css';
+import '/src/components/Modal/Modal.css';
 // {
 //   name : 모달 클래스명 String (*필수값)
 //   trigger : 모달 활성화 버튼 클래스명 String
