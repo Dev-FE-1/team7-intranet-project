@@ -8,14 +8,14 @@
   padding-left: 15px;
   box-sizing: border-box;
   background-color: #fff;
-  }
-  .input_search {
+}
+.input_search {
   width: 250px;
   display: flex;
   position: relative;
   align-items: center;
-  }
-  .input_search > .input {
+}
+.input_search > .input {
   width: 100%;
   padding-right: 40px;
   }
@@ -23,8 +23,8 @@
   color: #69d0cf;
   position: absolute;
   right: 5px;
-  }
-  .input_bigText {
+}
+.input_bigText {
   width: 330px;
   height: 80px;
   padding: 10px;

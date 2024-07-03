@@ -35,14 +35,13 @@
   margin-bottom: 20px;
 }
 .notice__card{
-  gap: 15px;
+  margin-left:20px;
   width:100%;
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   border-radius: 10px;
-  margin-bottom:20px;
   flex: 1 1 calc(25% - 10px); /*-10px로 하면 한줄에 카드가 3개 출력됨*/
 }
 .card .card_img{
