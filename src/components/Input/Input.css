@@ -10,17 +10,19 @@
   background-color: #fff;
 }
 .input_search {
+  width: 250px;
   display: flex;
   position: relative;
   align-items: center;
 }
 .input_search > .input {
+  width: 100%;
   padding-right: 40px;
 }
 .input_searchIcon {
   color: #69d0cf;
   position: absolute;
-  right: 15px;
+  right: 5px;
 }
 .input_bigText {
   width: 330px;
