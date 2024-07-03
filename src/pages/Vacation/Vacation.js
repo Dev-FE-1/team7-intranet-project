@@ -1,3 +1,10 @@
+import Modal from '/src/components/Modal/Modal.js';
+import Card from '/src/components/Card/Card.js';
+import '/src/components/Card/Card.css';
+import '/src/components/Button/Button.css';
+import '/src/components/Modal/Modal.css';
+import '/src/pages/Vacation/Vacation.css';
+
 export default function Vacation(root) {
   const data = [
     { type: '연차', sDate: '2024.06.10', eDate: '2024.06.12' },
@@ -31,11 +38,134 @@ export default function Vacation(root) {
     )
     .join('');
 
-  root.innerHTML = `<div class="vacation">
-          <div class="vacation__card card">
-            <h2 class="vacation__pageTitle">휴가/외출 관리</h2>
-            <div class="vacation__searchArea">
-              <div class="vacation__searchTypeSelect selectBox">
+  const applyModal = new Modal({
+    name: 'vacation_applyModal',
+    type: 'form',
+    title: '신 청',
+    buttons: [
+      { label: '취소', type: 'primary' },
+      { label: '확인', type: 'ligth' },
+    ],
+    trigger: 'modal_apply',
+    size: 'md',
+    content: `<div class="vacation_form">
+                  <dl class="vacation_category">
+                    <dt class="vacation_categoryTitle">구분</dt>
+                    <dd class="vacation_categoryItem">
+                      <label for="type1">
+                        <input id="type1" name="vacationCategory" type="radio" checked/>
+                        연차
+                      </label>
+                    </dd>
+                    <dd class="vacation_categoryItem">
+                      <label for="type2">
+                        <input id="type2" name="vacationCategory" type="radio"/>
+                        반차
+                      </label>
+                    </dd>
+                    <dd class="vacation_categoryItem">
+                      <label for="type3">
+                        <input id="type3" name="vacationCategory" type="radio"/>
+                        외출
+                      </label>
+                    </dd>
+                  </dl>
+
+                  <div class="vacation_date">
+                    <dl class="vacation_sDate">
+                      <dt class="vacation_sDateTitle">시작일</dt>
+                      <dd>
+                        <input class="vacation_inputText inputText" type="date" />
+                      </dd>
+                    </dl>
+                    <dl class="vacation_eDate">
+                      <dt class="vacation_eDateTitle">종료일</dt>
+                      <dd>
+                        <input class="vacation_inputText inputText" type="date"/>
+                      </dd>
+                    </dl>
+                  </div>
+
+                  <dl class="vacation_reason">
+                    <dt class="vacation_reasonTitle">사유</dt>
+                    <dd>
+                      <textarea
+                        class="vacation_inputTextarea inputText"
+                        name=""
+                        id=""
+                      ></textarea>
+                    </dd>
+                  </dl>
+                </div>`,
+  });
+
+  const detailModal = new Modal({
+    name: 'vacation_detailModal',
+    type: 'detail',
+    title: '상 세',
+    buttons: [{ label: '확인', type: 'ligth' }],
+    trigger: 'modal_detail',
+    size: 'md',
+    content: `<div class="vacation_form">
+                  <dl class="vacation_category">
+                    <dt class="vacation_categoryTitle">구분</dt>
+                    <dd class="vacation_categoryItem">
+                      <input type="radio" checked disabled />
+                      <label for="type1">연차</label>
+                    </dd>
+                    <dd class="vacation_categoryItem">
+                      <input type="radio" disabled/>
+                      <label for="type2">반차</label>
+                    </dd>
+                    <dd class="vacation_categoryItem">
+                      <input type="radio" disabled/>
+                      <label for="type3">외출</label>
+                    </dd>
+                  </dl>
+
+                  <div class="vacation_date">
+
+                    <dl class="vacation_sDate">
+                      <dt class="vacation_sDateTitle">시작일</dt>
+                      <dd>
+                        <input
+                          class="vacation_inputText inputText inputText--disabled"
+                          type="date"
+                          disabled
+                        />
+                      </dd>
+                    </dl>
+                    <dl class="vacation_eDate">
+                      <dt class="vacation_eDateTitle">종료일</dt>
+                      <dd>
+                        <input
+                          class="vacation_inputText inputText inputText--disabled"
+                          type="date"
+                          disabled
+                        />
+                      </dd>
+                    </dl>
+
+                  </div>
+
+                  <dl class="vacation_reason">
+                    <dt class="vacation_reasonTitle">사유</dt>
+                    <dd>
+                      <textarea
+                        class="vacation_inputTextarea inputText inputText--disabled"
+                        name=""
+                        id=""
+                        disabled
+                      ></textarea>
+                    </dd>
+                  </dl>
+                </div>`,
+  });
+
+  const pageCard = new Card({
+    page: {
+      title: '휴가/외출 관리',
+      searchArea: `<div class="selectBox search_type">
                 <label class="selectBox__label">구분</label>
                 <svg
                   fill="" version="1.1" class="selectBox__arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve" stroke="">
@@ -58,9 +188,8 @@ export default function Vacation(root) {
                   <li class="selectBox__option">외출</li>
                 </ul>
               </div>
-              <button class="btn modalApply">신청</button>
-            </div>
-            <div class="listTable">
+              <button class="btn modal_apply">신청</button>`,
+      content: `<div class="listTable">
               <ul class="listTable__thead">
                 <li class="listTable__tr">
                   <div class="listTable__th">구분</div>
@@ -73,9 +202,7 @@ export default function Vacation(root) {
                 ${listHtml}
               </ul>
             </div>
-            <!-- listTable -->
-
-            <ul class="vacation__pagination pagination">
+            <ul class="vacation_pagination pagination">
               <li class="btn pagination__btn">처음</li>
               <li class="pagination__arrow">◀</li>
               <li class="pagination__num">1</li>
@@ -85,166 +212,21 @@ export default function Vacation(root) {
               <li class="pagination__num">5</li>
               <li class="pagination__arrow">▶</li>
               <li class="btn pagination__btn">마지막</li>
-            </ul>
-          </div>
-          <!-- vacation__card -->
+            </ul>`,
+    },
+  });
 
-          <!-- applyModal -->
-          <div class="vacation__applyModal modal modal--none">
-            <div class="modal__bb"></div>
-            <div class="vacation__modalInner modal__inner">
-              <p class="vacation__modalTitle modal__title">신 청</p>
+  root.innerHTML = `<div class="vacation">${pageCard.render()}
+      ${applyModal.render()}
+      ${detailModal.render()}
+  </div>`;
 
-              <div class="vacation__modalContent modal__content">
-                <!-- 이 영역은 매번 바뀌므로 각 페이지에서 수정 -->
-                <div class="vacation__form">
-                  <dl class="vacation__category">
-                    <dt class="vacatjion__categoryTitle">구분</dt>
-                    <dd class="vacation__categoryItem">
-                      <label for="type1">
-                        <input id="type1" name="vacationCategory" type="radio" checked/>
-                        연차
-                      </label>
-                    </dd>
-                    <dd class="vacation__categoryItem">
-                      <label for="type2">
-                        <input id="type2" name="vacationCategory" type="radio"/>
-                        반차
-                      </label>
-                    </dd>
-                    <dd class="vacation__categoryItem">
-                      <label for="type3">  
-                        <input id="type3" name="vacationCategory" type="radio"/>
-                        외출
-                      </label>
-                    </dd>
-                  </dl>
+  // useSelectBox();
+  applyModal.useModal();
+  detailModal.useModal();
 
-                  <div class="vacation__date">
-
-                    <dl class="vacation__sDate">
-                      <dt class="vacation__sDateTitle">시작일</dt>
-                      <dd>
-                        <input
-                          class="vacation__inputText inputText"
-                          type="date"
-                        />
-                      </dd>
-                    </dl>
-                    <dl class="vacation__eDate">
-                      <dt class="vacation__eDateTitle">종료일</dt>
-                      <dd>
-                        <input
-                          class="vacation__inputText inputText"
-                          type="date"
-                        />
-                      </dd>
-                    </dl>
-
-                  </div>
-
-                  <dl class="vacation__reason">
-                    <dt class="vacation__reasonTitle">사유</dt>
-                    <dd>
-                      <textarea
-                        class="vacation__inputTextarea inputText"
-                        name=""
-                        id=""
-                      ></textarea>
-                    </dd>
-                  </dl>
-                </div>
-                <!-- 이 영역은 매번 바뀌므로 각 페이지에서 수정 -->
-              </div>
-
-              <div class="modal__btns">
-                <button class="btn btn--light modalClose">취소</button>
-                <button class="btn modalClose">확인</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- detailModal -->
-          <div class="vacation__detailModal modal modal--none">
-            <div class="modal__bb"></div>
-            <div class="vacation__modalInner modal__inner">
-              <p class="vacation__modalTitle modal__title">상 세</p>
-
-              <div class="vacation__modalContent modal__content">
-                <!-- 이 영역은 매번 바뀌므로 각 페이지에서 수정 -->
-                <div class="vacation__form">
-                  <dl class="vacation__category">
-                    <dt class="vacatjion__categoryTitle">구분</dt>
-                    <dd class="vacation__categoryItem">
-                      <input type="radio" checked disabled />
-                      <label for="type1">연차</label>
-                    </dd>
-                    <dd class="vacation__categoryItem">
-                      <input type="radio" disabled/>
-                      <label for="type2">반차</label>
-                    </dd>
-                    <dd class="vacation__categoryItem">
-                      <input type="radio" disabled/>
-                      <label for="type3">외출</label>
-                    </dd>
-                  </dl>
-
-                  <div class="vacation__date">
-
-                    <dl class="vacation__sDate">
-                      <dt class="vacation__sDateTitle">시작일</dt>
-                      <dd>
-                        <input
-                          class="vacation__inputText inputText inputText--disabled"
-                          type="date"
-                          disabled
-                        />
-                      </dd>
-                    </dl>
-                    <dl class="vacation__eDate">
-                      <dt class="vacation__eDateTitle">종료일</dt>
-                      <dd>
-                        <input
-                          class="vacation__inputText inputText inputText--disabled"
-                          type="date"
-                          disabled
-                        />
-                      </dd>
-                    </dl>
-
-                  </div>
-
-                  <dl class="vacation__reason">
-                    <dt class="vacation__reasonTitle">사유</dt>
-                    <dd>
-                      <textarea
-                        class="vacation__inputTextarea inputText inputText--disabled"
-                        name=""
-                        id=""
-                        disabled
-                      ></textarea>
-                    </dd>
-                  </dl>
-                </div>
-                <!-- 이 영역은 매번 바뀌므로 각 페이지에서 수정 -->
-              </div>
-
-              <div class="modal__btns">
-                <button class="btn modalClose">확인</button>
-              </div>
-            </div>
-          </div>
-
-        </div>`;
-
-  const categoryItem = root.querySelectorAll('.vacation__categoryItem');
+  const categoryItem = root.querySelectorAll('.vacation_categoryItem');
   categoryItem.forEach((item) => item.addEventListener('change', handleRadio));
-  const modalOpen = [
-    { btn: 'modalDetail', modal: 'vacation__detailModal' },
-    { btn: 'modalApply', modal: 'vacation__applyModal' },
-  ];
-  useModal(modalOpen);
-  useSelectBox();
 }
 
 // 라디오 선택(연차,반차,외출)에 따라 제출 폼 변경시켜주는 함수
@@ -301,7 +283,7 @@ function handleRadio() {
                                     </div>
                                   </dd>
                                 </dl>`;
-      useSelectBox();
+      // useSelectBox();
       break;
 
     case 'type3':
@@ -363,7 +345,7 @@ function handleRadio() {
                                     </div>
                                   </dd>
                                 </dl>`;
-      useSelectBox();
+      // useSelectBox();
       break;
 
     default:
