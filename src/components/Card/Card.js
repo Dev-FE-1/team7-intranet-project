@@ -1,3 +1,4 @@
+import '/src/components/Card/Card.css';
 // {
 //   page : { title : String, searchArea : String, content: String},
 //   img : {url : String, text: String },
