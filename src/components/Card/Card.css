@@ -14,6 +14,7 @@
   width: 100%;
   height: auto;
 }
+
 .card_img {
   height: 350px;
   padding: 0;
@@ -23,6 +24,19 @@
   border: 1px solid #edf6f5;
   background-color: #edf6f5;
 }
+
+.card_page .page_title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.card_page .page_searchArea {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px 0;
+}
+
 .card_img .card_imgWrap {
   width: 100%;
   height: 80%;
