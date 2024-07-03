@@ -1,9 +1,10 @@
 import Button from '/src/components/Button/Button.js';
-import Card from '../../components/Card/Card';
+import Card from '/src/components/Card/Card';
 import Modal from '/src/components/Modal/Modal.js';
 import Input from '/src/components/Input/Input.js';
-
 import './Notice.css';
+
+
 export default function Notice(root) {
   // 카드 데이터 객체 (임시)
   const cardData = [
@@ -363,64 +364,70 @@ export default function Notice(root) {
   const noticeSearch=new Input({type:'search', className:'notice__input', placeholder:'검색어를 입력하세요.'})
   const noticeUpload=new Button({label:'등록', classList:'btn--notice'})
   const noticeCard = new Card({page :{title:'공지사항', searchArea:noticeSearch.render(), content:noticeUpload.render()}})
+  const notiModal=new Modal({
+    name:'notice__modal', 
+    size:'md', 
+    trigger:'notice__card', 
+    buttons:[{label:'닫기', 
+      classList:'btn--notice--close modalClose'}], 
+      content: `<p class="notice__modalTitle">${cardData[0].title}</p>
+      <p class="notice__modalDate">${cardData[0].date}</p>
+        <div class="notice__modalImg">
+        <img src="${cardData[0].imgs}" alt="${cardData[0].imgAlt}"/>
+        </div>
+        <div class="notice__modalContent">${cardData[0].content}</div>`
+  });
 
   root.innerHTML = `
     <div class="notice">  
       ${noticeCard.render()}
         <div class="notice__container"></div>
-        <div class="notice__modalCard"></div>
+        ${notiModal.render()}
     </div>
+    
       `;
 
   const noticeContainer = document.querySelector('.notice__container');
-  const noticeModal = document.querySelector('.notice__modalCard');
   
-  // 카드 id, 제목, 이미지 데이터를 불러와서 카드를 생성하는 함수
-  function createCard(cardData) {
-    const card1 = new Card({img: {url:cardData.imgs, text: cardData.title},})
-    return `
+  
+    // 카드 id, 제목, 이미지 데이터를 불러와서 카드를 생성하는 함수
+    function createCard(cardData) {
+      const card1 = new Card({img: {url:cardData.imgs, text: cardData.title}})
+      return `
           <div class="notice__card" data-id='${cardData.id}'>
           ${card1.render()}
-        </div>
-        `;
-  }
-
-  // 데이터에 들어있는 카드의 갯수 만큼 카드를 추가하는 함수
-  function addCards(container, cardsData) {
-    let cards = '';
-    for (let cardData of cardsData) {
-      cards += createCard(cardData);
+          </div>
+          `;
     }
-    container.innerHTML = cards;
-  }
 
-  // 클릭한 카드의 정보를 가진 모달을 생성하는 함수
-  function renderModal() {
-    const cardElements =document.querySelectorAll('.notice__card');
-    // 데이터 객체의 id와 카드의 id가 일치하면 해당 id의 모달 내용 출력
-    cardElements.forEach((card) => {
-      card.addEventListener('click', () => {
-        const cardId = card.getAttribute('data-id');
-        const data = cardData.find((el) => el.id == cardId);
-        
-        const noticeModalContent = `<div class="notice__modalBar">
-          <p class="notice__modalTitle">${data.title}</p>
-          <p class="notice__modalDate">${data.date}</p>
-          <div>
-          <div class="modal__content">
-            <div class="notice__modalImg">
-            <img src="${data.imgs}" alt="${data.imgAlt}"/>
-            </div>
-            <div class="notice__modalContent">${data.content}</div>
-          </div>`
-          ;
-          const notiModal=new Modal({name:'notice__modal', size:'lg', trigger:'notice__card', title:data.title, buttons:[{label:'닫기', classList:'modalClose', content:noticeModalContent}]})
-          noticeModal.innerHTML = notiModal.render()
-          notiModal.useModal()
-      });
-    });
-  }
+    // 데이터에 들어있는 카드의 갯수 만큼 카드를 추가하는 함수
+    function addCards(container, cardsData) {
+      let cards = '';
+      for (let cardData of cardsData) {
+        cards += createCard(cardData);
+      }
+      container.innerHTML = cards;
+   }
   
+
+  // // 클릭한 카드의 정보를 가진 모달을 생성하는 함수
+  // function renderModal() {
+  //   const cardElements =document.querySelectorAll('.notice__card');
+
+  //   cardElements.forEach((card) => {
+  //     card.addEventListener('click', (e) => {
+  //       const cardId = e.currentTarget.getAttribute('data-id');
+  //       const data = cardData.find((el) => el.id == cardId);
+        
+  //       const noticeModalContent = renderNoticeModal(data)
+         
+  //         const noticeModalContainer = document.querySelector('.notice__modalCard');
+  //         noticeModalContainer.innerHTML=notiModal.render(); 
+  //         notiModal.useModal();
+          
+  //     });
+  //   });
+  // }
   addCards(noticeContainer, cardData);
-  renderModal();
+  //renderModal();
 }

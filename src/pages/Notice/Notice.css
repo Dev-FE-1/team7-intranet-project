@@ -2,9 +2,9 @@
   width:100px;
   font-size: 15px;
 }
-.btn--notice--cancel{
+.btn--notice--close{
   width:100px;
-  margin: 0 auto;
+  margin:0 550px;
 }
 
 /* notice */
@@ -51,6 +51,16 @@
   flex-wrap: wrap;
   gap: 15px;
 }
+.notice__container::after {
+  content: '';
+  flex: 1 1 calc(25% - 10px); /* 빈 공간을 차지할 가상 요소 */
+}
+.notice__container::after {
+  content: '';
+  flex: 1 1 calc(25% - 10px); /* 빈 공간을 차지할 가상 요소 */
+  height: 0; /* 높이를 0으로 설정하여 실제 공간 차지x */
+  margin-bottom: 20px;
+}
 .notice__card{
   overflow: hidden;
   border-radius: 10px;
@@ -68,30 +78,25 @@
 }
 
 /*notice-modal*/
-.modal{
+.notice__modalCard{
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px 40px; 
   width: 100%;
   max-height: calc(100vh - 50px);
   overflow-y: auto;
   box-sizing: border-box;
 }
-.notice__modalBar{
-  font-size:18px;
-  font-weight: bold;
-  padding:15px 0;
-}
 .notice__modalTitle{ 
+  font-size:20px;
+  font-weight: bold;
   text-align: left;
 }
 .notice__modalDate{
-  font-size: 15px;
+  font-size: 16px;
   text-align: right;
   padding:0px 0px 10px;
   border-bottom: 1px solid #dfdfdf;
 }
-.notice__modalContent{
+.modal__content{
   margin-top:20px;
-  font-size:16px;
-  font-weight: 400;
-  line-height: 20px;
 }
