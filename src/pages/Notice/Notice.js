@@ -360,10 +360,29 @@ export default function Notice(root) {
       imgs: '/public/assets/images/temp-image.jpg',
     },
   ];
-  
-  const noticeSearch=new Input({type:'search', className:'notice__input', placeholder:'검색어를 입력하세요.'})
+  const noticeSearch=new Input({type:'search', className:'notice__search', placeholder:'검색어를 입력하세요.'})
   const noticeUpload=new Button({label:'등록', classList:'btn--notice'})
-  const noticeCard = new Card({page :{title:'공지사항', searchArea:noticeSearch.render(), content:noticeUpload.render()}})
+
+  // 데이터에 들어있는 카드의 갯수 만큼 카드를 추가하는 함수
+  function addCards(cardData) {
+    let cards = '';
+    for (let data of cardData) {
+      let card1 = new Card({img: {url:data.imgs, text: data.title}})
+      cards += card1.render();
+    }
+    return cards;
+  }
+  // 전체 공지사항 감싸는 카드
+  const noticeCard = new Card({page :{title:'공지사항',
+    searchArea:[noticeSearch.render() + noticeUpload.render()],
+    content:`
+    <div class="notice__container">
+      <div class="notice__card" data-id='${cardData.id}'>
+      ${addCards(cardData)}
+      </div>
+    </div>`
+    }})
+
   const notiModal=new Modal({
     name:'notice__modal', 
     size:'md', 
@@ -379,35 +398,24 @@ export default function Notice(root) {
   });
 
   root.innerHTML = `
-    <div class="notice">  
+    <div class="notice"> 
       ${noticeCard.render()}
-        <div class="notice__container"></div>
-        ${notiModal.render()}
     </div>
     
       `;
 
-  const noticeContainer = document.querySelector('.notice__container');
-  
   
     // 카드 id, 제목, 이미지 데이터를 불러와서 카드를 생성하는 함수
-    function createCard(cardData) {
-      const card1 = new Card({img: {url:cardData.imgs, text: cardData.title}})
-      return `
-          <div class="notice__card" data-id='${cardData.id}'>
-          ${card1.render()}
-          </div>
-          `;
-    }
+  //   let createCard = function createCard(cardData) {
+  //     const card1 = new Card({img: {url:cardData.imgs, text: cardData.title}})
+  //     return `
+  //         <div class="notice__card" data-id='${cardData.id}'>
+  //         ${card1.render()}
+  //         </div>
+  //         `;
+  //   }
 
-    // 데이터에 들어있는 카드의 갯수 만큼 카드를 추가하는 함수
-    function addCards(container, cardsData) {
-      let cards = '';
-      for (let cardData of cardsData) {
-        cards += createCard(cardData);
-      }
-      container.innerHTML = cards;
-   }
+    
   
 
   // // 클릭한 카드의 정보를 가진 모달을 생성하는 함수
@@ -428,6 +436,6 @@ export default function Notice(root) {
   //     });
   //   });
   // }
-  addCards(noticeContainer, cardData);
+  addCards(cardData);
   //renderModal();
 }

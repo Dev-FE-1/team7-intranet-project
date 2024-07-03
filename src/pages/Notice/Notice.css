@@ -1,6 +1,8 @@
 .btn--notice{
   width:100px;
   font-size: 15px;
+  display:block;
+  margin-top:20px;
 }
 .btn--notice--close{
   width:100px;
@@ -11,45 +13,16 @@
 .notice{
   padding:10px;
   width:100%;
-  border: 1px solid #e0e0e0;
   border-radius: 10px;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
   box-sizing:border-box;
 }
-.notice__input{
-  width:290px;
-  display: block;
-  font-size: 16px;
-  margin-left:740px;
-}
-.notice .card_page{
-  padding:20px 25px 0px 25px;
+.page_searchArea{
+  height:80px;
+  width:95%;
   display:flex;
-  justify-content: space-between;
-  font-size: 27px;
-}
-.notice__input::placeholder{
-  color:#9CBBBE;
-}
-.notice__searchIcon{
-  color:#9CBBBE;
-  margin-top:5px;
-  width:20px;
-  height:30px;
-  flex-shrink: 0;
-  margin-left: -45px;
-}
-.notice__label{
-  min-width:300px;
-  font-size: 25px;
-  margin-bottom:8px;
-}
-.notice__container{
-  padding: 20px;
-  display:flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  gap:10px;
+  justify-content: end;
 }
 .notice__container::after {
   content: '';
@@ -62,18 +35,26 @@
   margin-bottom: 20px;
 }
 .notice__card{
-  overflow: hidden;
+  gap: 15px;
+  width:100%;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   border-radius: 10px;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom:20px;
   flex: 1 1 calc(25% - 10px); /*-10px로 하면 한줄에 카드가 3개 출력됨*/
 }
-.notice__card:hover{
+.card .card_img{
+  width:30%;
+  height:470px;
+}
+.card .card_img:hover{
   cursor:pointer;
 }
 .notice__card .card_imgText{
   font-size:20px;
-  padding:20px 10px;
+  padding:auto 10px;
   font-weight: 500;
 }
 
