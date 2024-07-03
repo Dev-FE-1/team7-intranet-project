@@ -12,7 +12,7 @@ app.use(express.json());
 // server에 저장된 정적 파일(임직원 프로필 이미지, 공지사항 이미지) 접근 가능
 app.use('/server/images', express.static('path/to/profile/images'));
 
-// 강사님 API 예시 코드(참고 자료)
+// API 예시 코드(참고 자료)
 // app.get('/api/users.json', (req, res) => {
 //   fs.readFile('./server/data/users.json', 'utf8', (err, data) => {
 //     if (err) {
