@@ -5,6 +5,7 @@ import Input from '/src/components/Input/Input.js';
 
 import './Notice.css';
 export default function Notice(root) {
+  // 카드 데이터 객체 (임시)
   const cardData = [
     {
       id: 1,
@@ -358,18 +359,19 @@ export default function Notice(root) {
       imgs: '/public/assets/images/temp-image.jpg',
     },
   ];
+  
   const noticeSearch=new Input({type:'search', className:'notice__input', placeholder:'검색어를 입력하세요.'})
   const noticeUpload=new Button({label:'등록', classList:'btn--notice'})
   const noticeCard = new Card({page :{title:'공지사항', searchArea:noticeSearch.render(), content:noticeUpload.render()}})
+
   root.innerHTML = `
-            <div class="notice">  
-              ${noticeCard.render()}
-            <div class="notice__container">
-            </div>
-            <div class="notice__modalCard">
-            </div>
-        </div>
-        `;
+    <div class="notice">  
+      ${noticeCard.render()}
+        <div class="notice__container"></div>
+        <div class="notice__modalCard"></div>
+    </div>
+      `;
+
   const noticeContainer = document.querySelector('.notice__container');
   const noticeModal = document.querySelector('.notice__modalCard');
   
@@ -395,7 +397,6 @@ export default function Notice(root) {
   // 클릭한 카드의 정보를 가진 모달을 생성하는 함수
   function renderModal() {
     const cardElements =document.querySelectorAll('.notice__card');
-
     // 데이터 객체의 id와 카드의 id가 일치하면 해당 id의 모달 내용 출력
     cardElements.forEach((card) => {
       card.addEventListener('click', () => {
@@ -420,10 +421,6 @@ export default function Notice(root) {
     });
   }
   
-
-
-  // 카드 데이터 객체 (임시)
- 
   addCards(noticeContainer, cardData);
   renderModal();
 }
