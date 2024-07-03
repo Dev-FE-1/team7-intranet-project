@@ -1,8 +1,10 @@
-import Modal from '/src/components/Modal/Modal.js';
-import Card from '/src/components/Card/Card.js';
-import '/src/components/Card/Card.css';
-import '/src/components/Button/Button.css';
-import '/src/components/Modal/Modal.css';
+import Modal from '/src/components/Modal/Modal';
+import Card from '/src/components/Card/Card';
+import SelectBox from '/src/components/SelectBox/SelectBox';
+import Button from '/src/components/Button/Button';
+import Table from '/src/components/Table/Table';
+// import Pagination from '/src/components/Pagination/Pagination';
+
 import '/src/pages/Vacation/Vacation.css';
 
 export default function Vacation(root) {
@@ -26,26 +28,12 @@ export default function Vacation(root) {
     { type: '연차', sDate: '2024.06.10', eDate: '2024.06.12' },
     { type: '연차', sDate: '2024.06.10', eDate: '2024.06.12' },
   ];
-  const listHtml = data
-    .map(
-      (
-        d
-      ) => `<li class="listTable__tr listTable__tr--hover modalDetail" data-id="${d.vacaId}">
-              <div class="listTable__td">${d.type}</div>
-              <div class="listTable__td">${d.sDate}</div>
-              <div class="listTable__td">${d.eDate}</div>
-            </li>`
-    )
-    .join('');
 
   const applyModal = new Modal({
     name: 'vacation_applyModal',
     type: 'form',
     title: '신 청',
-    buttons: [
-      { label: '취소', type: 'primary' },
-      { label: '확인', type: 'ligth' },
-    ],
+    buttons: [{ label: '취소', type: 'light' }, { label: '확인' }],
     trigger: 'modal_apply',
     size: 'md',
     content: `<div class="vacation_form">
@@ -162,68 +150,42 @@ export default function Vacation(root) {
                 </div>`,
   });
 
+  const typeSelect = new SelectBox({
+    className: 'search_type',
+    idName: 'test',
+    options: ['전체', '연차', '반차', '외출'],
+  });
+
+  const btnApply = new Button({ label: '신청', classList: 'modal_apply' });
+
+  const table = new Table({
+    headers: ['구분', '시작일', '종료일'],
+    data: data,
+  });
+
+  // const pagination = new Pagination({
+  //   totalCnt: 10,
+  //   dataPerPage: 5,
+  //   pagingPerPage: 5,
+  // });
+
   const pageCard = new Card({
     page: {
       title: '휴가/외출 관리',
-      searchArea: `<div class="selectBox search_type">
-                <label class="selectBox__label">구분</label>
-                <svg
-                  fill="" version="1.1" class="selectBox__arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve" stroke="">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <style type="text/css">
-                      .st0 {
-                        fill: none;
-                      }
-                    </style>
-                    <path d="M6.5,8.5l6,7l6-7H6.5z"></path>
-                    <rect class="st0" width="24" height="24"></rect>
-                    <rect class="st0" width="24" height="24"></rect>
-                  </g>
-                </svg>
-                <ul class="selectBox__list selectBox__list--none">
-                  <li class="selectBox__option">연차</li>
-                  <li class="selectBox__option">반차</li>
-                  <li class="selectBox__option">외출</li>
-                </ul>
-              </div>
-              <button class="btn modal_apply">신청</button>`,
-      content: `<div class="listTable">
-              <ul class="listTable__thead">
-                <li class="listTable__tr">
-                  <div class="listTable__th">구분</div>
-                  <div class="listTable__th">시작일</div>
-                  <div class="listTable__th">종료일</div>
-                </li>
-              </ul>
-
-              <ul class="listTable__tbody">
-                ${listHtml}
-              </ul>
-            </div>
-            <ul class="vacation_pagination pagination">
-              <li class="btn pagination__btn">처음</li>
-              <li class="pagination__arrow">◀</li>
-              <li class="pagination__num">1</li>
-              <li class="pagination__num">2</li>
-              <li class="pagination__num">3</li>
-              <li class="pagination__num">4</li>
-              <li class="pagination__num">5</li>
-              <li class="pagination__arrow">▶</li>
-              <li class="btn pagination__btn">마지막</li>
-            </ul>`,
+      searchArea: `${typeSelect.render()}${btnApply.render()}`,
+      content: `${table.render()}`,
     },
   });
 
-  root.innerHTML = `<div class="vacation">${pageCard.render()}
-      ${applyModal.render()}
-      ${detailModal.render()}
-  </div>`;
+  root.innerHTML = `
+    <div class="vacation">${pageCard.render()}
+        ${applyModal.render()}
+        ${detailModal.render()}
+    </div>`;
 
-  // useSelectBox();
   applyModal.useModal();
   detailModal.useModal();
+  typeSelect.useSelectBox();
 
   const categoryItem = root.querySelectorAll('.vacation_categoryItem');
   categoryItem.forEach((item) => item.addEventListener('change', handleRadio));
