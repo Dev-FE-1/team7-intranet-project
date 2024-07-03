@@ -69,7 +69,7 @@ export default class Modal {
         <div class="modal_inner">
           ${this.title ? `<p class="modal_title">${this.title}</p>` : ''}
           <div class="modal_content">${this.content || ''}</div>
-          ${buttonTemp}
+          <div class="modal_btns">${buttonTemp}</div>
         </div>
       </div>
     `;
