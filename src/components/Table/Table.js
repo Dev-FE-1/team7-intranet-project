@@ -1,26 +1,38 @@
-export default function ListTable() {
-  return `
-      <div class="listTable">
-        <ul class="listTable__thead">
-          <li class="listTable__tr">
-            <div class="listTable__th">구분</div>
-            <div class="listTable__th">시작일</div>
-            <div class="listTable__th">종료일</div>
-          </li>
-        </ul>
+// hearers = 속성명 (table header)
+// data = JSON 데이터
+// classList = 추가 클래스
 
-        <ul class="listTable__tbody">
-          <li class="listTable__tr listTable__tr--hover">
-            <div class="listTable__td">연차</div>
-            <div class="listTable__td">2024.06.10</div>
-            <div class="listTable__td">2024.06.12</div>
-          </li>
-          <li class="listTable__tr listTable__tr--hover">
-            <div class="listTable__td">연차</div>
-            <div class="listTable__td">2024.06.10</div>
-            <div class="listTable__td">2024.06.12</div>
-          </li>
-        </ul>
-      </div>
-      `;
+import './Table.css';
+
+export default class Table {
+  constructor(props) {
+    this.headers = props.headers;
+    this.data = props.data;
+    this.classList = props.classList;
+  }
+
+  render() {
+    const headerHTML = this.headers
+      .map((header) => `<th>${header}</th>`)
+      .join('');
+    const rowsHTML = this.data
+      .map(
+        (row) =>
+          `<tr>${Object.values(row)
+            .map((value) => `<td>${value}</td>`)
+            .join('')}</tr>`
+      )
+      .join('');
+
+    return `
+      <table class="table ${this.classList}">
+        <thead>
+          <tr>${headerHTML}</tr>
+        </thead>
+        <tbody>
+          ${rowsHTML}
+        </tbody>
+      </table>
+    `;
+  }
 }
