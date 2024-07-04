@@ -69,7 +69,29 @@ app.get('/api/notice/info', (req, res) => {});
 app.get('/api/notice/list', (req, res) => {});
 
 // 특정 페이지의 임직원 목록 정보 요청 API
-app.get('/api/employee/list', (req, res) => {});
+app.get('/api/employee/list', (req, res) => {
+  fs.readFile('./server/data/user.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: err,
+        data: null,
+      });
+    }
+    try {
+      const jsonData = JSON.parse(data);
+      res.json(jsonData);
+    } catch (parseErr) {
+      console.error('Error parsing JSON file:', parseErr);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: parseErr,
+        data: null,
+      });
+    }
+  });
+});
 
 // 임직원 상세 정보 요청 API
 app.get('/api/employee/info', (req, res) => {});
