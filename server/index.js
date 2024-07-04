@@ -80,18 +80,38 @@ app.get('/api/notice/list', (req, res) => {
     }
     try {
       let jsonData = JSON.parse(data);
-      console.log(jsonData)
 
-      // 최신에 올라온 데이터 부터 보이도록 날짜를 기준으로 내림차순 정렬(기본)
-      jsonData = jsonData.sort((a,b)=>new Date(b.date)-new Date(a.date));
+       //업로드 날짜 최신순으로 불러오도록 함
+      jsonData.data = jsonData.data.sort((a,b)=>new Date(b.date)-new Date(a.date)); 
+      
+      // 요청한 페이징 정보에 대한 응답
+      const page = parseInt(req.query.page) || 1;
+      const itemsPerPage = parseInt(req.query.itemsPerPage) || 9;
+      const startIndex = (page-1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      
+      let filterData = jsonData.data;
 
-      // 제목, 내용에 포함 된 내용으로 검색
-      if(searchQuery){
-        jsonData = jsonData.filter((item)=>
-          item.title.includes(searchQuery) || item.content.includes(searchQuery)
-        );
+      if(req.query.search){
+        const searchQuery=req.query.search.trim()
+        filterData=filterData.filter((item)=>{
+          return item.title.includes(searchQuery) || item.content.includes(searchQuery)
+        });
       }
-      res.json(jsonData);
+
+      const sliceData = filterData.slice(startIndex, endIndex);
+
+
+      //json 형태로 응답을 돌려줌
+      res.json({
+        jsonData,
+        currentPage:page,
+        itemsPerPage:itemsPerPage,
+        totalItems:jsonData.data.length,
+        totalPages:Math.ceil(jsonData.data.length/itemsPerPage),
+        data:sliceData,
+        searchQuery:req.query.search || '',
+      });
     } catch (parseErr) {
       console.error('Error parsing JSON file:', parseErr);
       return res.status(500).send({

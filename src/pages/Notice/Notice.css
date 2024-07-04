@@ -40,8 +40,8 @@
 }
 .card .card_img{
   width:30%;
-  height:470px;
-  margin-top:30px;
+  height:450px;
+  margin-top:20px;
 }
 .card .card_img:hover{
   cursor:pointer;
