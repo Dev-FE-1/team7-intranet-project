@@ -2,7 +2,6 @@
   width:100px;
   font-size: 15px;
   display:block;
-  margin-top:20px;
 }
 .btn--notice--close{
   width:100px;
@@ -17,36 +16,32 @@
   background-color: #fff;
   box-sizing:border-box;
 }
-.page_searchArea{
+/* .page_searchArea{
   height:80px;
   width:95%;
   display:flex;
   gap:10px;
   justify-content: end;
-}
-.notice__container::after {
-  content: '';
-  flex: 1 1 calc(25% - 10px); /* 빈 공간을 차지할 가상 요소 */
-}
-.notice__container::after {
-  content: '';
-  flex: 1 1 calc(25% - 10px); /* 빈 공간을 차지할 가상 요소 */
-  height: 0; /* 높이를 0으로 설정하여 실제 공간 차지x */
-  margin-bottom: 20px;
+} */
+.notice .page_content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap:5%;
 }
 .notice__card{
-  margin-left:20px;
   width:100%;
   padding: 0 20px;
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 5%;
   border-radius: 10px;
-  flex: 1 1 calc(25% - 10px); /*-10px로 하면 한줄에 카드가 3개 출력됨*/
 }
 .card .card_img{
   width:30%;
   height:470px;
+  margin-bottom:40px;
 }
 .card .card_img:hover{
   cursor:pointer;
@@ -70,7 +65,7 @@
   font-size:20px;
   font-weight: bold;
   text-align: left;
-}
+} 
 .notice__modalDate{
   font-size: 16px;
   text-align: right;
