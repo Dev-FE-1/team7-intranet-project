@@ -37,7 +37,7 @@ export default class Card {
         page.searchArea
           ? `<div class="page_searchArea">${page.searchArea}</div>`
           : ''
-      }`;
+      }<div class="page_content">${page.content || ''}</div>`;
     }
 
     return `<div class="card${type}${fill ? ' card_fill' : ''}"${
