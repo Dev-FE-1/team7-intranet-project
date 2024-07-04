@@ -16,37 +16,34 @@ export default class Card {
     this.props = props || {};
   }
   render() {
-    const { page, img, fill, content } = this.props;
+    const { page, img, fill, content, dataId } = this.props;
+    let temp = content;
+    let type = '';
+
     if (img) {
       // 이미지 카드 일때
-      return `
-        <div class="card card_img${fill ? ' card_fill' : ''}">
-          <div class="card_imgWrap">
+      type = ' card_img';
+      temp = `<div class="card_imgWrap">
             <img src="${img.url || ''}" alt="" />
           </div>
           <div class="card_imgText">
             <p>${img.text || ''}</p>
-          </div>
-        </div>
-      `;
+          </div>`;
     } else if (page) {
       // 페이지 카드 일때
-      return `
-        <div class="card card_page${fill ? ' card_fill' : ''}">
-          ${page.title ? `<h2 class="page_title">${page.title}</h2>` : ''}
-          ${
-            page.searchArea
-              ? `<div class="page_searchArea">${page.searchArea}</div>`
-              : ''
-          }
-          <div class="page_content">${page.content || ''}</div>
-        </div>
-      `;
-    } else {
-      // 기본 카드 (파라미터값 하나도 없을 때)
-      return `<div class="card${fill ? ' card_fill' : ''}">${
-        content || ''
-      }</div>`;
+      type = ' card_page';
+      temp = `${page.title ? `<h2 class="page_title">${page.title}</h2>` : ''}
+      ${
+        page.searchArea
+          ? `<div class="page_searchArea">${page.searchArea}</div>`
+          : ''
+      }`;
     }
+
+    return `<div class="card${type}${fill ? ' card_fill' : ''}"${
+      dataId ? ` data-id=${dataId}` : ''
+    }>
+      ${temp}
+    </div>`;
   }
 }
