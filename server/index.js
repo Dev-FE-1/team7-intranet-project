@@ -67,7 +67,7 @@ app.get('/api/notice/info', (req, res) => {});
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
 app.get('/api/notice/list', (req, res) => {
-  const filepath='./server/data/notices.json';
+  const filepath='./server/data/notice.json';
   
   fs.readFile(filepath, 'utf8', (err, data)=>{
     if (err) {
@@ -80,6 +80,7 @@ app.get('/api/notice/list', (req, res) => {
     }
     try {
       let jsonData = JSON.parse(data);
+      console.log(jsonData)
 
       // 최신에 올라온 데이터 부터 보이도록 날짜를 기준으로 내림차순 정렬(기본)
       jsonData = jsonData.sort((a,b)=>new Date(b.date)-new Date(a.date));
