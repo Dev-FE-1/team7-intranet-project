@@ -11,7 +11,7 @@
       "dept": "C-level",
       "leftVaca": 13,
       "admin": true,
-      "img": null
+      "img": "/server/images/profile/1.jpg"
     },
     {
       "userId": "2",
