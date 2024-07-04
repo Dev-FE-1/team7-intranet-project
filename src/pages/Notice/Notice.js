@@ -33,7 +33,10 @@ export default function Notice(root) {
   })
     .then(response=>{
       let cardData = response.data;
+
+      cardData = cardData.sort((a,b)=>new Date(b.date)-new Date(a.date)); //최신순으로 불러오도록 함
       cardData=cardData.slice(page, itemsPerPage+1) //9개만 불러옴
+
       addNoticeCard(notiContainer,cardData);
 
     }).catch(error => {
@@ -59,9 +62,30 @@ export default function Notice(root) {
       `
     }})
     container.innerHTML=noticeCard.render();
-  }
 
+    const imgCards = notiContainer.querySelectorAll('.card.card_img')
+    const lastCard = imgCards[imgCards.length-1]
+
+    if(lastCard){
+      const observer = new IntersectionObserver((entries)=>{
+        if(entries[0].isIntersecting){
+          observer.unobserve(lastCard) //재요청 하지 않을 데이터
+          currentPage++;
+          console.log('hello Observer')
+          fetchData(currentPage, searchQuery);
+        }
+      },{
+          root:null,
+          threshold:0.5
+      });
+      
+      observer.observe(lastCard)
+  }
+    
+  }
+  
   fetchData(currentPage)
+
 
   // 검색 보류
   // const searchInput = document.querySelector('.notice');
@@ -112,4 +136,5 @@ export default function Notice(root) {
   // }
   //renderModal();
   
+
 }

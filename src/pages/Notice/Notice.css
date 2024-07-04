@@ -41,7 +41,7 @@
 .card .card_img{
   width:30%;
   height:470px;
-  margin-bottom:40px;
+  margin-top:30px;
 }
 .card .card_img:hover{
   cursor:pointer;

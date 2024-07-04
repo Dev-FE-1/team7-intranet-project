@@ -66,7 +66,41 @@ app.get('/api/notice/recent', (req, res) => {});
 app.get('/api/notice/info', (req, res) => {});
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
-app.get('/api/notice/list', (req, res) => {});
+app.get('/api/notice/list', (req, res) => {
+  const filepath='./server/data/notices.json';
+  
+  fs.readFile(filepath, 'utf8', (err, data)=>{
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: err.message,
+        data: null,
+      });
+    }
+    try {
+      let jsonData = JSON.parse(data);
+
+      // 최신에 올라온 데이터 부터 보이도록 날짜를 기준으로 내림차순 정렬(기본)
+      jsonData = jsonData.sort((a,b)=>new Date(b.date)-new Date(a.date));
+
+      // 제목, 내용에 포함 된 내용으로 검색
+      if(searchQuery){
+        jsonData = jsonData.filter((item)=>
+          item.title.includes(searchQuery) || item.content.includes(searchQuery)
+        );
+      }
+      res.json(jsonData);
+    } catch (parseErr) {
+      console.error('Error parsing JSON file:', parseErr);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: parseErr.message,
+        data: null,
+      });
+    }
+  });
+});
 
 // 특정 페이지의 임직원 목록 정보 요청 API
 app.get('/api/employee/list', (req, res) => {});
