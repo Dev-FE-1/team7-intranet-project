@@ -10,6 +10,10 @@
   height: 300px;
   border-radius: 15px;
 }
+.employeeImage:hover {
+  cursor: pointer;
+  filter: grayscale(100%);
+}
 
 .employeeForm {
   display: relative;
@@ -35,14 +39,6 @@
   border-radius: 5px;
 }
 
-div {
-  border: 1px red solid;
-}
-.test {
-  width: 700px;
-  height: 700px;
-  background-color: #69d0cf;
-}
 .name_column {
   display: flex;
   vertical-align: middle;

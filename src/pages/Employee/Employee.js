@@ -11,7 +11,7 @@ export default function Employee(root) {
       birth: '1990-01-01',
       email: 'asdf@adf.com',
       phone: '010-1234-5678',
-      img: 'server/images/profile/24.jpg',
+      img: 'server/images/profile/49.jpg',
     },
   ];
 
@@ -20,7 +20,7 @@ export default function Employee(root) {
       <div class="employee_modal">
                   <div class="modal_employeeImage">
                     <div class="employeeImage">
-                      <img src=${data[0].img} class="employeeImage"/>
+                      <img src=${data[0].img} class="employeeImage uploadImage" />
                     </div>
                   </div>
                   <form class="employeeForm">
@@ -57,4 +57,24 @@ export default function Employee(root) {
       </div>
       
       `;
+
+  const uploadImage = document.querySelector('.uploadImage');
+  uploadImage.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        uploadImage.src =
+          e.target.result || 'server/images/profile/${user.ID}.jpg';
+        uploadImage.style.objectFit = 'cover';
+        uploadImage.style.width = '300px';
+        uploadImage.style.height = '300px';
+      };
+      reader.readAsDataURL(file);
+    });
+    input.click();
+  });
 }
