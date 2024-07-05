@@ -9,5 +9,13 @@ export function renderLayout() {
 
 // 로그인 여부 확인 로직
 export function checkLogin() {
-  return true;
+  console.log(getCookie('userId'));
+  return getCookie('userId') ? true : false;
+}
+
+// 브라우저의 쿠키 값을 가져오는 로직
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
 }

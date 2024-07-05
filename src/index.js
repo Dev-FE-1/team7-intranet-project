@@ -36,7 +36,7 @@ const route = () => {
   const root = document.querySelector('#root');
 
   // 로그인 여부 확인 후 해당 값에 따라 라우팅 처리
-  if (checkLogin()) {
+  if (checkLogin(route)) {
     // Layout 렌더링 적용
     renderLayout();
 

@@ -1,5 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import { getJsonData, findKeyValue } from './utils/common.js';
 import fs from 'fs';
 
 const port = process.env.PORT || 8080;
@@ -8,6 +10,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json());
+app.use(cookieParser());
 
 // server에 저장된 정적 파일(임직원 프로필 이미지, 공지사항 이미지) 접근 가능
 app.use('/server/images', express.static('path/to/profile/images'));
@@ -38,7 +41,21 @@ app.use('/server/images', express.static('path/to/profile/images'));
 // });
 
 // 로그인 기능
-app.post('/api/user/login', (req, res) => {});
+app.post('/api/user/login', async (req, res) => {
+  const { id, pw } = req.body;
+  const jsonData = await getJsonData('./server/data/user.json');
+  const [user] = findKeyValue(jsonData, 'email', `${id}@77cm.co.kr`);
+
+  if (user && user.password === pw) {
+    // 사용자 정보를 쿠키에 저장
+    res.cookie('userId', user.userId, { maxAge: 900000, httpOnly: true });
+    res.cookie('admin', user.admin, { maxAge: 900000, httpOnly: true });
+
+    res.status(200).send({ message: '로그인 성공' });
+  } else {
+    res.status(401).send({ message: '로그인 실패' });
+  }
+});
 
 // 근무 시작/종료 API
 app.post('/api/user/work/start', (req, res) => {});
