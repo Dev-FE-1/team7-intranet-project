@@ -32,31 +32,60 @@ export default function Vacation(root) {
     { type: '연차', sDate: '2024.06.10', eDate: '2024.06.12' },
   ];
 
-  const typeRadio = new Radio({
-    labels: ['연차', '반차', '외출'],
-    name: 'vacationCategory',
-    classList: '',
-    checked: 0,
-  });
-
-  const textArea = new Input({ type: 'bigText', className: 'reason' });
-
-  const dateInput = new Input({
-    type: 'date',
-    className: 'vacation_inputText',
-  });
-
-  const applyModal = new Modal({
-    name: 'vacation_applyModal',
-    type: 'form',
-    title: '신 청',
-    buttons: [
-      { label: '취소', type: 'light', classList: 'modalClose' },
-      { label: '확인', classList: 'modalClose' },
-    ],
-    trigger: 'modal_apply',
+  const modal = new Modal({
+    name: 'modalInit',
+    title: 'modalInit',
     size: 'md',
-    content: `<div class="vacation_form">
+    buttons: [{ label: '확인', type: 'light', classList: 'modalClose' }],
+  });
+
+  const typeSelect = new SelectBox({
+    className: 'search_type',
+    idName: 'test',
+    options: ['전체', '연차', '반차', '외출'],
+  });
+
+  const btnApply = new Button({ label: '신청', classList: 'modal_apply' });
+  const btnTest = new Button({ label: 'test', classList: 'modal_detail' });
+
+  const table = new Table({
+    headers: ['구분', '시작일', '종료일'],
+    data: data,
+  });
+
+  const pageCard = new Card({
+    page: {
+      title: '휴가/외출 관리',
+      searchArea: `${typeSelect.render()}${btnApply.render()}${btnTest.render()}`,
+      content: `${table.render()}`,
+    },
+  });
+
+  root.innerHTML = `
+    <div class="vacation">${pageCard.render()}
+        ${modal.render()}
+    </div>`;
+
+  typeSelect.useSelectBox();
+
+  document.querySelector('.modal_apply').addEventListener('click', () => {
+    const typeRadio = new Radio({
+      labels: ['연차', '반차', '외출'],
+      name: 'vacationCategory',
+      classList: '',
+      checked: 0,
+    });
+
+    const textArea = new Input({ type: 'bigText', className: 'reason' });
+
+    const dateInput = new Input({
+      type: 'date',
+      className: 'vacation_inputText',
+    });
+    modal.update({
+      name: 'vacation_applyModal',
+      title: '신 청',
+      content: `<div class="vacation_form">
                   <dl class="vacation_category">
                     <dt class="vacation_categoryTitle">구분</dt>
                     <dd class="vacation_categoryItem">${typeRadio.render()}</dd>
@@ -84,29 +113,44 @@ export default function Vacation(root) {
                     </dd>
                   </dl>
                 </div>`,
+    });
+    modal.useModal();
+
+    const categoryItem = root.querySelectorAll('.vacation_categoryItem label');
+    categoryItem.forEach((item) =>
+      item.addEventListener('change', handleRadio)
+    );
   });
 
-  const detailModal = new Modal({
-    name: 'vacation_detailModal',
-    type: 'detail',
-    title: '상 세',
-    buttons: [{ label: '확인', type: 'ligth' }],
-    trigger: 'modal_detail',
-    size: 'md',
-    content: `<div class="vacation_form">
+  document.querySelector('.modal_detail').addEventListener('click', () => {
+    const typeRadio = new Radio({
+      labels: ['연차', '반차', '외출'],
+      name: 'vacationCategory',
+      classList: '',
+      checked: 0,
+      disabled: true,
+    });
+
+    const textArea = new Input({
+      type: 'bigText',
+      className: 'reason',
+      disabled: true,
+    });
+
+    const dateInput = new Input({
+      type: 'date',
+      className: 'vacation_inputText',
+      disabled: true,
+    });
+    modal.update({
+      name: '.vacation_detailModal',
+      title: '상 세',
+      buttons: [{ label: '확인', type: 'light', classList: 'modalClose' }],
+      content: `<div class="vacation_form">
                   <dl class="vacation_category">
                     <dt class="vacation_categoryTitle">구분</dt>
                     <dd class="vacation_categoryItem">
-                      <input type="radio" checked disabled />
-                      <label for="type1">연차</label>
-                    </dd>
-                    <dd class="vacation_categoryItem">
-                      <input type="radio" disabled/>
-                      <label for="type2">반차</label>
-                    </dd>
-                    <dd class="vacation_categoryItem">
-                      <input type="radio" disabled/>
-                      <label for="type3">외출</label>
+                      ${typeRadio.render()}
                     </dd>
                   </dl>
 
@@ -115,21 +159,13 @@ export default function Vacation(root) {
                     <dl class="vacation_sDate">
                       <dt class="vacation_sDateTitle">시작일</dt>
                       <dd>
-                        <input
-                          class="vacation_inputText inputText inputText--disabled"
-                          type="date"
-                          disabled
-                        />
+                        ${dateInput.render()}
                       </dd>
                     </dl>
                     <dl class="vacation_eDate">
                       <dt class="vacation_eDateTitle">종료일</dt>
                       <dd>
-                        <input
-                          class="vacation_inputText inputText inputText--disabled"
-                          type="date"
-                          disabled
-                        />
+                        ${dateInput.render()}
                       </dd>
                     </dl>
 
@@ -138,60 +174,18 @@ export default function Vacation(root) {
                   <dl class="vacation_reason">
                     <dt class="vacation_reasonTitle">사유</dt>
                     <dd>
-                      <textarea
-                        class="vacation_inputTextarea inputText inputText--disabled"
-                        name=""
-                        id=""
-                        disabled
-                      ></textarea>
+                      ${textArea.render()}
                     </dd>
                   </dl>
                 </div>`,
+    });
+    modal.useModal();
   });
-
-  const typeSelect = new SelectBox({
-    className: 'search_type',
-    idName: 'test',
-    options: ['전체', '연차', '반차', '외출'],
-  });
-
-  const btnApply = new Button({ label: '신청', classList: 'modal_apply' });
-
-  const table = new Table({
-    headers: ['구분', '시작일', '종료일'],
-    data: data,
-  });
-
-  // const pagination = new Pagination({
-  //   totalCnt: 10,
-  //   dataPerPage: 5,
-  //   pagingPerPage: 5,
-  // });
-
-  const pageCard = new Card({
-    page: {
-      title: '휴가/외출 관리',
-      searchArea: `${typeSelect.render()}${btnApply.render()}`,
-      content: `${table.render()}`,
-    },
-  });
-
-  root.innerHTML = `
-    <div class="vacation">${pageCard.render()}
-        ${applyModal.render()}
-        ${detailModal.render()}
-    </div>`;
-
-  applyModal.useModal();
-  detailModal.useModal();
-  typeSelect.useSelectBox();
-
-  const categoryItem = root.querySelectorAll('.vacation_categoryItem label');
-  categoryItem.forEach((item) => item.addEventListener('change', handleRadio));
 }
 
 // 라디오 선택(연차,반차,외출)에 따라 제출 폼 변경시켜주는 함수
 function handleRadio() {
+  console.log('A');
   const type = this.querySelector('input[name="vacationCategory"]').id;
   const vacationDate = root.querySelector('.vacation_date');
 
