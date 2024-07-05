@@ -33,10 +33,13 @@ export default function Vacation(root) {
   ];
 
   const modal = new Modal({
-    name: 'modalInit',
-    title: 'modalInit',
+    name: 'vacation_applyModal',
+    title: '신 청',
     size: 'md',
-    buttons: [{ label: '확인', type: 'light', classList: 'modalClose' }],
+    buttons: [
+      { label: '취소', type: 'light', classList: 'modalClose' },
+      { label: '확인', classList: 'modalClose' },
+    ],
   });
 
   const typeSelect = new SelectBox({
@@ -68,6 +71,7 @@ export default function Vacation(root) {
 
   typeSelect.useSelectBox();
 
+  //신청 버튼 클릭 시
   document.querySelector('.modal_apply').addEventListener('click', () => {
     const typeRadio = new Radio({
       labels: ['연차', '반차', '외출'],
@@ -83,8 +87,6 @@ export default function Vacation(root) {
       className: 'vacation_inputText',
     });
     modal.update({
-      name: 'vacation_applyModal',
-      title: '신 청',
       content: `<div class="vacation_form">
                   <dl class="vacation_category">
                     <dt class="vacation_categoryTitle">구분</dt>
@@ -122,6 +124,7 @@ export default function Vacation(root) {
     );
   });
 
+  //상세 버튼 클릭 시
   document.querySelector('.modal_detail').addEventListener('click', () => {
     const typeRadio = new Radio({
       labels: ['연차', '반차', '외출'],
@@ -130,18 +133,17 @@ export default function Vacation(root) {
       checked: 0,
       disabled: true,
     });
-
     const textArea = new Input({
       type: 'bigText',
       className: 'reason',
       disabled: true,
     });
-
     const dateInput = new Input({
       type: 'date',
       className: 'vacation_inputText',
       disabled: true,
     });
+
     modal.update({
       name: '.vacation_detailModal',
       title: '상 세',
