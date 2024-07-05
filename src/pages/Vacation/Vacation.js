@@ -187,7 +187,6 @@ export default function Vacation(root) {
 
 // 라디오 선택(연차,반차,외출)에 따라 제출 폼 변경시켜주는 함수
 function handleRadio() {
-  console.log('A');
   const type = this.querySelector('input[name="vacationCategory"]').id;
   const vacationDate = root.querySelector('.vacation_date');
 
@@ -273,5 +272,6 @@ function handleRadio() {
       break;
   }
   type2STimeSelect.useSelectBox();
+  type3STimeSelect.useSelectBox();
   type3ETimeSelect.useSelectBox();
 }
