@@ -1,8 +1,9 @@
-import renderLayout from './utils/common';
+import { renderLayout, checkLogin } from './utils/common';
 import Home from '/src/pages/Home/Home.js';
 import Notice from '/src/pages/Notice/Notice.js';
 import Vacation from '/src/pages/Vacation/Vacation.js';
 import Employee from '/src/pages/Employee/Employee.js';
+import Login from '/src/pages/Login/Login.js';
 
 const app = () => {
   init();
@@ -31,26 +32,33 @@ const navigatePage = (event) => {
 // 페이지 이동을 처리하는 함수
 const route = () => {
   const path = window.location.pathname;
+  const wrap = document.querySelector('#wrap');
   const root = document.querySelector('#root');
 
-  // Layout 렌더링 적용
-  renderLayout();
+  // 로그인 여부 확인 후 해당 값에 따라 라우팅 처리
+  if (checkLogin()) {
+    // Layout 렌더링 적용
+    renderLayout();
 
-  switch (path) {
-    case '/':
-      Home(root);
-      break;
-    case '/notice':
-      Notice(root);
-      break;
-    case '/vacation':
-      Vacation(root);
-      break;
-    case '/employee':
-      Employee(root);
-      break;
-    default:
-      break;
+    switch (path) {
+      case '/':
+        Home(root);
+        break;
+      case '/notice':
+        Notice(root);
+        break;
+      case '/vacation':
+        Vacation(root);
+        break;
+      case '/employee':
+        Employee(root);
+        break;
+      default:
+        break;
+    }
+  } else {
+    history.pushState(null, null, '/login');
+    Login(wrap);
   }
 };
 
