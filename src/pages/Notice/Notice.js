@@ -20,34 +20,20 @@ export default function Notice(root) {
 
   //초기 페이지
   let currentPage = 1;
-  let itemsPerPage = 9;
+  let itemsPerPage = 50;
   let searchQuery='';
 
   root.innerHTML = `
   <div class="notice"> 
   </div>
+  <div class="modalContainer"></div>
     `;
 
   const notiContainer = document.querySelector('.notice')
 
-  //검색, 스크롤 이벤트 발생 시 URL 변경
-  function updateURL(page, search){
-    const url = new URL(window.location)
-    const params = new URLSearchParams(url.search)
-
-    params.set('page' ,page)
-    if(search){
-      params.set('search', search)
-    }else{
-      params.delete('search')
-    }
-
-    window.history.replaceState({}, '', `${url.pathname}?${params.toString()}`)
-  }
-
   // notice api 요청 
   function fetchData(page, append=false, search=''){
-  axios.get(`/api/notice/list?`,{
+  axios.get(`/api/notice/list`,{
     params:{
       page:page,
       itemsPerPage:itemsPerPage,
@@ -55,11 +41,9 @@ export default function Notice(root) {
     }
   })
     .then(response=>{
-      //무한스크롤 페이징 처리된 데이터
       let cardData = response.data.data; 
 
       addNoticeCard(notiContainer, cardData, append);
-      updateURL(page, search)
 
     }).catch(error => {
       console.error('Error fetching data:', error);
@@ -70,13 +54,16 @@ export default function Notice(root) {
   function createCards(cardData) {
     return cardData.map((data)=>{
       let card = new Card({
-        img: {url:data.img, text: data.title, dataId: data.id}})
+        img: {url:data.img, 
+        text: data.title},
+        dataId: data.noticeId
+      });
       return card.render()
     }).join('');
 
   }
 
-  // 공지사항 카드가 추가된 공지사항 페이지를 그려주는 함수, 무한스크롤 로직 제어 포함
+  // 공지사항 카드가 추가된 공지사항 페이지를 그려주는 함수
   function addNoticeCard(container, cardData, append){
     let isData=true
     const noticeCard = new Card({
@@ -87,83 +74,48 @@ export default function Notice(root) {
         `
       }});
 
-  //append 상태가 false, 초기로드 시 카드 데이터 9개만 생성
-  if(!append){
-      container.innerHTML=`${noticeCard.render()}`;
+    //append 상태가 false, 초기로드 시 카드 데이터 9개만 생성
+    if(!append){
+    container.innerHTML=`${noticeCard.render()}`;
     }else{
-      //append 상태를 true로 변경하여 스크롤 시 새로운 데이터를  추가하도록 함
-      container.querySelector('.page_content').innerHTML+=createCards(cardData)
+    container.querySelector('.page_content').innerHTML=createCards(cardData)
     }
 
-    //더 이상 카드 데이터가 없으면 false
-    if(cardData.length<itemsPerPage){
-      isData=false;
-    }
 
-    //무한 스크롤
-    const imgCards = notiContainer.querySelectorAll('.card.card_img')
-    const lastCard = Array.from(imgCards).slice(-1); 
-
-    lastCard.forEach((card)=>{
-      //card가 뷰포트에 얼마나 보이는지 감시
-      const observer = new IntersectionObserver((entries)=>{
-        //뷰포트 내 마지막 요소가 절반 이상 보이면 무한스크롤
-          if(entries[0].isIntersecting && isData){
-            card.classList.add('Visible')
-            observer.unobserve(card) //재요청 하지 않을 데이터
-            currentPage++;
-            itemsPerPage=3;
-            console.log('hello Observer')
-            fetchData(currentPage, true);
-          }else{
-            card.classList.remove('Visible')
+    let allCard = container.querySelectorAll('.card.card_img')
+    allCard.forEach((card)=>{
+      card.addEventListener('click',(e)=>{
+        if (card) {
+          const cardId = card.getAttribute('data-id');
+          let data = cardData.find((el) => Number(el.noticeId) === Number(cardId));
+          if (data) {
+            const noticeModal = new Modal({
+              name: 'notice_modal',
+              size: 'md',
+              buttons: [{ label: '닫기', classList: 'btn--notice--close modalClose' }],
+              content: `<p class="notice__modalTitle">${data.title}</p>
+                        <p class="notice__modalDate">${data.date}</p>
+                        <div class="notice__modalImg">
+                          <img src="${data.img}" alt="${data.title}"/>
+                        </div>
+                        <div class="notice__modalContent">${data.content}</div>`
+            });
+            document.querySelector('.modalContainer').innerHTML = noticeModal.render();
+            noticeModal.useModal();
           }
-      },{
-          root:null,  //뷰포트 기준으로 관찰
-          threshold:0.7
-    });
-      setTimeout(()=>{observer.observe(card)},1000)  //스크롤 시 그 다음 카드들을 가져옴
+        }
+      })
     })
-
-    //검색
-    const searchInput = notiContainer.querySelector('.notice__search.input');
     
-    //검색 키워드 입력 후 엔터를 눌렀을 때  키워드에 해당하는 목록을 불러오는 함수
-    searchInput.addEventListener('keyup',(e)=>{
-      if(e.key === 'Enter'){
-        const searchKeyword = searchInput.value.trim()
-        if(!searchKeyword !== ''){
-          console.log('Enter key pressed! Search keyword:', searchKeyword);
-        currentPage =1;
-        //서버로 검색 키워드, 현재 페이지 전달
-        searchQuery=searchKeyword;
-        fetchData(currentPage, false, searchKeyword)
-        }
-      }
-    })
-
-    //검색 키워드 입력 후 돋보기 버튼을 눌렀을 때  키워드에 해당하는 목록을 불러오는 함수
-    const searchBtn=notiContainer.querySelector('.input_searchIcon')
-      searchBtn.addEventListener('click',(e)=>{
-        const searchKeyword = searchInput.value.trim()
-        if (searchKeyword !== '') {
-          console.log('clicked! Search keyword:', searchKeyword);
-          currentPage = 1;
-          //서버로 검색 키워드, 현재 페이지 전달
-          searchQuery=searchKeyword;
-          fetchData(currentPage, false, searchKeyword);
-        }
-    });
 }
-  
-  fetchData(currentPage)
+
+
 
 
 
   // const notiModal=new Modal({
   //   name:'notice__modal', 
-  //   size:'md', 
-  //   trigger:'notice__card', 
+  //   size:'md',  
   //   buttons:[{label:'닫기', 
   //     classList:'btn--notice--close modalClose'}], 
   //     content: `<p class="notice__modalTitle">${cardData[0].title}</p>
@@ -195,6 +147,5 @@ export default function Notice(root) {
   //   });
   // }
   //renderModal();
-  
-
+  fetchData(currentPage)
 }

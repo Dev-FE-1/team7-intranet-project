@@ -3,10 +3,6 @@
   font-size: 15px;
   display:block;
 }
-.btn--notice--close{
-  width:100px;
-  margin:0 550px;
-}
 
 /* notice */
 .notice{
@@ -16,13 +12,6 @@
   background-color: #fff;
   box-sizing:border-box;
 }
-/* .page_searchArea{
-  height:80px;
-  width:95%;
-  display:flex;
-  gap:10px;
-  justify-content: end;
-} */
 .notice .page_content{
   display: flex;
   flex-wrap: wrap;
@@ -40,7 +29,7 @@
 }
 .card .card_img{
   width:30%;
-  height:450px;
+  height:410px;
   margin-top:20px;
 }
 .card .card_img:hover{
@@ -53,10 +42,9 @@
 }
 
 /*notice-modal*/
-.notice__modalCard{
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+.modal_inner{
   padding: 20px 40px; 
-  width: 100%;
+  width: 80%;
   max-height: calc(100vh - 50px);
   overflow-y: auto;
   box-sizing: border-box;
@@ -72,6 +60,6 @@
   padding:0px 0px 10px;
   border-bottom: 1px solid #dfdfdf;
 }
-.modal__content{
+.notice__modalContent{
   margin-top:20px;
 }

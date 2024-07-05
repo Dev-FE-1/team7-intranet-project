@@ -90,7 +90,7 @@ app.get('/api/notice/list', (req, res) => {
       const startIndex = (page-1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
       
-      //검색  기능 데이터
+      //검색 
       let filterData = jsonData.data;
 
       if(req.query.search){
