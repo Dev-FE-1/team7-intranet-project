@@ -9,6 +9,7 @@ export default class Table {
     this.headers = props.headers;
     this.data = props.data;
     this.classList = props.classList;
+    this.rowClass = props.rowClass;
   }
 
   render() {
@@ -18,7 +19,7 @@ export default class Table {
     const rowsHTML = this.data
       .map(
         (row) =>
-          `<tr>${Object.values(row)
+          `<tr class="${this.rowClass}">${Object.values(row)
             .map((value) => `<td>${value}</td>`)
             .join('')}</tr>`
       )
