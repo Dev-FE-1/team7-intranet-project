@@ -41,6 +41,11 @@ export default function Vacation(root) {
 
   const textArea = new Input({ type: 'bigText', className: 'reason' });
 
+  const dateInput = new Input({
+    type: 'date',
+    className: 'vacation_inputText',
+  });
+
   const applyModal = new Modal({
     name: 'vacation_applyModal',
     type: 'form',
@@ -61,13 +66,13 @@ export default function Vacation(root) {
                     <dl class="vacation_sDate">
                       <dt class="vacation_sDateTitle">시작일</dt>
                       <dd>
-                        <input class="vacation_inputText inputText" type="date" />
+                        ${dateInput.render()}
                       </dd>
                     </dl>
                     <dl class="vacation_eDate">
                       <dt class="vacation_eDateTitle">종료일</dt>
                       <dd>
-                        <input class="vacation_inputText inputText" type="date"/>
+                      ${dateInput.render()}
                       </dd>
                     </dl>
                   </div>
@@ -189,22 +194,38 @@ export default function Vacation(root) {
 function handleRadio() {
   const type = this.querySelector('input[name="vacationCategory"]').id;
   const vacationDate = root.querySelector('.vacation_date');
-  let sDateSelect = new SelectBox({
+
+  const dateInput = new Input({
+    type: 'date',
+    className: 'vacation_inputText',
+  });
+  const type2STimeSelect = new SelectBox({
     className: 'vacation_sDateSelect',
     options: ['오전 09:00 ~ 14:00', '오후 14:00 ~ 18:00'],
   });
+  const type3STimeSelect = new SelectBox({
+    className: 'vacation_outingStimeSelect',
+    initValue: '시작 시간',
+    options: ['09:00', '10:00', '11:00'],
+  });
+  const type3ETimeSelect = new SelectBox({
+    className: 'vacation_outingEtimeSelect',
+    initValue: '종료 시간',
+    options: ['09:00', '10:00', '11:00'],
+  });
+
   switch (type) {
     case 'vacationCategory1':
       vacationDate.innerHTML = `<dl class="vacation_sDate">
                                   <dt class="vacation_sDateTitle">시작일</dt>
                                   <dd>
-                                    <input class="vacation_inputText inputText" type="date" />
+                                    ${dateInput.render()}
                                   </dd>
                                 </dl>
                                 <dl class="vacation_eDate">
                                   <dt class="vacation_eDateTitle">종료일</dt>
                                   <dd>
-                                    <input class="vacation_inputText inputText" type="date"/>
+                                    ${dateInput.render()}
                                   </dd>
                                 </dl>`;
       break;
@@ -212,57 +233,49 @@ function handleRadio() {
       vacationDate.innerHTML = `<dl class="vacation_sDate">
                                   <dt class="vacation_sDateTitle">시작일</dt>
                                   <dd>
-                                    <input class="vacation_inputText inputText" type="date"/>
+                                    ${dateInput.render()}
                                   </dd>
                                   <dd>
-                                    ${sDateSelect.render()}
+                                    ${type2STimeSelect.render()}
                                   </dd>
                                 </dl>`;
-      sDateSelect.useSelectBox();
+
       break;
     case 'vacationCategory3':
-      sDateSelect = new SelectBox({
-        className: 'vacation_outingStimeSelect',
-        initValue: '시작 시간',
-        options: ['09:00', '10:00', '11:00'],
-      });
-      const eDateSelect = new SelectBox({
-        className: 'vacation_outingEtimeSelect',
-        initValue: '종료 시간',
-        options: ['09:00', '10:00', '11:00'],
-      });
       vacationDate.innerHTML = `<dl class="vacation_sDate">
                                   <dt class="vacation_sDateTitle">시작일</dt>
                                   <dd>
-                                    <input class="vacation_inputText inputText" type="date"/>
+                                    ${dateInput.render()}
                                   </dd>
                                 </dl>
                                 <dl class="vacation_outingTime">
                                   <dt class="vacation_outingTimeTitle">외출 시간</dt>
                                   <dd>
-                                    ${sDateSelect.render()}
+                                    ${type3STimeSelect.render()}
                                   </dd>
 
                                   <dd>
-                                    ${eDateSelect.render()}
+                                    ${type3ETimeSelect.render()}
                                   </dd>
                                 </dl>`;
-      eDateSelect.useSelectBox();
+
       break;
 
     default:
       vacationDate.innerHTML = `<dl class="vacation_sDate">
                                   <dt class="vacation_sDateTitle">시작일</dt>
                                   <dd>
-                                    <input class="vacation_inputText inputText" type="date" />
+                                  ${type1SDateInput.render()}
                                   </dd>
                                 </dl>
                                 <dl class="vacation_eDate">
                                   <dt class="vacation_eDateTitle">종료일</dt>
                                   <dd>
-                                    <input class="vacation_inputText inputText" type="date"/>
+                                    ${dateInput.render()}
                                   </dd>
                                 </dl>`;
       break;
   }
+  type2STimeSelect.useSelectBox();
+  type3ETimeSelect.useSelectBox();
 }
