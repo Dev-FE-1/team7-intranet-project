@@ -18,8 +18,8 @@
 .input_search > .input {
   width: 100%;
   padding-right: 40px;
-}
-.input_searchIcon {
+  }
+  .input_searchIcon {
   color: #69d0cf;
   position: absolute;
   right: 5px;
@@ -29,7 +29,7 @@
   height: 80px;
   padding: 10px;
   resize: none;
-}
+  }
 .input_date {
   width: 200px;
   padding: 0 15px;
@@ -37,11 +37,11 @@
 .input:focus {
   outline: 1px solid #69d0cf;
 }
-.input:disabled {
+  .input:disabled {
   color: #6c6c6c;
   background-color: #d9d9d9;
   border: 1px solid #bdc3cd;
 }
-.input::placeholder {
+  .input::placeholder {
   color: #9cbbbe;
 }
