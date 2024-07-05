@@ -32,10 +32,11 @@
   font-weight: bold;
 }
 
-.vacation_categoryItem {
+.vacation_categoryItem label {
+  margin-right: 20px;
   cursor: pointer;
 }
-.vacation_categoryItem:has(input[disabled]) {
+.vacation_categoryItem label:has(input[disabled]) {
   cursor: initial;
 }
 
