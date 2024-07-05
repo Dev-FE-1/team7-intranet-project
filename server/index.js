@@ -88,7 +88,61 @@ app.get('/api/notice/recent', (req, res) => {});
 app.get('/api/notice/info', (req, res) => {});
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
-app.get('/api/notice/list', (req, res) => {});
+app.get('/api/notice/list', (req, res) => {
+  const filepath='./server/data/notice.json';
+  
+  fs.readFile(filepath, 'utf8', (err, data)=>{
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: err.message,
+        data: null,
+      });
+    }
+    try {
+      let jsonData = JSON.parse(data);
+
+       //업로드 날짜 최신순으로 불러오도록 함
+      jsonData.data = jsonData.data.sort((a,b)=>new Date(b.date)-new Date(a.date)); 
+      
+      // 요청한 페이징 정보에 대한 응답
+      const page = parseInt(req.query.page) || 1;
+      const itemsPerPage = parseInt(req.query.itemsPerPage) || 9;
+      const startIndex = (page-1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      
+      //검색 
+      let filterData = jsonData.data;
+
+      if(req.query.search){
+        const searchQuery=req.query.search.trim()
+        filterData=filterData.filter((item)=>{
+          return item.title.includes(searchQuery) || item.content.includes(searchQuery)
+        });
+      }
+      const sliceData = filterData.slice(startIndex, endIndex);
+
+      //json 형태로 응답을 돌려줌
+      res.json({
+        jsonData,
+        currentPage:page,
+        itemsPerPage:itemsPerPage,
+        totalItems:jsonData.data.length,
+        totalPages:Math.ceil(jsonData.data.length/itemsPerPage),
+        data:sliceData,
+        searchQuery:req.query.search || '',
+      });
+    } catch (parseErr) {
+      console.error('Error parsing JSON file:', parseErr);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: parseErr.message,
+        data: null,
+      });
+    }
+  });
+});
 
 // 특정 페이지의 임직원 목록 정보 요청 API
 app.get('/api/employee/list', (req, res) => {});
