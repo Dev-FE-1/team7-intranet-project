@@ -30,6 +30,10 @@
   padding: 10px;
   resize: none;
 }
+.input_date {
+  width: 200px;
+  padding: 0 15px;
+}
 .input:focus {
   outline: 1px solid #69d0cf;
 }
