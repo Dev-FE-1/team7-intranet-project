@@ -90,6 +90,7 @@ app.get('/api/notice/list', (req, res) => {
       const startIndex = (page-1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
       
+      //검색  기능 데이터
       let filterData = jsonData.data;
 
       if(req.query.search){
@@ -98,9 +99,7 @@ app.get('/api/notice/list', (req, res) => {
           return item.title.includes(searchQuery) || item.content.includes(searchQuery)
         });
       }
-
       const sliceData = filterData.slice(startIndex, endIndex);
-
 
       //json 형태로 응답을 돌려줌
       res.json({

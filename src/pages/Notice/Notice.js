@@ -27,11 +27,27 @@ export default function Notice(root) {
   <div class="notice"> 
   </div>
     `;
+
   const notiContainer = document.querySelector('.notice')
+
+  //검색, 스크롤 이벤트 발생 시 URL 변경
+  function updateURL(page, search){
+    const url = new URL(window.location)
+    const params = new URLSearchParams(url.search)
+
+    params.set('page' ,page)
+    if(search){
+      params.set('search', search)
+    }else{
+      params.delete('search')
+    }
+
+    window.history.replaceState({}, '', `${url.pathname}?${params.toString()}`)
+  }
 
   // notice api 요청 
   function fetchData(page, append=false, search=''){
-  axios.get(`/api/notice/list`,{
+  axios.get(`/api/notice/list?`,{
     params:{
       page:page,
       itemsPerPage:itemsPerPage,
@@ -41,7 +57,9 @@ export default function Notice(root) {
     .then(response=>{
       //무한스크롤 페이징 처리된 데이터
       let cardData = response.data.data; 
+
       addNoticeCard(notiContainer, cardData, append);
+      updateURL(page, search)
 
     }).catch(error => {
       console.error('Error fetching data:', error);
@@ -60,7 +78,7 @@ export default function Notice(root) {
 
   // 공지사항 카드가 추가된 공지사항 페이지를 그려주는 함수, 무한스크롤 로직 제어 포함
   function addNoticeCard(container, cardData, append){
-
+    let isData=true
     const noticeCard = new Card({
       page :{title:'공지사항',
       searchArea:[noticeSearch.render() + noticeUpload.render()],
@@ -77,26 +95,35 @@ export default function Notice(root) {
       container.querySelector('.page_content').innerHTML+=createCards(cardData)
     }
 
+    //더 이상 카드 데이터가 없으면 false
+    if(cardData.length<itemsPerPage){
+      isData=false;
+    }
+
     //무한 스크롤
     const imgCards = notiContainer.querySelectorAll('.card.card_img')
-    const lastCard = Array.from(imgCards).slice(-3); 
-    console.log(lastCard)
+    const lastCard = Array.from(imgCards).slice(-1); 
 
     lastCard.forEach((card)=>{
+      //card가 뷰포트에 얼마나 보이는지 감시
       const observer = new IntersectionObserver((entries)=>{
-        if(entries[0].isIntersecting){
-          observer.unobserve(card) //재요청 하지 않을 데이터
-          currentPage++;
-          itemsPerPage=3;
-          console.log('hello Observer')
-          fetchData(currentPage, true);
-        }
+        //뷰포트 내 마지막 요소가 절반 이상 보이면 무한스크롤
+          if(entries[0].isIntersecting && isData){
+            card.classList.add('Visible')
+            observer.unobserve(card) //재요청 하지 않을 데이터
+            currentPage++;
+            itemsPerPage=3;
+            console.log('hello Observer')
+            fetchData(currentPage, true);
+          }else{
+            card.classList.remove('Visible')
+          }
       },{
-          root:null,
-          threshold:0.5
-      });
-      observer.observe(card)
-      })
+          root:null,  //뷰포트 기준으로 관찰
+          threshold:0.7
+    });
+      setTimeout(()=>{observer.observe(card)},1000)  //스크롤 시 그 다음 카드들을 가져옴
+    })
 
     //검색
     const searchInput = notiContainer.querySelector('.notice__search.input');
@@ -108,6 +135,7 @@ export default function Notice(root) {
         if(!searchKeyword !== ''){
           console.log('Enter key pressed! Search keyword:', searchKeyword);
         currentPage =1;
+        //서버로 검색 키워드, 현재 페이지 전달
         searchQuery=searchKeyword;
         fetchData(currentPage, false, searchKeyword)
         }
@@ -121,6 +149,7 @@ export default function Notice(root) {
         if (searchKeyword !== '') {
           console.log('clicked! Search keyword:', searchKeyword);
           currentPage = 1;
+          //서버로 검색 키워드, 현재 페이지 전달
           searchQuery=searchKeyword;
           fetchData(currentPage, false, searchKeyword);
         }
@@ -129,17 +158,6 @@ export default function Notice(root) {
   
   fetchData(currentPage)
 
-
-  // 검색 보류
-  
-  // if(searchInput){
-  //   console.log('searchinput 확인')
-  //   searchInput.addEventListener('input', (e)=>{
-  //     searchQuery = e.target.value;
-  //     currentPage=1;
-  //     fetchData(currentPage, searchQuery);
-  //   });
-  // }
 
 
   // const notiModal=new Modal({
