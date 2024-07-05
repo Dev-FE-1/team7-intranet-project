@@ -102,7 +102,7 @@
       "dept": "마케팅팀",
       "leftVaca": 3,
       "admin": false,
-      "img": "/server/images/profile/8.jpg"
+      "img": null
     },
     {
       "userId": "9",
@@ -180,7 +180,7 @@
       "dept": "영업팀",
       "leftVaca": 15,
       "admin": false,
-      "img": "/server/images/profile/14.jpg"
+      "img": null
     },
     {
       "userId": "15",
@@ -271,7 +271,7 @@
       "dept": "인사팀",
       "leftVaca": 6,
       "admin": false,
-      "img": "/server/images/profile/21.jpg"
+      "img": null
     },
     {
       "userId": "22",
@@ -388,7 +388,7 @@
       "dept": "영업팀",
       "leftVaca": 6,
       "admin": false,
-      "img": "/server/images/profile/30.jpg"
+      "img": null
     },
     {
       "userId": "31",
@@ -401,7 +401,7 @@
       "dept": "재무팀",
       "leftVaca": 7,
       "admin": false,
-      "img": "/server/images/profile/31.jpg"
+      "img": null
     },
     {
       "userId": "32",
@@ -414,7 +414,7 @@
       "dept": "인사팀",
       "leftVaca": 9,
       "admin": false,
-      "img": "/server/images/profile/32.jpg"
+      "img": null
     },
     {
       "userId": "33",
@@ -427,7 +427,7 @@
       "dept": "개발팀",
       "leftVaca": 7,
       "admin": false,
-      "img": "/server/images/profile/33.jpg"
+      "img": null
     },
     {
       "userId": "34",
@@ -440,7 +440,7 @@
       "dept": "마케팅팀",
       "leftVaca": 18,
       "admin": false,
-      "img": "/server/images/profile/34.jpg"
+      "img": null
     },
     {
       "userId": "35",
@@ -453,7 +453,7 @@
       "dept": "개발팀",
       "leftVaca": 13,
       "admin": false,
-      "img": "/server/images/profile/35.jpg"
+      "img": null
     },
     {
       "userId": "36",
@@ -466,7 +466,7 @@
       "dept": "마케팅팀",
       "leftVaca": 20,
       "admin": false,
-      "img": "/server/images/profile/36.jpg"
+      "img": null
     },
     {
       "userId": "37",
@@ -479,7 +479,7 @@
       "dept": "C-level",
       "leftVaca": 0,
       "admin": false,
-      "img": "/server/images/profile/37.jpg"
+      "img": null
     },
     {
       "userId": "38",
@@ -492,7 +492,7 @@
       "dept": "마케팅팀",
       "leftVaca": 8,
       "admin": false,
-      "img": "/server/images/profile/38.jpg"
+      "img": null
     },
     {
       "userId": "39",
@@ -505,7 +505,7 @@
       "dept": "개발팀",
       "leftVaca": 17,
       "admin": false,
-      "img": "/server/images/profile/39.jpg"
+      "img": null
     },
     {
       "userId": "40",
@@ -518,7 +518,7 @@
       "dept": "개발팀",
       "leftVaca": 16,
       "admin": false,
-      "img": "/server/images/profile/40.jpg"
+      "img": null
     },
     {
       "userId": "41",
@@ -531,7 +531,7 @@
       "dept": "C-level",
       "leftVaca": 10,
       "admin": false,
-      "img": "/server/images/profile/41.jpg"
+      "img": null
     },
     {
       "userId": "42",
@@ -544,7 +544,7 @@
       "dept": "재무팀",
       "leftVaca": 10,
       "admin": false,
-      "img": "/server/images/profile/42.jpg"
+      "img": null
     },
     {
       "userId": "43",
@@ -557,7 +557,7 @@
       "dept": "인사팀",
       "leftVaca": 20,
       "admin": false,
-      "img": "/server/images/profile/43.jpg"
+      "img": null
     },
     {
       "userId": "44",
@@ -570,7 +570,7 @@
       "dept": "인사팀",
       "leftVaca": 10,
       "admin": false,
-      "img": "/server/images/profile/44.jpg"
+      "img": null
     },
     {
       "userId": "45",
@@ -583,7 +583,7 @@
       "dept": "인사팀",
       "leftVaca": 14,
       "admin": false,
-      "img": "/server/images/profile/45.jpg"
+      "img": null
     },
     {
       "userId": "46",
@@ -596,7 +596,7 @@
       "dept": "마케팅팀",
       "leftVaca": 4,
       "admin": false,
-      "img": "/server/images/profile/46.jpg"
+      "img": null
     },
     {
       "userId": "47",
@@ -609,7 +609,7 @@
       "dept": "마케팅팀",
       "leftVaca": 13,
       "admin": false,
-      "img": "/server/images/profile/47.jpg"
+      "img": null
     },
     {
       "userId": "48",
@@ -622,7 +622,7 @@
       "dept": "개발팀",
       "leftVaca": 15,
       "admin": false,
-      "img": "/server/images/profile/48.jpg"
+      "img": null
     },
     {
       "userId": "49",
@@ -635,7 +635,7 @@
       "dept": "재무팀",
       "leftVaca": 14,
       "admin": false,
-      "img": "/server/images/profile/49.jpg"
+      "img": null
     },
     {
       "userId": "50",
@@ -648,7 +648,7 @@
       "dept": "인사팀",
       "leftVaca": 8,
       "admin": false,
-      "img": "/server/images/profile/50.jpg"
+      "img": null
     },
     {
       "userId": "51",
@@ -687,7 +687,7 @@
       "dept": "마케팅팀",
       "leftVaca": 6,
       "admin": false,
-      "img": "/server/images/profile/53.jpg"
+      "img": null
     },
     {
       "userId": "54",
@@ -843,7 +843,7 @@
       "dept": "영업팀",
       "leftVaca": 9,
       "admin": false,
-      "img": "/server/images/profile/65.jpg"
+      "img": null
     },
     {
       "userId": "66",
@@ -895,7 +895,7 @@
       "dept": "마케팅팀",
       "leftVaca": 13,
       "admin": false,
-      "img": "/server/images/profile/69.jpg"
+      "img": null
     },
     {
       "userId": "70",
@@ -960,7 +960,7 @@
       "dept": "영업팀",
       "leftVaca": 9,
       "admin": false,
-      "img": "/server/images/profile/74.jpg"
+      "img": null
     },
     {
       "userId": "75",
@@ -973,7 +973,7 @@
       "dept": "마케팅팀",
       "leftVaca": 2,
       "admin": false,
-      "img": "/server/images/profile/74.jpg"
+      "img": null
     },
     {
       "userId": "76",
@@ -999,7 +999,7 @@
       "dept": "영업팀",
       "leftVaca": 13,
       "admin": false,
-      "img": "/server/images/profile/77.jpg"
+      "img": null
     },
     {
       "userId": "78",
@@ -1129,7 +1129,7 @@
       "dept": "영업팀",
       "leftVaca": 5,
       "admin": false,
-      "img": "/server/images/profile/87.jpg"
+      "img": null
     },
     {
       "userId": "88",
@@ -1285,7 +1285,7 @@
       "dept": "영업팀",
       "leftVaca": 13,
       "admin": false,
-      "img": "/server/images/profile/99.jpg"
+      "img": null
     },
     {
       "userId": "100",
