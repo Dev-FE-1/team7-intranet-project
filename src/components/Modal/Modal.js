@@ -1,5 +1,7 @@
 import Button from '/src/components/Button/Button.js';
-
+import '/src/components/Button/Button.css';
+import '/src/components/Card/Card.css';
+import '/src/components/Modal/Modal.css';
 // {
 //   name : 모달 클래스명 String (*필수값)
 //   trigger : 모달 활성화 버튼 클래스명 String
@@ -67,7 +69,7 @@ export default class Modal {
         <div class="modal_inner">
           ${this.title ? `<p class="modal_title">${this.title}</p>` : ''}
           <div class="modal_content">${this.content || ''}</div>
-          ${buttonTemp}
+          <div class="modal_btns">${buttonTemp}</div>
         </div>
       </div>
     `;
