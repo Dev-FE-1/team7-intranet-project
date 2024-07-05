@@ -9,8 +9,8 @@ export default class Table {
   constructor(props) {
     this.headers = props.headers;
     this.data = props.data;
-    this.classList = props.classList;
-    this.rowClass = props.rowClass;
+    this.classList = props.classList || '';
+    this.rowClass = props.rowClass || '';
   }
 
   render() {
