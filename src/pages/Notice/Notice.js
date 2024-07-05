@@ -109,43 +109,5 @@ export default function Notice(root) {
     
 }
 
-
-
-
-
-  // const notiModal=new Modal({
-  //   name:'notice__modal', 
-  //   size:'md',  
-  //   buttons:[{label:'닫기', 
-  //     classList:'btn--notice--close modalClose'}], 
-  //     content: `<p class="notice__modalTitle">${cardData[0].title}</p>
-  //     <p class="notice__modalDate">${cardData[0].date}</p>
-  //       <div class="notice__modalImg">
-  //       <img src="${cardData[0].img}"/>
-  //       </div>
-  //       <div class="notice__modalContent">${cardData[0].content}</div>`
-  // });
-
-
-
-  // // 클릭한 카드의 정보를 가진 모달을 생성하는 함수
-  // function renderModal() {
-  //   const cardElements =document.querySelectorAll('.notice__card');
-
-  //   cardElements.forEach((card) => {
-  //     card.addEventListener('click', (e) => {
-  //       const cardId = e.currentTarget.getAttribute('data-id');
-  //       const data = cardData.find((el) => el.id == cardId);
-        
-  //       const noticeModalContent = renderNoticeModal(data)
-         
-  //         const noticeModalContainer = document.querySelector('.notice__modalCard');
-  //         noticeModalContainer.innerHTML=notiModal.render(); 
-  //         notiModal.useModal();
-          
-  //     });
-  //   });
-  // }
-  //renderModal();
   fetchData(currentPage)
 }
