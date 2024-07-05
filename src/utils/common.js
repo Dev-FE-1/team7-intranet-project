@@ -9,5 +9,5 @@ export function renderLayout() {
 
 // 로그인 여부 확인 로직
 export function checkLogin() {
-  return false;
+  return true;
 }

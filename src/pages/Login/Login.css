@@ -43,3 +43,12 @@
   border-top: 1px solid #e0e0e0;
   font-size: 13px;
 }
+.login_modal .modal_inner {
+  width: 350px;
+}
+
+.login_modal .modal_content {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
