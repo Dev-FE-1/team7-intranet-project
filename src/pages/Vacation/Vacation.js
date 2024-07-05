@@ -1,4 +1,5 @@
 import axios from 'axios';
+import createHourOptions from '../../utils/createHourOptions';
 import Modal from '/src/components/Modal/Modal';
 import Card from '/src/components/Card/Card';
 import SelectBox from '/src/components/SelectBox/SelectBox';
@@ -214,12 +215,12 @@ function handleRadio() {
   const type3STimeSelect = new SelectBox({
     className: 'vacation_outingStimeSelect',
     initValue: '시작 시간',
-    options: ['09:00', '10:00', '11:00'],
+    options: createHourOptions(),
   });
   const type3ETimeSelect = new SelectBox({
     className: 'vacation_outingEtimeSelect',
     initValue: '종료 시간',
-    options: ['09:00', '10:00', '11:00'],
+    options: createHourOptions(),
   });
 
   switch (type) {
