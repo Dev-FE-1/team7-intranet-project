@@ -51,7 +51,29 @@ app.get('/api/user/work/status', (req, res) => {});
 app.get('/api/user/info', (req, res) => {});
 
 // 특정 페이지의 휴가/외출 목록 정보 요청 API
-app.get('/api/vacation/list', (req, res) => {});
+app.get('/api/vacation/list', (req, res) => {
+  fs.readFile('./server/data/vacation.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: err,
+        data: null,
+      });
+    }
+    try {
+      const jsonData = JSON.parse(data);
+      res.json(jsonData);
+    } catch (parseErr) {
+      console.error('Error parsing JSON file:', parseErr);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: parseErr,
+        data: null,
+      });
+    }
+  });
+});
 
 // 휴가/외출 상세 정보 요청 API
 app.get('/api/vacation/info', (req, res) => {});
