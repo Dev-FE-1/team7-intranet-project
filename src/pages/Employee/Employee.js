@@ -58,6 +58,16 @@ export default function Employee(root) {
       
       `;
 
+  fetch('/api/employee/user?userId=4')
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      // Handle the error here
+      console.error(error);
+    });
+
   const uploadImage = document.querySelector('.uploadImage');
   uploadImage.addEventListener('click', () => {
     const input = document.createElement('input');
