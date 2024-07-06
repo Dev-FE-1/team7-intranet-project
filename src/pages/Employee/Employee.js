@@ -11,26 +11,28 @@ export default function Employee(root) {
     .then((response) => response.json())
     .then((data) => {
       const employeeList = data['data'];
+
       // 임직원 테이블 작성
       const table = new Table({
         headers: ['사원번호', '이름', '부서', '직급', '이메일', '전화번호'],
-        data: employeeList.map((emp) => [
-          emp.userId,
-          `<div class="name_column">
-            <div class="thumbnail"><img src="${
-              emp.img ? emp.img : 'public/assets/images/profile-default.png'
-            }" class="thumbnail" ></div> 
-            <div class="name">${emp.name}</div>
+        data: employeeList.map((emp) => ({
+          id: emp.userId,
+          name: `<div class="name_column">
+        <div class="thumbnail"><img src="${
+          emp.img ? emp.img : 'public/assets/images/profile-default.png'
+        }" class="thumbnail" ></div>
+        <div class="name">${emp.name}</div>
           </div>`,
-          emp.dept,
-          emp.position,
-          emp.email,
-          emp.phone,
-        ]),
+          dept: emp.dept,
+          position: emp.position,
+          email: emp.email,
+          phone: emp.phone,
+          dataId: emp.userId,
+        })),
         classList: 'table_employee',
         rowClass: 'employeeDetail',
-        rowId: 'aa',
       });
+
       // 페이지 15명씩 1페이지 분할
       const pagination = new Pagination({
         totalCnt: employeeList.length,
@@ -96,6 +98,10 @@ export default function Employee(root) {
   //     </form>
   //   </div>
   // `;
+
+  // document.querySelectorAll('.employeeDetail').forEach((row, index) => {
+  //   row.setAttribute('data-id', employeeList[index].userId);
+  // });
 
   // const employeeModal = new Modal({
   //   name: 'modal_employee',
