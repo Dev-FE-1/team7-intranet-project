@@ -33,6 +33,7 @@
 }
 .selectBox_list {
   width: 100%;
+  max-height: 200px;
   position: absolute;
   top: 40px;
   left: 0;
@@ -40,6 +41,7 @@
   border-radius: 5px;
   background-color: #edf6f5;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 .selectBox_listNone {
   display: none;

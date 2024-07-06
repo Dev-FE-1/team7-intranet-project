@@ -2,6 +2,7 @@
 // data = JSON 데이터
 // classList = 테이블 추가 클래스
 // rowClass = 각 항 클래스 추가
+// dataId = 각 항 데이터-아이디 추가
 
 import './Table.css';
 
@@ -11,6 +12,7 @@ export default class Table {
     this.data = props.data;
     this.classList = props.classList || '';
     this.rowClass = props.rowClass || '';
+    this.dataId = props.dataId || '';
   }
 
   render() {
@@ -20,7 +22,9 @@ export default class Table {
     const rowsHTML = this.data
       .map(
         (row) =>
-          `<tr class="${this.rowClass}">${Object.values(row)
+          `<tr data-id="${this.dataId}" class="${
+            this.rowClass
+          }">${Object.values(row)
             .map((value) => `<td>${value}</td>`)
             .join('')}</tr>`
       )
