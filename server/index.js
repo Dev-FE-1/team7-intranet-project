@@ -1,5 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import { getJsonData, findKeyValue } from './utils/common.js';
 import fs from 'fs';
 
 const port = process.env.PORT || 8080;
@@ -8,6 +10,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json());
+app.use(cookieParser());
 
 // server에 저장된 정적 파일(임직원 프로필 이미지, 공지사항 이미지) 접근 가능
 app.use('/server/images', express.static('path/to/profile/images'));
@@ -37,8 +40,22 @@ app.use('/server/images', express.static('path/to/profile/images'));
 //   });
 // });
 
-// 로그인 기능
-app.post('/api/user/login', (req, res) => {});
+// 로그인 API
+app.post('/api/user/login', async (req, res) => {
+  const { id, pw } = req.body;
+  const jsonData = await getJsonData('./server/data/user.json');
+  const [user] = findKeyValue(jsonData, 'email', `${id}@77cm.co.kr`);
+
+  if (user && user.password === pw) {
+    // 사용자 정보를 쿠키에 저장
+    res.cookie('userId', user.userId, { maxAge: 900000 });
+    res.cookie('admin', user.admin, { maxAge: 900000 });
+
+    res.status(200).send({ message: '로그인 성공' });
+  } else {
+    res.status(401).send({ message: '로그인 실패' });
+  }
+});
 
 // 근무 시작/종료 API
 app.post('/api/user/work/start', (req, res) => {});
@@ -89,9 +106,9 @@ app.get('/api/notice/info', (req, res) => {});
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
 app.get('/api/notice/list', (req, res) => {
-  const filepath='./server/data/notice.json';
-  
-  fs.readFile(filepath, 'utf8', (err, data)=>{
+  const filepath = './server/data/notice.json';
+
+  fs.readFile(filepath, 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       return res.status(500).send({
@@ -103,22 +120,27 @@ app.get('/api/notice/list', (req, res) => {
     try {
       let jsonData = JSON.parse(data);
 
-       //업로드 날짜 최신순으로 불러오도록 함
-      jsonData.data = jsonData.data.sort((a,b)=>new Date(b.date)-new Date(a.date)); 
-      
+      //업로드 날짜 최신순으로 불러오도록 함
+      jsonData.data = jsonData.data.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+
       // 요청한 페이징 정보에 대한 응답
       const page = parseInt(req.query.page) || 1;
       const itemsPerPage = parseInt(req.query.itemsPerPage) || 9;
-      const startIndex = (page-1) * itemsPerPage;
+      const startIndex = (page - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
-      
-      //검색 
+
+      //검색
       let filterData = jsonData.data;
 
-      if(req.query.search){
-        const searchQuery=req.query.search.trim()
-        filterData=filterData.filter((item)=>{
-          return item.title.includes(searchQuery) || item.content.includes(searchQuery)
+      if (req.query.search) {
+        const searchQuery = req.query.search.trim();
+        filterData = filterData.filter((item) => {
+          return (
+            item.title.includes(searchQuery) ||
+            item.content.includes(searchQuery)
+          );
         });
       }
       const sliceData = filterData.slice(startIndex, endIndex);
@@ -126,12 +148,12 @@ app.get('/api/notice/list', (req, res) => {
       //json 형태로 응답을 돌려줌
       res.json({
         jsonData,
-        currentPage:page,
-        itemsPerPage:itemsPerPage,
-        totalItems:jsonData.data.length,
-        totalPages:Math.ceil(jsonData.data.length/itemsPerPage),
-        data:sliceData,
-        searchQuery:req.query.search || '',
+        currentPage: page,
+        itemsPerPage: itemsPerPage,
+        totalItems: jsonData.data.length,
+        totalPages: Math.ceil(jsonData.data.length / itemsPerPage),
+        data: sliceData,
+        searchQuery: req.query.search || '',
       });
     } catch (parseErr) {
       console.error('Error parsing JSON file:', parseErr);
