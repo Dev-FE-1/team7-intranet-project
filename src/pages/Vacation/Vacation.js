@@ -32,7 +32,7 @@ export default function Vacation(root) {
       size: 'md',
       buttons: [
         { label: '취소', type: 'light', classList: 'modalClose' },
-        { label: '확인', classList: 'modalClose' },
+        { label: '확인', classList: 'btn_apply' },
       ],
     });
 
@@ -104,7 +104,7 @@ export default function Vacation(root) {
                       <dd class="vacation_categoryItem">${typeRadio.render()}</dd>
                     </dl>
   
-                    <div class="vacation_date">
+                    <div class="vacation_date type1">
                       <dl class="vacation_sDate">
                         <dt class="vacation_sDateTitle">시작일</dt>
                         <dd>
@@ -127,7 +127,7 @@ export default function Vacation(root) {
                     </dl>
                   </div>`,
       });
-      modal.useModal();
+      modal.show();
 
       const categoryItem = root.querySelectorAll(
         '.vacation_categoryItem label'
@@ -141,9 +141,7 @@ export default function Vacation(root) {
     document.querySelectorAll('.modal_detail').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         const vacaId = e.target.closest('tr').dataset.id;
-        console.log(vacaId);
         const [detailData] = myData.filter((d) => d.vacaId === Number(vacaId));
-        console.log(detailData);
         let checkedType = 0;
         if (detailData.type === '반차') {
           checkedType = 1;
@@ -175,10 +173,8 @@ export default function Vacation(root) {
                           ${typeRadio.render()}
                         </dd>
                       </dl>
-    
-                      <div class="vacation_date">
-                        ${switchCate(detailData.type)}
-                      </div>
+
+                      ${switchCate(detailData.type)}
     
                       <dl class="vacation_reason">
                         <dt class="vacation_reasonTitle">사유</dt>
@@ -262,6 +258,69 @@ export default function Vacation(root) {
         modal.useModal();
       });
     });
+    // 신청모달 버튼 클릭 이벤트 처리
+    document
+      .querySelector('.vacation_applyModal')
+      .addEventListener('click', (e) => {
+        const btnApply = document.querySelector('.btn_apply');
+        const btnClose = document.querySelector('.modalClose');
+        if (e.target === btnApply) {
+          const type = document
+            .querySelector('input[name="vacationCategory"]:checked')
+            .closest('label')
+            .innerText.trim();
+          let sDate = document
+            .querySelector('.vacation_sDate .vacation_inputText')
+            .value.replaceAll('-', '.');
+          let eDate = '';
+          if (type === '연차') {
+            eDate = document
+              .querySelector('.vacation_eDate .vacation_inputText')
+              .value.replaceAll('-', '.');
+          } else if (type === '반차') {
+            const period = document
+              .querySelector('.vacation_sDate .selectBox_label')
+              .innerText.split(' ')[0];
+            if (period === '오전') {
+              sDate = `${sDate} 09:00`;
+              eDate = `${sDate} 14:00`;
+            } else if (period === '오후') {
+              sDate = `${sDate} 14:00`;
+              eDate = `${sDate} 18:00`;
+            }
+          } else if (type === '외출') {
+            const sTime = document
+              .querySelector('.vacation_outingStimeSelect .selectBox_label')
+              .innerText.trim();
+            const eTime = document
+              .querySelector('.vacation_outingEtimeSelect .selectBox_label')
+              .innerText.trim();
+            sDate = `${sDate} ${sTime}`;
+            eDate = `${sDate} ${eTime}`;
+          }
+          const note = document.querySelector('.reason').value;
+          const data = { userId: 3, type, sDate, eDate, note };
+          if (validateForm(data)) {
+            submitData(data);
+            alert('휴가/외출 신청이 완료되었습니다.');
+            modal.hide();
+          } else {
+            alert('필수값이 입력되지 않았습니다.');
+            return;
+          }
+        } else if (e.target === btnClose) {
+          modal.hide();
+        } else {
+          return;
+        }
+      });
+  }
+
+  // 휴가/외출 신청 데이터 전송
+  function submitData(data) {
+    //서버로 데이터 보내는 로직 추가하고 새로운 데이터 받기
+    const newData = myData; //서버로 받은 새로운 데이터로 수정 할 것
+    renderPage(newData);
   }
 }
 
@@ -321,24 +380,25 @@ function handleRadio() {
   type3ETimeSelect.useSelectBox();
 }
 
+// 연차, 반차, 외출에 따라 바뀌는 html을 리턴해주는 함수
 function switchCate(type) {
   if (type === '연차') {
-    return `<dl class="vacation_sDate">
+    return `<div class="vacation_date type1"><dl class="vacation_sDate">
                                   <dt class="vacation_sDateTitle">시작일</dt>
                                   <dd></dd>
                                 </dl>
                                 <dl class="vacation_eDate">
                                   <dt class="vacation_eDateTitle">종료일</dt>
                                   <dd></dd>
-                                </dl>`;
+                                </dl></div>`;
   } else if (type === '반차') {
-    return `<dl class="vacation_sDate">
+    return `<div class="vacation_date type2"><dl class="vacation_sDate">
                                   <dt class="vacation_sDateTitle">시작일</dt>
                                   <dd></dd>
                                   <dd></dd>
-                                </dl>`;
+                                </dl></div>`;
   } else {
-    return `<dl class="vacation_sDate">
+    return `<div class="vacation_date type3"><dl class="vacation_sDate">
                                   <dt class="vacation_sDateTitle">시작일</dt>
                                   <dd></dd>
                                 </dl>
@@ -346,6 +406,11 @@ function switchCate(type) {
                                   <dt class="vacation_outingTimeTitle">외출 시간</dt>
                                   <dd></dd>
                                   <dd></dd>
-                                </dl>`;
+                                </dl></div>`;
   }
+}
+
+// 휴가/외출 신청 유효성검사
+function validateForm() {
+  return true;
 }
