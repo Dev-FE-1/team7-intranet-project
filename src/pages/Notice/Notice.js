@@ -20,19 +20,25 @@ export default function Notice(root) {
 
   //초기 페이지
   let currentPage = 1;
-  let itemsPerPage = 50;
+  let itemsPerPage = 9;
   let searchQuery='';
 
   root.innerHTML = `
-  <div class="notice"> 
-  </div>
+  <div class="notice"></div>
   <div class="modalContainer"></div>
-    `;
+  `;
 
   const notiContainer = document.querySelector('.notice')
 
   // notice api 요청 
   function fetchData(page, append=false, search=''){
+    if(!append){
+      notiContainer.innerHTML = ''
+    }else{
+      const skeletonHtml = createSkeleton(itemsPerPage)
+      notiContainer.querySelector('.page_content').insertAdjacentHTML('beforeend', skeletonHtml)
+    }
+
   axios.get(`/api/notice/list`,{
     params:{
       page:page,
@@ -60,9 +66,16 @@ export default function Notice(root) {
       });
       return card.render()
     }).join('');
-
   }
 
+  function createSkeleton(num){
+    let skeletons = ''
+    for(let i=0;i<num;i++){
+      skeletons += `<div class="skeleton-card skeleton"></div>`
+    }
+    return skeletons;
+  }
+  
   // 공지사항 카드가 추가된 공지사항 페이지를 그려주는 함수
   function addNoticeCard(container, cardData, append){
     let isData=true
@@ -74,15 +87,27 @@ export default function Notice(root) {
         `
       }});
 
-    //append 상태가 false, 초기로드 시 카드 데이터 9개만 생성
+    //append 상태이면 새로운 목록을 불러오는 상태이므로 스켈레톤을 지우고 다음 목록을 가져옴
     if(!append){
-    container.innerHTML=`${noticeCard.render()}`;
+      container.innerHTML=`${noticeCard.render()}`;
     }else{
-    container.querySelector('.page_content').innerHTML=createCards(cardData)
+      container.querySelector('.page_content').insertAdjacentHTML('beforeend', createCards(cardData));
+
+      const skeletons = container.querySelectorAll('.skeleton-card')
+        skeletons.forEach((skeleton)=>{
+          setTimeout(()=>skeleton.remove(),300)
+        })
+      }
+
+     //더 이상 카드 데이터가 없으면 false
+    if(cardData.length<itemsPerPage){
+      isData=false;
     }
 
 
+    //공지사항 상세 내용을 확인할 수 있는 모달 함수
     let allCard = container.querySelectorAll('.card.card_img')
+
     allCard.forEach((card)=>{
       card.addEventListener('click',(e)=>{
         if (card) {
@@ -106,8 +131,29 @@ export default function Notice(root) {
         }
       })
     })
-    
-}
+
+    //무한 스크롤
+    const lastCard = Array.from(allCard).slice(-1)
+    lastCard.forEach((card)=>{
+      const observer = new IntersectionObserver((entries)=>{
+        if(entries[0].isIntersecting && isData){
+          observer.unobserve(card)
+          currentPage++;
+          itemsPerPage=9;
+          console.log('hello Observer')
+          //서버에 다음 목록 요청
+          fetchData(currentPage, true);
+        }else{
+          card.classList.remove('Visible')
+        }
+      },{
+        root:null,
+        threshold:0.7
+      })
+      //감시할 카드(뷰 포트 내 마지막 카드)
+      observer.observe(card)
+    })
+  }
 
   fetchData(currentPage)
 }
