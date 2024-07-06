@@ -48,8 +48,8 @@ app.post('/api/user/login', async (req, res) => {
 
   if (user && user.password === pw) {
     // 사용자 정보를 쿠키에 저장
-    res.cookie('userId', user.userId, { maxAge: 900000 });
-    res.cookie('admin', user.admin, { maxAge: 900000 });
+    res.cookie('userId', user.userId);
+    res.cookie('admin', user.admin);
 
     res.status(200).send({ message: '로그인 성공' });
   } else {
