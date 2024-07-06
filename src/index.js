@@ -33,12 +33,13 @@ const navigatePage = (event) => {
 const route = () => {
   const path = window.location.pathname;
   const wrap = document.querySelector('#wrap');
-  const root = document.querySelector('#root');
 
   // 로그인 여부 확인 후 해당 값에 따라 라우팅 처리
-  if (checkLogin(route)) {
+  if (checkLogin()) {
     // Layout 렌더링 적용
     renderLayout();
+
+    const root = document.querySelector('#root');
 
     switch (path) {
       case '/':
@@ -57,8 +58,7 @@ const route = () => {
         break;
     }
   } else {
-    history.pushState(null, null, '/login');
-    Login(wrap);
+    Login(wrap, route);
   }
 };
 
