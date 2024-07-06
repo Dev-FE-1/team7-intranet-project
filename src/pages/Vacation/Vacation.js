@@ -8,7 +8,7 @@ import Table from '/src/components/Table/Table';
 import Radio from '../../components/Radio/Radio';
 import Input from '../../components/Input/Input';
 
-// import Pagination from '/src/components/Pagination/Pagination';
+import Pagination from '/src/components/Pagination/Pagination';
 
 import '/src/pages/Vacation/Vacation.css';
 
@@ -56,10 +56,11 @@ export default function Vacation(root) {
       rowClass: 'modal_detail',
     });
 
-    // const pagination = new Pagination({
-    //   totalCnt: datas.length,
-    //   pagingPerPage: 5,
-    // });
+    const pagination = new Pagination({
+      totalCnt: datas.length,
+      dataPerPage: 5,
+      pagingPerPage: 5,
+    });
 
     const pageCard = new Card({
       page: {
@@ -72,15 +73,14 @@ export default function Vacation(root) {
     root.innerHTML = `
       <div class="vacation">
         ${pageCard.render()}
-             
+        <div class="pagination_container">
+          ${pagination.render()}
+        </div>
         ${modal.render()}
       </div>`;
 
     typeSelect.useSelectBox();
-    // <div class="pagination_container">
-    //   ${pagination.render()}
-    // </div>
-    // pagination.usePagination();
+    pagination.usePagination();
 
     //신청 버튼 클릭 시
     document.querySelector('.modal_apply').addEventListener('click', () => {
@@ -141,6 +141,7 @@ export default function Vacation(root) {
     document.querySelectorAll('.modal_detail').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         const vacaId = e.target.closest('tr').dataset.id;
+        console.log(vacaId);
         const [detailData] = myData.filter((d) => d.vacaId === Number(vacaId));
         console.log(detailData);
         let checkedType = 0;
