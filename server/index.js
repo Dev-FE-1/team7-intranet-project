@@ -43,8 +43,8 @@ app.use('/server/images', express.static('path/to/profile/images'));
 // 로그인 API
 app.post('/api/user/login', async (req, res) => {
   const { id, pw } = req.body;
-  const jsonData = await getJsonData('./server/data/user.json');
-  const [user] = findKeyValue(jsonData, 'email', `${id}@77cm.co.kr`);
+  const userData = await getJsonData('./server/data/user.json');
+  const [user] = findKeyValue(userData, 'email', `${id}@77cm.co.kr`);
 
   if (user && user.password === pw) {
     // 사용자 정보를 쿠키에 저장
@@ -57,15 +57,20 @@ app.post('/api/user/login', async (req, res) => {
   }
 });
 
+// 로그인한 사용자의 정보(이름, 소속 부서, 프로필 이미지 경로, 근무 상태) 요청 API
+app.get('/api/user/info', async (req, res) => {
+  const userId = req.query.userId;
+  const userData = await getJsonData('./server/data/user.json');
+  const [user] = findKeyValue(userData, 'userId', userId);
+  const { name, dept, img, admin } = user;
+  const userInfo = { name, dept, img, admin };
+
+  res.status(200).send(userInfo);
+});
+
 // 근무 시작/종료 API
 app.post('/api/user/work/start', (req, res) => {});
 app.post('/api/user/work/end', (req, res) => {});
-
-// 로그인한 사용자의 근무 상태 확인 API
-app.get('/api/user/work/status', (req, res) => {});
-
-// 로그인한 사용자의 정보(이름, 소속 부서, 프로필 이미지 경로) 요청 API
-app.get('/api/user/info', (req, res) => {});
 
 // 특정 페이지의 휴가/외출 목록 정보 요청 API
 app.get('/api/vacation/list', (req, res) => {
