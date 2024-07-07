@@ -4,9 +4,12 @@ import Button from '/src/components/Button/Button';
 import { getDate, getTime } from '/src/utils/getDateTime.js';
 import './Home.css';
 
-export default function Home(root) {
+export default function Home(root, userInfo) {
   // interval ID를 관리하기 위한 변수
   let intervalId = null;
+
+  // 로그인한 사용자의 정보
+  const { name, img, dept, work } = userInfo;
 
   // 프로필 Card 컴포넌트
   const profileCard = new Card({
@@ -18,13 +21,15 @@ export default function Home(root) {
       <p class="home_date">${getDate().today}</p>
     </div>
     <div class="home_welcome">
-      <p class="home_greet">안녕하세요, OOO님!</p>
+      <p class="home_greet">안녕하세요, ${name}님!</p>
       <p class="home_goodDay">오늘도 좋은 하루 보내세요!</p>
     </div>
   </div>
   <div class="home_profileBox">
-    <img class="home_profileImg" src="/public/assets/images/profile-default-mint.png" alt="profile" />
-    <span class="home_dept">OO부 OOO</span>
+    <img class="home_profileImg" src=${
+      img ? img : '/public/assets/images/profile-default-mint.png'
+    } alt="profile" />
+    <span class="home_dept">${dept} ${name}</span>
   </div>
 `,
   });

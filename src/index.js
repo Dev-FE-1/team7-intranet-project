@@ -1,4 +1,4 @@
-import { renderLayout, checkLogin } from './utils/common';
+import { renderLayout, checkLogin, userInfoApi } from './utils/common';
 import Home from '/src/pages/Home/Home.js';
 import Notice from '/src/pages/Notice/Notice.js';
 import Vacation from '/src/pages/Vacation/Vacation.js';
@@ -30,20 +30,23 @@ const navigatePage = (event) => {
 };
 
 // 페이지 이동을 처리하는 함수
-const route = () => {
+const route = async () => {
   const path = window.location.pathname;
   const wrap = document.querySelector('#wrap');
 
   // 로그인 여부 확인 후 해당 값에 따라 라우팅 처리
   if (checkLogin()) {
+    // 로그인한 유저의 정보 API 요청
+    const userInfo = await userInfoApi();
+
     // Layout 렌더링 적용
-    renderLayout();
+    renderLayout(userInfo);
 
     const root = document.querySelector('#root');
 
     switch (path) {
       case '/':
-        Home(root);
+        Home(root, userInfo);
         break;
       case '/notice':
         Notice(root);

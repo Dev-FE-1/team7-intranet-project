@@ -50,7 +50,15 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 22px;
+}
+.navber_text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.navbar_name {
+  font-size: 20px;
+  font-weight: bold;
 }
 .navbar_logoutIcon {
   color: white;

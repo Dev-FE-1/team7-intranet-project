@@ -1,6 +1,8 @@
 import './Navbar.css';
 
-export default function Navbar() {
+export default function Navbar(userInfo) {
+  const { name, img, admin } = userInfo;
+
   return `<div class="navbar_logo">
             <a href="/"><img src="/public/assets/images/logo.png" alt="logo"/></a>
           </div>
@@ -8,20 +10,24 @@ export default function Navbar() {
             <ul class="navbar_list">
               <li class="navbar_item"><a href="/notice">공지사항</a></li>
               <li class="navbar_item"><a href="/vacation">휴가/외출 관리</a></li>
-              <div class="navbar_line"></div>
-              <li class="navbar_item"><a href="/employee">임직원 관리</a></li>
+              ${
+                admin
+                  ? `<div class="navbar_line"></div>
+              <li class="navbar_item"><a href="/employee">임직원 관리</a></li>`
+                  : ''
+              } 
             </ul>
           </div>
           <div class="navbar_profile">
             <div class="navbar_user">
               <img
-              src="/public/assets/images/profile-default.png"
+              src=${img ? img : '/public/assets/images/profile-default.png'}
               class="navbar_photo"
               alt="navbarprofile"
               />
-              <div>
-                <div class="navbar_name">OOO님</div>
-                <div class="navbar_admin">관리자 계정</div>
+              <div class="navber_text">
+                <div class="navbar_name">${name}님</div>
+                ${admin ? `<div class="navbar_admin">관리자 계정</div>` : ''}
               </div>
             </div>
             <a class="navbar_logoutBtn" href="/login">
