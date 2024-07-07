@@ -7,7 +7,7 @@ export default function Navbar() {
           <div class="navbar_menu">
             <ul class="navbar_list">
               <li class="navbar_item"><a href="/notice">공지사항</a></li>
-              <li class="navbar_item"><a href="/vacation">휴가/외출관리</a></li>
+              <li class="navbar_item"><a href="/vacation">휴가/외출 관리</a></li>
               <div class="navbar_line"></div>
               <li class="navbar_item"><a href="/employee">임직원 관리</a></li>
             </ul>

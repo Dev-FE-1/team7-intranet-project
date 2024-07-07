@@ -53,7 +53,6 @@ export default class Modal {
     modal.classList.add('show');
     //닫기
     modal.addEventListener('click', (e) => {
-      console.log('useModal close');
       const btnClose = e.target.closest('.modalClose');
       if (!btnClose) return;
       e.target.closest('.modal').classList.remove('show');

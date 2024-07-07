@@ -1,86 +1,79 @@
 /*  font */
 @font-face {
   font-family: 'cafe24-ohsquare-air';
-  src: url(/src/assets/fonts/cafe24-ohsquare-air.woff);
+  src: url('/public/assets/fonts/cafe24-ohsquare-air.woff');
 }
 
 /* home */
 .home {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: auto;
   gap: 30px;
 }
 
-/* firstLine */
-.home__firstLine {
+.home .card {
   width: 100%;
-  display: flex;
-  gap: 30px;
-}
-
-/* secondLine */
-.home__secondLine {
-  width: 100%;
-  display: flex;
 }
 
 /* profileCard */
-.home__profileCard {
-  flex: 1.8;
+.home_profileCard {
+  grid-column: 1 / 2;
+  grid-row: 1;
   display: flex;
   overflow: hidden;
-  padding: 30px 50px;
   font-family: 'cafe24-ohsquare-air';
   color: #012e33;
 }
-.home__textBox {
+.home_textBox {
   width: 70%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 25px;
 }
-.home__today {
+.home_today {
   font-weight: bold;
 }
-.home__week {
+.home_week {
   font-size: 55px;
 }
-.home__date {
+.home_date {
   margin-top: 20px;
   font-size: 30px;
 }
-.home__welcome {
+.home_welcome {
   margin-top: 30px;
   font-size: 22px;
 }
-.home__goodDay {
+.home_goodDay {
   margin-top: 10px;
   color: #67cdcc;
 }
-.home__profileBox {
-  width: 40%;
-  height: 100%;
+.home_profileBox {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-right: 10px;
 }
-.home__profileImg {
-  width: 150px;
-  height: 150px;
+.home_profileImg {
+  width: 180px;
+  height: 180px;
   border-radius: 10px;
   background-color: #edf6f5;
 }
-.home__dept {
+.home_dept {
   margin-top: 15px;
   font-size: 18px;
 }
 
 /* workCard */
-.home__workCard {
-  flex: 1.2;
+.home_workCard {
+  grid-column: 2 / 3;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,21 +81,21 @@
   overflow: hidden;
   box-sizing: border-box;
 }
-.home__timeBox {
+.home_timeBox {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   border-bottom: 1px solid #e0e0e0;
 }
-.home__time {
+.home_time {
   margin-left: 10px;
   font-size: 55px;
   letter-spacing: 10px;
 }
-.home__timeText {
+.home_timeText {
   width: 70px;
   height: 100%;
   display: flex;
@@ -110,15 +103,15 @@
   justify-content: space-around;
   margin-left: 3px;
 }
-.home__now {
+.home_now {
   display: flex;
   justify-content: center;
 }
-.home__second {
+.home_second {
   font-size: 35px;
   letter-spacing: 5px;
 }
-.home__workBox {
+.home_workBox {
   width: 100%;
   height: 100%;
   display: flex;
@@ -127,7 +120,7 @@
   justify-content: center;
   align-items: center;
 }
-.home__notWorkInfo {
+.home_notWorkInfo {
   width: 100%;
   height: 100%;
   display: flex;
@@ -135,7 +128,7 @@
   justify-content: center;
   align-items: center;
 }
-.home__workInfo {
+.home_workInfo {
   width: 100%;
   height: 100%;
   display: flex;
@@ -144,13 +137,13 @@
   align-items: center;
   gap: 15px;
 }
-.home__workStatus {
+.home_workStatus {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 24px;
 }
-.home__workEmoji {
+.home_workEmoji {
   width: 35px;
   height: 35px;
   display: flex;
@@ -160,102 +153,59 @@
   border-radius: 10px;
   margin-right: 10px;
 }
-.home__workText {
+.home_workText {
   letter-spacing: 1px;
   padding-bottom: 40px;
 }
-.home__workBtn {
+.home_workBtn {
   width: 100%;
   display: flex;
   position: absolute;
   bottom: 0;
   justify-content: center;
+  font-weight: bold;
 }
-.home__workBtn:hover .home__workIcon {
+.home_workBtn:hover .home_workIcon {
   color: #fff;
 }
 
 /* noticeListCard */
-.home__noticeListCard {
-  flex: 1;
-  height: 440px;
+.home_noticeListCard {
+  grid-column: 1 / 3;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
   box-sizing: border-box;
-  padding: 30px 35px;
-  gap: 20px;
 }
-.home__labelMore {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 50px;
-  color: #012e33;
-}
-.home__noticeLabel {
-  font-size: 25px;
-  font-weight: bold;
-  margin-left: 5px;
-}
-.home__moreNotice {
+.home_moreNotice {
   margin-right: 10px;
   font-weight: bold;
   color: #012e33;
 }
-.home__moreNotice:hover {
-  cursor: pointer;
-}
-.home__noticeList {
+.home_noticeList {
   display: flex;
   flex: 1;
   gap: 25px;
 }
-.home__noticeCard {
+.home_noticeCard {
   height: 330px;
   flex: 1;
   margin: 0;
 }
-.home__noticeCard:hover {
+.home_noticeCard:hover {
   cursor: pointer;
 }
 
 /* workModal */
-.home__modalText {
-  padding: 30px 0;
+.modal_inner {
+  display: flex;
+  align-items: center;
 }
-
-/* noticeModal */
-.home__noticeModalInner {
-  width: 30%;
-  max-height: calc(100vh - 20px);
-  padding: 20px 40px;
-  overflow-y: auto;
-  box-sizing: border-box;
+.modal_title {
+  width: 100%;
 }
-.home__noticeModalBar {
-  font-size: 18px;
-  font-weight: bold;
-  padding: 15px 0;
-}
-.home__noticeModalTitle {
-  text-align: left;
-}
-.home__noticeModalDate {
-  font-size: 15px;
-  text-align: right;
-  padding: 0px 0px 10px;
-  border-bottom: 1px solid #dfdfdf;
-}
-.home__noticeModalText {
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-}
-.home__noticeModalBtn {
-  width: 100px;
-  margin: 0 auto;
+.modal_content {
+  margin: 50px 0;
 }
