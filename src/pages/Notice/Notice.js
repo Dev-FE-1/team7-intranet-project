@@ -17,6 +17,13 @@ export default function Notice(root) {
   const noticeUpload=new Button({
     label:'등록', 
     classList:'btn--notice'})
+  
+  const noticeCard = new Card({
+    page :{title:'공지사항',
+    searchArea:[noticeSearch.render() + noticeUpload.render()],
+    content:``
+    }
+  })
 
   //초기 페이지
   let currentPage = 1;
@@ -24,7 +31,7 @@ export default function Notice(root) {
   let searchQuery='';
 
   root.innerHTML = `
-  <div class="notice"></div>
+  <div class="notice">${noticeCard.render()}</div>
   <div class="modalContainer"></div>
   `;
 
@@ -130,18 +137,10 @@ export default function Notice(root) {
   // 공지사항 카드가 추가된 공지사항 페이지를 그려주는 함수
   function addNoticeCard(container, cardData, append){
     let isData=true
-    const noticeCard = new Card({
-      page :{title:'공지사항',
-      searchArea:[noticeSearch.render() + noticeUpload.render()],
-      content:`
-        ${createCards(cardData)}
-        `
-      }
-    })
 
     //append 상태이면 새로운 목록을 불러오는 상태이므로 스켈레톤을 지우고 다음 목록을 가져옴
     if(!append){
-      container.innerHTML=`${noticeCard.render()}`;
+      container.querySelector('.page_content').innerHTML=createCards(cardData);
     }else{
       container.querySelector('.page_content').insertAdjacentHTML('beforeend', createCards(cardData));
 
@@ -221,5 +220,4 @@ export default function Notice(root) {
   
 
   fetchData(currentPage)
-  //contentData(currentPage)
 }
