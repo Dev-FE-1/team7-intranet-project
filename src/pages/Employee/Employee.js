@@ -1,12 +1,13 @@
 import Card from '../../components/Card/Card.js';
 import Table from '../../components/Table/Table.js';
 import Pagination from '../../components/Pagination/Pagination.js';
-import Button from '../../components/Button/Button.js';
+import Input from '../../components/Input/Input.js';
 import Modal from '../../components/Modal/Modal.js';
 import './Employee.css';
 
 export default function Employee(root) {
   // 전체 임직원 호출API
+
   fetch('/api/employee/list')
     .then((response) => response.json())
     .then((data) => {
@@ -30,93 +31,160 @@ export default function Employee(root) {
           dataId: emp.userId,
         })),
         classList: 'table_employee',
-        rowClass: 'employeeDetail',
+        rowClass: 'employee_detail',
       });
 
-      // 페이지 15명씩 1페이지 분할
+      // 카드 내 테이블, 페이지네이션 렌더링
       const pagination = new Pagination({
         totalCnt: employeeList.length,
         currentPage: 1,
         dataPerPage: 15,
         pagingPerPage: 5,
       });
+
+      //공지사항 페이지 상단 검색란
+      const employeeSearch = new Input({
+        type: 'search',
+        className: 'employee_search',
+        placeholder: '이름을 입력하세요.',
+      });
+
+      // 모달용 임시 데이터 = 모달 내 불러오는 동적 데이터로 변환 필요
+      const sampleData = [
+        {
+          userId: '7',
+          name: '김민지',
+          position: '차장',
+          email: 'seojunbag@77cm.co.kr',
+          password: '1234',
+          phone: '010-6440-7770',
+          birth: '1962-04-08',
+          dept: '마케팅팀',
+          leftVaca: 17,
+          admin: false,
+          img: '/server/images/profile/22.jpg',
+        },
+      ];
+
+      // 직원 모달창 인풋 생성
+      const employeeinputs = [
+        {
+          type: 'text',
+          className: 'user_id',
+          label: '사원번호',
+          value: sampleData[0].userId,
+        },
+        {
+          type: 'text',
+          className: 'user_name',
+          label: '이름',
+          value: sampleData[0].name,
+        },
+        {
+          type: 'text',
+          className: 'user_dept',
+          label: '부서',
+          value: sampleData[0].dept,
+        },
+        {
+          type: 'text',
+          className: 'user_position',
+          label: '직급',
+          value: sampleData[0].position,
+        },
+        {
+          type: 'date',
+          className: 'user_birth',
+          label: '생년월일',
+          value: sampleData[0].birth,
+        },
+        {
+          type: 'email',
+          className: 'user_email',
+          label: '이메일',
+          value: sampleData[0].email,
+        },
+        {
+          type: 'tel',
+          className: 'user_phone',
+          label: '전화번호',
+          value: sampleData[0].phone,
+        },
+      ];
+
+      const inputsHTML = employeeinputs
+        .map(
+          (input) =>
+            `<div class="employeeForm_group">
+          <label for="${input.className}">${input.label}</label>
+          ${new Input(input).render()}
+        </div>`
+        )
+        .join('');
+
+      // 모달 생성
+      const modal = new Modal({
+        name: 'employee_modal', // 모달 클래스명 String (*필수값)
+        title: '직원 정보',
+        size: 'md',
+        buttons: [
+          { label: '닫기', type: 'light', classList: 'modalClose' },
+          { label: '수정', classList: 'modalClose' },
+        ],
+        classList: 'employee_modal',
+        content: `<div class="employee_modal">
+          <div class="modal_employeeImage">
+            <div class="employeeImage uploadImage">
+          <img src=${sampleData[0].img} class="employeeImage uploadImage" />
+            </div>
+          </div>
+          <form class="employeeForm">
+            ${inputsHTML}
+          </form>
+        </div>
+        `,
+      });
+
       // 페이지 UI 통일 카드
-      // 카드 내 테이블, 페이지네이션 렌더링
       const card = new Card({
         page: {
-          title: '휴가/외출 관리',
+          title: '임직원 목록',
+          searchArea: `<div class="listTable">${employeeSearch.render()}</div>`,
           content: `
             <div class="listTable">${table.render()}</div>
-            <div class="pagination">${pagination.render()}</div>
+            <div class="employeeModal">${modal.render()}</div>
+            <div class="pagination">${pagination.render()} </div>
             `,
         },
       });
+
       // 카드 렌더링
       root.innerHTML = `<div>${card.render()}</div>`;
     })
+
     // API 에러 처리
     .catch((error) => {
       console.error('Error:', error);
     });
 
-  // const employeeModalContent = `
-  //   <div class="employee_modal">
-  //     <div class="modal_employeeImage">
-  //       <div class="employeeImage">
-  //         <img src=${data[0].img} class="employeeImage uploadImage" />
-  //       </div>
-  //     </div>
-  //     <form class="employeeForm"></form>
-  //       <div class="employeeForm_group">
-  //         <label for="employee_userID">사원번호</label>
-  //         <input readonly type="text" id="employee_id" value='${data[0].userId}' />
-  //       </div>
-  //       <div class="employeeForm_group">
-  //         <label for="employee_name">이름</label>
-  //         <input readonly type="text" id="employee_name" value=${data[0].name} />
-  //       </div>
-  //       <div class="employeeForm_group">
-  //         <label for="employee_dept">부서</label>
-  //         <input readonly type="text" id="employee_dept" value=${data[0].dept} />
-  //       </div>
-  //       <div class="employeeForm_group">
-  //         <label for="employee_position">직급</label>
-  //         <input readonly type="text" id="employee_position" value=${data[0].position} />
-  //       </div>
-  //       <div class="employeeForm_group">
-  //         <label for="employee_birth">생년월일</label>
-  //         <input type="date" id="employee_birth" value=${data[0].birth} />
-  //       </div>
-  //       <div class="employeeForm_group">
-  //         <label for="employee_email">이메일</label>
-  //         <input readonly type="email" id="employee_email" value=${data[0].email} />
-  //       </div>
-  //       <div class="employeeForm_group">
-  //         <label for="employee_phone">전화번호</label>
-  //         <input type="tel" id="employee_phone" value=${data[0].phone} />
-  //       </div>
-  //     </form>
-  //   </div>
-  // `;
+  // // 이미지 업로드 함수 - 서버 업로드 필요
+  // const uploadImage = document.querySelector('.uploadImage');
 
-  // document.querySelectorAll('.employeeDetail').forEach((row, index) => {
-  //   row.setAttribute('data-id', employeeList[index].userId);
-  // });
-
-  // const employeeModal = new Modal({
-  //   name: 'modal_employee',
-  //   buttons: [
-  //     { label: '닫기', type: 'button', classList: 'modalClose' },
-  //     { label: '저장', type: 'submit', classList: 'modalSave' },
-  //   ],
-  //   title: '사원 정보',
-  //   content: employeeModalContent,
-  // });
-
-  // <div>${employeeModal.render()}</div>;
-
-  // document.querySelector('.name').addEventListener('click', (e) => {
-  //   e.preventDefault();
-  //   employeeModal.useModal();
+  // uploadImage.addEventListener('click', () => {
+  //   const input = document.createElement('input');
+  //   input.type = 'file';
+  //   input.accept = 'image/*';
+  //   input.addEventListener('change', (event) => {
+  //     const file = event.target.files[0];
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       uploadImage.src = e.target.result;
+  //       uploadImage.style.objectFit = 'cover';
+  //       uploadImage.style.width = '300px';
+  //       uploadImage.style.height = '300px';
+  //     };
+  //     reader.readAsDataURL(file);
+  //   });
+  //   input.click();
   // });
 }

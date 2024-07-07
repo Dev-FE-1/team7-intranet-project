@@ -197,65 +197,10 @@ app.get('/api/employee/list', (req, res) => {
 });
 
 // 임직원 상세 정보 요청 API
-app.get('/api/employee/:userId', (req, res) => {
-  const userId = req.params.userId;
-  fs.readFile('./server/data/user.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: err,
-        data: null,
-      });
-    }
-    try {
-      const jsonData = JSON.parse(data);
-      const user = jsonData.find((user) => user.id === userId);
-      if (!user) {
-        return res.status(404).send({
-          status: 'Not Found',
-          message: 'User not found',
-          data: null,
-        });
-      }
-      res.json(user);
-    } catch (parseErr) {
-      console.error('Error parsing JSON file:', parseErr);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: parseErr,
-        data: null,
-      });
-    }
-  });
-});
+app.get('/api/employee/info', (req, res) => {});
 
 // 임직원 상세 정보 수정 API
 app.put('/api/employee/info', (req, res) => {});
-// 수정요청을 받으면 user.json의 내용을 변경
-app.put('/api/employee/update', (req, res) => {
-  const newData = req.body; // 새로운 데이터
-  fs.writeFile(
-    './server/data/user.json',
-    JSON.stringify(newData),
-    'utf8',
-    (err) => {
-      if (err) {
-        console.error('Error writing JSON file:', err);
-        return res.status(500).send({
-          status: 'Internal Server Error',
-          message: err,
-          data: null,
-        });
-      }
-      res.json({
-        status: 'Success',
-        message: 'User data updated successfully',
-        data: newData,
-      });
-    }
-  );
-});
 
 app.listen(port, () => {
   console.log(`ready to ${port}`);

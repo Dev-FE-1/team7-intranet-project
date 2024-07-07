@@ -5,15 +5,12 @@
 }
 
 .name {
-  width: 4vw;
-  margin-left: 5px;
+  width: 100%;
+  margin-left: 10px;
   align-content: center;
   overflow: hidden;
   text-overflow: clip;
   white-space: nowrap;
-}
-.listTable {
-  margin: 30px 0 20px;
 }
 
 .table td {
@@ -46,12 +43,11 @@
 
 .employeeForm {
   display: relative;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 .employeeForm_group {
   display: flex;
-  margin: 10px 0;
+  margin: 8px 0;
+  margin-bottom: auto;
 }
 .employeeForm_group label {
   width: 80px;
@@ -63,9 +59,7 @@
 }
 .employeeForm_group input {
   width: calc(100% - 90px);
-  padding: 5px;
-  border: 1px solid #69d0cf;
-  border-radius: 5px;
+  height: 35px;
 }
 
 /* 여기 밑에는 노노 */
