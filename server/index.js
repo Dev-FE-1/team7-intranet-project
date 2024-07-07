@@ -1,7 +1,12 @@
 import express from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import { getJsonData, findKeyValue } from './utils/common.js';
+import {
+  getJsonData,
+  setJsonData,
+  findKeyValue,
+  getDateTime,
+} from './utils/common.js';
 import fs from 'fs';
 
 const port = process.env.PORT || 8080;
@@ -62,6 +67,9 @@ app.get('/api/user/info', async (req, res) => {
   const userId = req.query.userId;
   const userData = await getJsonData('./server/data/user.json');
   const [user] = findKeyValue(userData, 'userId', userId);
+  const atdData = await getJsonData('./server/data/attendance.json');
+  const atd = findKeyValue(atdData, 'userId', userId);
+  const todayAtd = findKeyValue(atd, 'date', today);
   const { name, dept, img, admin } = user;
   const userInfo = { name, dept, img, admin };
 
@@ -69,8 +77,55 @@ app.get('/api/user/info', async (req, res) => {
 });
 
 // 근무 시작/종료 API
-app.post('/api/user/work/start', (req, res) => {});
-app.post('/api/user/work/end', (req, res) => {});
+app.post('/api/user/work', async (req, res) => {
+  const { type } = req.body;
+  const userId = +req.cookies.userId;
+  const today = getDateTime().today;
+  const now = getDateTime().time;
+  const atdData = await getJsonData('./server/data/attendance.json');
+  const atd = findKeyValue(atdData, 'userId', userId);
+
+  // 해당 사원이 출근한 이력이 있을 경우
+  if (atd) {
+    const todayAtd = findKeyValue(atd, 'date', today);
+
+    // 오늘 날짜에 출근한 이력이 있는지 확인
+    if (todayAtd && type === 'end') {
+      todayAtd.eTime = now;
+
+      atdData[todayAtd.atdId - 1] = todayAtd;
+    } else if (!todayAtd && type === 'start') {
+      atdData.push({
+        atdId: atdData.length,
+        date: today,
+        userId: userId,
+        sTime: now,
+        eTime: null,
+      });
+    }
+  } else {
+    atdData.push({
+      atdId: atdData.length,
+      date: today,
+      userId: userId,
+      sTime: now,
+      eTime: null,
+    });
+  }
+
+  const writeResult = await setJsonData(
+    './server/data/attendance.json',
+    atdData
+  );
+
+  if (writeResult) {
+    type === 'start'
+      ? res.status(200).send({ type: 'start' })
+      : res.status(200).send({ type: 'end' });
+  } else {
+    res.status(401).send({ message: '근무 시작/종료 실패' });
+  }
+});
 
 // 특정 페이지의 휴가/외출 목록 정보 요청 API
 app.get('/api/vacation/list', (req, res) => {

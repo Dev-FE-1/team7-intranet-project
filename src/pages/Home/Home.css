@@ -92,7 +92,7 @@
 }
 .home_time {
   margin-left: 10px;
-  font-size: 55px;
+  font-size: 50px;
   letter-spacing: 10px;
 }
 .home_timeText {
@@ -108,7 +108,7 @@
   justify-content: center;
 }
 .home_second {
-  font-size: 35px;
+  font-size: 30px;
   letter-spacing: 5px;
 }
 .home_workBox {
@@ -141,7 +141,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 22px;
+  font-weight: bold;
 }
 .home_workEmoji {
   width: 35px;
@@ -156,9 +157,10 @@
 .home_workText {
   letter-spacing: 1px;
   padding-bottom: 40px;
+  margin-top: 10px;
 }
 .home_workBtn {
-  width: 100%;
+  width: 300px;
   display: flex;
   position: absolute;
   bottom: 0;
@@ -199,13 +201,13 @@
 }
 
 /* workModal */
-.modal_inner {
+.home_workModal .modal_inner {
   display: flex;
   align-items: center;
 }
-.modal_title {
+.home_workModal .modal_title {
   width: 100%;
 }
-.modal_content {
+.home_workModal .modal_content {
   margin: 50px 0;
 }
