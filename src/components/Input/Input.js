@@ -10,6 +10,7 @@ import './Input.css';
     disabled : true(비활성화 O), false(비활성화 X)
     required : true(필수 입력 O), false(필수 입력 X)
     maxLength : 입력 가능한 최대 길이(정수 입력)
+    dateMin : type이 date일때 min 속성 값 
   }
 */
 export default class Input {
@@ -27,6 +28,7 @@ export default class Input {
       disabled,
       required,
       maxLength,
+      dateMin,
     } = this.props;
 
     switch (type) {
@@ -60,6 +62,7 @@ export default class Input {
   ${maxLength ? `maxLength="${maxLength}"` : ''}
   ${disabled ? 'disabled' : ''}
   ${required ? 'required' : ''}
+  ${dateMin ? `min="${dateMin}"` : ''}
   />`;
 
       default:
