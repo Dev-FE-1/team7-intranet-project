@@ -4,6 +4,7 @@ import '/src/components/Card/Card.css';
 //   img : {url : String, text: String },
 //   fill : boolean,
 //   content : String  >> (주의)페이지콘텐츠의 경우 [page]의 value값으로 보내주세요. page:{content:''}
+//   classList : String >> 카드 자체에 추가적으로 적용할 클래스
 // }
 
 // 호출 예시
@@ -16,7 +17,7 @@ export default class Card {
     this.props = props || {};
   }
   render() {
-    const { page, img, fill, content, dataId } = this.props;
+    const { page, img, fill, content, dataId, classList } = this.props;
     let temp = content;
     let type = '';
 
@@ -40,9 +41,9 @@ export default class Card {
       }<div class="page_content">${page.content || ''}</div>`;
     }
 
-    return `<div class="card${type}${fill ? ' card_fill' : ''}"${
-      dataId ? ` data-id=${dataId}` : ''
-    }>
+    return `<div class="card${type}${fill ? ' card_fill' : ''}${
+      classList ? ` ${classList}` : ''
+    }"${dataId ? ` data-id=${dataId}` : ''}>
       ${temp}
     </div>`;
   }

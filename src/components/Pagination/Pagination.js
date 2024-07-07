@@ -1,6 +1,6 @@
 import './Pagination.css';
 
-//const{페이지네이션을 감싸는 컨테이너 클래스, 목록 전체 갯수, 한 페이지에 보여줄 목록의 갯수, 한 페이지에 보여줄 페이지네이션 갯수, 목록 데이터}
+//const{목록 전체 갯수, 초기 페이지(기본값 1), 한 페이지에 보여줄 목록의 갯수, 한 페이지에 보여줄 페이지네이션 갯수, 목록 데이터}
 //사용예시
 //<div class = "pagination_test">     --> 페이지네이션을 감싸는 컨테이너 클래스를 작업 중인 페이지에서 제작
 //</div>
@@ -29,7 +29,7 @@ class Pagination {
 
     let pagingHtml = `
       <ul class="pagination">
-        <li class="btn btn--first" id="first"><a href="#">처음</a></li>
+        <li class="pagination_btn btn--first" id="first"><a href="#">처음</a></li>
         <li class="pagination_arrow" id="prev"><a href="#">◀</a></li>`;
 
     for (let i = firstPage; i <= lastPage; i++) {
@@ -42,7 +42,7 @@ class Pagination {
 
     pagingHtml += `
         <li class="pagination_arrow" id="next"><a href="#">▶</a></li>
-        <li class="btn btn--end" id="last"><a href="#">마지막</a></li>
+        <li class="pagination_btn btn--end" id="last"><a href="#">마지막</a></li>
       </ul>
     `;
     return pagingHtml;

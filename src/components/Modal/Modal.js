@@ -35,11 +35,23 @@ export default class Modal {
     this.content = content;
   }
 
-  useModal() {
+  // 모달 열기
+  show() {
     const modal = document.querySelector(`.modal`);
-    // 모달 열기
     modal.classList.add('show');
-    // 모달 닫기
+  }
+
+  // 모달 닫기
+  hide() {
+    const modal = document.querySelector(`.modal`);
+    modal.classList.remove('show');
+  }
+
+  useModal() {
+    //열기
+    const modal = document.querySelector(`.modal`);
+    modal.classList.add('show');
+    //닫기
     modal.addEventListener('click', (e) => {
       const btnClose = e.target.closest('.modalClose');
       if (!btnClose) return;
