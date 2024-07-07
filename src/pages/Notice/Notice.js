@@ -32,28 +32,78 @@ export default function Notice(root) {
 
   // notice api 요청 
   function fetchData(page, append=false, search=''){
-    if(!append){
-      notiContainer.innerHTML = ''
-    }else{
+
+    if(append){
       const skeletonHtml = createSkeleton(itemsPerPage)
       notiContainer.querySelector('.page_content').insertAdjacentHTML('beforeend', skeletonHtml)
     }
 
-  axios.get(`/api/notice/list`,{
-    params:{
-      page:page,
-      itemsPerPage:itemsPerPage,
-      search:searchQuery
-    }
-  })
-    .then(response=>{
-      let cardData = response.data.data; 
+    axios.get(`/api/notice/list`,{
+      params:{
+        page:page,
+        itemsPerPage:itemsPerPage,
+        search:searchQuery
+      }
+    })
+      .then(response=>{
+        let cardData = response.data.data; 
+        addNoticeCard(notiContainer, cardData, append);
+        useNoticeModal();
+        Search();
+      })
+      .catch(error => {
+        if(error.response && error.response.status === 404){
+          displayNotMessage()
+        }else{
+        console.error('Error fetching data:', error);
+        }
+      });
 
-      addNoticeCard(notiContainer, cardData, append);
+      // 검색 결과가 일치하지 않으면 검색결과가 없습니다 노출
+      function displayNotMessage(){
+        const returnCard = new Card({
+          page :{title:'공지사항',
+          searchArea:[noticeSearch.render() + noticeUpload.render()],
+          content:`
+          <div class="noticenone">검색결과가 없습니다.</div>
+            `
+          }
+        })
+        notiContainer.innerHTML=returnCard.render()
+      }
+  } 
 
-    }).catch(error => {
-      console.error('Error fetching data:', error);
-    });
+  //공지사항 상세 정보 api 요청
+  function contentData(noticeId){
+    axios.get(`api/notice/info`,{
+      params:{
+        noticeId:noticeId
+      }
+    })
+      .then(response=>{
+        let cardContent = response.data.jsonData.data;
+        cardContent = cardContent.find((item)=>Number(item.noticeId) === Number(noticeId))
+        console.log(cardContent)
+        if(cardContent){
+            //공지사항 상세 내용을 확인할 수 있는 모달 
+            const noticeModal = new Modal({
+              name: 'notice_modal',
+              size: 'md',
+              buttons: [{ label: '닫기', classList: 'btn--notice--close modalClose' }],
+              content: `<p class="notice__modalTitle">${cardContent.title}</p>
+                        <p class="notice__modalDate">${cardContent.date}</p>
+                          <div class="notice__modalImg">
+                              <img src="${cardContent.img}" alt="${cardContent.title}"/>
+                          </div>
+                        <div class="notice__modalContent">${cardContent.content}</div>`
+              });
+              document.querySelector('.modalContainer').innerHTML = noticeModal.render();
+              noticeModal.useModal();
+        }
+      })
+      .catch(error =>{
+        console.log('contentData Error :', error)
+      })
   }
 
   // 데이터에 들어있는 카드의 갯수 만큼 카드를 추가하는 함수
@@ -68,6 +118,7 @@ export default function Notice(root) {
     }).join('');
   }
 
+  //스켈레톤 생성 함수
   function createSkeleton(num){
     let skeletons = ''
     for(let i=0;i<num;i++){
@@ -85,7 +136,8 @@ export default function Notice(root) {
       content:`
         ${createCards(cardData)}
         `
-      }});
+      }
+    })
 
     //append 상태이면 새로운 목록을 불러오는 상태이므로 스켈레톤을 지우고 다음 목록을 가져옴
     if(!append){
@@ -97,42 +149,15 @@ export default function Notice(root) {
         skeletons.forEach((skeleton)=>{
           setTimeout(()=>skeleton.remove(),300)
         })
-      }
+    }
 
      //더 이상 카드 데이터가 없으면 false
     if(cardData.length<itemsPerPage){
       isData=false;
     }
 
-
-    //공지사항 상세 내용을 확인할 수 있는 모달 함수
-    let allCard = container.querySelectorAll('.card.card_img')
-
-    allCard.forEach((card)=>{
-      card.addEventListener('click',(e)=>{
-        if (card) {
-          const cardId = card.getAttribute('data-id');
-          let data = cardData.find((el) => Number(el.noticeId) === Number(cardId));
-          if (data) {
-            const noticeModal = new Modal({
-              name: 'notice_modal',
-              size: 'md',
-              buttons: [{ label: '닫기', classList: 'btn--notice--close modalClose' }],
-              content: `<p class="notice__modalTitle">${data.title}</p>
-                        <p class="notice__modalDate">${data.date}</p>
-                        <div class="notice__modalImg">
-                          <img src="${data.img}" alt="${data.title}"/>
-                        </div>
-                        <div class="notice__modalContent">${data.content}</div>`
-            });
-            document.querySelector('.modalContainer').innerHTML = noticeModal.render();
-            noticeModal.useModal();
-          }
-        }
-      })
-    })
-
     //무한 스크롤
+    let allCard = container.querySelectorAll('.card.card_img')
     const lastCard = Array.from(allCard).slice(-1)
     lastCard.forEach((card)=>{
       const observer = new IntersectionObserver((entries)=>{
@@ -155,5 +180,46 @@ export default function Notice(root) {
     })
   }
 
+  //모달 호출 함수
+  function useNoticeModal(){
+    let allCard = notiContainer.querySelectorAll('.card.card_img')
+    allCard.forEach((card)=>{
+    card.addEventListener('click',(e)=>{
+      if (card) {
+        const cardId = card.getAttribute('data-id');
+        contentData(cardId)
+        }
+      })
+    })
+  }
+
+  function Search(){
+    const searchInput = notiContainer.querySelector('.notice__search.input')
+    const searchBtn = notiContainer.querySelector('.input_searchIcon')
+
+    searchInput.addEventListener('keyup', (e)=>{
+      if((e.key) === 'Enter'){
+        e.preventDefault()
+        const searchKeyword = searchInput.value.trim()
+        if(searchKeyword !==''){
+          currentPage = 1
+          searchQuery = searchKeyword
+          fetchData(currentPage, false, searchKeyword)
+        }
+      }
+    })
+    searchBtn.addEventListener('click',(e)=>{
+      e.preventDefault()
+      const searchKeyword = searchInput.value.trim()
+      if(searchKeyword !==''){
+        currentPage = 1
+        searchQuery = searchKeyword
+        fetchData(currentPage, false, searchKeyword)
+      }
+    })
+  }
+  
+
   fetchData(currentPage)
+  //contentData(currentPage)
 }

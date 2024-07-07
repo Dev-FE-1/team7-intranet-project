@@ -102,7 +102,43 @@ app.post('/api/vacation', (req, res) => {});
 app.get('/api/notice/recent', (req, res) => {});
 
 // 공지사항 상세 정보 요청 API
-app.get('/api/notice/info', (req, res) => {});
+app.get('/api/notice/info', (req, res) => {
+  const filepath = './server/data/notice.json';
+
+  fs.readFile(filepath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: err.message,
+        data: null,
+      });
+    }
+    try {
+      let jsonData = JSON.parse(data);
+
+      //업로드 날짜 최신순으로 불러오도록 함
+      jsonData.data = jsonData.data.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      const noticeId = req.query.noticeId
+      //json 형태로 응답을 돌려줌
+      res.json({
+        jsonData,
+        noticeId: noticeId
+      });
+    } catch (parseErr) {
+      console.error('Error parsing JSON file:', parseErr);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: parseErr.message,
+        data: null,
+      });
+    }
+  });
+
+
+});
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
 app.get('/api/notice/list', (req, res) => {
@@ -136,12 +172,17 @@ app.get('/api/notice/list', (req, res) => {
 
       if (req.query.search) {
         const searchQuery = req.query.search.trim();
+        const keywords = searchQuery.split(' ')
         filterData = filterData.filter((item) => {
-          return (
-            item.title.includes(searchQuery) ||
-            item.content.includes(searchQuery)
-          );
+          return keywords.every((keyword)=>(
+            item.title.includes(keyword) ||
+            item.content.includes(keyword)
+          )) 
         });
+
+        if(filterData.length === 0){
+          return res.status(404).json({ message: '해당 키워드가 없습니다' });
+        }
       }
       const sliceData = filterData.slice(startIndex, endIndex);
 

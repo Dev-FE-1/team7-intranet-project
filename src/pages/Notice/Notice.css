@@ -39,6 +39,14 @@
   padding:auto 10px;
   font-weight: 500;
 }
+.page_content .noticenone{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height:580px;
+  font-size: 18px;
+  margin: 0 auto;
+}
 
 /*skeleton*/
 .skeleton {
