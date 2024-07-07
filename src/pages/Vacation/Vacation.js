@@ -96,6 +96,7 @@ export default function Vacation(root) {
       const dateInput = new Input({
         type: 'date',
         className: 'vacation_inputText',
+        dateMin: new Date().toISOString().split('T')[0],
       });
       modal.update({
         content: `<div class="vacation_form">
@@ -335,6 +336,7 @@ function handleRadio() {
   const dateInput = new Input({
     type: 'date',
     className: 'vacation_inputText',
+    dateMin: new Date().toISOString().split('T')[0],
   });
   const type2STimeSelect = new SelectBox({
     className: 'vacation_sDateSelect',
