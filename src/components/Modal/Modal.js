@@ -78,7 +78,7 @@ export default class Modal {
       .querySelector('.modal')
       .classList.add(`${updateName}`, `modal_${updateSize}`);
     if (updateClassList) {
-      document.querySelector('.modal').classList.add(` ${updateClassList}`);
+      document.querySelector('.modal').classList.add(`${updateClassList}`);
     }
     document.querySelector('.modal_title').innerHTML = updateTitle;
     document.querySelector('.modal_content').innerHTML = updateContent;

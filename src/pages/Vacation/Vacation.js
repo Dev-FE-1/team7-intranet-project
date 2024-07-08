@@ -15,10 +15,11 @@ import '/src/pages/Vacation/Vacation.css';
 export default function Vacation(root) {
   fetchData('list');
   let myData = [];
+  const userId = getUserIdFromCookie();
   async function fetchData(filter) {
     try {
       const res = await axios.get(`/api/vacation/${filter}`);
-      myData = res.data.data.filter((d) => d.userId === '3');
+      myData = res.data.filter((d) => d.userId === '3');
       renderPage(myData);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -166,7 +167,7 @@ export default function Vacation(root) {
         });
 
         modal.update({
-          name: '.vacation_detailModal',
+          name: 'vacation_detailModal',
           title: '상 세',
           buttons: [{ label: '확인', type: 'light', classList: 'modalClose' }],
           content: `<div class="vacation_form">
@@ -302,11 +303,10 @@ export default function Vacation(root) {
             sDate = `${sDate} ${sTime}`;
           }
           const note = document.querySelector('.reason').value;
-          const data = { userId: 3, type, sDate, eDate, note };
+          const data = { userId: userId, type, sDate, eDate, note };
+          //유효성 검사 후 통과하면 데이터 전송함수 호출
           if (validateForm(data)) {
             submitData(data);
-            alert('휴가/외출 신청이 완료되었습니다.');
-            modal.hide();
           } else {
             document.querySelector('.modal').classList.add('shake');
             document.querySelector('.form_alert').classList.add('show');
@@ -323,13 +323,30 @@ export default function Vacation(root) {
           return;
         }
       });
-  }
 
-  // 휴가/외출 신청 데이터 전송
-  function submitData(data) {
-    //서버로 데이터 보내는 로직 추가하고 새로운 데이터 받기
-    const newData = myData; //서버로 받은 새로운 데이터로 수정 할 것
-    renderPage(newData);
+    // 서버로 신청 폼 데이터를 전송하는 함수
+    async function submitData(data) {
+      try {
+        const response = await axios.post('/api/vacation', data);
+        modal.update({
+          size: 'sm',
+          name: 'vacation_doneModal',
+          buttons: [{ label: '확인', type: 'light', classList: 'modalClose' }],
+          content: `신청이 완료되었습니다.`,
+          classList: 'show',
+        });
+        document
+          .querySelector('.vacation_doneModal')
+          .addEventListener('click', (e) => {
+            if (e.target !== document.querySelector('.modalClose')) return;
+            fetchData('list');
+          });
+        // 여기에 성공 시 처리할 로직을 추가하세요 (예: 사용자에게 성공 메시지 보여주기)
+      } catch (error) {
+        console.error('신청 제출 중 오류가 발생했습니다.', error);
+        // 여기에 오류 발생 시 처리할 로직을 추가하세요 (예: 오류 메시지 표시)
+      }
+    }
   }
 }
 
@@ -460,7 +477,6 @@ function switchCate(type) {
 // 휴가/외출 신청 유효성검사
 function validateForm(data) {
   const { type, sDate, eDate } = data;
-  console.log(data);
   const alert = document.querySelector('.form_alert');
 
   // 1. 연차 필수 입력 항목 확인
@@ -513,4 +529,15 @@ function validateForm(data) {
 
   // 모든 조건을 통과하면 true 반환
   return true;
+}
+
+function getUserIdFromCookie() {
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === 'userId') {
+      return value;
+    }
+  }
+  return null; // 해당 쿠키 이름을 가진 쿠키를 찾지 못한 경우
 }

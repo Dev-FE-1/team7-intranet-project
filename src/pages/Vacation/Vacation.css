@@ -74,8 +74,15 @@
   justify-content: space-between;
 }
 
+.vacation .vacation_doneModal .modal_content {
+  min-height: 200px;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 1100px) {
-  .vacation .modal_md .modal_inner {
+  .vacation .modal_md .modal_inner,
+  .vacation .modal_sm .modal_inner {
     width: 80%;
   }
 }

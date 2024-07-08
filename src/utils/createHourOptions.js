@@ -4,7 +4,6 @@ export default function createHourOptions(selectedDate) {
   const currentHour = now.getHours();
   const currentDate = now.toISOString().split('T')[0]; // 오늘 날짜 (yyyy-mm-dd 형식)
   selectedDate = selectedDate || currentDate;
-  console.log(selectedDate);
   if (selectedDate > currentDate) {
     // 선택된 날짜가 오늘 이후의 날짜일 경우
     for (let hour = 9; hour <= 18; hour++) {
