@@ -123,16 +123,16 @@ export default function Employee(root) {
         .join('');
 
       // 모달 생성
-      const modal = new Modal({
-        name: 'employee_modal', // 모달 클래스명 String (*필수값)
-        title: '직원 정보',
-        size: 'md',
-        buttons: [
-          { label: '닫기', type: 'light', classList: 'modalClose' },
-          { label: '수정', classList: 'modalClose' },
-        ],
-        classList: 'employee_modal',
-        content: `<div class="employee_modal">
+      document.addEventListener('DOMContentLoaded', () => {
+        const employeeModal = new Modal({
+          name: 'employee_modal', // 모달 클래스명 String (*필수값)
+          title: '직원 정보',
+          size: 'md',
+          buttons: [
+            { label: '닫기', type: 'light', classList: 'modalClose' },
+            { label: '수정', classList: 'modalClose' },
+          ],
+          content: `<div class="employee_modal">
           <div class="modal_employeeImage">
             <div class="employeeImage uploadImage">
           <img src=${sampleData[0].img} class="employeeImage uploadImage" />
@@ -143,6 +143,12 @@ export default function Employee(root) {
           </form>
         </div>
         `,
+        });
+        document
+          .querySelector('.employee_detail')
+          .addEventListener('click', () => {
+            employeeModal.useModal();
+          });
       });
 
       // 페이지 UI 통일 카드
@@ -152,14 +158,16 @@ export default function Employee(root) {
           searchArea: `<div class="listTable">${employeeSearch.render()}</div>`,
           content: `
             <div class="listTable">${table.render()}</div>
-            <div class="employeeModal">${modal.render()}</div>
+            
             <div class="pagination">${pagination.render()} </div>
             `,
         },
       });
 
       // 카드 렌더링
-      root.innerHTML = `<div>${card.render()}</div>`;
+      root.innerHTML = `<div>${card.render()} 
+      
+      </div>`;
     })
 
     // API 에러 처리
