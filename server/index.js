@@ -64,37 +64,48 @@ app.post('/api/user/login', async (req, res) => {
 
 // 로그인한 사용자의 정보(이름, 소속 부서, 프로필 이미지 경로, 근무 상태) 요청 API
 app.get('/api/user/info', async (req, res) => {
-  const userId = req.query.userId;
+  const userId = +req.cookies.userId;
+  const today = getDateTime().today;
   const userData = await getJsonData('./server/data/user.json');
-  const [user] = findKeyValue(userData, 'userId', userId);
   const atdData = await getJsonData('./server/data/attendance.json');
-  const atd = findKeyValue(atdData, 'userId', userId);
-  const todayAtd = findKeyValue(atd, 'date', today);
+  const [user] = findKeyValue(userData, 'userId', userId);
   const { name, dept, img, admin } = user;
   const userInfo = { name, dept, img, admin };
+
+  const atd = findKeyValue(atdData, 'userId', userId);
+  const todayAtd = findKeyValue(atd, 'date', today)[0];
+
+  if (todayAtd) {
+    if (todayAtd.eTime) {
+      userInfo['work'] = `DONE-${todayAtd['eTime']}`;
+    } else {
+      userInfo['work'] = `ING-${todayAtd['sTime']}`;
+    }
+  } else {
+    userInfo['work'] = 'NOT';
+  }
 
   res.status(200).send(userInfo);
 });
 
 // 근무 시작/종료 API
 app.post('/api/user/work', async (req, res) => {
-  const { type } = req.body;
   const userId = +req.cookies.userId;
   const today = getDateTime().today;
   const now = getDateTime().time;
   const atdData = await getJsonData('./server/data/attendance.json');
   const atd = findKeyValue(atdData, 'userId', userId);
+  const status = [];
 
   // 해당 사원이 출근한 이력이 있을 경우
   if (atd) {
     const todayAtd = findKeyValue(atd, 'date', today);
 
     // 오늘 날짜에 출근한 이력이 있는지 확인
-    if (todayAtd && type === 'end') {
-      todayAtd.eTime = now;
-
-      atdData[todayAtd.atdId - 1] = todayAtd;
-    } else if (!todayAtd && type === 'start') {
+    if (todayAtd[0]) {
+      todayAtd[0].eTime = now;
+      status[0] = `DONE-${now}`;
+    } else {
       atdData.push({
         atdId: atdData.length,
         date: today,
@@ -102,6 +113,7 @@ app.post('/api/user/work', async (req, res) => {
         sTime: now,
         eTime: null,
       });
+      status[0] = `ING-${now}`;
     }
   } else {
     atdData.push({
@@ -111,6 +123,7 @@ app.post('/api/user/work', async (req, res) => {
       sTime: now,
       eTime: null,
     });
+    status[0] = `ING-${now}`;
   }
 
   const writeResult = await setJsonData(
@@ -119,9 +132,7 @@ app.post('/api/user/work', async (req, res) => {
   );
 
   if (writeResult) {
-    type === 'start'
-      ? res.status(200).send({ type: 'start' })
-      : res.status(200).send({ type: 'end' });
+    res.status(200).send({ status: status[0] });
   } else {
     res.status(401).send({ message: '근무 시작/종료 실패' });
   }

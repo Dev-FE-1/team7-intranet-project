@@ -24,6 +24,7 @@ export function getJsonData(path) {
 }
 
 // 특정 경로에 위치한 Json 파일에 접근해 입력하는 배열을 덮어쓰는 함수
+// path 작성 예시 : './server/data/user.json'
 export function setJsonData(path, arr) {
   return new Promise((resolve, reject) => {
     fs.writeFile(
@@ -32,13 +33,10 @@ export function setJsonData(path, arr) {
       'utf8',
       (err) => {
         if (err) {
-          reject(err);
+          return reject(err);
         }
-        try {
-          resolve(true);
-        } catch (err) {
-          reject(err);
-        }
+
+        resolve(true);
       }
     );
   });
