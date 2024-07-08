@@ -54,16 +54,17 @@ export default function Notice(root) {
     })
       .then(response=>{
         let cardData = response.data.data; 
+        if(cardData.length === 0 && !append){
+          displayNotMessage();
+        }else{
         addNoticeCard(notiContainer, cardData, append);
+        updateURL(search)
         useNoticeModal();
         Search();
+        }
       })
       .catch(error => {
-      if (error.response && error.response.status === 404) {
-        displayNotMessage();
-      } else {
         console.error('Server error:', error);
-      }
       });
 
       // 검색 결과가 일치하지 않으면 검색결과가 없습니다 노출
@@ -77,6 +78,7 @@ export default function Notice(root) {
           }
         })
         notiContainer.innerHTML=returnCard.render()
+        Search()
       }
   } 
 
@@ -112,6 +114,7 @@ export default function Notice(root) {
       })
   }
 
+  // 공지사항 게시글 등록 요청 api
   function fetchUpload(formData){
     axios.post('/api/notice/upload', formData, {
       headers:{
@@ -130,6 +133,21 @@ export default function Notice(root) {
     .catch(error =>{
       console.log('fetchUpload Error :', error)
     })
+  }
+
+  // 검색 키워드에 맞게 url 변경시키는 함수
+  function updateURL(search){
+    const url = new URL(window.location.href)
+    const params = new URLSearchParams(url, search)
+
+    if(search){
+      params.set('search', search)
+    }else{
+      params.delete('search')
+    }
+    
+    url.search = params.toString()
+    window.history.replaceState({}, '', url.toString())
   }
 
   // 데이터에 들어있는 카드의 갯수 만큼 카드를 추가하는 함수
@@ -183,7 +201,6 @@ export default function Notice(root) {
           observer.unobserve(card)
           currentPage++;
           itemsPerPage=3;
-          console.log('hello Observer')
           //서버에 다음 목록 요청
           fetchData(currentPage, true);
         }else{
@@ -216,24 +233,45 @@ export default function Notice(root) {
     const searchInput = notiContainer.querySelector('.notice__search.input')
     const searchBtn = notiContainer.querySelector('.input_searchIcon')
 
+    // 키워드에 맞는 목록 결과를 보여주는 함수
+    function showSearchList(searchKeyword){
+      currentPage = 1
+      searchQuery = searchKeyword
+      fetchData(currentPage, false, searchKeyword)
+      updateURL(searchQuery)
+    }
+    
+    // 처음 목록으로 되돌아가는 함수
+    function showResetList(){
+      currentPage=1
+      searchQuery=''
+      searchInput.value=''
+      fetchData(currentPage)
+      updateURL(searchQuery)
+    }
+
     searchInput.addEventListener('keyup', (e)=>{
-      if((e.key) === 'Enter'){
+      if(e.key === 'Enter'){
         e.preventDefault()
         const searchKeyword = searchInput.value.trim()
         if(searchKeyword !==''){
-          currentPage = 1
-          searchQuery = searchKeyword
-          fetchData(currentPage, false, searchKeyword)
+          showSearchList(searchKeyword)
+        }else{
+          showResetList()
         }
       }
     })
+
     searchBtn.addEventListener('click',(e)=>{
       e.preventDefault()
-      const searchKeyword = searchInput.value.trim()
-      if(searchKeyword !==''){
-        currentPage = 1
-        searchQuery = searchKeyword
-        fetchData(currentPage, false, searchKeyword)
+      if(e.key === 'Enter'){
+        e.preventDefault()
+        const searchKeyword = searchInput.value.trim()
+        if(searchKeyword !==''){
+          showSearchList(searchKeyword)
+        }else{
+          showResetList()
+        }
       }
     })
   }

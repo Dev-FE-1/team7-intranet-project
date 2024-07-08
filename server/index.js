@@ -323,7 +323,14 @@ app.get(`/api/notice/list`, (req, res) => {
         });
 
         if (filterData.length === 0) {
-          return res.status(404).json({ message: '해당 키워드가 없습니다' });
+          return res.status(200).json({ 
+            currentPage : page,
+            itemsPerPage: itemsPerPage,
+            totalItems: 0,
+            totalPages: 0,
+            data:[],
+            searchQuery: req.query.search || '',
+          });
         }
       }
       const sliceData = filterData.slice(startIndex, endIndex);
