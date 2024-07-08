@@ -1,7 +1,12 @@
 import express from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import { getJsonData, findKeyValue } from './utils/common.js';
+import {
+  getJsonData,
+  setJsonData,
+  findKeyValue,
+  getDateTime,
+} from './utils/common.js';
 import fs from 'fs';
 
 const port = process.env.PORT || 8080;
@@ -59,18 +64,79 @@ app.post('/api/user/login', async (req, res) => {
 
 // 로그인한 사용자의 정보(이름, 소속 부서, 프로필 이미지 경로, 근무 상태) 요청 API
 app.get('/api/user/info', async (req, res) => {
-  const userId = req.query.userId;
+  const userId = +req.cookies.userId;
+  const today = getDateTime().today;
   const userData = await getJsonData('./server/data/user.json');
+  const atdData = await getJsonData('./server/data/attendance.json');
   const [user] = findKeyValue(userData, 'userId', userId);
   const { name, dept, img, admin } = user;
   const userInfo = { name, dept, img, admin };
+
+  const atd = findKeyValue(atdData, 'userId', userId);
+  const todayAtd = findKeyValue(atd, 'date', today)[0];
+
+  if (todayAtd) {
+    if (todayAtd.eTime) {
+      userInfo['work'] = `DONE-${todayAtd['eTime']}`;
+    } else {
+      userInfo['work'] = `ING-${todayAtd['sTime']}`;
+    }
+  } else {
+    userInfo['work'] = 'NOT';
+  }
 
   res.status(200).send(userInfo);
 });
 
 // 근무 시작/종료 API
-app.post('/api/user/work/start', (req, res) => {});
-app.post('/api/user/work/end', (req, res) => {});
+app.post('/api/user/work', async (req, res) => {
+  const userId = +req.cookies.userId;
+  const today = getDateTime().today;
+  const now = getDateTime().time;
+  const atdData = await getJsonData('./server/data/attendance.json');
+  const atd = findKeyValue(atdData, 'userId', userId);
+  const status = [];
+
+  // 해당 사원이 출근한 이력이 있을 경우
+  if (atd) {
+    const todayAtd = findKeyValue(atd, 'date', today);
+
+    // 오늘 날짜에 출근한 이력이 있는지 확인
+    if (todayAtd[0]) {
+      todayAtd[0].eTime = now;
+      status[0] = `DONE-${now}`;
+    } else {
+      atdData.push({
+        atdId: atdData.length,
+        date: today,
+        userId: userId,
+        sTime: now,
+        eTime: null,
+      });
+      status[0] = `ING-${now}`;
+    }
+  } else {
+    atdData.push({
+      atdId: atdData.length,
+      date: today,
+      userId: userId,
+      sTime: now,
+      eTime: null,
+    });
+    status[0] = `ING-${now}`;
+  }
+
+  const writeResult = await setJsonData(
+    './server/data/attendance.json',
+    atdData
+  );
+
+  if (writeResult) {
+    res.status(200).send({ status: status[0] });
+  } else {
+    res.status(401).send({ message: '근무 시작/종료 실패' });
+  }
+});
 
 // 특정 페이지의 휴가/외출 목록 정보 요청 API
 app.get('/api/vacation/list', (req, res) => {
@@ -126,11 +192,11 @@ app.get('/api/notice/info', (req, res) => {
       jsonData.data = jsonData.data.sort(
         (a, b) => new Date(b.date) - new Date(a.date)
       );
-      const noticeId = req.query.noticeId
+      const noticeId = req.query.noticeId;
       //json 형태로 응답을 돌려줌
       res.json({
         jsonData,
-        noticeId: noticeId
+        noticeId: noticeId,
       });
     } catch (parseErr) {
       console.error('Error parsing JSON file:', parseErr);
@@ -141,8 +207,6 @@ app.get('/api/notice/info', (req, res) => {
       });
     }
   });
-
-
 });
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
@@ -177,15 +241,15 @@ app.get('/api/notice/list', (req, res) => {
 
       if (req.query.search) {
         const searchQuery = req.query.search.trim();
-        const keywords = searchQuery.split(' ')
+        const keywords = searchQuery.split(' ');
         filterData = filterData.filter((item) => {
-          return keywords.every((keyword)=>(
-            item.title.includes(keyword) ||
-            item.content.includes(keyword)
-          )) 
+          return keywords.every(
+            (keyword) =>
+              item.title.includes(keyword) || item.content.includes(keyword)
+          );
         });
 
-        if(filterData.length === 0){
+        if (filterData.length === 0) {
           return res.status(404).json({ message: '해당 키워드가 없습니다' });
         }
       }

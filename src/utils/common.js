@@ -55,7 +55,7 @@ export function deleteAllCookies() {
 // 로그인한 회원의 정보에 대해 API 요청하는 로직
 export async function userInfoApi() {
   try {
-    const res = await axios.get(`/api/user/info?userId=${getCookie('userId')}`);
+    const res = await axios.get(`/api/user/info`);
     return res.data;
   } catch (err) {
     console.error('API error:', err);
