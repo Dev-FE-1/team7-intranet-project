@@ -132,7 +132,7 @@ export default function Employee(root) {
             size: 'md',
             buttons: [
               { label: '닫기', type: 'light', classList: 'modalClose' },
-              { label: '수정', classList: 'modalEdit' },
+              { label: '수정', classList: 'modalClose' },
             ],
             content: `
               <div class="modal_employeeImage">
@@ -154,6 +154,26 @@ export default function Employee(root) {
           root
             .querySelector('.listTable')
             .insertAdjacentHTML('beforeend', employeeModal.render());
+
+          // 이미지 업로드 이벤트 추가
+          const uploadImage = document.querySelector('.uploadImage img');
+          uploadImage.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.addEventListener('change', (event) => {
+              const file = event.target.files[0];
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                uploadImage.src = e.target.result;
+                uploadImage.style.objectFit = 'cover';
+                uploadImage.style.width = '300px';
+                uploadImage.style.height = '300px';
+              };
+              reader.readAsDataURL(file);
+            });
+            input.click();
+          });
 
           // 모달 오픈
           employeeModal.useModal();
