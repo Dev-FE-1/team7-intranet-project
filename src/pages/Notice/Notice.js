@@ -120,10 +120,11 @@ export default function Notice(root) {
     })
     .then(response=>{
       if(response.status === 200){
-        alert('공지사항 업로드 완료')
+        alert('공지사항 업로드 완료!')
         fetchData(1)
+        document.querySelector('.uploadContainer .modalClose').click();
       }else{
-        alert('업로드 실패')
+        alert('공지사항 업로드 실패')
       }
     })
     .catch(error =>{
@@ -176,7 +177,7 @@ export default function Notice(root) {
     //무한 스크롤
     let allCard = container.querySelectorAll('.card.card_img')
     const lastCard = Array.from(allCard).slice(-1)
-    lastCard.forEach((card)=>{
+    lastCard.forEach((card)=>{ 
       const observer = new IntersectionObserver((entries)=>{
         if(entries[0].isIntersecting && isData){
           observer.unobserve(card)
@@ -197,7 +198,7 @@ export default function Notice(root) {
     })
   }
 
-  //모달 호출 함수
+  // 모달 호출 함수
   function useNoticeModal(){
     let allCard = notiContainer.querySelectorAll('.card.card_img')
     allCard.forEach((card)=>{
@@ -210,6 +211,7 @@ export default function Notice(root) {
     })
   }
 
+  // 공지사항 목록 검색 함수
   function Search(){
     const searchInput = notiContainer.querySelector('.notice__search.input')
     const searchBtn = notiContainer.querySelector('.input_searchIcon')
@@ -238,46 +240,55 @@ export default function Notice(root) {
 
   // 공지사항 등록 로직
     const uploadBtn = notiContainer.querySelector('.btn.btn_primary.btn--notice')
-    const uploadBox = document.querySelector('.uploadContainer')
-    
-    const noticeTitle = new Input({
-      type:'text', 
-      clssName:'notice_title', 
-      placeholder:'제목을 입력하세요.',
-      disabled:false, 
-      required:true, 
-      maxLength:200})
-    const noticeContent = new Input({
-      type:'bigText',
-      className:'notice_content',
-      placeholder:'내용을 입력하세요.',
-      disabled:false,
-      required:true,
-      maxLength:200})
 
     uploadBtn.addEventListener('click',(e)=>{
-      console.log(e.currentTarget)
+      document.querySelector('.modalContainer').innerHTML=``;
+
+      const noticeTitle = new Input({
+        type:'text', 
+        clssName:'notice_title', 
+        placeholder:'제목을 입력하세요.',
+        disabled:false, 
+        required:true, 
+        maxLength:200})
+      const noticeContent = new Input({
+        type:'bigText',
+        className:'notice_content',
+        placeholder:'내용을 입력하세요.',
+        disabled:false,
+        required:true,
+        maxLength:200})
+
       const uploadForm = new Modal({
         name:'notice_upload',
         buttons:[{label:'취소', classList:'btn_light btn--notice--cancel modalClose'}, {label:'확인', classList:'btn--notice--upload'}],
         title:'공지사항 업로드',
         size:'md',
         content:`<div class="notice_form">
-                <div class="noticeTitle_writing">
-                  ${noticeTitle.render()}
+                  <div class="noticeTitle_writing">
+                    <div class="noticeUploadTitle">제목</div>
+                      ${noticeTitle.render()}
                   </div>
-                <div class="noticeContent_writing">
-                  <div class="notice_writing">
-                  ${noticeContent.render()}
+                  <div class="noticeContent_writing">
+                    <div class="noticeUploadContent">내용</div>
+                      <div class="notice_writing">
+                      ${noticeContent.render()}
+                    </div>
                   </div>
-                </div>
-                  <input type="file" id="notice_file">
-        </div>`
+                  <div class="noticeFile_writing">
+                    <div class="noticeUploadFile">첨부파일</div>
+                      <input type="file" id="notice_file">
+                  </div>
+                </div>`
       })
       document.querySelector('.uploadContainer').innerHTML=uploadForm.render()
-      uploadForm.useModal()
+      uploadForm.show()
+      document.querySelector('.btn_light.btn--notice--cancel').addEventListener('click',()=>{
+        uploadForm.hide()
+      })
 
     document.querySelector('.btn--notice--upload').addEventListener('click',(e)=>{
+      const uploadBox = document.querySelector('.notice_form')
       const title = uploadBox.querySelector('.noticeTitle_writing input').value
       const content = uploadBox.querySelector('.noticeContent_writing textarea').value
       const fileInput = uploadBox.querySelector('#notice_file')
@@ -286,7 +297,7 @@ export default function Notice(root) {
       const formData = new FormData()
       formData.append('title', title)
       formData.append('content', content)
-      formData.append('file', file, encodeURIComponent(file.name))
+      formData.append('file', file)
 
       fetchUpload(formData)
     })

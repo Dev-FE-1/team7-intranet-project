@@ -8,7 +8,7 @@
 .home {
   width: 100%;
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1.4fr 1fr;
   grid-template-rows: auto;
   gap: 30px;
 }
@@ -32,7 +32,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 25px;
 }
 .home_today {
   font-weight: bold;
@@ -57,11 +56,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-right: 10px;
 }
 .home_profileImg {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border-radius: 10px;
   background-color: #edf6f5;
 }
@@ -92,7 +90,7 @@
 }
 .home_time {
   margin-left: 10px;
-  font-size: 55px;
+  font-size: 50px;
   letter-spacing: 10px;
 }
 .home_timeText {
@@ -108,7 +106,7 @@
   justify-content: center;
 }
 .home_second {
-  font-size: 35px;
+  font-size: 30px;
   letter-spacing: 5px;
 }
 .home_workBox {
@@ -120,7 +118,7 @@
   justify-content: center;
   align-items: center;
 }
-.home_notWorkInfo {
+.home_ingWorkInfo {
   width: 100%;
   height: 100%;
   display: flex;
@@ -128,20 +126,21 @@
   justify-content: center;
   align-items: center;
 }
-.home_workInfo {
+.home_doneWorkInfo {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  padding-top: 60px;
 }
 .home_workStatus {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 22px;
+  font-weight: bold;
 }
 .home_workEmoji {
   width: 35px;
@@ -156,9 +155,10 @@
 .home_workText {
   letter-spacing: 1px;
   padding-bottom: 40px;
+  margin-top: 10px;
 }
 .home_workBtn {
-  width: 100%;
+  width: 300px;
   display: flex;
   position: absolute;
   bottom: 0;
@@ -199,13 +199,13 @@
 }
 
 /* workModal */
-.modal_inner {
+.home_workModal .modal_inner {
   display: flex;
   align-items: center;
 }
-.modal_title {
+.home_workModal .modal_title {
   width: 100%;
 }
-.modal_content {
+.home_workModal .modal_content {
   margin: 50px 0;
 }

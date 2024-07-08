@@ -96,6 +96,7 @@ export default function Vacation(root) {
       const dateInput = new Input({
         type: 'date',
         className: 'vacation_inputText',
+        dateMin: new Date().toISOString().split('T')[0],
       });
       modal.update({
         content: `<div class="vacation_form">
@@ -335,20 +336,7 @@ function handleRadio() {
   const dateInput = new Input({
     type: 'date',
     className: 'vacation_inputText',
-  });
-  const type2STimeSelect = new SelectBox({
-    className: 'vacation_sDateSelect',
-    options: ['오전 09:00 ~ 14:00', '오후 14:00 ~ 18:00'],
-  });
-  const type3STimeSelect = new SelectBox({
-    className: 'vacation_outingStimeSelect',
-    initValue: '시작 시간',
-    options: createHourOptions(),
-  });
-  const type3ETimeSelect = new SelectBox({
-    className: 'vacation_outingEtimeSelect',
-    initValue: '종료 시간',
-    options: createHourOptions(),
+    dateMin: new Date().toISOString().split('T')[0],
   });
 
   vacationDate.innerHTML = switchCate(type);
@@ -357,6 +345,10 @@ function handleRadio() {
     document.querySelector('.vacation_sDate dd').innerHTML = dateInput.render();
     document.querySelector('.vacation_eDate dd').innerHTML = dateInput.render();
   } else if (type === '반차') {
+    const type2STimeSelect = new SelectBox({
+      className: 'vacation_sDateSelect',
+      options: ['오전 09:00 ~ 14:00', '오후 14:00 ~ 18:00'],
+    });
     document.querySelectorAll('.vacation_sDate dd').forEach((dd, i) => {
       if (i === 0) {
         dd.innerHTML = dateInput.render();
@@ -364,8 +356,30 @@ function handleRadio() {
         dd.innerHTML = type2STimeSelect.render();
       }
     });
+    type2STimeSelect.useSelectBox();
   } else {
-    document.querySelector('.vacation_sDate dd').innerHTML = dateInput.render();
+    //type === '외출'
+    const type3DateInput = new Input({
+      type: 'date',
+      className: 'vacation_inputText',
+      dateMin: new Date().toISOString().split('T')[0],
+      value: new Date().toISOString().split('T')[0],
+    });
+
+    document.querySelector('.vacation_sDate dd').innerHTML =
+      type3DateInput.render();
+
+    const type3STimeSelect = new SelectBox({
+      className: 'vacation_outingStimeSelect',
+      initValue: '시작 시간',
+      options: createHourOptions(),
+    });
+    const type3ETimeSelect = new SelectBox({
+      className: 'vacation_outingEtimeSelect',
+      initValue: '종료 시간',
+      options: createHourOptions(),
+    });
+
     document.querySelectorAll('.vacation_outingTime dd').forEach((dd, i) => {
       if (i === 0) {
         dd.innerHTML = type3STimeSelect.render();
@@ -373,11 +387,35 @@ function handleRadio() {
         dd.innerHTML = type3ETimeSelect.render();
       }
     });
-  }
 
-  type2STimeSelect.useSelectBox();
-  type3STimeSelect.useSelectBox();
-  type3ETimeSelect.useSelectBox();
+    type3STimeSelect.useSelectBox();
+
+    document
+      .querySelector('.vacation_date.type3 .vacation_inputText')
+      .addEventListener('change', (e) => {
+        const selectedDate = e.target.value;
+        const updateStime = new SelectBox({
+          className: 'vacation_outingStimeSelect',
+          initValue: '시작 시간',
+          options: createHourOptions(selectedDate),
+        });
+        const updateEtime = new SelectBox({
+          className: 'vacation_outingEtimeSelect',
+          initValue: '종료 시간',
+          options: createHourOptions(selectedDate),
+        });
+        document
+          .querySelectorAll('.vacation_outingTime dd')
+          .forEach((dd, i) => {
+            if (i === 0) {
+              dd.innerHTML = updateStime.render();
+            } else {
+              dd.innerHTML = updateEtime.render();
+            }
+          });
+        updateStime.useSelectBox();
+      });
+  }
 }
 
 // 연차, 반차, 외출에 따라 바뀌는 html을 리턴해주는 함수

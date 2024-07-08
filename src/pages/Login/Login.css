@@ -50,5 +50,5 @@
 .login_modal .modal_content {
   display: flex;
   justify-content: center;
-  padding: 60px 0;
+  margin: 50px 0;
 }
