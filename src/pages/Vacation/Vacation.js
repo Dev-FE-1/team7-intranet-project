@@ -97,7 +97,9 @@ export default function Vacation(root) {
       const dateInput = new Input({
         type: 'date',
         className: 'vacation_inputText',
-        dateMin: new Date().toISOString().split('T')[0],
+        dateMin: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
+          .toString()
+          .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`,
       });
       modal.update({
         content: `<div class="vacation_form">
@@ -361,9 +363,15 @@ function handleRadio() {
   const dateInput = new Input({
     type: 'date',
     className: 'vacation_inputText',
-    dateMin: new Date().toISOString().split('T')[0],
+    dateMin: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
+      .toString()
+      .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`,
   });
-
+  console.log(
+    `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
+      .toString()
+      .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`
+  );
   vacationDate.innerHTML = switchCate(type);
 
   if (type === '연차') {
@@ -387,8 +395,12 @@ function handleRadio() {
     const type3DateInput = new Input({
       type: 'date',
       className: 'vacation_inputText',
-      dateMin: new Date().toISOString().split('T')[0],
-      value: new Date().toISOString().split('T')[0],
+      dateMin: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
+        .toString()
+        .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`,
+      value: `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
+        .toString()
+        .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`,
     });
 
     document.querySelector('.vacation_sDate dd').innerHTML =
