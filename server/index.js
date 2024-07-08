@@ -107,7 +107,7 @@ app.post('/api/user/work', async (req, res) => {
       status[0] = `DONE-${now}`;
     } else {
       atdData.push({
-        atdId: atdData.length,
+        atdId: atdData.length + 1,
         date: today,
         userId: userId,
         sTime: now,
@@ -117,7 +117,7 @@ app.post('/api/user/work', async (req, res) => {
     }
   } else {
     atdData.push({
-      atdId: atdData.length,
+      atdId: atdData.length + 1,
       date: today,
       userId: userId,
       sTime: now,
