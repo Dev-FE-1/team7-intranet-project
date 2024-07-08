@@ -8,11 +8,11 @@
       "eTime": "18:00"
     },
     {
-      "atdId": 1,
+      "atdId": 2,
       "date": "2024.07.08",
-      "userId": 4,
-      "sTime": "12:59",
-      "eTime": "15:11"
+      "userId": 5,
+      "sTime": "15:39",
+      "eTime": "15:39"
     }
   ]
 }
