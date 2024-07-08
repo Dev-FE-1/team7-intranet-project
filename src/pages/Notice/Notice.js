@@ -33,19 +33,19 @@ export default function Notice(root) {
   root.innerHTML = `
   <div class="notice">${noticeCard.render()}</div>
   <div class="modalContainer"></div>
+  <div class="uploadContainer"></div>
   `;
 
   const notiContainer = document.querySelector('.notice')
 
   // notice api 요청 
   function fetchData(page, append=false, search=''){
-
     if(append){
       const skeletonHtml = createSkeleton(itemsPerPage)
       notiContainer.querySelector('.page_content').insertAdjacentHTML('beforeend', skeletonHtml)
     }
 
-    axios.get(`/api/notice/list`,{
+    axios.get('/api/notice/list',{
       params:{
         page:page,
         itemsPerPage:itemsPerPage,
@@ -59,11 +59,11 @@ export default function Notice(root) {
         Search();
       })
       .catch(error => {
-        if(error.response && error.response.status === 404){
-          displayNotMessage()
-        }else{
-        console.error('Error fetching data:', error);
-        }
+      if (error.response && error.response.status === 404) {
+        displayNotMessage();
+      } else {
+        console.error('Server error:', error);
+      }
       });
 
       // 검색 결과가 일치하지 않으면 검색결과가 없습니다 노출
@@ -82,15 +82,14 @@ export default function Notice(root) {
 
   //공지사항 상세 정보 api 요청
   function contentData(noticeId){
-    axios.get(`api/notice/info`,{
+    axios.get(`/api/notice/info`,{
       params:{
-        noticeId:noticeId
+        noticeId:noticeId,
       }
     })
       .then(response=>{
         let cardContent = response.data.jsonData.data;
         cardContent = cardContent.find((item)=>Number(item.noticeId) === Number(noticeId))
-        console.log(cardContent)
         if(cardContent){
             //공지사항 상세 내용을 확인할 수 있는 모달 
             const noticeModal = new Modal({
@@ -111,6 +110,25 @@ export default function Notice(root) {
       .catch(error =>{
         console.log('contentData Error :', error)
       })
+  }
+
+  function fetchUpload(formData){
+    axios.post('/api/notice/upload', formData, {
+      headers:{
+        'Content-Type' : 'multipart/form-data'
+      },
+    })
+    .then(response=>{
+      if(response.status === 200){
+        alert('공지사항 업로드 완료')
+        fetchData(1)
+      }else{
+        alert('업로드 실패')
+      }
+    })
+    .catch(error =>{
+      console.log('fetchUpload Error :', error)
+    })
   }
 
   // 데이터에 들어있는 카드의 갯수 만큼 카드를 추가하는 함수
@@ -163,7 +181,7 @@ export default function Notice(root) {
         if(entries[0].isIntersecting && isData){
           observer.unobserve(card)
           currentPage++;
-          itemsPerPage=9;
+          itemsPerPage=3;
           console.log('hello Observer')
           //서버에 다음 목록 요청
           fetchData(currentPage, true);
@@ -217,6 +235,62 @@ export default function Notice(root) {
       }
     })
   }
+
+  // 공지사항 등록 로직
+    const uploadBtn = notiContainer.querySelector('.btn.btn_primary.btn--notice')
+    const uploadBox = document.querySelector('.uploadContainer')
+    
+    const noticeTitle = new Input({
+      type:'text', 
+      clssName:'notice_title', 
+      placeholder:'제목을 입력하세요.',
+      disabled:false, 
+      required:true, 
+      maxLength:200})
+    const noticeContent = new Input({
+      type:'bigText',
+      className:'notice_content',
+      placeholder:'내용을 입력하세요.',
+      disabled:false,
+      required:true,
+      maxLength:200})
+
+    uploadBtn.addEventListener('click',(e)=>{
+      console.log(e.currentTarget)
+      const uploadForm = new Modal({
+        name:'notice_upload',
+        buttons:[{label:'취소', classList:'btn_light btn--notice--cancel modalClose'}, {label:'확인', classList:'btn--notice--upload'}],
+        title:'공지사항 업로드',
+        size:'md',
+        content:`<div class="notice_form">
+                <div class="noticeTitle_writing">
+                  ${noticeTitle.render()}
+                  </div>
+                <div class="noticeContent_writing">
+                  <div class="notice_writing">
+                  ${noticeContent.render()}
+                  </div>
+                </div>
+                  <input type="file" id="notice_file">
+        </div>`
+      })
+      document.querySelector('.uploadContainer').innerHTML=uploadForm.render()
+      uploadForm.useModal()
+
+    document.querySelector('.btn--notice--upload').addEventListener('click',(e)=>{
+      const title = uploadBox.querySelector('.noticeTitle_writing input').value
+      const content = uploadBox.querySelector('.noticeContent_writing textarea').value
+      const fileInput = uploadBox.querySelector('#notice_file')
+      const file = fileInput.files[0]
+
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('content', content)
+      formData.append('file', file, encodeURIComponent(file.name))
+
+      fetchUpload(formData)
+    })
+  })
   
 
   fetchData(currentPage)

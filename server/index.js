@@ -1,8 +1,9 @@
-import express from 'express';
+import express, { json } from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { getJsonData, findKeyValue } from './utils/common.js';
 import fs from 'fs';
+import multer from 'multer';
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -14,6 +15,8 @@ app.use(cookieParser());
 
 // server에 저장된 정적 파일(임직원 프로필 이미지, 공지사항 이미지) 접근 가능
 app.use('/server/images', express.static('path/to/profile/images'));
+
+const noticeUpload = multer({dest:'server/images/notice/'})
 
 // API 예시 코드(참고 자료)
 // app.get('/api/users.json', (req, res) => {
@@ -106,6 +109,51 @@ app.post('/api/vacation', (req, res) => {});
 // 가장 최근에 올라온 공지사항 3개 요청 API
 app.get('/api/notice/recent', (req, res) => {});
 
+// 공지사항 게시물 등록 API
+app.post('/api/notice/upload', noticeUpload.single('file'), (req, res)=>{
+  const filepath = './server/data/notice.json';
+  const {title, content} = req.body
+  const file = req.file
+
+  const encodeFileName = encodeURIComponent(file.originalname)
+
+  fs.readFile(filepath, 'utf8' , (err, data)=>{
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: err.message,
+        data: null,
+      });
+    }
+
+    const jsonData = JSON.parse(data)
+    const notices = jsonData.data
+
+    const lastId = notices.length > 0 ? notices[notices.length -1] : null
+    const newNoticeId = lastId ? lastId.noticeId + 1 : 1
+    const newNotice = {
+      noticeId:newNoticeId,
+      date:new Date().toISOString().split('T')[0],
+      title,
+      content,
+      img: encodeFileName ? `server/images/notice/${encodeFileName.filename}` : null
+    }
+
+    notices.push(newNotice)
+
+    jsonData.data = notices
+    fs.writeFile(filepath, JSON.stringify(jsonData, null, 2), (err)=>{
+      if(err){
+        console.error('Error notice writing: ', err)
+        return res.status(500).json({message:'server Error'})
+      }
+
+      res.status(200).json({ message: 'Notice uploaded successfully' });
+    })
+  })
+})
+
 // 공지사항 상세 정보 요청 API
 app.get('/api/notice/info', (req, res) => {
   const filepath = './server/data/notice.json';
@@ -141,12 +189,10 @@ app.get('/api/notice/info', (req, res) => {
       });
     }
   });
-
-
 });
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
-app.get('/api/notice/list', (req, res) => {
+app.get(`/api/notice/list`, (req, res) => {
   const filepath = './server/data/notice.json';
 
   fs.readFile(filepath, 'utf8', (err, data) => {
@@ -161,6 +207,9 @@ app.get('/api/notice/list', (req, res) => {
     try {
       let jsonData = JSON.parse(data);
 
+      if(!jsonData.data || !Array.isArray(jsonData.data)){
+        return res.status(500).send({ status: 'List data error', data: null });
+      } 
       //업로드 날짜 최신순으로 불러오도록 함
       jsonData.data = jsonData.data.sort(
         (a, b) => new Date(b.date) - new Date(a.date)
@@ -193,7 +242,6 @@ app.get('/api/notice/list', (req, res) => {
 
       //json 형태로 응답을 돌려줌
       res.json({
-        jsonData,
         currentPage: page,
         itemsPerPage: itemsPerPage,
         totalItems: jsonData.data.length,

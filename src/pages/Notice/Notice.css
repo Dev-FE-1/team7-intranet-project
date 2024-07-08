@@ -91,3 +91,13 @@
   margin-top:20px;
   box-sizing: border-box;
 }
+
+/*notice-upload*/
+.noticeTitle_writing .input{
+  max-width:500px;
+  margin-bottom: 30px;
+}
+.noticeContent_writing .input{
+  max-width:500px;
+  height: 300px;
+}
