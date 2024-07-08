@@ -26,18 +26,27 @@
   gap: 5%;
   border-radius: 10px;
 }
-.card .card_img{
+.notice .card .card_img{
   width:30%;
   height:410px;
   margin-top:20px;
 }
-.card .card_img:hover{
+.notice .card .card_img:hover{
   cursor:pointer;
 }
 .notice__card .card_imgText{
   font-size:20px;
   padding:auto 10px;
   font-weight: 500;
+}
+.page_content .noticenone{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height:580px;
+  font-size: 18px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /*skeleton*/
@@ -62,10 +71,8 @@
 }
 
 /*notice-modal*/
-.modal_inner{
-  padding: 20px 40px; 
-  width: 80%;
-  max-height: calc(100vh - 50px);
+.modalContainer .modal_inner{
+  max-height: calc(100vh - 30px);
   overflow-y: auto;
   box-sizing: border-box;
 }
@@ -82,4 +89,5 @@
 }
 .notice__modalContent{
   margin-top:20px;
+  box-sizing: border-box;
 }
