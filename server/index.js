@@ -169,9 +169,6 @@ app.get('/api/vacation/info', (req, res) => {});
 // 휴가/외출 신청 API
 app.post('/api/vacation', (req, res) => {});
 
-// 가장 최근에 올라온 공지사항 3개 요청 API
-app.get('/api/notice/recent', (req, res) => {});
-
 // 공지사항 상세 정보 요청 API
 app.get('/api/notice/info', (req, res) => {
   const filepath = './server/data/notice.json';

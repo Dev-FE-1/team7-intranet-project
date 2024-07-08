@@ -60,11 +60,11 @@ export default function Home(root, userInfo) {
     classList: 'home_noticeListCard',
     page: {
       title: '공지사항',
-      searchArea: `<a class="home_moreNotice" href="/notice">더보기 ></a>`,
       content: `
-    <div class="home_noticeList">
-  
-    </div>
+      <a class="home_moreNotice" href="/notice">더보기 ></a>
+      <div class="home_noticeList">
+    
+      </div>
       `,
     },
   });
