@@ -15,10 +15,11 @@ import '/src/pages/Vacation/Vacation.css';
 export default function Vacation(root) {
   fetchData('list');
   let myData = [];
+  const userId = getUserIdFromCookie();
   async function fetchData(filter) {
     try {
       const res = await axios.get(`/api/vacation/${filter}`);
-      myData = res.data.data.filter((d) => d.userId === '3');
+      myData = res.data.filter((d) => d.userId === '3');
       renderPage(myData);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -126,7 +127,9 @@ export default function Vacation(root) {
                         ${textArea.render()}
                       </dd>
                     </dl>
-                  </div>`,
+                    <p class="form_alert">* 시작일, 종료일, 외출시간이 입력되었는지 확인 해주세요.</p>
+                  </div>
+                  `,
       });
       modal.show();
 
@@ -164,7 +167,7 @@ export default function Vacation(root) {
         });
 
         modal.update({
-          name: '.vacation_detailModal',
+          name: 'vacation_detailModal',
           title: '상 세',
           buttons: [{ label: '확인', type: 'light', classList: 'modalClose' }],
           content: `<div class="vacation_form">
@@ -283,11 +286,11 @@ export default function Vacation(root) {
               .querySelector('.vacation_sDate .selectBox_label')
               .innerText.split(' ')[0];
             if (period === '오전') {
-              sDate = `${sDate} 09:00`;
               eDate = `${sDate} 14:00`;
+              sDate = `${sDate} 09:00`;
             } else if (period === '오후') {
-              sDate = `${sDate} 14:00`;
               eDate = `${sDate} 18:00`;
+              sDate = `${sDate} 14:00`;
             }
           } else if (type === '외출') {
             const sTime = document
@@ -296,17 +299,22 @@ export default function Vacation(root) {
             const eTime = document
               .querySelector('.vacation_outingEtimeSelect .selectBox_label')
               .innerText.trim();
-            sDate = `${sDate} ${sTime}`;
             eDate = `${sDate} ${eTime}`;
+            sDate = `${sDate} ${sTime}`;
           }
           const note = document.querySelector('.reason').value;
-          const data = { userId: 3, type, sDate, eDate, note };
+          const data = { userId: userId, type, sDate, eDate, note };
+          //유효성 검사 후 통과하면 데이터 전송함수 호출
           if (validateForm(data)) {
             submitData(data);
-            alert('휴가/외출 신청이 완료되었습니다.');
-            modal.hide();
           } else {
-            alert('필수값이 입력되지 않았습니다.');
+            document.querySelector('.modal').classList.add('shake');
+            document.querySelector('.form_alert').classList.add('show');
+            document
+              .querySelector('.modal')
+              .addEventListener('animationend', () => {
+                document.querySelector('.modal').classList.remove('shake');
+              });
             return;
           }
         } else if (e.target === btnClose) {
@@ -315,13 +323,30 @@ export default function Vacation(root) {
           return;
         }
       });
-  }
 
-  // 휴가/외출 신청 데이터 전송
-  function submitData(data) {
-    //서버로 데이터 보내는 로직 추가하고 새로운 데이터 받기
-    const newData = myData; //서버로 받은 새로운 데이터로 수정 할 것
-    renderPage(newData);
+    // 서버로 신청 폼 데이터를 전송하는 함수
+    async function submitData(data) {
+      try {
+        const response = await axios.post('/api/vacation', data);
+        modal.update({
+          size: 'sm',
+          name: 'vacation_doneModal',
+          buttons: [{ label: '확인', type: 'light', classList: 'modalClose' }],
+          content: `신청이 완료되었습니다.`,
+          classList: 'show',
+        });
+        document
+          .querySelector('.vacation_doneModal')
+          .addEventListener('click', (e) => {
+            if (e.target !== document.querySelector('.modalClose')) return;
+            fetchData('list');
+          });
+        // 여기에 성공 시 처리할 로직을 추가하세요 (예: 사용자에게 성공 메시지 보여주기)
+      } catch (error) {
+        console.error('신청 제출 중 오류가 발생했습니다.', error);
+        // 여기에 오류 발생 시 처리할 로직을 추가하세요 (예: 오류 메시지 표시)
+      }
+    }
   }
 }
 
@@ -416,6 +441,7 @@ function handleRadio() {
         updateStime.useSelectBox();
       });
   }
+  document.querySelector('.form_alert').classList.remove('show');
 }
 
 // 연차, 반차, 외출에 따라 바뀌는 html을 리턴해주는 함수
@@ -449,6 +475,69 @@ function switchCate(type) {
 }
 
 // 휴가/외출 신청 유효성검사
-function validateForm() {
+function validateForm(data) {
+  const { type, sDate, eDate } = data;
+  const alert = document.querySelector('.form_alert');
+
+  // 1. 연차 필수 입력 항목 확인
+  if (type === '연차') {
+    if (!sDate || !eDate) {
+      alert.innerText = '* 시작일과 종료일을 모두 입력해주세요.';
+      return false;
+    }
+  }
+
+  // 2. 반차 필수 입력 항목 확인
+  if (type === '반차') {
+    const hasDateError = !/\d{4}.\d{2}.\d{2}/.test(sDate);
+    if (hasDateError) {
+      alert.innerText = '* 시작일을 입력해주세요.';
+      return false;
+    }
+  }
+
+  // 3. 외출 필수 입력 항목 확인
+  if (type === '외출') {
+    const dateWithTimeRegex = /^\d{4}.\d{2}.\d{2} \d{2}:\d{2}$/;
+    const hasDateTimeError =
+      !dateWithTimeRegex.test(sDate) || !dateWithTimeRegex.test(eDate);
+    if (hasDateTimeError) {
+      alert.innerText = '* 시작일, 시간을 모두 입력해주세요.';
+      return false;
+    }
+  }
+
+  // 4. 연차일 경우 날짜 비교
+  if (type === '연차') {
+    const startDate = new Date(sDate.replaceAll('-', '.'));
+    const endDate = new Date(eDate.replaceAll('-', '.'));
+    if (startDate > endDate) {
+      alert.innerText = '* 종료일은 시작일보다 뒤에 있어야 합니다.';
+      return false; // 종료일이 시작일보다 빠른 경우 false 반환
+    }
+  }
+
+  // 5. 외출일 경우 시간 비교
+  if (type === '외출') {
+    const startTime = sDate.split(' ')[1];
+    const endTime = eDate.split(' ')[1];
+    if (startTime >= endTime) {
+      alert.innerText = '* 종료 시간은 시작 시간보다 뒤에 있어야 합니다.';
+      return false; // 종료 시간이 시작 시간보다 빠르거나 같은 경우 false 반환
+    }
+  }
+
+  // 모든 조건을 통과하면 true 반환
   return true;
+}
+
+function getUserIdFromCookie() {
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === 'userId') {
+      return value;
+    }
+  }
+  return null; // 해당 쿠키 이름을 가진 쿠키를 찾지 못한 경우
 }
