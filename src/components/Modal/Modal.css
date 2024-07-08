@@ -65,3 +65,15 @@
   left: 0;
   background: rgba(0, 0, 0, 0.7);
 }
+
+.modal_inner::-webkit-scrollbar {
+  width: 7px; /* 스크롤바 너비 */
+}
+
+.modal_inner::-webkit-scrollbar-thumb {
+  background-color: #5ab2b2; /* 스크롤바 배경 색상 (투명도 조절 가능) */
+  border-radius: 15px;
+}
+.modal_inner::-webkit-scrollbar-track {
+  background-color: transparent; /* 스크롤바 배경을 투명하게 설정 */
+}
