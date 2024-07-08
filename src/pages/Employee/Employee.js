@@ -7,11 +7,17 @@ import './Employee.css';
 
 export default function Employee(root) {
   // 전체 임직원 호출API
-
   fetch('/api/employee/list')
     .then((response) => response.json())
     .then((data) => {
       const employeeList = data['data'];
+
+      //공지사항 페이지 상단 이름 검색
+      const employeeSearch = new Input({
+        type: 'search',
+        className: 'employee_search',
+        placeholder: '이름을 입력하세요.',
+      });
 
       // 임직원 테이블 작성
       const table = new Table({
@@ -41,74 +47,49 @@ export default function Employee(root) {
         dataPerPage: 15,
         pagingPerPage: 5,
       });
-
-      //공지사항 페이지 상단 검색란
-      const employeeSearch = new Input({
-        type: 'search',
-        className: 'employee_search',
-        placeholder: '이름을 입력하세요.',
-      });
-
-      // 모달용 임시 데이터 = 모달 내 불러오는 동적 데이터로 변환 필요
-      const sampleData = [
-        {
-          userId: '7',
-          name: '김민지',
-          position: '차장',
-          email: 'seojunbag@77cm.co.kr',
-          password: '1234',
-          phone: '010-6440-7770',
-          birth: '1962-04-08',
-          dept: '마케팅팀',
-          leftVaca: 17,
-          admin: false,
-          img: '/server/images/profile/22.jpg',
-        },
-      ];
-
       // 직원 모달창 인풋 생성
       const employeeinputs = [
         {
           type: 'text',
           className: 'user_id',
           label: '사원번호',
-          value: sampleData[0].userId,
+          value: `${employeeList[20].userId}`,
         },
         {
           type: 'text',
           className: 'user_name',
           label: '이름',
-          value: sampleData[0].name,
+          value: `${employeeList[20].name}`,
         },
         {
           type: 'text',
           className: 'user_dept',
           label: '부서',
-          value: sampleData[0].dept,
+          value: `${employeeList[20].dept}`,
         },
         {
           type: 'text',
           className: 'user_position',
           label: '직급',
-          value: sampleData[0].position,
+          value: `${employeeList[20].position}`,
         },
         {
           type: 'date',
           className: 'user_birth',
           label: '생년월일',
-          value: sampleData[0].birth,
+          value: `${employeeList[20].birth}`,
         },
         {
           type: 'email',
           className: 'user_email',
           label: '이메일',
-          value: sampleData[0].email,
+          value: `${employeeList[20].email}`,
         },
         {
           type: 'tel',
           className: 'user_phone',
           label: '전화번호',
-          value: sampleData[0].phone,
+          value: `${employeeList[20].phone}`,
         },
       ];
 
@@ -123,32 +104,28 @@ export default function Employee(root) {
         .join('');
 
       // 모달 생성
-      document.addEventListener('DOMContentLoaded', () => {
-        const employeeModal = new Modal({
-          name: 'employee_modal', // 모달 클래스명 String (*필수값)
-          title: '직원 정보',
-          size: 'md',
-          buttons: [
-            { label: '닫기', type: 'light', classList: 'modalClose' },
-            { label: '수정', classList: 'modalClose' },
-          ],
-          content: `<div class="employee_modal">
+      const employeeModal = new Modal({
+        name: 'employee_modal',
+        title: '직원 정보',
+        size: 'md',
+        buttons: [
+          { label: '닫기', type: 'light', classList: 'modalClose' },
+          { label: '수정', classList: 'modalEdit' },
+        ],
+        content: `
           <div class="modal_employeeImage">
             <div class="employeeImage uploadImage">
-          <img src=${sampleData[0].img} class="employeeImage uploadImage" />
+          <img src=${
+            employeeList[20].img
+              ? employeeList[20].img
+              : 'public/assets/images/profile-default.png'
+          } class="employeeImage uploadImage" />
             </div>
           </div>
           <form class="employeeForm">
             ${inputsHTML}
           </form>
-        </div>
         `,
-        });
-        document
-          .querySelector('.employee_detail')
-          .addEventListener('click', () => {
-            employeeModal.useModal();
-          });
       });
 
       // 페이지 UI 통일 카드
@@ -158,41 +135,24 @@ export default function Employee(root) {
           searchArea: `<div class="listTable">${employeeSearch.render()}</div>`,
           content: `
             <div class="listTable">${table.render()}</div>
-            
-            <div class="pagination">${pagination.render()} </div>
+            ${employeeModal.render()}
+            <div class="pagination">${pagination.render()}</div>
             `,
         },
       });
 
       // 카드 렌더링
-      root.innerHTML = `<div>${card.render()} 
-      
-      </div>`;
+      root.innerHTML = `${card.render()}`;
+
+      document.querySelectorAll('.employee_detail').forEach((emp) => {
+        emp.addEventListener('click', (e) => {
+          employeeModal.useModal();
+        });
+      });
     })
 
     // API 에러 처리
     .catch((error) => {
       console.error('Error:', error);
     });
-
-  // // 이미지 업로드 함수 - 서버 업로드 필요
-  // const uploadImage = document.querySelector('.uploadImage');
-
-  // uploadImage.addEventListener('click', () => {
-  //   const input = document.createElement('input');
-  //   input.type = 'file';
-  //   input.accept = 'image/*';
-  //   input.addEventListener('change', (event) => {
-  //     const file = event.target.files[0];
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       uploadImage.src = e.target.result;
-  //       uploadImage.style.objectFit = 'cover';
-  //       uploadImage.style.width = '300px';
-  //       uploadImage.style.height = '300px';
-  //     };
-  //     reader.readAsDataURL(file);
-  //   });
-  //   input.click();
-  // });
 }
