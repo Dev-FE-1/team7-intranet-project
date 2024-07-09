@@ -349,6 +349,20 @@
       "title": "신제품 출시 안내",
       "content": "안녕하세요. 이번 공지는 신제품 출시와 관련된 안내입니다. 자세한 내용은 첨부 파일을 참조하시기 바랍니다.",
       "img": "/server/images/notice/50.jpg"
+    },
+    {
+      "noticeId": 51,
+      "date": "2024-07-08",
+      "title": "공지사항 업로드 테스트",
+      "content": "업로드 테스트 입니다.",
+      "img": "server/images/notice/51.jpg"
+    },
+    {
+      "noticeId": 52,
+      "date": "2024-07-08",
+      "title": "임직원 대상 이벤트",
+      "content": "할 뻔 했습니다 ...더보기",
+      "img": "server/images/notice/52.jpg"
     }
   ]
 }

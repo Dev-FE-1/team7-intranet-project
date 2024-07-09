@@ -33,19 +33,19 @@ export default function Notice(root) {
   root.innerHTML = `
   <div class="notice">${noticeCard.render()}</div>
   <div class="modalContainer"></div>
+  <div class="uploadContainer"></div>
   `;
 
   const notiContainer = document.querySelector('.notice')
 
   // notice api 요청 
   function fetchData(page, append=false, search=''){
-
     if(append){
       const skeletonHtml = createSkeleton(itemsPerPage)
       notiContainer.querySelector('.page_content').insertAdjacentHTML('beforeend', skeletonHtml)
     }
 
-    axios.get(`/api/notice/list`,{
+    axios.get('/api/notice/list',{
       params:{
         page:page,
         itemsPerPage:itemsPerPage,
@@ -54,16 +54,17 @@ export default function Notice(root) {
     })
       .then(response=>{
         let cardData = response.data.data; 
+        if(cardData.length === 0 && !append){
+          displayNotMessage();
+        }else{
         addNoticeCard(notiContainer, cardData, append);
+        updateURL(search)
         useNoticeModal();
         Search();
+        }
       })
       .catch(error => {
-        if(error.response && error.response.status === 404){
-          displayNotMessage()
-        }else{
-        console.error('Error fetching data:', error);
-        }
+        console.error('Server error:', error);
       });
 
       // 검색 결과가 일치하지 않으면 검색결과가 없습니다 노출
@@ -77,20 +78,20 @@ export default function Notice(root) {
           }
         })
         notiContainer.innerHTML=returnCard.render()
+        Search()
       }
   } 
 
   //공지사항 상세 정보 api 요청
   function contentData(noticeId){
-    axios.get(`api/notice/info`,{
+    axios.get(`/api/notice/info`,{
       params:{
-        noticeId:noticeId
+        noticeId:noticeId,
       }
     })
       .then(response=>{
         let cardContent = response.data.jsonData.data;
         cardContent = cardContent.find((item)=>Number(item.noticeId) === Number(noticeId))
-        console.log(cardContent)
         if(cardContent){
             //공지사항 상세 내용을 확인할 수 있는 모달 
             const noticeModal = new Modal({
@@ -111,6 +112,42 @@ export default function Notice(root) {
       .catch(error =>{
         console.log('contentData Error :', error)
       })
+  }
+
+  // 공지사항 게시글 등록 요청 api
+  function fetchUpload(formData){
+    axios.post('/api/notice/upload', formData, {
+      headers:{
+        'Content-Type' : 'multipart/form-data'
+      },
+    })
+    .then(response=>{
+      if(response.status === 200){
+        alert('공지사항 업로드 완료!')
+        fetchData(1)
+        document.querySelector('.uploadContainer .modalClose').click();
+      }else{
+        alert('공지사항 업로드 실패')
+      }
+    })
+    .catch(error =>{
+      console.log('fetchUpload Error :', error)
+    })
+  }
+
+  // 검색 키워드에 맞게 url 변경시키는 함수
+  function updateURL(search){
+    const url = new URL(window.location.href)
+    const params = new URLSearchParams(url, search)
+
+    if(search){
+      params.set('search', search)
+    }else{
+      params.delete('search')
+    }
+    
+    url.search = params.toString()
+    window.history.replaceState({}, '', url.toString())
   }
 
   // 데이터에 들어있는 카드의 갯수 만큼 카드를 추가하는 함수
@@ -158,13 +195,12 @@ export default function Notice(root) {
     //무한 스크롤
     let allCard = container.querySelectorAll('.card.card_img')
     const lastCard = Array.from(allCard).slice(-1)
-    lastCard.forEach((card)=>{
+    lastCard.forEach((card)=>{ 
       const observer = new IntersectionObserver((entries)=>{
         if(entries[0].isIntersecting && isData){
           observer.unobserve(card)
           currentPage++;
-          itemsPerPage=9;
-          console.log('hello Observer')
+          itemsPerPage=3;
           //서버에 다음 목록 요청
           fetchData(currentPage, true);
         }else{
@@ -179,7 +215,7 @@ export default function Notice(root) {
     })
   }
 
-  //모달 호출 함수
+  // 모달 호출 함수
   function useNoticeModal(){
     let allCard = notiContainer.querySelectorAll('.card.card_img')
     allCard.forEach((card)=>{
@@ -192,31 +228,118 @@ export default function Notice(root) {
     })
   }
 
+  // 공지사항 목록 검색 함수
   function Search(){
     const searchInput = notiContainer.querySelector('.notice__search.input')
     const searchBtn = notiContainer.querySelector('.input_searchIcon')
 
+    // 키워드에 맞는 목록 결과를 보여주는 함수
+    function showSearchList(searchKeyword){
+      currentPage = 1
+      searchQuery = searchKeyword
+      fetchData(currentPage, false, searchKeyword)
+      updateURL(searchQuery)
+    }
+    
+    // 처음 목록으로 되돌아가는 함수
+    function showResetList(){
+      currentPage=1
+      searchQuery=''
+      searchInput.value=''
+      fetchData(currentPage)
+      updateURL(searchQuery)
+    }
+
     searchInput.addEventListener('keyup', (e)=>{
-      if((e.key) === 'Enter'){
+      if(e.key === 'Enter'){
         e.preventDefault()
         const searchKeyword = searchInput.value.trim()
         if(searchKeyword !==''){
-          currentPage = 1
-          searchQuery = searchKeyword
-          fetchData(currentPage, false, searchKeyword)
+          showSearchList(searchKeyword)
+        }else{
+          showResetList()
         }
       }
     })
+
     searchBtn.addEventListener('click',(e)=>{
       e.preventDefault()
-      const searchKeyword = searchInput.value.trim()
-      if(searchKeyword !==''){
-        currentPage = 1
-        searchQuery = searchKeyword
-        fetchData(currentPage, false, searchKeyword)
+      if(e.key === 'Enter'){
+        e.preventDefault()
+        const searchKeyword = searchInput.value.trim()
+        if(searchKeyword !==''){
+          showSearchList(searchKeyword)
+        }else{
+          showResetList()
+        }
       }
     })
   }
+
+  // 공지사항 등록 로직
+    const uploadBtn = notiContainer.querySelector('.btn.btn_primary.btn--notice')
+
+    uploadBtn.addEventListener('click',(e)=>{
+      document.querySelector('.modalContainer').innerHTML=``;
+
+      const noticeTitle = new Input({
+        type:'text', 
+        clssName:'notice_title', 
+        placeholder:'제목을 입력하세요.',
+        disabled:false, 
+        required:true, 
+        maxLength:200})
+      const noticeContent = new Input({
+        type:'bigText',
+        className:'notice_content',
+        placeholder:'내용을 입력하세요.',
+        disabled:false,
+        required:true,
+        maxLength:200})
+
+      const uploadForm = new Modal({
+        name:'notice_upload',
+        buttons:[{label:'취소', classList:'btn_light btn--notice--cancel modalClose'}, {label:'확인', classList:'btn--notice--upload'}],
+        title:'공지사항 업로드',
+        size:'md',
+        content:`<div class="notice_form">
+                  <div class="noticeTitle_writing">
+                    <div class="noticeUploadTitle">제목</div>
+                      ${noticeTitle.render()}
+                  </div>
+                  <div class="noticeContent_writing">
+                    <div class="noticeUploadContent">내용</div>
+                      <div class="notice_writing">
+                      ${noticeContent.render()}
+                    </div>
+                  </div>
+                  <div class="noticeFile_writing">
+                    <div class="noticeUploadFile">첨부파일</div>
+                      <input type="file" id="notice_file">
+                  </div>
+                </div>`
+      })
+      document.querySelector('.uploadContainer').innerHTML=uploadForm.render()
+      uploadForm.show()
+      document.querySelector('.btn_light.btn--notice--cancel').addEventListener('click',()=>{
+        uploadForm.hide()
+      })
+
+    document.querySelector('.btn--notice--upload').addEventListener('click',(e)=>{
+      const uploadBox = document.querySelector('.notice_form')
+      const title = uploadBox.querySelector('.noticeTitle_writing input').value
+      const content = uploadBox.querySelector('.noticeContent_writing textarea').value
+      const fileInput = uploadBox.querySelector('#notice_file')
+      const file = fileInput.files[0]
+
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('content', content)
+      formData.append('file', file)
+
+      fetchUpload(formData)
+    })
+  })
   
 
   fetchData(currentPage)
