@@ -234,8 +234,25 @@ app.get('/api/notice/recent', async (req, res) => {
 // 공지사항 게시물 등록 API
 app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
   const filepath = './server/data/notice.json';
-  const { title, content } = req.body;
-  const file = req.file;
+  const {title, content} = req.body
+  const file = req.file
+
+  //공지사항 등록 모달 유효성 검사
+  if(!title){
+    return res.status(200).json({
+      status:'title empty',
+    })
+  }
+  if(!content){ 
+    return res.status(200).json({
+      status:'content empty',
+    })   
+  }
+  if(!file){
+    return res.status(200).json({
+      status:'file empty',
+    })
+  }
 
   fs.readFile(filepath, 'utf8', (err, data) => {
     if (err) {
@@ -282,11 +299,12 @@ app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
           return res.status(500).json({ message: 'server Error' });
         }
 
-        res.status(200).json({ message: 'Notice uploaded successfully' });
-      });
-    });
-  });
-});
+        res.status(200).json({ status: 'upload success', message: 'Notice uploaded successfully' });
+      })
+    })
+  })
+})
+
 
 // 공지사항 상세정보 요청 API
 app.get('/api/notice/info', async (req, res) => {

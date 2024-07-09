@@ -52,3 +52,17 @@ body,
   max-width: 1400px;
   box-sizing: border-box;
 }
+
+/* 빨간색 테두리 + 흔들림 효과 적용 CSS */
+#red_vibration {
+  border: 1px solid #cc0000;
+  animation: vibration 0.1s infinite;
+}
+@keyframes vibration {
+  from {
+    transform: rotate(0.5deg);
+  }
+  to {
+    transform: rotate(-0.5deg);
+  }
+}

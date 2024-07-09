@@ -57,6 +57,7 @@ export default function Notice(root) {
   `;
 
   const notiContainer = document.querySelector('.notice')
+  const uploadContainer = document.querySelector('.uploadContainer')
 
   // notice api 요청 
   function fetchData(page, append=false, search=''){
@@ -106,20 +107,19 @@ export default function Notice(root) {
   function contentData(noticeId){
     axios.get(`/api/notice/info`,{
       params:{
-        noticeId:noticeId,
+        'data-id':noticeId,
       }
     })
       .then(response=>{
-        let cardContent = response.data.jsonData.data;
-        cardContent = cardContent.find((item)=>Number(item.noticeId) === Number(noticeId))
+        let cardContent = response.data.notice;
         if(cardContent){
             //공지사항 상세 내용을 확인할 수 있는 모달 
             const noticeModal = new Modal({
               name: 'notice_modal',
               size: 'md',
+              title:cardContent.title,
               buttons: [{ label: '닫기', classList: 'btn--notice--close modalClose' }],
-              content: `<p class="notice__modalTitle">${cardContent.title}</p>
-                        <p class="notice__modalDate">${cardContent.date}</p>
+              content: `<p class="notice__modalDate">${cardContent.date}</p>
                           <div class="notice__modalImg">
                               <img src="${cardContent.img}" alt="${cardContent.title}"/>
                           </div>
@@ -142,12 +142,29 @@ export default function Notice(root) {
       },
     })
     .then(response=>{
-      if(response.status === 200){
+      const {status} = response.data;
+      if(status === 'upload success'){
         alert('공지사항 업로드 완료!')
         fetchData(1)
         document.querySelector('.uploadContainer .modalClose').click();
-      }else{
-        alert('공지사항 업로드 실패')
+      }else if(status === 'title empty'){
+        alert('제목 입력값을 확인하세요.')
+        uploadContainer.querySelector('.noticeTitle_writing input').classList.add('empty')
+        setTimeout(()=>{
+        uploadContainer.querySelector('.noticeTitle_writing input').classList.remove('empty')
+        },2000)
+      }else if(status === 'content empty'){
+        alert('내용 입력값을 확인하세요.')
+        uploadContainer.querySelector('.noticeContent_writing textarea').classList.add('empty')
+        setTimeout(()=>{
+        uploadContainer.querySelector('.noticeContent_writing textarea').classList.remove('empty')
+        },2000)
+      }else if(status === 'file empty'){
+        alert('첨부파일 입력값을 확인하세요.')
+        uploadContainer.querySelector('.fileWarning').classList.add('empty')
+        setTimeout(()=>{
+        uploadContainer.querySelector('.fileWarning').classList.remove('empty')
+        },2000)
       }
     })
     .catch(error =>{
@@ -316,7 +333,7 @@ export default function Notice(root) {
           placeholder:'내용을 입력하세요.',
           disabled:false,
           required:true,
-          maxLength:200})
+          maxLength:700})
 
         const uploadForm = new Modal({
           name:'notice_upload',
@@ -338,6 +355,7 @@ export default function Notice(root) {
                       <div class="noticeUploadFile">첨부파일</div>
                         <input type="file" id="notice_file">
                     </div>
+                    <div class="fileWarning">첨부파일은 필수 입력 값 입니다.</div>
                   </div>`
           })
           document.querySelector('.uploadContainer').innerHTML=uploadForm.render()
