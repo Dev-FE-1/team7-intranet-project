@@ -68,6 +68,7 @@ export default function Employee(root) {
         tr.addEventListener('click', function () {
           let index = this.getAttribute('data-id');
           const employee = employeeList.find((emp) => emp.userId == index);
+          console.log('employee', employee);
 
           // 직원 모달창 인풋 생성
           const employeeInputs = [
@@ -177,6 +178,7 @@ export default function Employee(root) {
 
           // 모달 오픈
           employeeModal.useModal();
+          console.log('modal_content', employeeModal);
         });
       });
     })
