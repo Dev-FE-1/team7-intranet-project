@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Card from '../../components/Card/Card.js';
 import Table from '../../components/Table/Table.js';
 import Pagination from '../../components/Pagination/Pagination.js';
@@ -63,6 +64,22 @@ export default function Employee(root) {
       // 카드 렌더링
       root.innerHTML = `${card.render()}`;
 
+      // 모달 생성 (최초 1회)
+      const employeeModal = new Modal({
+        name: 'employee_modal',
+        title: '직원 정보',
+        size: 'md',
+        buttons: [
+          { label: '닫기', type: 'light', classList: 'modalClose' },
+          { label: '수정', classList: 'modalClose' },
+        ],
+        content: '', // 초기 내용은 비워둠
+      });
+
+      root
+        .querySelector('.listTable')
+        .insertAdjacentHTML('beforeend', employeeModal.render());
+
       // 클릭한 직원의 인덱스를 찾아 모달창에 데이터 전달
       document.querySelectorAll('tr').forEach((tr) => {
         tr.addEventListener('click', function () {
@@ -126,14 +143,14 @@ export default function Employee(root) {
             )
             .join('');
 
-          // 모달 생성
-          const employeeModal = new Modal({
+          // 모달 내용 업데이트
+          employeeModal.update({
             name: 'employee_modal',
             title: '직원 정보',
             size: 'md',
             buttons: [
               { label: '닫기', type: 'light', classList: 'modalClose' },
-              { label: '수정', classList: 'modalClose' },
+              { label: '수정', classList: 'modalEdit' },
             ],
             content: `
               <div class="modal_employeeImage">
@@ -149,12 +166,30 @@ export default function Employee(root) {
                 ${inputsHTML}
               </form>
             `,
+            dataId: employee.userId, // 추가
           });
 
-          // 모달 렌더링
-          root
-            .querySelector('.listTable')
-            .insertAdjacentHTML('beforeend', employeeModal.render());
+          // API 요청을 통해 이미지를 서버에 업로드하는 함수
+          function uploadProfile(formData) {
+            axios
+              .post('/api/employee/uploadImage', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              })
+              .then((response) => {
+                const { status } = response.data;
+                if (status === 'upload success') {
+                  alert('이미지 업로드 완료!');
+                  // 이미지 업로드 후 페이지를 갱신하거나, 필요한 작업을 추가합니다.
+                } else {
+                  alert('이미지 업로드 실패!');
+                }
+              })
+              .catch((error) => {
+                console.log('uploadImage Error:', error);
+              });
+          }
 
           // 이미지 업로드 이벤트 추가
           const uploadImage = document.querySelector('.uploadImage img');
@@ -164,6 +199,7 @@ export default function Employee(root) {
             input.accept = 'image/*';
             input.addEventListener('change', (event) => {
               const file = event.target.files[0];
+
               const reader = new FileReader();
               reader.onload = (e) => {
                 uploadImage.src = e.target.result;
