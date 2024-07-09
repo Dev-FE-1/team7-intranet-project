@@ -21,6 +21,7 @@ app.use(cookieParser());
 // server에 저장된 정적 파일(임직원 프로필 이미지, 공지사항 이미지) 접근 가능
 app.use('/server/images', express.static('path/to/profile/images'));
 
+//공지사항 이미지 파일 업로드에 multer 사용
 const noticeStorage = multer.diskStorage({
   dest:(req, file, cb)=>{
     cb(null, 'server/images/notice/')
