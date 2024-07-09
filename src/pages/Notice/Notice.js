@@ -7,23 +7,43 @@ import './Notice.css';
 
 
 export default function Notice(root) {
-  //공지사항 페이지 상단 검색란
-  const noticeSearch=new Input({
-    type:'search',
-    className:'notice__search', 
-    placeholder:'검색어를 입력하세요.'})
 
-  //공지사항 페이지 상단 등록 버튼
-  const noticeUpload=new Button({
-    label:'등록', 
-    classList:'btn--notice'})
+  // 관리자/사용자 등록 버튼 노출 여부 결정을 위한 쿠키 불러오기 함수
+  function getCookie(user){
+    const value = `${document.cookie}`
+    const parts = value.split(`; ${user}=`)
+
+    if(parts.length === 2) return parts.pop().split(';').shift()
+
+    return null
+  }
+
+  const checkAdmin = getCookie('admin') === 'true'
   
-  const noticeCard = new Card({
-    page :{title:'공지사항',
-    searchArea:[noticeSearch.render() + noticeUpload.render()],
-    content:``
+    // 공지사항 페이지 상단 검색란
+    const noticeSearch = new Input({
+      type: 'search',
+      className: 'notice__search',
+      placeholder: '검색어를 입력하세요.'
+    });
+
+    // 공지사항 페이지 상단 등록 버튼
+    let noticeUpload = '';
+    if (checkAdmin) {
+      noticeUpload = new Button({
+        label: '등록',
+        classList: 'btn--notice'
+      });
     }
-  })
+
+    const noticeCard = new Card({
+      page: {
+        title: '공지사항',
+        searchArea: [noticeSearch.render() + (checkAdmin ? noticeUpload.render() : '')],
+        content: ``
+      }
+    })
+  
 
   //초기 페이지
   let currentPage = 1;
@@ -71,7 +91,7 @@ export default function Notice(root) {
       function displayNotMessage(){
         const returnCard = new Card({
           page :{title:'공지사항',
-          searchArea:[noticeSearch.render() + noticeUpload.render()],
+          searchArea:[noticeSearch.render() + (checkAdmin ? noticeUpload.render() : '')],
           content:`
           <div class="noticenone">검색결과가 없습니다.</div>
             `
@@ -276,71 +296,72 @@ export default function Notice(root) {
     })
   }
 
-  // 공지사항 등록 로직
-    const uploadBtn = notiContainer.querySelector('.btn.btn_primary.btn--notice')
+    // 공지사항 등록 로직
+    if(checkAdmin){
+      const uploadBtn = notiContainer.querySelector('.btn.btn_primary.btn--notice')
+        if(uploadBtn){
+        uploadBtn.addEventListener('click',(e)=>{
+        document.querySelector('.modalContainer').innerHTML=``;
 
-    uploadBtn.addEventListener('click',(e)=>{
-      document.querySelector('.modalContainer').innerHTML=``;
+        const noticeTitle = new Input({
+          type:'text', 
+          clssName:'notice_title', 
+          placeholder:'제목을 입력하세요.',
+          disabled:false, 
+          required:true, 
+          maxLength:200})
+        const noticeContent = new Input({
+          type:'bigText',
+          className:'notice_content',
+          placeholder:'내용을 입력하세요.',
+          disabled:false,
+          required:true,
+          maxLength:200})
 
-      const noticeTitle = new Input({
-        type:'text', 
-        clssName:'notice_title', 
-        placeholder:'제목을 입력하세요.',
-        disabled:false, 
-        required:true, 
-        maxLength:200})
-      const noticeContent = new Input({
-        type:'bigText',
-        className:'notice_content',
-        placeholder:'내용을 입력하세요.',
-        disabled:false,
-        required:true,
-        maxLength:200})
-
-      const uploadForm = new Modal({
-        name:'notice_upload',
-        buttons:[{label:'취소', classList:'btn_light btn--notice--cancel modalClose'}, {label:'확인', classList:'btn--notice--upload'}],
-        title:'공지사항 업로드',
-        size:'md',
-        content:`<div class="notice_form">
-                  <div class="noticeTitle_writing">
-                    <div class="noticeUploadTitle">제목</div>
-                      ${noticeTitle.render()}
-                  </div>
-                  <div class="noticeContent_writing">
-                    <div class="noticeUploadContent">내용</div>
-                      <div class="notice_writing">
-                      ${noticeContent.render()}
+        const uploadForm = new Modal({
+          name:'notice_upload',
+          buttons:[{label:'취소', classList:'btn_light btn--notice--cancel modalClose'}, {label:'확인', classList:'btn--notice--upload'}],
+          title:'공지사항 업로드',
+          size:'md',
+          content:`<div class="notice_form">
+                    <div class="noticeTitle_writing">
+                      <div class="noticeUploadTitle">제목</div>
+                        ${noticeTitle.render()}
                     </div>
-                  </div>
-                  <div class="noticeFile_writing">
-                    <div class="noticeUploadFile">첨부파일</div>
-                      <input type="file" id="notice_file">
-                  </div>
-                </div>`
+                    <div class="noticeContent_writing">
+                      <div class="noticeUploadContent">내용</div>
+                        <div class="notice_writing">
+                        ${noticeContent.render()}
+                      </div>
+                    </div>
+                    <div class="noticeFile_writing">
+                      <div class="noticeUploadFile">첨부파일</div>
+                        <input type="file" id="notice_file">
+                    </div>
+                  </div>`
+          })
+          document.querySelector('.uploadContainer').innerHTML=uploadForm.render()
+          uploadForm.show()
+          document.querySelector('.btn_light.btn--notice--cancel').addEventListener('click',()=>{
+          uploadForm.hide()
+        })
+
+        document.querySelector('.btn--notice--upload').addEventListener('click',(e)=>{
+        const uploadBox = document.querySelector('.notice_form')
+        const title = uploadBox.querySelector('.noticeTitle_writing input').value
+        const content = uploadBox.querySelector('.noticeContent_writing textarea').value
+        const fileInput = uploadBox.querySelector('#notice_file')
+        const file = fileInput.files[0]
+
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('content', content)
+        formData.append('file', file)
+
+        fetchUpload(formData)
+        })
       })
-      document.querySelector('.uploadContainer').innerHTML=uploadForm.render()
-      uploadForm.show()
-      document.querySelector('.btn_light.btn--notice--cancel').addEventListener('click',()=>{
-        uploadForm.hide()
-      })
-
-    document.querySelector('.btn--notice--upload').addEventListener('click',(e)=>{
-      const uploadBox = document.querySelector('.notice_form')
-      const title = uploadBox.querySelector('.noticeTitle_writing input').value
-      const content = uploadBox.querySelector('.noticeContent_writing textarea').value
-      const fileInput = uploadBox.querySelector('#notice_file')
-      const file = fileInput.files[0]
-
-      const formData = new FormData()
-      formData.append('title', title)
-      formData.append('content', content)
-      formData.append('file', file)
-
-      fetchUpload(formData)
-    })
-  })
-  
-
-  fetchData(currentPage)
+    }
+  }
+  fetchData(currentPage)  
 }
