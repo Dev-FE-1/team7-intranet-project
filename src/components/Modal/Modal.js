@@ -39,23 +39,37 @@ export default class Modal {
   show() {
     const modal = document.querySelector(`.modal`);
     modal.classList.add('show');
+    // Body에 overflow:hidden 스타일 추가
+    document.body.style.overflow = 'hidden';
+    // Window에 스크롤 이벤트 추가하여 스크롤 방지
+    window.addEventListener('scroll', (e) => e.preventDefault());
   }
 
   // 모달 닫기
   hide() {
     const modal = document.querySelector(`.modal`);
     modal.classList.remove('show');
+    // Body에 overflow 스타일 복원
+    document.body.style.overflow = '';
+    // Window에서 스크롤 이벤트 제거
+    window.removeEventListener('scroll', (e) => e.preventDefault());
   }
 
   useModal() {
     //열기
     const modal = document.querySelector(`.modal`);
     modal.classList.add('show');
+    // Body에 overflow:hidden 스타일 추가
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('scroll', (e) => e.preventDefault());
     //닫기
     modal.addEventListener('click', (e) => {
       const btnClose = e.target.closest('.modalClose');
       if (!btnClose) return;
       e.target.closest('.modal').classList.remove('show');
+      // Body에 overflow 스타일과 패딩 복원
+      document.body.style.overflow = '';
+      window.removeEventListener('scroll', (e) => e.preventDefault());
     });
   }
 
@@ -78,7 +92,7 @@ export default class Modal {
       .querySelector('.modal')
       .classList.add(`${updateName}`, `modal_${updateSize}`);
     if (updateClassList) {
-      document.querySelector('.modal').classList.add(` ${updateClassList}`);
+      document.querySelector('.modal').classList.add(`${updateClassList}`);
     }
     document.querySelector('.modal_title').innerHTML = updateTitle;
     document.querySelector('.modal_content').innerHTML = updateContent;

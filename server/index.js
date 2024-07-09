@@ -21,6 +21,7 @@ app.use(cookieParser());
 // server에 저장된 정적 파일(임직원 프로필 이미지, 공지사항 이미지) 접근 가능
 app.use('/server/images', express.static('path/to/profile/images'));
 
+//공지사항 이미지 파일 업로드에 multer 사용
 const noticeStorage = multer.diskStorage({
   dest:(req, file, cb)=>{
     cb(null, 'server/images/notice/')
@@ -150,7 +151,7 @@ app.post('/api/user/work', async (req, res) => {
   }
 });
 
-// 특정 페이지의 휴가/외출 목록 정보 요청 API
+// 휴가/외출 목록 정보 요청 API
 app.get('/api/vacation/list', (req, res) => {
   fs.readFile('./server/data/vacation.json', 'utf8', (err, data) => {
     if (err) {
@@ -163,7 +164,8 @@ app.get('/api/vacation/list', (req, res) => {
     }
     try {
       const jsonData = JSON.parse(data);
-      res.json(jsonData);
+      const reversedData = jsonData.data.reverse();
+      res.json(reversedData);
     } catch (parseErr) {
       console.error('Error parsing JSON file:', parseErr);
       return res.status(500).send({
@@ -175,11 +177,47 @@ app.get('/api/vacation/list', (req, res) => {
   });
 });
 
-// 휴가/외출 상세 정보 요청 API
-app.get('/api/vacation/info', (req, res) => {});
-
 // 휴가/외출 신청 API
-app.post('/api/vacation', (req, res) => {});
+app.post('/api/vacation', (req, res) => {
+  try {
+    // 요청에서 데이터 추출
+    const { userId, type, sDate, eDate, note } = req.body;
+
+    // 기존 데이터 가져오기
+    const filePath = './server/data/vacation.json';
+    const rawData = fs.readFileSync(filePath);
+    const data = JSON.parse(rawData);
+
+    // 새로운 휴가/외출 추가
+    const newVacation = {
+      vacaId: data.data.length + 1,
+      userId,
+      type,
+      sDate,
+      eDate,
+      note,
+    };
+
+    // 데이터에 추가
+    data.data.push(newVacation);
+
+    // JSON 파일 업데이트
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+
+    // 성공 응답
+    res.status(201).json({
+      success: true,
+      message: '휴가/외출 신청이 정상적으로 처리되었습니다.',
+    });
+  } catch (error) {
+    // 오류 처리
+    console.error('Error:', error.message);
+    res.status(500).json({
+      success: false,
+      message: '서버 오류입니다. 잠시 후 다시 시도해주세요.',
+    });
+  }
+});
 
 // 가장 최근에 올라온 공지사항 3개 요청 API
 app.get('/api/notice/recent', (req, res) => {});
