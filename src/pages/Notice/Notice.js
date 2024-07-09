@@ -57,6 +57,7 @@ export default function Notice(root) {
   `;
 
   const notiContainer = document.querySelector('.notice')
+  const uploadContainer = document.querySelector('.uploadContainer')
 
   // notice api 요청 
   function fetchData(page, append=false, search=''){
@@ -106,20 +107,19 @@ export default function Notice(root) {
   function contentData(noticeId){
     axios.get(`/api/notice/info`,{
       params:{
-        noticeId:noticeId,
+        'data-id':noticeId,
       }
     })
       .then(response=>{
-        let cardContent = response.data.jsonData.data;
-        cardContent = cardContent.find((item)=>Number(item.noticeId) === Number(noticeId))
+        let cardContent = response.data.notice;
         if(cardContent){
             //공지사항 상세 내용을 확인할 수 있는 모달 
             const noticeModal = new Modal({
               name: 'notice_modal',
               size: 'md',
+              title:cardContent.title,
               buttons: [{ label: '닫기', classList: 'btn--notice--close modalClose' }],
-              content: `<p class="notice__modalTitle">${cardContent.title}</p>
-                        <p class="notice__modalDate">${cardContent.date}</p>
+              content: `<p class="notice__modalDate">${cardContent.date}</p>
                           <div class="notice__modalImg">
                               <img src="${cardContent.img}" alt="${cardContent.title}"/>
                           </div>
@@ -149,22 +149,22 @@ export default function Notice(root) {
         document.querySelector('.uploadContainer .modalClose').click();
       }else if(status === 'title empty'){
         alert('제목 입력값을 확인하세요.')
-        document.querySelector('.uploadContainer .modalTitle_writing .input').classList.add('empty')
+        uploadContainer.querySelector('.noticeTitle_writing input').classList.add('empty')
         setTimeout(()=>{
-        document.querySelector('.uploadContainer .modalTitle_writing .input').classList.remove('empty')
-        },1000)
+        uploadContainer.querySelector('.noticeTitle_writing input').classList.remove('empty')
+        },2000)
       }else if(status === 'content empty'){
         alert('내용 입력값을 확인하세요.')
-        document.querySelector('.uploadContainer .modalContent_writing .input').classList.add('empty')
+        uploadContainer.querySelector('.noticeContent_writing textarea').classList.add('empty')
         setTimeout(()=>{
-        document.querySelector('.uploadContainer .modalContent_writing .input').classList.remove('empty')
-        },1000)
+        uploadContainer.querySelector('.noticeContent_writing textarea').classList.remove('empty')
+        },2000)
       }else if(status === 'file empty'){
         alert('첨부파일 입력값을 확인하세요.')
-        document.querySelector('.uploadContainer .fileWarning').classList.add('empty')
+        uploadContainer.querySelector('.fileWarning').classList.add('empty')
         setTimeout(()=>{
-        document.querySelector('.uploadContainer .fileWarning').classList.remove('empty')
-        },1000)
+        uploadContainer.querySelector('.fileWarning').classList.remove('empty')
+        },2000)
       }
     })
     .catch(error =>{

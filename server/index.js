@@ -23,15 +23,15 @@ app.use('/server/images', express.static('path/to/profile/images'));
 
 //공지사항 이미지 파일 업로드에 multer 사용
 const noticeStorage = multer.diskStorage({
-  dest:(req, file, cb)=>{
-    cb(null, 'server/images/notice/')
+  dest: (req, file, cb) => {
+    cb(null, 'server/images/notice/');
   },
-  filename:(req, file, cb)=>{
-    cb(null, file.originalname)
-  }
-})
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-const noticeUpload = multer({storage: noticeStorage})
+const noticeUpload = multer({ storage: noticeStorage });
 
 // API 예시 코드(참고 자료)
 // app.get('/api/users.json', (req, res) => {
@@ -220,10 +220,19 @@ app.post('/api/vacation', (req, res) => {
 });
 
 // 가장 최근에 올라온 공지사항 3개 요청 API
-app.get('/api/notice/recent', (req, res) => {});
+app.get('/api/notice/recent', async (req, res) => {
+  const noticeData = await getJsonData('./server/data/notice.json');
+
+  // 데이터 최신순 정렬 후 공지사항 3개 추출
+  const newestNoticeData = noticeData
+    .sort((a, b) => b.noticeId - a.noticeId)
+    .slice(0, 3);
+
+  res.status(200).send({ data: newestNoticeData });
+});
 
 // 공지사항 게시물 등록 API
-app.post('/api/notice/upload', noticeUpload.single('file'), (req, res)=>{
+app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
   const filepath = './server/data/notice.json';
   const {title, content} = req.body
   const file = req.file
@@ -245,62 +254,6 @@ app.post('/api/notice/upload', noticeUpload.single('file'), (req, res)=>{
     })
   }
 
-  fs.readFile(filepath, 'utf8' , (err, data)=>{
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: err.message,
-        data: null,
-      });
-    }
-
-    const jsonData = JSON.parse(data)
-    const notices = jsonData.data
-
-    const lastId = notices.length > 0 ? notices[notices.length -1] : null
-    const newNoticeId = lastId ? lastId.noticeId + 1 : 1
-    
-    //jpg 확장자만 fileExt 변수에 저장
-    const fileExt = file.originalname.split('.').pop()
-    //목록 내 이미지 다음 번호.jpg로 이미지 파일 이름 저장
-    const newFileName = `${newNoticeId}.${fileExt}`
-    const newFilePath = `server/images/notice/${newFileName}`
-  
-
-    fs.rename(file.path, newFilePath, (err)=>{
-      if (err) {
-        console.error('Error renaming file:', err);
-        return res.status(500).json({ message: 'File Rename Error' });
-      }
-
-      const newNotice = {
-        noticeId:newNoticeId,
-        date:new Date().toISOString().split('T')[0],
-        title,
-        content,
-        img: newFilePath
-      }
-
-      notices.push(newNotice)
-
-      jsonData.data = notices
-      fs.writeFile(filepath, JSON.stringify(jsonData, null, 2), (err)=>{
-        if(err){
-          console.error('Error notice writing: ', err)
-          return res.status(500).json({message:'server Error'})
-        }
-
-        res.status(200).json({ status: 'upload success', message: 'Notice uploaded successfully' });
-      })
-    })
-  })
-})
-
-// 공지사항 상세 정보 요청 API
-app.get('/api/notice/info', (req, res) => {
-  const filepath = './server/data/notice.json';
-
   fs.readFile(filepath, 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
@@ -310,28 +263,60 @@ app.get('/api/notice/info', (req, res) => {
         data: null,
       });
     }
-    try {
-      let jsonData = JSON.parse(data);
 
-      //최신순으로 불러오도록 함
-      jsonData.data = jsonData.data.sort(
-        (a, b) => b.noticeId - a.noticeId
-      );
-      const noticeId = req.query.noticeId;
-      //json 형태로 응답을 돌려줌
-      res.json({
-        jsonData,
-        noticeId: noticeId,
-      });
-    } catch (parseErr) {
-      console.error('Error parsing JSON file:', parseErr);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: parseErr.message,
-        data: null,
-      });
-    }
-  });
+    const jsonData = JSON.parse(data);
+    const notices = jsonData.data;
+
+    const lastId = notices.length > 0 ? notices[notices.length - 1] : null;
+    const newNoticeId = lastId ? lastId.noticeId + 1 : 1;
+
+    //jpg 확장자만 fileExt 변수에 저장
+    const fileExt = file.originalname.split('.').pop();
+    //목록 내 이미지 다음 번호.jpg로 이미지 파일 이름 저장
+    const newFileName = `${newNoticeId}.${fileExt}`;
+    const newFilePath = `server/images/notice/${newFileName}`;
+
+    fs.rename(file.path, newFilePath, (err) => {
+      if (err) {
+        console.error('Error renaming file:', err);
+        return res.status(500).json({ message: 'File Rename Error' });
+      }
+
+      const newNotice = {
+        noticeId: newNoticeId,
+        date: new Date().toISOString().split('T')[0],
+        title,
+        content,
+        img: newFilePath,
+      };
+
+      notices.push(newNotice);
+
+      jsonData.data = notices;
+      fs.writeFile(filepath, JSON.stringify(jsonData, null, 2), (err) => {
+        if (err) {
+          console.error('Error notice writing: ', err);
+          return res.status(500).json({ message: 'server Error' });
+        }
+
+        res.status(200).json({ status: 'upload success', message: 'Notice uploaded successfully' });
+      })
+    })
+  })
+})
+
+
+// 공지사항 상세정보 요청 API
+app.get('/api/notice/info', async (req, res) => {
+  const dataId = +req.query['data-id'];
+  const noticeData = await getJsonData('./server/data/notice.json');
+  const [notice] = findKeyValue(noticeData, 'noticeId', dataId);
+
+  if (notice) {
+    res.status(200).send({ notice: notice });
+  } else {
+    res.status(401).send({ message: '공지사항 상세정보 요청 실패' });
+  }
 });
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
@@ -350,13 +335,11 @@ app.get(`/api/notice/list`, (req, res) => {
     try {
       let jsonData = JSON.parse(data);
 
-      if(!jsonData.data || !Array.isArray(jsonData.data)){
+      if (!jsonData.data || !Array.isArray(jsonData.data)) {
         return res.status(500).send({ status: 'List data error', data: null });
-      } 
+      }
       //업로드 날짜 최신순으로 불러오도록 함
-      jsonData.data = jsonData.data.sort(
-        (a, b) => b.noticeId - a.noticeId
-      );
+      jsonData.data = jsonData.data.sort((a, b) => b.noticeId - a.noticeId);
 
       // 요청한 페이징 정보에 대한 응답
       const page = parseInt(req.query.page) || 1;
@@ -378,12 +361,12 @@ app.get(`/api/notice/list`, (req, res) => {
         });
 
         if (filterData.length === 0) {
-          return res.status(200).json({ 
-            currentPage : page,
+          return res.status(200).json({
+            currentPage: page,
             itemsPerPage: itemsPerPage,
             totalItems: 0,
             totalPages: 0,
-            data:[],
+            data: [],
             searchQuery: req.query.search || '',
           });
         }
