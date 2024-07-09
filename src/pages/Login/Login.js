@@ -63,8 +63,16 @@ export default function Login(wrap, route) {
   document.querySelector('.login_btn').addEventListener('click', async (e) => {
     e.preventDefault();
 
+    const id = document.querySelector('.idText').value;
+    const pw = document.querySelector('.pwText').value;
+
+    if (id === '' || pw === '') {
+      checkValidation(id, pw);
+      return;
+    }
+
     try {
-      const success = await loginApi();
+      const success = await loginApi(id, pw);
 
       if (success) {
         history.pushState(null, null, '/');
@@ -78,16 +86,29 @@ export default function Login(wrap, route) {
   });
 }
 
-// 로그인 API 실행 함수
-const loginApi = async () => {
-  const id = document.querySelector('.idText').value;
-  const pw = document.querySelector('.pwText').value;
-
+// 로그인 API 실행 로직
+const loginApi = async (id, pw) => {
   try {
     const res = await axios.post('/api/user/login', { id, pw });
     return res.status === 200;
   } catch (err) {
     console.error('API error:', err);
     return false;
+  }
+};
+
+// ID와 PW 값이 비었을 경우 흔들림 효과 적용 로직
+const checkValidation = (id, pw) => {
+  if (id === '') {
+    document.querySelector('.idText').setAttribute('id', 'red_vibration');
+    setTimeout(() => {
+      document.querySelector('.idText').removeAttribute('id', 'red_vibration');
+    }, 500);
+  }
+  if (pw === '') {
+    document.querySelector('.pwText').setAttribute('id', 'red_vibration');
+    setTimeout(() => {
+      document.querySelector('.pwText').removeAttribute('id', 'red_vibration');
+    }, 500);
   }
 };
