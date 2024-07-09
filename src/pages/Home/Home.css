@@ -183,7 +183,7 @@
 .home_moreNotice {
   position: absolute;
   right: 20px;
-  top: 30px;
+  top: 40px;
   margin-right: 10px;
   font-weight: bold;
   color: #012e33;
@@ -192,6 +192,7 @@
   display: flex;
   flex: 1;
   gap: 25px;
+  margin-top: 30px;
 }
 .home_noticeCard {
   height: 330px;
@@ -212,4 +213,27 @@
 }
 .home_workModal .modal_content {
   margin: 50px 0;
+}
+
+/* noticeModal */
+/*notice-modal*/
+.home_noticeModal .modal_inner {
+  max-height: calc(100vh - 30px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.home_noticeTitle {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+.home_noticeDate {
+  font-size: 16px;
+  text-align: right;
+  padding: 0px 0px 10px;
+  border-bottom: 1px solid #dfdfdf;
+}
+.home_noticeContent {
+  margin-top: 20px;
+  box-sizing: border-box;
 }

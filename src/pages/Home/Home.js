@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getDate, getTime } from '/src/utils/getDateTime.js';
 import './Home.css';
 
-export default function Home(root, userInfo) {
+export default async function Home(root, userInfo) {
   // interval ID를 관리하기 위한 변수
   let intervalId = null;
 
@@ -13,6 +13,9 @@ export default function Home(root, userInfo) {
 
   // 현재 로그인한 사용자의 근무 상태 값
   const workStatus = [work];
+
+  // 최근 공지사항 목록 API 요청 후 데이터 저장
+  const { data: newestNotice } = await noticeListApi();
 
   // 프로필 Card 컴포넌트
   const profileCard = new Card({
@@ -63,7 +66,20 @@ export default function Home(root, userInfo) {
       content: `
       <a class="home_moreNotice" href="/notice">더보기 ></a>
       <div class="home_noticeList">
-    
+        ${newestNotice
+          .map((nn, idx) => {
+            const noticeCard = new Card({
+              classList: 'home_noticeCard',
+              img: {
+                url: nn.img,
+                text: nn.title,
+              },
+              dataId: nn.noticeId,
+            });
+
+            return noticeCard.render();
+          })
+          .join('')}
       </div>
       `,
     },
@@ -80,10 +96,23 @@ export default function Home(root, userInfo) {
     ],
   });
 
+  // 공지사항 상세정보 Modal 컴포넌트
+  const noticeModal = new Modal({
+    name: 'home_noticeModal',
+    size: 'md',
+    buttons: [{ label: '닫기', classList: 'home_noticeCancel modalClose' }],
+    content: `<p class="home_noticeDate"></p>
+                <div class="home_noticeImg">
+                </div>
+              <div class="home_noticeContent"></div>`,
+  });
+
+  // Home 메인 페이지에 컴포넌트를 추가하는 로직
   root.innerHTML = `<div class="home">${profileCard.render()}
   ${workCard.render()}
   ${noticeListCard.render()}
-  ${workModal.render()}</div>`;
+  ${workModal.render()}
+  ${noticeModal.render()}</div>`;
 
   // 현재 시간을 나타내기 위한 로직
   checkWorkCardExist();
@@ -116,6 +145,27 @@ export default function Home(root, userInfo) {
         }
       })
     : '';
+
+  // 공지사항 목록에 위치한 공지사항 카드를 클릭했을 때 해당하는 상세정보 모달이 나오도록 하는 로직
+  document.querySelectorAll('.home_noticeCard').forEach((card) => {
+    card.addEventListener('click', async (e) => {
+      const dataId = card.getAttribute('data-id');
+      const noticeData = await noticeInfoApi(dataId);
+
+      noticeModal.update({
+        name: 'home_noticeModal',
+        size: 'md',
+        title: noticeData.title,
+        buttons: [{ label: '닫기', classList: 'home_noticeCancel modalClose' }],
+        content: `<p class="home_noticeDate">${noticeData.date}</p>
+                    <div class="home_noticeImg">
+                        <img src="${noticeData.img}" alt="${noticeData.title}"/>
+                    </div>
+                  <div class="home_noticeContent">${noticeData.content}</div>`,
+      });
+      noticeModal.useModal();
+    });
+  });
 }
 
 // 현재 페이지에 근무 시간 카드가 존재하는지 확인하는 로직
@@ -210,6 +260,28 @@ const workApi = async () => {
   try {
     const res = await axios.post('/api/user/work');
     return res.data.status;
+  } catch (err) {
+    console.error('API error:', err);
+    return false;
+  }
+};
+
+// 최근 공지사항 목록 API 요청 로직
+const noticeListApi = async () => {
+  try {
+    const res = await axios.get('/api/notice/recent');
+    return res.data;
+  } catch (err) {
+    console.error('API error:', err);
+    return false;
+  }
+};
+
+// 공지사항 상세정보 API 요청 로직
+const noticeInfoApi = async (dataId) => {
+  try {
+    const res = await axios.get(`/api/notice/info?data-id=${dataId}`);
+    return res.data.notice;
   } catch (err) {
     console.error('API error:', err);
     return false;

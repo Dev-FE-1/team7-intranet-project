@@ -219,7 +219,16 @@ app.post('/api/vacation', (req, res) => {
 });
 
 // 가장 최근에 올라온 공지사항 3개 요청 API
-app.get('/api/notice/recent', (req, res) => {});
+app.get('/api/notice/recent', async (req, res) => {
+  const noticeData = await getJsonData('./server/data/notice.json');
+
+  // 데이터 최신순 정렬 후 공지사항 3개 추출
+  const newestNoticeData = noticeData
+    .sort((a, b) => b.noticeId - a.noticeId)
+    .slice(0, 3);
+
+  res.status(200).send({ data: newestNoticeData });
+});
 
 // 공지사항 게시물 등록 API
 app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
@@ -278,39 +287,17 @@ app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
   });
 });
 
-// 공지사항 상세 정보 요청 API
-app.get('/api/notice/info', (req, res) => {
-  const filepath = './server/data/notice.json';
+// 공지사항 상세정보 요청 API
+app.get('/api/notice/info', async (req, res) => {
+  const dataId = +req.query['data-id'];
+  const noticeData = await getJsonData('./server/data/notice.json');
+  const [notice] = findKeyValue(noticeData, 'noticeId', dataId);
 
-  fs.readFile(filepath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: err.message,
-        data: null,
-      });
-    }
-    try {
-      let jsonData = JSON.parse(data);
-
-      //최신순으로 불러오도록 함
-      jsonData.data = jsonData.data.sort((a, b) => b.noticeId - a.noticeId);
-      const noticeId = req.query.noticeId;
-      //json 형태로 응답을 돌려줌
-      res.json({
-        jsonData,
-        noticeId: noticeId,
-      });
-    } catch (parseErr) {
-      console.error('Error parsing JSON file:', parseErr);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: parseErr.message,
-        data: null,
-      });
-    }
-  });
+  if (notice) {
+    res.status(200).send({ notice: notice });
+  } else {
+    res.status(401).send({ message: '공지사항 상세정보 요청 실패' });
+  }
 });
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
