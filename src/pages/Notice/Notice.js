@@ -142,12 +142,29 @@ export default function Notice(root) {
       },
     })
     .then(response=>{
-      if(response.status === 200){
+      const {status} = response.data;
+      if(status === 'upload success'){
         alert('공지사항 업로드 완료!')
         fetchData(1)
         document.querySelector('.uploadContainer .modalClose').click();
-      }else{
-        alert('공지사항 업로드 실패')
+      }else if(status === 'title empty'){
+        alert('제목 입력값을 확인하세요.')
+        document.querySelector('.uploadContainer .modalTitle_writing .input').classList.add('empty')
+        setTimeout(()=>{
+        document.querySelector('.uploadContainer .modalTitle_writing .input').classList.remove('empty')
+        },1000)
+      }else if(status === 'content empty'){
+        alert('내용 입력값을 확인하세요.')
+        document.querySelector('.uploadContainer .modalContent_writing .input').classList.add('empty')
+        setTimeout(()=>{
+        document.querySelector('.uploadContainer .modalContent_writing .input').classList.remove('empty')
+        },1000)
+      }else if(status === 'file empty'){
+        alert('첨부파일 입력값을 확인하세요.')
+        document.querySelector('.uploadContainer .fileWarning').classList.add('empty')
+        setTimeout(()=>{
+        document.querySelector('.uploadContainer .fileWarning').classList.remove('empty')
+        },1000)
       }
     })
     .catch(error =>{
@@ -316,7 +333,7 @@ export default function Notice(root) {
           placeholder:'내용을 입력하세요.',
           disabled:false,
           required:true,
-          maxLength:200})
+          maxLength:700})
 
         const uploadForm = new Modal({
           name:'notice_upload',
@@ -338,6 +355,7 @@ export default function Notice(root) {
                       <div class="noticeUploadFile">첨부파일</div>
                         <input type="file" id="notice_file">
                     </div>
+                    <div class="fileWarning">첨부파일은 필수 입력 값 입니다.</div>
                   </div>`
           })
           document.querySelector('.uploadContainer').innerHTML=uploadForm.render()
