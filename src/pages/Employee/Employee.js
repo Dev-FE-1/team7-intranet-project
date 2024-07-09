@@ -70,7 +70,7 @@ export default function Employee(root) {
           const employee = employeeList.find((emp) => emp.userId == index);
 
           // 직원 모달창 인풋 생성
-          const employeeinputs = [
+          const employeeInputs = [
             {
               type: 'text',
               className: 'user_id',
@@ -115,7 +115,7 @@ export default function Employee(root) {
             },
           ];
 
-          const inputsHTML = employeeinputs
+          const inputsHTML = employeeInputs
             .map(
               (input) =>
                 `<div class="employeeForm_group">
