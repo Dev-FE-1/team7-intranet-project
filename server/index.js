@@ -153,28 +153,82 @@ app.post('/api/user/work', async (req, res) => {
 
 // 휴가/외출 목록 정보 요청 API
 app.get('/api/vacation/list', (req, res) => {
-  fs.readFile('./server/data/vacation.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: err,
-        data: null,
-      });
+  try {
+    const filePath = './server/data/vacation.json';
+    const rawData = fs.readFileSync(filePath);
+    const jsonData = JSON.parse(rawData).data;
+
+    const userId = req.cookies.userId;
+    const myData = jsonData.filter((item) => item.userId === userId).reverse();
+    const dataPerPage = 5;
+    const currentPage = Number(req.query.page) || 1;
+    const total = myData.length;
+    let sliceData = [...myData].slice(0, dataPerPage);
+    if (currentPage !== 1) {
+      sliceData = [...myData].slice(
+        (currentPage - 1) * dataPerPage,
+        currentPage * dataPerPage
+      );
     }
-    try {
-      const jsonData = JSON.parse(data);
-      const reversedData = jsonData.data.reverse();
-      res.json(reversedData);
-    } catch (parseErr) {
-      console.error('Error parsing JSON file:', parseErr);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: parseErr,
-        data: null,
-      });
+    res.json({
+      data: sliceData,
+      dataPerPage,
+      currentPage,
+      total,
+    });
+  } catch (parseErr) {
+    console.error('Error parsing JSON file:', parseErr);
+    return res.status(500).send({
+      status: 'Internal Server Error',
+      message: parseErr,
+      data: null,
+    });
+  }
+});
+
+// 휴가/외출 필터링 요청 API
+app.get('/api/vacation/search', async (req, res) => {
+  try {
+    // 쿼리 파라미터에서 검색 조건을 가져옴
+    const filePath = './server/data/vacation.json';
+    const rawData = fs.readFileSync(filePath);
+    const jsonData = JSON.parse(rawData).data;
+
+    const userId = req.cookies.userId;
+    const myData = jsonData.filter((item) => item.userId === userId).reverse();
+    const searchType = req.query.search;
+    const searchData = myData.filter((item) => {
+      if (searchType === '전체') {
+        return true;
+      } else {
+        return item.type === searchType;
+      }
+    });
+    const dataPerPage = 5;
+    const currentPage = Number(req.query.page) || 1;
+    const total = searchData.length;
+    let sliceData = [...searchData].slice(0, dataPerPage);
+    if (currentPage !== 1) {
+      sliceData = [...searchData].slice(
+        (currentPage - 1) * dataPerPage,
+        currentPage * dataPerPage
+      );
     }
-  });
+    res.json({
+      data: sliceData,
+      dataPerPage,
+      currentPage,
+      total,
+    });
+    // 데이터 필터링 및 역순 정렬
+  } catch (err) {
+    console.error('Error processing request:', err);
+    res.status(500).json({
+      status: 'Internal Server Error',
+      message: err.message,
+      data: null,
+    });
+  }
 });
 
 // 휴가/외출 신청 API
@@ -215,34 +269,6 @@ app.post('/api/vacation', (req, res) => {
     res.status(500).json({
       success: false,
       message: '서버 오류입니다. 잠시 후 다시 시도해주세요.',
-    });
-  }
-});
-
-// 휴가/외출 필터링 요청 API
-app.get('/api/vacation/search', async (req, res) => {
-  try {
-    // 쿼리 파라미터에서 검색 조건을 가져옴
-    const searchType = req.query.search;
-
-    const filePath = './server/data/vacation.json';
-    const rawData = fs.readFileSync(filePath);
-    const data = JSON.parse(rawData).data;
-
-    if (searchType === '전체') {
-      res.json(data.reverse());
-    } else {
-      res.json(
-        data.filter((item) => item.type.trim() === searchType).reverse()
-      );
-    }
-    // 데이터 필터링 및 역순 정렬
-  } catch (err) {
-    console.error('Error processing request:', err);
-    res.status(500).json({
-      status: 'Internal Server Error',
-      message: err.message,
-      data: null,
     });
   }
 });

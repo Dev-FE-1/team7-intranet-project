@@ -16,24 +16,38 @@ export default function Vacation(root) {
   let myData = [];
   const userId = getUserIdFromCookie();
   let currentParams = getCurrentURLParams();
-  if (!currentParams.search) {
-    fetchData('list');
-  } else {
-    fetchData('search');
-  }
-  async function fetchData(filter) {
+  let dataPerPage = 0;
+  let total = 0;
+  fetchData();
+  async function fetchData() {
     currentParams = getCurrentURLParams();
-    if (filter === 'search') {
-      filter = `search?search=${currentParams.search}`;
-    }
-
-    try {
-      const res = await axios.get(`/api/vacation/${filter}`);
-      console.log(res);
-      myData = res.data.filter((d) => d.userId === '3');
-      renderPage(myData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    const currentPage = currentParams.page;
+    console.log(currentPage);
+    if (currentParams.search) {
+      try {
+        const res = await axios.get(
+          `/api/vacation/search?search=${currentParams.search}${
+            currentPage ? `&page=${currentPage}` : ''
+          }`
+        );
+        dataPerPage = res.data.dataPerPage;
+        total = res.data.total;
+        renderPage(res.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    } else {
+      try {
+        const res = await axios.get(
+          `/api/vacation/list${currentPage ? `?page=${currentPage}` : ''}`
+        );
+        myData = res.data.data.filter((d) => d.userId === '3');
+        dataPerPage = res.data.dataPerPage;
+        total = res.data.total;
+        renderPage(res.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
   }
 
@@ -70,9 +84,10 @@ export default function Vacation(root) {
     });
 
     const pagination = new Pagination({
-      totalCnt: datas.length,
-      dataPerPage: 5,
+      totalCnt: total,
+      dataPerPage,
       pagingPerPage: 5,
+      currentPage: currentParams.page,
     });
 
     const pageCard = new Card({
@@ -93,7 +108,6 @@ export default function Vacation(root) {
       </div>`;
 
     typeSelect.useSelectBox();
-    pagination.usePagination();
 
     //신청 버튼 클릭 시
     document.querySelector('.modal_apply').addEventListener('click', () => {
@@ -367,18 +381,41 @@ export default function Vacation(root) {
         if (opt !== e.target) {
           return;
         }
-        setQueryString({ search: e.target.innerText.trim() });
+        const queryParams = {
+          page: 1,
+          search: e.target.innerText.trim(),
+        };
+        setQueryString(queryParams);
         fetchData('search');
       });
     });
-  }
-}
 
-//쿼리 설정
-function setQueryString(query) {
+    pagination.usePagination();
+
+    //페이지버튼시 클릭
+    document
+      .querySelector('.pagination_container')
+      .addEventListener('click', (e) => {
+        if (e.target !== e.target.closest('li')) return;
+        const queryParams = {
+          ...currentParams,
+          page: pagination.getCurrentPage(),
+        };
+        setQueryString(queryParams);
+        fetchData('search');
+      });
+  }
+  // renderPage() END
+}
+// Vacation() END
+
+//URL쿼리 업데이트
+function setQueryString(params) {
   const url = new URL(window.location.href);
   // 업데이트된 쿼리 매개변수로 URL 업데이트
-  url.search = `search=${query.search}`;
+  for (let key in params) {
+    url.searchParams.set(key, params[key]);
+  }
   // 새로운 URL로 변경
   window.history.pushState({}, '', url.toString());
 }
@@ -398,11 +435,6 @@ function handleRadio() {
       .toString()
       .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`,
   });
-  console.log(
-    `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
-      .toString()
-      .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`
-  );
   vacationDate.innerHTML = switchCate(type);
 
   if (type === '연차') {
