@@ -46,6 +46,8 @@ export function renderLayout(userInfo) {
     document.querySelector('.navbar').classList.remove('navbar_view');
     document.querySelector('.navbar_arrow').classList.add('navbar_arrow_none');
   });
+
+  window.scrollTo(0, 0);
 }
 
 // 로그인 여부 확인 로직
