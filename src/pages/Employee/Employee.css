@@ -14,11 +14,40 @@
   border-radius: 50%;
   border: 1px solid #e0e0e0;
 }
+@media (max-width: 800px) {
+  .thumbnail {
+    display: none;
+  }
+  .email {
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+/* 모바일 환경에서의 스타일링 */
+@media (max-width: 600px) {
+  .table th,
+  .table td {
+    padding: 8px; /* 좀 더 작은 패딩 */
+    font-size: 14px; /* 폰트 사이즈 축소 */
+  }
+  .pagination_btn {
+    display: none;
+    font-size: 12px;
+  }
+}
+
+.modal_inner {
+  min-width: 280px;
+}
+
 .employee_modal .modal_content {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .modal_employeeImage {
   display: relative;
   padding-right: 40px;
@@ -28,10 +57,55 @@
   height: 300px;
   border-radius: 15px;
 }
+@media (max-width: 1200px) {
+  .employee_modal .modal_content {
+    flex-direction: column;
+  }
+  .employeeImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+  }
+  .modal_employeeImage {
+    display: relative;
+    padding-right: 0px;
+  }
+}
+
 .employeeImage:hover {
   cursor: pointer;
   filter: brightness(0.7);
 }
+.employeeImage {
+  position: relative;
+  display: inline-block; /* 이미지의 크기에 맞게 설정 */
+}
+
+.imageOverlay {
+  position: absolute;
+  bottom: 10px; /* 이미지 하단에 배치 */
+  left: 50%; /* 이미지 중앙에 배치 */
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.employeeImage:hover .imageOverlay {
+  opacity: 1;
+}
+
+.deleteImage {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.deleteImage:hover {
+  background-color: #cccccc;
+}
+
 .employeeForm {
   display: relative;
 }
