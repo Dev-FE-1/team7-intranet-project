@@ -13,7 +13,7 @@ import Pagination from '/src/components/Pagination/Pagination';
 import '/src/pages/Vacation/Vacation.css';
 
 export default function Vacation(root) {
-  let myData = [];
+  let data = [];
   const userId = getUserIdFromCookie();
   let currentParams = getCurrentURLParams();
   let dataPerPage = 0;
@@ -30,8 +30,9 @@ export default function Vacation(root) {
           }`
         );
         dataPerPage = res.data.dataPerPage;
+        data = res.data.data;
         total = res.data.total;
-        renderPage(res.data.data);
+        renderPage(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -42,7 +43,8 @@ export default function Vacation(root) {
         );
         dataPerPage = res.data.dataPerPage;
         total = res.data.total;
-        renderPage(res.data.data);
+        data = res.data.data;
+        renderPage(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -171,7 +173,7 @@ export default function Vacation(root) {
     document.querySelectorAll('.modal_detail').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         const vacaId = e.target.closest('tr').dataset.id;
-        const [detailData] = myData.filter((d) => d.vacaId === Number(vacaId));
+        const [detailData] = data.filter((d) => d.vacaId === Number(vacaId));
         let checkedType = 0;
         if (detailData.type === '반차') {
           checkedType = 1;
