@@ -240,10 +240,122 @@
 
 /* 반응형 웹 처리 */
 @media (max-width: 1200px) {
+  .home_week {
+    font-size: 40px;
+  }
+  .home_date {
+    font-size: 25px;
+  }
+  .home_welcome {
+    font-size: 18px;
+  }
+  .home_profileImg {
+    width: 130px;
+    height: 130px;
+  }
+  .home_dept {
+    font-size: 17px;
+  }
+  .home_time {
+    font-size: 40px;
+    letter-spacing: 8px;
+  }
+  .home_now {
+    justify-content: flex-start;
+    font-size: 14px;
+  }
+  .home_second {
+    font-size: 25px;
+    letter-spacing: 4px;
+  }
+  .home_workText {
+    font-size: 14px;
+  }
+  .home_workStatus {
+    font-size: 18px;
+  }
+  .home_workEmoji {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #69d0cf;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+  .home_workBtn {
+    width: 220px;
+    font-size: 14px;
+  }
+  .home_workModal .modal_inner {
+    min-width: 350px;
+  }
+  .home_noticeModal .modal_inner {
+    width: 70%;
+  }
 }
 @media (max-width: 767px) {
   .home {
     display: flex;
     flex-direction: column;
+  }
+  .home_week {
+    font-size: 55px;
+  }
+  .home_date {
+    margin-top: 20px;
+    font-size: 30px;
+  }
+  .home_welcome {
+    margin-top: 30px;
+    font-size: 22px;
+  }
+  .home_profileImg {
+    width: 150px;
+    height: 150px;
+  }
+  .home_dept {
+    font-size: 18px;
+  }
+  .home_time {
+    font-size: 50px;
+    letter-spacing: 10px;
+  }
+  .home_now {
+    font-size: 16px;
+  }
+  .home_second {
+    font-size: 30px;
+    letter-spacing: 5px;
+  }
+  .home_workStatus {
+    font-size: 22px;
+  }
+  .home_workEmoji {
+    width: 35px;
+    height: 35px;
+  }
+  .home_workText {
+    font-size: 16px;
+  }
+  .home_workBtn {
+    width: 300px;
+    font-size: 16px;
+  }
+  .home_noticeList {
+    display: flex;
+    flex-direction: column;
+  }
+  .home_noticeCard {
+    flex: none;
+    height: 250px;
+  }
+  .home_workModal .modal_inner {
+    width: 70%;
+    padding: 25px 0;
+  }
+  .home_noticeModal .modal_inner {
+    width: 90%;
   }
 }
