@@ -12,6 +12,7 @@ export default function Notice(root) {
   function getCookie(user){
     const value = `${document.cookie}`
     const parts = value.split(`; ${user}=`)
+    console.log(parts)
 
     if(parts.length === 2) return parts.pop().split(';').shift()
 
@@ -135,7 +136,7 @@ export default function Notice(root) {
   }
 
   // 공지사항 게시글 등록 요청 api
-  function fetchUpload(formData){
+  function useUpload(formData){
     axios.post('/api/notice/upload', formData, {
       headers:{
         'Content-Type' : 'multipart/form-data'
@@ -220,7 +221,7 @@ export default function Notice(root) {
 
       const skeletons = container.querySelectorAll('.skeleton-card')
         skeletons.forEach((skeleton)=>{
-          setTimeout(()=>skeleton.remove(),300)
+          setTimeout(()=>skeleton.remove(),500)
         })
     }
 
@@ -245,7 +246,7 @@ export default function Notice(root) {
         }
       },{
         root:null,
-        threshold:0.7
+        threshold:0.8
       })
       //감시할 카드(뷰 포트 내 마지막 카드)
       observer.observe(card)
@@ -376,7 +377,7 @@ export default function Notice(root) {
         formData.append('content', content)
         formData.append('file', file)
 
-        fetchUpload(formData)
+        useUpload(formData)
         })
       })
     }
