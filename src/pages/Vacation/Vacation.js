@@ -13,16 +13,41 @@ import Pagination from '/src/components/Pagination/Pagination';
 import '/src/pages/Vacation/Vacation.css';
 
 export default function Vacation(root) {
-  fetchData('list');
   let myData = [];
   const userId = getUserIdFromCookie();
-  async function fetchData(filter) {
-    try {
-      const res = await axios.get(`/api/vacation/${filter}`);
-      myData = res.data.filter((d) => d.userId === '3');
-      renderPage(myData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+  let currentParams = getCurrentURLParams();
+  let dataPerPage = 0;
+  let total = 0;
+  fetchData();
+  async function fetchData() {
+    currentParams = getCurrentURLParams();
+    const currentPage = currentParams.page;
+    console.log(currentPage);
+    if (currentParams.search) {
+      try {
+        const res = await axios.get(
+          `/api/vacation/search?search=${currentParams.search}${
+            currentPage ? `&page=${currentPage}` : ''
+          }`
+        );
+        dataPerPage = res.data.dataPerPage;
+        total = res.data.total;
+        renderPage(res.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    } else {
+      try {
+        const res = await axios.get(
+          `/api/vacation/list${currentPage ? `?page=${currentPage}` : ''}`
+        );
+        myData = res.data.data.filter((d) => d.userId === '3');
+        dataPerPage = res.data.dataPerPage;
+        total = res.data.total;
+        renderPage(res.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
   }
 
@@ -41,6 +66,7 @@ export default function Vacation(root) {
       className: 'search_type',
       idName: 'test',
       options: ['전체', '연차', '반차', '외출'],
+      initValue: currentParams.search,
     });
 
     const btnApply = new Button({ label: '신청', classList: 'modal_apply' });
@@ -58,9 +84,10 @@ export default function Vacation(root) {
     });
 
     const pagination = new Pagination({
-      totalCnt: datas.length,
-      dataPerPage: 5,
+      totalCnt: total,
+      dataPerPage,
       pagingPerPage: 5,
+      currentPage: currentParams.page,
     });
 
     const pageCard = new Card({
@@ -81,7 +108,6 @@ export default function Vacation(root) {
       </div>`;
 
     typeSelect.useSelectBox();
-    pagination.usePagination();
 
     //신청 버튼 클릭 시
     document.querySelector('.modal_apply').addEventListener('click', () => {
@@ -349,7 +375,49 @@ export default function Vacation(root) {
         // 여기에 오류 발생 시 처리할 로직을 추가하세요 (예: 오류 메시지 표시)
       }
     }
+    //구분 필터링 시
+    document.querySelector('.search_type').addEventListener('click', (e) => {
+      document.querySelectorAll('.selectBox_option').forEach((opt) => {
+        if (opt !== e.target) {
+          return;
+        }
+        const queryParams = {
+          page: 1,
+          search: e.target.innerText.trim(),
+        };
+        setQueryString(queryParams);
+        fetchData('search');
+      });
+    });
+
+    pagination.usePagination();
+
+    //페이지버튼시 클릭
+    document
+      .querySelector('.pagination_container')
+      .addEventListener('click', (e) => {
+        if (e.target !== e.target.closest('li')) return;
+        const queryParams = {
+          ...currentParams,
+          page: pagination.getCurrentPage(),
+        };
+        setQueryString(queryParams);
+        fetchData('search');
+      });
   }
+  // renderPage() END
+}
+// Vacation() END
+
+//URL쿼리 업데이트
+function setQueryString(params) {
+  const url = new URL(window.location.href);
+  // 업데이트된 쿼리 매개변수로 URL 업데이트
+  for (let key in params) {
+    url.searchParams.set(key, params[key]);
+  }
+  // 새로운 URL로 변경
+  window.history.pushState({}, '', url.toString());
 }
 
 // 라디오 선택(연차,반차,외출)에 따라 제출 폼 변경시켜주는 함수
@@ -367,11 +435,6 @@ function handleRadio() {
       .toString()
       .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`,
   });
-  console.log(
-    `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
-      .toString()
-      .padStart(2, 0)}-${new Date().getDate().toString().padStart(2, 0)}`
-  );
   vacationDate.innerHTML = switchCate(type);
 
   if (type === '연차') {
@@ -552,4 +615,17 @@ function getUserIdFromCookie() {
     }
   }
   return null; // 해당 쿠키 이름을 가진 쿠키를 찾지 못한 경우
+}
+
+function getCurrentURLParams() {
+  // 현재 URL의 쿼리 문자열 가져오기
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // URLSearchParams를 객체로 변환
+  const params = {};
+  for (const [key, value] of urlParams) {
+    params[key] = value;
+  }
+
+  return params;
 }
