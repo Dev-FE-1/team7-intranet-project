@@ -75,6 +75,8 @@
   max-height: calc(100vh - 30px);
   overflow-y: auto;
   box-sizing: border-box;
+  width: 100%;
+  max-width: 50%;
 }
 .notice__modalTitle{ 
   font-size:20px;
@@ -89,14 +91,13 @@
 }
 
 /*noticeUpload-modal*/
-.notice_form{
-}
 .noticeContent_writing,
 .noticeTitle_writing,
 .noticeFile_writing{
   display:flex;
   justify-content: flex-start;
-  gap:30px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .noticeUploadTitle,
 .noticeUploadContent,
@@ -108,62 +109,81 @@
 }
 
 /*notice-upload*/
+.uploadContainer .modal_inner{
+  width:100%;
+  max-width: 50%;
+}
 .noticeTitle_writing input{
-  width:700px;
   margin-bottom: 30px;
+  width:100%;
+  max-width:750px;
 }
 .noticeContent_writing textarea{
-  width:700px;
   height: 400px;
+  width:100%;
+  max-width: 750px;
 }
 .noticeTitle_writing input.empty{
-  border:1px solid #000;
+  border:1px solid #ff0000;
 }
 .noticeContent_writing textarea.empty{
-  border:1px solid #000;
+  border:1px solid #ff0000;
 }
-.fileWarning{
-  margin-left:130px;
-  box-sizing: border-box;
+.noticeFile_writing input[type="file"]{
+  width:100%;
+  max-width: 600px;
 }
 .fileWarning.empty{
   color:#ff0000;
   font-weight: 600;
 }
 
-@media (max-width: 1100px) {
+/*반응형*/
+/* @media (max-width: 1200px) {
   .notice .card .card_img {
     width: 45%;
   }
   .noticeTitle_writing input, 
-  .noticeContent_writing textarea {
+  .noticeContent_writing textarea,
+  .noticeFile_writing input[type="file"] {
     width: 100%;
+    max-width: none;
   }
-}
-@media (max-width: 700px) {
+} */
+
+@media (max-width: 800px) {
+  .modalContainer .modal_inner {
+    max-width: 100%;
+  }
   .notice .card .card_img {
     width: 100%;
+    height:480px;
   }
-  .notice_upload .modal_md .modal_inner {
-    width: 100%;
+  .page_content .noticenone{
+    height:660px;
+  }
+  .uploadContainer .modal_inner {
+    max-width: 90%;
   }
   .noticeUploadTitle,
   .noticeUploadContent,
   .noticeUploadFile {
-    min-width: 70px;
+    min-width: 50px;
     font-size: 16px;
   }
   .noticeUploadTitle {
     padding-top: 10px;
   }
   .noticeTitle_writing input,
-  .noticeContent_writing textarea {
-    width: 100%;
+  .noticeContent_writing textarea 
+  .noticeFile_writing input[type="file"]{
     margin-bottom: 10px;
+    max-width: 100%;
   }
-  .fileWarning {
-    margin-left: 0;
-    text-align: center;
+
+  .skeleton-card{
+    width:100%;
+    height: 300px;
   }
 }
 
