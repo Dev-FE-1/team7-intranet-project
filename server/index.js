@@ -424,14 +424,14 @@ app.get('/api/employee/list', (req, res) => {
 // 임직원 프로필사진 수정 요청 API
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const profilePath = './images/profile/';
+    const profilePath = path.join(__dirname, 'server/images/profile');
     if (!fs.existsSync(profilePath)) {
-      fs.mkdirSync(profilePath);
+      fs.mkdirSync(profilePath, { recursive: true });
     }
     cb(null, profilePath);
   },
   filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    cb(null, `${file.originalname}`);
   },
 });
 
@@ -448,61 +448,61 @@ app.post('/api/employee/uploadImage', upload.single('image'), (req, res) => {
   });
 });
 
-// 임직원 프로필 이미지 삭제 API
-app.put('/api/employee/deleteImage', (req, res) => {
-  const { userId } = req.body;
-  const filePath = './server/data/user.json';
+// // 임직원 프로필 이미지 삭제 API
+// app.put('/api/employee/deleteImage', (req, res) => {
+//   const { userId } = req.body;
+//   const filePath = '/server/data/user.json';
 
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: err,
-        data: null,
-      });
-    }
+//   fs.readFile(filePath, 'utf8', (err, data) => {
+//     if (err) {
+//       console.error('Error reading JSON file:', err);
+//       return res.status(500).send({
+//         status: 'Internal Server Error',
+//         message: err,
+//         data: null,
+//       });
+//     }
 
-    try {
-      const jsonData = JSON.parse(data);
-      const user = jsonData.find((user) => user.userId === userId);
+//     try {
+//       const jsonData = JSON.parse(data);
+//       const user = jsonData.find((user) => user.userId === userId);
 
-      if (!user) {
-        return res.status(404).send({
-          status: 'User not found',
-          message: 'User not found',
-          data: null,
-        });
-      }
+//       if (!user) {
+//         return res.status(404).send({
+//           status: 'User not found',
+//           message: 'User not found',
+//           data: null,
+//         });
+//       }
 
-      user.img = null;
+//       user.img = null;
 
-      fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
-        if (err) {
-          console.error('Error writing JSON file:', err);
-          return res.status(500).send({
-            status: 'Internal Server Error',
-            message: err,
-            data: null,
-          });
-        }
+//       fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+//         if (err) {
+//           console.error('Error writing JSON file:', err);
+//           return res.status(500).send({
+//             status: 'Internal Server Error',
+//             message: err,
+//             data: null,
+//           });
+//         }
 
-        res.status(200).send({
-          status: 'Image deleted successfully',
-          message: 'Image deleted successfully',
-          data: null,
-        });
-      });
-    } catch (parseErr) {
-      console.error('Error parsing JSON file:', parseErr);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: parseErr,
-        data: null,
-      });
-    }
-  });
-});
+//         res.status(200).send({
+//           status: 'Image deleted successfully',
+//           message: 'Image deleted successfully',
+//           data: null,
+//         });
+//       });
+//     } catch (parseErr) {
+//       console.error('Error parsing JSON file:', parseErr);
+//       return res.status(500).send({
+//         status: 'Internal Server Error',
+//         message: parseErr,
+//         data: null,
+//       });
+//     }
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`ready to ${port}`);

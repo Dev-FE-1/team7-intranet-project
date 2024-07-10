@@ -150,7 +150,6 @@ export default function Employee(root) {
             title: '직원 정보',
             size: 'md',
             buttons: [
-              { label: '삭제', type: 'light', classList: 'modalDelete' },
               { label: '닫기', type: 'light', classList: 'modalClose' },
               { label: '수정', classList: 'modalEdit' },
             ],
@@ -173,6 +172,7 @@ export default function Employee(root) {
 
           // 이미지 업로드 이벤트 추가
           const uploadImage = document.querySelector('.uploadImage img');
+          let uploadedFile = null;
 
           uploadImage.addEventListener('click', () => {
             const input = document.createElement('input');
@@ -180,50 +180,45 @@ export default function Employee(root) {
             input.accept = 'image/*';
             input.addEventListener('change', (event) => {
               const file = event.target.files[0];
-              const reader = new FileReader();
-              reader.onload = (e) => {
-                uploadImage.src = e.target.result;
-                uploadImage.style.objectFit = 'cover';
-                uploadImage.style.width = '300px';
-                uploadImage.style.height = '300px';
-              };
-              reader.readAsDataURL(file);
+              if (file) {
+                uploadedFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                  uploadImage.src = e.target.result;
+                  uploadImage.style.objectFit = 'cover';
+                  uploadImage.style.width = '300px';
+                  uploadImage.style.height = '300px';
+                };
+                reader.readAsDataURL(file);
+              }
             });
             input.click();
           });
 
           // 수정 버튼 클릭 시 이미지 업로드
           document.querySelector('.modalEdit').addEventListener('click', () => {
-            const file = uploadImage.src;
-            if (confirm('프로필 사진이 수정됩니다. 계속하시겠습니까?')) {
-              axios
-                .post('/api/employee/uploadImage', { file })
-                .then((response) => {
-                  console.log('Image uploaded successfully');
-                })
-                .catch((error) => {
-                  console.error('Error uploading image:', error);
-                });
-            }
-          });
+            if (uploadedFile) {
+              if (confirm('프로필 사진이 수정됩니다. 계속하시겠습니까?')) {
+                const formData = new FormData();
+                formData.append('image', uploadedFile);
 
-          document
-            .querySelector('.modalDelete')
-            .addEventListener('click', () => {
-              if (confirm('프로필 사진을 기본 프로필로 변경하시겠습니까?')) {
                 axios
-                  .post('/api/employee/deleteImage')
+                  .post('/api/employee/uploadImage', formData, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                    },
+                  })
                   .then((response) => {
-                    console.log('Image deleted successfully');
-                    uploadImage.src =
-                      'public/assets/images/profile-default.png';
+                    console.log('Image uploaded successfully');
                   })
                   .catch((error) => {
-                    console.error('Error deleting image:', error);
+                    console.error('Error uploading image:', error);
                   });
               }
-            });
-
+            } else {
+              alert('이미지를 선택하세요.');
+            }
+          });
           // 모달 오픈
           employeeModal.useModal();
         });
