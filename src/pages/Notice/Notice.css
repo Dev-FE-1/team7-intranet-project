@@ -75,6 +75,8 @@
   max-height: calc(100vh - 30px);
   overflow-y: auto;
   box-sizing: border-box;
+  width: 100%;
+  max-width: 50%;
 }
 .notice__modalTitle{ 
   font-size:20px;
@@ -110,12 +112,12 @@
 .noticeTitle_writing input{
   margin-bottom: 30px;
   width:100%;
-  max-width:600px;
+  max-width:700px;
 }
 .noticeContent_writing textarea{
   height: 400px;
   width:100%;
-  max-width: 600px;
+  max-width: 700px;
 }
 .noticeTitle_writing input.empty{
   border:1px solid #ff0000;
@@ -133,7 +135,7 @@
 }
 
 /*반응형*/
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .notice .card .card_img {
     width: 45%;
   }
@@ -143,8 +145,12 @@
     width: 100%;
     max-width: none;
   }
-}
-@media (max-width: 600px) {
+} */
+
+@media (max-width: 767px) {
+  .modalContainer .modal_inner {
+    max-width: 100%;
+  }
   .notice .card .card_img {
     width: 100%;
   }
@@ -165,6 +171,11 @@
   .noticeFile_writing input[type="file"]{
     margin-bottom: 10px;
     max-width: 100%;
+  }
+
+  .skeleton-card{
+    width:100%;
+    height: 300px;
   }
 }
 
