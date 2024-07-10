@@ -9,6 +9,7 @@ import {
 } from './utils/common.js';
 import fs from 'fs';
 import multer from 'multer';
+import path from 'path';
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -234,24 +235,24 @@ app.get('/api/notice/recent', async (req, res) => {
 // 공지사항 게시물 등록 API
 app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
   const filepath = './server/data/notice.json';
-  const {title, content} = req.body
-  const file = req.file
+  const { title, content } = req.body;
+  const file = req.file;
 
   //공지사항 등록 모달 유효성 검사
-  if(!title){
+  if (!title) {
     return res.status(200).json({
-      status:'title empty',
-    })
+      status: 'title empty',
+    });
   }
-  if(!content){ 
+  if (!content) {
     return res.status(200).json({
-      status:'content empty',
-    })   
+      status: 'content empty',
+    });
   }
-  if(!file){
+  if (!file) {
     return res.status(200).json({
-      status:'file empty',
-    })
+      status: 'file empty',
+    });
   }
 
   fs.readFile(filepath, 'utf8', (err, data) => {
@@ -299,12 +300,14 @@ app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
           return res.status(500).json({ message: 'server Error' });
         }
 
-        res.status(200).json({ status: 'upload success', message: 'Notice uploaded successfully' });
-      })
-    })
-  })
-})
-
+        res.status(200).json({
+          status: 'upload success',
+          message: 'Notice uploaded successfully',
+        });
+      });
+    });
+  });
+});
 
 // 공지사항 상세정보 요청 API
 app.get('/api/notice/info', async (req, res) => {
@@ -418,11 +421,88 @@ app.get('/api/employee/list', (req, res) => {
   });
 });
 
-// 임직원 상세 정보 요청 API
-app.get('/api/employee/info', (req, res) => {});
+// 임직원 프로필사진 수정 요청 API
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const profilePath = './images/profile/';
+    if (!fs.existsSync(profilePath)) {
+      fs.mkdirSync(profilePath);
+    }
+    cb(null, profilePath);
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
 
-// 임직원 상세 정보 수정 API
-app.put('/api/employee/info', (req, res) => {});
+const upload = multer({ storage: storage });
+
+// 임직원 프로필 이미지 업로드 API 엔드포인트
+app.post('/api/employee/uploadImage', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send({ status: 'file empty' });
+  }
+  res.send({
+    status: 'upload success',
+    path: req.file.path,
+  });
+});
+
+// 임직원 프로필 이미지 삭제 API
+app.put('/api/employee/deleteImage', (req, res) => {
+  const { userId } = req.body;
+  const filePath = './server/data/user.json';
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: err,
+        data: null,
+      });
+    }
+
+    try {
+      const jsonData = JSON.parse(data);
+      const user = jsonData.find((user) => user.userId === userId);
+
+      if (!user) {
+        return res.status(404).send({
+          status: 'User not found',
+          message: 'User not found',
+          data: null,
+        });
+      }
+
+      user.img = null;
+
+      fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+        if (err) {
+          console.error('Error writing JSON file:', err);
+          return res.status(500).send({
+            status: 'Internal Server Error',
+            message: err,
+            data: null,
+          });
+        }
+
+        res.status(200).send({
+          status: 'Image deleted successfully',
+          message: 'Image deleted successfully',
+          data: null,
+        });
+      });
+    } catch (parseErr) {
+      console.error('Error parsing JSON file:', parseErr);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: parseErr,
+        data: null,
+      });
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`ready to ${port}`);

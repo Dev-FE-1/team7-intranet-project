@@ -80,12 +80,13 @@ export default function Employee(root) {
         .querySelector('.listTable')
         .insertAdjacentHTML('beforeend', employeeModal.render());
 
+      pagination.usePagination();
+
       // 클릭한 직원의 인덱스를 찾아 모달창에 데이터 전달
       document.querySelectorAll('tr').forEach((tr) => {
         tr.addEventListener('click', function () {
           let index = this.getAttribute('data-id');
           const employee = employeeList.find((emp) => emp.userId == index);
-          console.log('employee', employee);
 
           // 직원 모달창 인풋 생성
           const employeeInputs = [
@@ -149,6 +150,7 @@ export default function Employee(root) {
             title: '직원 정보',
             size: 'md',
             buttons: [
+              { label: '삭제', type: 'light', classList: 'modalDelete' },
               { label: '닫기', type: 'light', classList: 'modalClose' },
               { label: '수정', classList: 'modalEdit' },
             ],
@@ -169,37 +171,15 @@ export default function Employee(root) {
             dataId: employee.userId, // 추가
           });
 
-          // API 요청을 통해 이미지를 서버에 업로드하는 함수
-          function uploadProfile(formData) {
-            axios
-              .post('/api/employee/uploadImage', formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                },
-              })
-              .then((response) => {
-                const { status } = response.data;
-                if (status === 'upload success') {
-                  alert('이미지 업로드 완료!');
-                  // 이미지 업로드 후 페이지를 갱신하거나, 필요한 작업을 추가합니다.
-                } else {
-                  alert('이미지 업로드 실패!');
-                }
-              })
-              .catch((error) => {
-                console.log('uploadImage Error:', error);
-              });
-          }
-
           // 이미지 업로드 이벤트 추가
           const uploadImage = document.querySelector('.uploadImage img');
+
           uploadImage.addEventListener('click', () => {
             const input = document.createElement('input');
             input.type = 'file';
             input.accept = 'image/*';
             input.addEventListener('change', (event) => {
               const file = event.target.files[0];
-
               const reader = new FileReader();
               reader.onload = (e) => {
                 uploadImage.src = e.target.result;
@@ -212,9 +192,40 @@ export default function Employee(root) {
             input.click();
           });
 
+          // 수정 버튼 클릭 시 이미지 업로드
+          document.querySelector('.modalEdit').addEventListener('click', () => {
+            const file = uploadImage.src;
+            if (confirm('프로필 사진이 수정됩니다. 계속하시겠습니까?')) {
+              axios
+                .post('/api/employee/uploadImage', { file })
+                .then((response) => {
+                  console.log('Image uploaded successfully');
+                })
+                .catch((error) => {
+                  console.error('Error uploading image:', error);
+                });
+            }
+          });
+
+          document
+            .querySelector('.modalDelete')
+            .addEventListener('click', () => {
+              if (confirm('프로필 사진을 기본 프로필로 변경하시겠습니까?')) {
+                axios
+                  .post('/api/employee/deleteImage')
+                  .then((response) => {
+                    console.log('Image deleted successfully');
+                    uploadImage.src =
+                      'public/assets/images/profile-default.png';
+                  })
+                  .catch((error) => {
+                    console.error('Error deleting image:', error);
+                  });
+              }
+            });
+
           // 모달 오픈
           employeeModal.useModal();
-          console.log('modal_content', employeeModal);
         });
       });
     })
