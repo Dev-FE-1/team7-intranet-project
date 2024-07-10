@@ -86,7 +86,7 @@ export default async function Home(root, userInfo) {
   });
 
   // 근무 알림 Modal 컴포넌트
-  const workModal = new Modal({
+  const homeModal = new Modal({
     name: 'home_workModal',
     title: '알 림',
     content: '정말 근무를 시작하시겠습니까?',
@@ -96,23 +96,22 @@ export default async function Home(root, userInfo) {
     ],
   });
 
-  // 공지사항 상세정보 Modal 컴포넌트
-  const noticeModal = new Modal({
-    name: 'home_noticeModal',
-    size: 'md',
-    buttons: [{ label: '닫기', classList: 'home_noticeCancel modalClose' }],
-    content: `<p class="home_noticeDate"></p>
-                <div class="home_noticeImg">
-                </div>
-              <div class="home_noticeContent"></div>`,
-  });
+  // // 공지사항 상세정보 Modal 컴포넌트
+  // const noticeModal = new Modal({
+  //   name: 'home_noticeModal',
+  //   size: 'md',
+  //   buttons: [{ label: '닫기', classList: 'home_noticeCancel modalClose' }],
+  //   content: `<p class="home_noticeDate"></p>
+  //               <div class="home_noticeImg">
+  //               </div>
+  //             <div class="home_noticeContent"></div>`,
+  // });
 
   // Home 메인 페이지에 컴포넌트를 추가하는 로직
   root.innerHTML = `<div class="home">${profileCard.render()}
   ${workCard.render()}
   ${noticeListCard.render()}
-  ${workModal.render()}
-  ${noticeModal.render()}</div>`;
+  ${homeModal.render()}</div>`;
 
   // 현재 시간을 나타내기 위한 로직
   checkWorkCardExist();
@@ -122,7 +121,36 @@ export default async function Home(root, userInfo) {
   // 근무 카드에 위치한 근무 버튼과 모달의 확인 버튼에 이벤트를 추가하는 로직
   document.querySelector('.home_workBtn')
     ? document.querySelector('.home_workBtn').addEventListener('click', () => {
-        workModal.useModal();
+        if (workStatus[0] === 'NOT') {
+          homeModal.update({
+            name: 'home_workModal',
+            title: '알 림',
+            content: '정말 근무를 시작하시겠습니까?',
+            buttons: [
+              {
+                label: '취소',
+                type: 'light',
+                classList: 'home_workCancel modalClose',
+              },
+              { label: '확인', classList: 'home_workConfirm' },
+            ],
+          });
+        } else {
+          homeModal.update({
+            name: 'home_workModal',
+            title: '알 림',
+            content: '정말 근무를 종료하시겠습니까?',
+            buttons: [
+              {
+                label: '취소',
+                type: 'light',
+                classList: 'home_workCancel modalClose',
+              },
+              { label: '확인', classList: 'home_workConfirm' },
+            ],
+          });
+        }
+        homeModal.useModal();
 
         const workConfirm = document.querySelector('.home_workConfirm');
 
@@ -133,7 +161,7 @@ export default async function Home(root, userInfo) {
             if (!!status) {
               workStatus[0] = status;
 
-              workModal.hide();
+              homeModal.hide();
 
               document.querySelector(
                 '.home_workModal .modal_content'
@@ -152,7 +180,7 @@ export default async function Home(root, userInfo) {
       const dataId = card.getAttribute('data-id');
       const noticeData = await noticeInfoApi(dataId);
 
-      noticeModal.update({
+      homeModal.update({
         name: 'home_noticeModal',
         size: 'md',
         title: noticeData.title,
@@ -163,7 +191,7 @@ export default async function Home(root, userInfo) {
                     </div>
                   <div class="home_noticeContent">${noticeData.content}</div>`,
       });
-      noticeModal.useModal();
+      homeModal.useModal();
     });
   });
 }
