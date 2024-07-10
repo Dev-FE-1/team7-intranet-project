@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Card from '../../components/Card/Card.js';
 import Table from '../../components/Table/Table.js';
 import Pagination from '../../components/Pagination/Pagination.js';
@@ -7,11 +8,17 @@ import './Employee.css';
 
 export default function Employee(root) {
   // 전체 임직원 호출API
-
   fetch('/api/employee/list')
     .then((response) => response.json())
     .then((data) => {
       const employeeList = data['data'];
+
+      // 공지사항 페이지 상단 이름 검색
+      const employeeSearch = new Input({
+        type: 'search',
+        className: 'employee_search',
+        placeholder: '이름을 입력하세요.',
+      });
 
       // 임직원 테이블 작성
       const table = new Table({
@@ -19,10 +26,10 @@ export default function Employee(root) {
         data: employeeList.map((emp) => ({
           id: emp.userId,
           name: `<div class="name_column">
-        <div class="thumbnail"><img src="${
-          emp.img ? emp.img : 'public/assets/images/profile-default.png'
-        }" class="thumbnail" ></div>
-        <div class="name">${emp.name}</div>
+            <div class="thumbnail"><img src="${
+              emp.img ? emp.img : 'public/assets/images/profile-default.png'
+            }" class="thumbnail" ></div>
+            <div class="name">${emp.name}</div>
           </div>`,
           dept: emp.dept,
           position: emp.position,
@@ -42,109 +49,6 @@ export default function Employee(root) {
         pagingPerPage: 5,
       });
 
-      //공지사항 페이지 상단 검색란
-      const employeeSearch = new Input({
-        type: 'search',
-        className: 'employee_search',
-        placeholder: '이름을 입력하세요.',
-      });
-
-      // 모달용 임시 데이터 = 모달 내 불러오는 동적 데이터로 변환 필요
-      const sampleData = [
-        {
-          userId: '7',
-          name: '김민지',
-          position: '차장',
-          email: 'seojunbag@77cm.co.kr',
-          password: '1234',
-          phone: '010-6440-7770',
-          birth: '1962-04-08',
-          dept: '마케팅팀',
-          leftVaca: 17,
-          admin: false,
-          img: '/server/images/profile/22.jpg',
-        },
-      ];
-
-      // 직원 모달창 인풋 생성
-      const employeeinputs = [
-        {
-          type: 'text',
-          className: 'user_id',
-          label: '사원번호',
-          value: sampleData[0].userId,
-        },
-        {
-          type: 'text',
-          className: 'user_name',
-          label: '이름',
-          value: sampleData[0].name,
-        },
-        {
-          type: 'text',
-          className: 'user_dept',
-          label: '부서',
-          value: sampleData[0].dept,
-        },
-        {
-          type: 'text',
-          className: 'user_position',
-          label: '직급',
-          value: sampleData[0].position,
-        },
-        {
-          type: 'date',
-          className: 'user_birth',
-          label: '생년월일',
-          value: sampleData[0].birth,
-        },
-        {
-          type: 'email',
-          className: 'user_email',
-          label: '이메일',
-          value: sampleData[0].email,
-        },
-        {
-          type: 'tel',
-          className: 'user_phone',
-          label: '전화번호',
-          value: sampleData[0].phone,
-        },
-      ];
-
-      const inputsHTML = employeeinputs
-        .map(
-          (input) =>
-            `<div class="employeeForm_group">
-          <label for="${input.className}">${input.label}</label>
-          ${new Input(input).render()}
-        </div>`
-        )
-        .join('');
-
-      // 모달 생성
-      const modal = new Modal({
-        name: 'employee_modal', // 모달 클래스명 String (*필수값)
-        title: '직원 정보',
-        size: 'md',
-        buttons: [
-          { label: '닫기', type: 'light', classList: 'modalClose' },
-          { label: '수정', classList: 'modalClose' },
-        ],
-        classList: 'employee_modal',
-        content: `<div class="employee_modal">
-          <div class="modal_employeeImage">
-            <div class="employeeImage uploadImage">
-          <img src=${sampleData[0].img} class="employeeImage uploadImage" />
-            </div>
-          </div>
-          <form class="employeeForm">
-            ${inputsHTML}
-          </form>
-        </div>
-        `,
-      });
-
       // 페이지 UI 통일 카드
       const card = new Card({
         page: {
@@ -152,39 +56,178 @@ export default function Employee(root) {
           searchArea: `<div class="listTable">${employeeSearch.render()}</div>`,
           content: `
             <div class="listTable">${table.render()}</div>
-            <div class="employeeModal">${modal.render()}</div>
-            <div class="pagination">${pagination.render()} </div>
-            `,
+            <div class="pagination">${pagination.render()}</div>
+          `,
         },
       });
 
       // 카드 렌더링
-      root.innerHTML = `<div>${card.render()}</div>`;
+      root.innerHTML = `${card.render()}`;
+
+      // 모달 생성 (최초 1회)
+      const employeeModal = new Modal({
+        name: 'employee_modal',
+        title: '직원 정보',
+        size: 'md',
+        buttons: [
+          { label: '닫기', type: 'light', classList: 'modalClose' },
+          { label: '수정', classList: 'modalClose' },
+        ],
+        content: '', // 초기 내용은 비워둠
+      });
+
+      root
+        .querySelector('.listTable')
+        .insertAdjacentHTML('beforeend', employeeModal.render());
+
+      pagination.usePagination();
+
+      // 클릭한 직원의 인덱스를 찾아 모달창에 데이터 전달
+      document.querySelectorAll('tr').forEach((tr) => {
+        tr.addEventListener('click', function () {
+          let index = this.getAttribute('data-id');
+          const employee = employeeList.find((emp) => emp.userId == index);
+
+          // 직원 모달창 인풋 생성
+          const employeeInputs = [
+            {
+              type: 'text',
+              className: 'user_id',
+              label: '사원번호',
+              value: `${employee.userId}`,
+            },
+            {
+              type: 'text',
+              className: 'user_name',
+              label: '이름',
+              value: `${employee.name}`,
+            },
+            {
+              type: 'text',
+              className: 'user_dept',
+              label: '부서',
+              value: `${employee.dept}`,
+            },
+            {
+              type: 'text',
+              className: 'user_position',
+              label: '직급',
+              value: `${employee.position}`,
+            },
+            {
+              type: 'date',
+              className: 'user_birth',
+              label: '생년월일',
+              value: `${employee.birth}`,
+            },
+            {
+              type: 'email',
+              className: 'user_email',
+              label: '이메일',
+              value: `${employee.email}`,
+            },
+            {
+              type: 'tel',
+              className: 'user_phone',
+              label: '전화번호',
+              value: `${employee.phone}`,
+            },
+          ];
+
+          const inputsHTML = employeeInputs
+            .map(
+              (input) =>
+                `<div class="employeeForm_group">
+              <label for="${input.className}">${input.label}</label>
+              ${new Input(input).render()}
+            </div>`
+            )
+            .join('');
+
+          // 모달 내용 업데이트
+          employeeModal.update({
+            name: 'employee_modal',
+            title: '직원 정보',
+            size: 'md',
+            buttons: [
+              { label: '닫기', type: 'light', classList: 'modalClose' },
+              { label: '수정', classList: 'modalEdit' },
+            ],
+            content: `
+              <div class="modal_employeeImage">
+                <div class="employeeImage uploadImage">
+              <img src=${
+                employee.img
+                  ? employee.img
+                  : 'public/assets/images/profile-default.png'
+              } class="employeeImage uploadImage" />
+                </div>
+              </div>
+              <form class="employeeForm">
+                ${inputsHTML}
+              </form>
+            `,
+            dataId: employee.userId, // 추가
+          });
+          // 이미지 업로드 이벤트 추가
+          const uploadImage = document.querySelector('.uploadImage img');
+          let uploadedFile = null;
+
+          uploadImage.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.addEventListener('change', (event) => {
+              const file = event.target.files[0];
+              if (file) {
+                uploadedFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                  uploadImage.src = e.target.result;
+                  uploadImage.style.objectFit = 'cover';
+                  uploadImage.style.width = '300px';
+                  uploadImage.style.height = '300px';
+                };
+                reader.readAsDataURL(file);
+              }
+            });
+            input.click();
+          });
+
+          // 수정 버튼 클릭 시 이미지 업로드
+          document.querySelector('.modalEdit').addEventListener('click', () => {
+            if (uploadedFile) {
+              if (confirm('프로필 사진이 수정됩니다. 계속하시겠습니까?')) {
+                const formData = new FormData();
+                formData.append('image', uploadedFile);
+
+                axios
+                  .post('/api/employee/uploadImage', formData, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                    },
+                  })
+                  .then((response) => {
+                    console.log('Image uploaded successfully');
+                    // 모달 닫기
+                    const modal = document.querySelector('.modal'); // 모달의 클래스나 ID에 맞게 수정
+                  })
+                  .catch((error) => {
+                    console.error('Error uploading image:', error);
+                  });
+              }
+            } else {
+              alert('이미지를 선택하세요.');
+            }
+          });
+          // 모달 오픈
+          employeeModal.useModal();
+        });
+      });
     })
 
     // API 에러 처리
     .catch((error) => {
       console.error('Error:', error);
     });
-
-  // // 이미지 업로드 함수 - 서버 업로드 필요
-  // const uploadImage = document.querySelector('.uploadImage');
-
-  // uploadImage.addEventListener('click', () => {
-  //   const input = document.createElement('input');
-  //   input.type = 'file';
-  //   input.accept = 'image/*';
-  //   input.addEventListener('change', (event) => {
-  //     const file = event.target.files[0];
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       uploadImage.src = e.target.result;
-  //       uploadImage.style.objectFit = 'cover';
-  //       uploadImage.style.width = '300px';
-  //       uploadImage.style.height = '300px';
-  //     };
-  //     reader.readAsDataURL(file);
-  //   });
-  //   input.click();
-  // });
 }
