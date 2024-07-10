@@ -22,7 +22,6 @@ export default function Vacation(root) {
   async function fetchData() {
     currentParams = getCurrentURLParams();
     const currentPage = currentParams.page;
-    console.log(currentPage);
     if (currentParams.search) {
       try {
         const res = await axios.get(

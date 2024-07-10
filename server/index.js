@@ -161,7 +161,7 @@ app.get('/api/vacation/list', (req, res) => {
 
     const userId = req.cookies.userId;
     const myData = jsonData.filter((item) => item.userId === userId).reverse();
-    const dataPerPage = 5;
+    const dataPerPage = 10;
     const currentPage = Number(req.query.page) || 1;
     const total = myData.length;
     let sliceData = [...myData].slice(0, dataPerPage);
@@ -205,7 +205,7 @@ app.get('/api/vacation/search', async (req, res) => {
         return item.type === searchType;
       }
     });
-    const dataPerPage = 5;
+    const dataPerPage = 10;
     const currentPage = Number(req.query.page) || 1;
     const total = searchData.length;
     let sliceData = [...searchData].slice(0, dataPerPage);

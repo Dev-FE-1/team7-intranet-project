@@ -12,7 +12,7 @@ class Pagination {
 
     this.totalCnt = Number(totalCnt);
     this.currentPage = Number(currentPage) || 1;
-    this.dataPerPage = Number(dataPerPage) || 15;
+    this.dataPerPage = Number(dataPerPage);
     this.pagingPerPage = Number(pagingPerPage);
   }
 
