@@ -111,13 +111,18 @@ export default function Notice(root) {
     })
       .then(response=>{
         let cardContent = response.data.notice;
+        const buttons = [{ label: '닫기', classList: 'btn--notice--close modalClose'}]
+
+        if(checkAdmin){
+          buttons.push({label:'삭제', type:'light', classList:'btn--notice--delete'})
+        }
         if(cardContent){
             //공지사항 상세 내용을 확인할 수 있는 모달 
             const noticeModal = new Modal({
               name: 'notice_modal',
               size: 'md',
               title:cardContent.title,
-              buttons: [{ label: '닫기', classList: 'btn--notice--close modalClose' }],
+              buttons: buttons,
               content: `<p class="notice__modalDate">${cardContent.date}</p>
                           <div class="notice__modalImg">
                               <img src="${cardContent.img}" alt="${cardContent.title}"/>
@@ -126,9 +131,15 @@ export default function Notice(root) {
               });
               document.querySelector('.modalContainer').innerHTML = noticeModal.render();
               noticeModal.useModal();
+
+
+              let deleteBtn = document.querySelector('.btn--notice--delete')
+              if(deleteBtn){
+                deleteBtn.addEventListener('click',()=>{
+                  deleteNotice(noticeId)
+                })
+              }
         }
-      })
-      .catch(error =>{
       })
   }
 
@@ -166,6 +177,25 @@ export default function Notice(root) {
       }
     })
     .catch(error =>{
+    })
+  }
+
+  //공지사항 삭제 api 요청
+  function deleteNotice(noticeId){
+    axios.delete('/api/notice/delete', {
+      params:{
+        'data-id':noticeId
+      }
+    })
+    .then(response => {
+      const {status} = response.data
+      if(status === 'notice deleted success'){
+        alert('공지사항 삭제 완료')
+        fetchData(1)
+        document.querySelector('.modalClose').click()
+      }else{
+        alert('공지사항 삭제 실패')
+      }
     })
   }
 
@@ -375,5 +405,6 @@ export default function Notice(root) {
       })
     }
   }
+
   fetchData(currentPage)  
 }

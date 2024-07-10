@@ -24,7 +24,7 @@ app.use('/server/images', express.static('path/to/profile/images'));
 
 //공지사항 이미지 파일 업로드에 multer 사용
 const noticeStorage = multer.diskStorage({
-  dest: (req, file, cb) => {
+  destination: (req, file, cb) => {
     cb(null, 'server/images/notice/');
   },
   filename: (req, file, cb) => {
@@ -375,6 +375,41 @@ app.get('/api/notice/info', async (req, res) => {
     res.status(401).send({ message: '공지사항 상세정보 요청 실패' });
   }
 });
+
+// 공지사항 삭제 API
+app.delete('/api/notice/delete', (req, res)=>{
+  const filepath = './server/data/notice.json';
+  const noticeId = req.query['data-id']
+  
+  fs.readFile(filepath, 'utf8', (err, data)=>{
+    let notices=[]
+
+    try{
+      const jsonData = JSON.parse(data);
+      notices = jsonData.data
+      const filteredNotice = notices.filter((item)=>Number(item.noticeId)!==Number(noticeId))
+      
+      if(notices.length === filteredNotice.length){
+      return res.json({status: 'not found notice id'})
+      }
+
+      filteredNotice.forEach((item, idx)=>{
+      item.noticeId = idx+1
+      })
+
+      jsonData.data = filteredNotice;
+
+      fs.writeFile(filepath, JSON.stringify(jsonData, null, 2), 'utf8', (err)=>{
+        if(err){
+          return res.status(500).json({ error: err.message });
+        }
+      res.json({status:'notice deleted success'})
+    })
+  }
+  catch(parseErr){
+  }
+  })
+})
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
 app.get(`/api/notice/list`, (req, res) => {
