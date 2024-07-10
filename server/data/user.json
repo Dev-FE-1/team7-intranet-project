@@ -1299,6 +1299,32 @@
       "leftVaca": 13,
       "admin": false,
       "img": "/server/images/profile/100.jpg"
+    },
+    {
+      "userId": 101,
+      "name": "김직원",
+      "position": "사원",
+      "email": "test1@77cm.co.kr",
+      "password": "test1",
+      "phone": "010-0012-2122",
+      "birth": "1957-10-23",
+      "dept": "개발팀",
+      "leftVaca": 13,
+      "admin": true,
+      "img": null
+    },
+    {
+      "userId": 102,
+      "name": "최직원",
+      "position": "사원",
+      "email": "test2@77cm.co.kr",
+      "password": "test2",
+      "phone": "010-2215-3451",
+      "birth": "1957-10-23",
+      "dept": "개발팀",
+      "leftVaca": 13,
+      "admin": false,
+      "img": null
     }
   ]
 }

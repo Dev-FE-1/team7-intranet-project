@@ -62,3 +62,7 @@ export async function userInfoApi() {
     return false;
   }
 }
+
+export function checkAdmin() {
+  return getCookie('admin') === 'true' ? true : false;
+}

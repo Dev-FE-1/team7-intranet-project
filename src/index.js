@@ -1,4 +1,9 @@
-import { renderLayout, checkLogin, userInfoApi } from './utils/common';
+import {
+  renderLayout,
+  checkLogin,
+  userInfoApi,
+  checkAdmin,
+} from './utils/common';
 import Home from '/src/pages/Home/Home.js';
 import Notice from '/src/pages/Notice/Notice.js';
 import Vacation from '/src/pages/Vacation/Vacation.js';
@@ -55,7 +60,15 @@ const route = async () => {
         Vacation(root);
         break;
       case '/employee':
-        Employee(root);
+        if (checkAdmin()) {
+          Employee(root);
+        } else {
+          history.pushState(null, null, '/');
+          route();
+        }
+        break;
+      case '/login':
+        Login(wrap, route);
         break;
       default:
         break;
