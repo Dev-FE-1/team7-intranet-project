@@ -153,7 +153,7 @@
 
 @media (max-width: 800px) {
   .modalContainer .modal_inner {
-    max-width: 100%;
+    max-width: 90%;
   }
   .notice .card .card_img {
     width: 100%;
