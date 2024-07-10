@@ -40,7 +40,6 @@ export default function Vacation(root) {
         const res = await axios.get(
           `/api/vacation/list${currentPage ? `?page=${currentPage}` : ''}`
         );
-        myData = res.data.data.filter((d) => d.userId === '3');
         dataPerPage = res.data.dataPerPage;
         total = res.data.total;
         renderPage(res.data.data);
