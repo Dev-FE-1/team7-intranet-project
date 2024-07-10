@@ -89,6 +89,8 @@
 }
 .notice__modalContent{
   margin-top:20px;
+  line-height: 170%;
+  white-space: pre-wrap;
   box-sizing: border-box;
 }
 
