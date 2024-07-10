@@ -43,6 +43,9 @@ export default class Modal {
     document.body.style.overflow = 'hidden';
     // Window에 스크롤 이벤트 추가하여 스크롤 방지
     window.addEventListener('scroll', (e) => e.preventDefault());
+
+    // 모달이 열릴 때, 최상단으로 스크롤을 이동
+    document.querySelector('.modal_inner').scrollTo(0, 0);
   }
 
   // 모달 닫기
@@ -71,6 +74,9 @@ export default class Modal {
       document.body.style.overflow = '';
       window.removeEventListener('scroll', (e) => e.preventDefault());
     });
+
+    // 모달이 열릴 때, 최상단으로 스크롤을 이동
+    document.querySelector('.modal_inner').scrollTo(0, 0);
   }
 
   update(update) {

@@ -161,7 +161,7 @@ app.get('/api/vacation/list', (req, res) => {
 
     const userId = req.cookies.userId;
     const myData = jsonData.filter((item) => item.userId === userId).reverse();
-    const dataPerPage = 5;
+    const dataPerPage = 10;
     const currentPage = Number(req.query.page) || 1;
     const total = myData.length;
     let sliceData = [...myData].slice(0, dataPerPage);
@@ -205,7 +205,7 @@ app.get('/api/vacation/search', async (req, res) => {
         return item.type === searchType;
       }
     });
-    const dataPerPage = 5;
+    const dataPerPage = 10;
     const currentPage = Number(req.query.page) || 1;
     const total = searchData.length;
     let sliceData = [...searchData].slice(0, dataPerPage);
@@ -452,31 +452,27 @@ app.get(`/api/notice/list`, (req, res) => {
 
 // 특정 페이지의 임직원 목록 정보 요청 API
 app.get('/api/employee/list', (req, res) => {
-  fs.readFile(
-    path.join(__dirname, 'server/data/user.json'),
-    'utf8',
-    (err, data) => {
-      if (err) {
-        console.error('Error reading JSON file:', err);
-        return res.status(500).send({
-          status: 'Internal Server Error',
-          message: err,
-          data: null,
-        });
-      }
-      try {
-        const jsonData = JSON.parse(data);
-        res.json(jsonData);
-      } catch (parseErr) {
-        console.error('Error parsing JSON file:', parseErr);
-        return res.status(500).send({
-          status: 'Internal Server Error',
-          message: parseErr,
-          data: null,
-        });
-      }
+  fs.readFile('./server/data/user.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: err,
+        data: null,
+      });
     }
-  );
+    try {
+      const jsonData = JSON.parse(data);
+      res.json(jsonData);
+    } catch (parseErr) {
+      console.error('Error parsing JSON file:', parseErr);
+      return res.status(500).send({
+        status: 'Internal Server Error',
+        message: parseErr,
+        data: null,
+      });
+    }
+  });
 });
 
 // 임직원 프로필사진 수정 요청 API
