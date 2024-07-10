@@ -169,7 +169,6 @@ export default function Employee(root) {
             `,
             dataId: employee.userId, // 추가
           });
-
           // 이미지 업로드 이벤트 추가
           const uploadImage = document.querySelector('.uploadImage img');
           let uploadedFile = null;
@@ -210,6 +209,8 @@ export default function Employee(root) {
                   })
                   .then((response) => {
                     console.log('Image uploaded successfully');
+                    // 모달 닫기
+                    const modal = document.querySelector('.modal'); // 모달의 클래스나 ID에 맞게 수정
                   })
                   .catch((error) => {
                     console.error('Error uploading image:', error);
