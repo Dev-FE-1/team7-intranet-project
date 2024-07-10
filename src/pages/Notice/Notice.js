@@ -348,15 +348,12 @@ export default function Notice(root) {
                     </div>
                     <div class="noticeContent_writing">
                       <div class="noticeUploadContent">내용</div>
-                        <div class="notice_writing">
                         ${noticeContent.render()}
-                      </div>
                     </div>
                     <div class="noticeFile_writing">
                       <div class="noticeUploadFile">첨부파일</div>
                         <input type="file" id="notice_file">
                     </div>
-                    <div class="fileWarning">첨부파일은 필수 입력 값 입니다.</div>
                   </div>`
           })
           document.querySelector('.uploadContainer').innerHTML=uploadForm.render()
