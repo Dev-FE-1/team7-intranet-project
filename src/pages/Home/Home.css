@@ -237,3 +237,13 @@
   margin-top: 20px;
   box-sizing: border-box;
 }
+
+/* 반응형 웹 처리 */
+@media (max-width: 1200px) {
+}
+@media (max-width: 767px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+  }
+}
