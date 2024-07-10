@@ -14,13 +14,37 @@ export function renderLayout(userInfo) {
 `;
   }
 
+  document.querySelector('.navbar').classList.add('navbar_none');
+
   // 헤더와 네비게이션바 렌더링
   document.querySelector('.navbar').innerHTML = Navbar(userInfo);
   document.querySelector('.header').innerHTML = Header();
 
+  // 헤더에 위치한 메뉴 버튼에 로직 추가
+  document.querySelector('.header_menu').addEventListener('click', () => {
+    document.querySelector('.navbar').classList.add('navbar_view');
+    document
+      .querySelector('.navbar_arrow')
+      .classList.remove('navbar_arrow_none');
+  });
+
+  // 네비게이션바에 위치한 화살표 버튼에 로직 추가
+  document.querySelector('.navbar_arrow').addEventListener('click', () => {
+    document.querySelector('.navbar').classList.remove('navbar_view');
+    document.querySelector('.navbar_arrow').classList.add('navbar_arrow_none');
+  });
+
   // 네비게이션바에 위치한 로그아웃 버튼에 로직 추가
   document.querySelector('.navbar_logoutBtn').addEventListener('click', () => {
     deleteAllCookies();
+  });
+
+  // 반응형 웹 환경에서 네비게이션 바를 이용해 라우팅이 일어날 때 네비게이션 바를 넣도록 하는 로직
+  document.querySelector('.navbar').addEventListener('click', (e) => {
+    if (!e.target.closest('a')) return;
+
+    document.querySelector('.navbar').classList.remove('navbar_view');
+    document.querySelector('.navbar_arrow').classList.add('navbar_arrow_none');
   });
 }
 

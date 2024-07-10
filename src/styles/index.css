@@ -66,3 +66,34 @@ body,
     transform: rotate(-0.5deg);
   }
 }
+
+/* 반응형 웹 처리 */
+@media (min-width: 1201px) {
+  .header_menu {
+    display: none;
+  }
+  .navbar_arrow {
+    display: none;
+  }
+}
+@media (max-width: 1200px) {
+  .header_menu {
+    display: flex;
+  }
+
+  .navbar_none {
+    left: -350px;
+    transition: left 0.7s;
+  }
+  .navbar_view {
+    left: 0px;
+    transition: left 0.7s;
+  }
+  .navbar_arrow {
+    display: flex;
+  }
+
+  .container {
+    margin-left: 0px;
+  }
+}

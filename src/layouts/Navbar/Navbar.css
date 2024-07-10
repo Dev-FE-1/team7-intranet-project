@@ -12,6 +12,15 @@
 .navbar_logo {
   width: 150px;
 }
+.navbar_arrow {
+  color: #fff;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+.navbar_arrow:hover {
+  cursor: pointer;
+}
 .navbar_item > a {
   display: block;
   padding: 20px;
@@ -69,4 +78,16 @@
   width: 100%;
   height: 1px;
   background-color: #113a40;
+}
+.navbar_bb {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+.navbar_bb_none {
+  display: none;
 }
