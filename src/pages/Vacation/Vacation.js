@@ -13,12 +13,23 @@ import Pagination from '/src/components/Pagination/Pagination';
 import '/src/pages/Vacation/Vacation.css';
 
 export default function Vacation(root) {
-  fetchData('list');
   let myData = [];
   const userId = getUserIdFromCookie();
+  let currentParams = getCurrentURLParams();
+  if (!currentParams.search) {
+    fetchData('list');
+  } else {
+    fetchData('search');
+  }
   async function fetchData(filter) {
+    currentParams = getCurrentURLParams();
+    if (filter === 'search') {
+      filter = `search?search=${currentParams.search}`;
+    }
+
     try {
       const res = await axios.get(`/api/vacation/${filter}`);
+      console.log(res);
       myData = res.data.filter((d) => d.userId === '3');
       renderPage(myData);
     } catch (error) {
@@ -41,6 +52,7 @@ export default function Vacation(root) {
       className: 'search_type',
       idName: 'test',
       options: ['전체', '연차', '반차', '외출'],
+      initValue: currentParams.search,
     });
 
     const btnApply = new Button({ label: '신청', classList: 'modal_apply' });
@@ -349,7 +361,26 @@ export default function Vacation(root) {
         // 여기에 오류 발생 시 처리할 로직을 추가하세요 (예: 오류 메시지 표시)
       }
     }
+    //구분 필터링 시
+    document.querySelector('.search_type').addEventListener('click', (e) => {
+      document.querySelectorAll('.selectBox_option').forEach((opt) => {
+        if (opt !== e.target) {
+          return;
+        }
+        setQueryString({ search: e.target.innerText.trim() });
+        fetchData('search');
+      });
+    });
   }
+}
+
+//쿼리 설정
+function setQueryString(query) {
+  const url = new URL(window.location.href);
+  // 업데이트된 쿼리 매개변수로 URL 업데이트
+  url.search = `search=${query.search}`;
+  // 새로운 URL로 변경
+  window.history.pushState({}, '', url.toString());
 }
 
 // 라디오 선택(연차,반차,외출)에 따라 제출 폼 변경시켜주는 함수
@@ -552,4 +583,17 @@ function getUserIdFromCookie() {
     }
   }
   return null; // 해당 쿠키 이름을 가진 쿠키를 찾지 못한 경우
+}
+
+function getCurrentURLParams() {
+  // 현재 URL의 쿼리 문자열 가져오기
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // URLSearchParams를 객체로 변환
+  const params = {};
+  for (const [key, value] of urlParams) {
+    params[key] = value;
+  }
+
+  return params;
 }

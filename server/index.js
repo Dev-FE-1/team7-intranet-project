@@ -219,6 +219,34 @@ app.post('/api/vacation', (req, res) => {
   }
 });
 
+// 휴가/외출 필터링 요청 API
+app.get('/api/vacation/search', async (req, res) => {
+  try {
+    // 쿼리 파라미터에서 검색 조건을 가져옴
+    const searchType = req.query.search;
+
+    const filePath = './server/data/vacation.json';
+    const rawData = fs.readFileSync(filePath);
+    const data = JSON.parse(rawData).data;
+
+    if (searchType === '전체') {
+      res.json(data.reverse());
+    } else {
+      res.json(
+        data.filter((item) => item.type.trim() === searchType).reverse()
+      );
+    }
+    // 데이터 필터링 및 역순 정렬
+  } catch (err) {
+    console.error('Error processing request:', err);
+    res.status(500).json({
+      status: 'Internal Server Error',
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
 // 가장 최근에 올라온 공지사항 3개 요청 API
 app.get('/api/notice/recent', async (req, res) => {
   const noticeData = await getJsonData('./server/data/notice.json');
@@ -234,24 +262,24 @@ app.get('/api/notice/recent', async (req, res) => {
 // 공지사항 게시물 등록 API
 app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
   const filepath = './server/data/notice.json';
-  const {title, content} = req.body
-  const file = req.file
+  const { title, content } = req.body;
+  const file = req.file;
 
   //공지사항 등록 모달 유효성 검사
-  if(!title){
+  if (!title) {
     return res.status(200).json({
-      status:'title empty',
-    })
+      status: 'title empty',
+    });
   }
-  if(!content){ 
+  if (!content) {
     return res.status(200).json({
-      status:'content empty',
-    })   
+      status: 'content empty',
+    });
   }
-  if(!file){
+  if (!file) {
     return res.status(200).json({
-      status:'file empty',
-    })
+      status: 'file empty',
+    });
   }
 
   fs.readFile(filepath, 'utf8', (err, data) => {
@@ -299,12 +327,14 @@ app.post('/api/notice/upload', noticeUpload.single('file'), (req, res) => {
           return res.status(500).json({ message: 'server Error' });
         }
 
-        res.status(200).json({ status: 'upload success', message: 'Notice uploaded successfully' });
-      })
-    })
-  })
-})
-
+        res.status(200).json({
+          status: 'upload success',
+          message: 'Notice uploaded successfully',
+        });
+      });
+    });
+  });
+});
 
 // 공지사항 상세정보 요청 API
 app.get('/api/notice/info', async (req, res) => {
