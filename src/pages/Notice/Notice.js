@@ -12,7 +12,6 @@ export default function Notice(root) {
   function getCookie(user){
     const value = `${document.cookie}`
     const parts = value.split(`; ${user}=`)
-    console.log(parts)
 
     if(parts.length === 2) return parts.pop().split(';').shift()
 
@@ -86,7 +85,6 @@ export default function Notice(root) {
         }
       })
       .catch(error => {
-        console.error('Server error:', error);
       });
 
       // 검색 결과가 일치하지 않으면 검색결과가 없습니다 노출
@@ -131,7 +129,6 @@ export default function Notice(root) {
         }
       })
       .catch(error =>{
-        console.log('contentData Error :', error)
       })
   }
 
@@ -169,7 +166,6 @@ export default function Notice(root) {
       }
     })
     .catch(error =>{
-      console.log('fetchUpload Error :', error)
     })
   }
 
