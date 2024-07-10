@@ -69,9 +69,40 @@ body,
 
 /*공지사항 모달 content 글자 간격*/
 .notice__modalContent,
-.home_noticeContent{
-  margin-top:20px;
+.home_noticeContent {
+  margin-top: 20px;
   line-height: 170%;
   white-space: pre-wrap;
   box-sizing: border-box;
+}
+
+/* 반응형 웹 처리 */
+@media (min-width: 1201px) {
+  .header_menu {
+    display: none;
+  }
+  .navbar_arrow {
+    display: none;
+  }
+}
+@media (max-width: 1200px) {
+  .header_menu {
+    display: flex;
+  }
+
+  .navbar_none {
+    left: -350px;
+    transition: left 0.7s;
+  }
+  .navbar_view {
+    left: 0px;
+    transition: left 0.7s;
+  }
+  .navbar_arrow {
+    display: flex;
+  }
+
+  .container {
+    margin-left: 0px;
+  }
 }
