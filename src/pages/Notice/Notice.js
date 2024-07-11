@@ -102,7 +102,7 @@ export default function Notice(root) {
       }
   } 
 
-  //공지사항 상세 정보 api 요청
+  //공지사항 모달을 열었을 때 보여야할 상세 정보 api 요청
   function contentData(noticeId){
     axios.get(`/api/notice/info`,{
       params:{
@@ -117,28 +117,30 @@ export default function Notice(root) {
           buttons.push({label:'삭제', type:'light', classList:'btn--notice--delete'})
         }
         if(cardContent){
-            //공지사항 상세 내용을 확인할 수 있는 모달 
-            const noticeModal = new Modal({
-              name: 'notice_modal',
-              size: 'md',
-              title:cardContent.title,
-              buttons: buttons,
-              content: `<p class="notice__modalDate">${cardContent.date}</p>
-                          <div class="notice__modalImg">
-                              <img src="${cardContent.img}" alt="${cardContent.title}"/>
-                          </div>
-                        <div class="notice__modalContent">${cardContent.content}</div>`
-              });
-              document.querySelector('.modalContainer').innerHTML = noticeModal.render();
-              noticeModal.useModal();
+          //공지사항 상세 내용을 확인할 수 있는 모달 
+          const noticeModal = new Modal({
+            name: 'notice_modal',
+            size: 'md',
+            title:cardContent.title,
+            buttons: buttons,
+            content: `<p class="notice__modalDate">${cardContent.date}</p>
+                        <div class="notice__modalImg">
+                          <img src="${cardContent.img}" alt="${cardContent.title}"/>
+                        </div>
+                      <div class="notice__modalContent">${cardContent.content}</div>`
+          });
+          document.querySelector('.modalContainer').innerHTML = noticeModal.render();
+          noticeModal.useModal();
 
-
-              let deleteBtn = document.querySelector('.btn--notice--delete')
-              if(deleteBtn){
-                deleteBtn.addEventListener('click',()=>{
-                  deleteNotice(noticeId)
-                })
-              }
+          let deleteBtn = document.querySelector('.btn--notice--delete')
+            if(deleteBtn){
+              deleteBtn.addEventListener('click', ()=>{
+                const deleteCheck = confirm('정말로 삭제하시겠습니까?')
+                if(deleteCheck){
+                deleteNotice(noticeId)
+                }
+              })
+            }
         }
       })
   }

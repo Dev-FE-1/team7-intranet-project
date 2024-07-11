@@ -383,7 +383,6 @@ app.delete('/api/notice/delete', (req, res)=>{
   
   fs.readFile(filepath, 'utf8', (err, data)=>{
     let notices=[]
-
     try{
       const jsonData = JSON.parse(data);
       notices = jsonData.data
@@ -404,10 +403,9 @@ app.delete('/api/notice/delete', (req, res)=>{
           return res.status(500).json({ error: err.message });
         }
       res.json({status:'notice deleted success'})
-    })
-  }
-  catch(parseErr){
-  }
+      })
+    }catch(parseErr){
+    }
   })
 })
 
@@ -416,14 +414,6 @@ app.get(`/api/notice/list`, (req, res) => {
   const filepath = './server/data/notice.json';
 
   fs.readFile(filepath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: err.message,
-        data: null,
-      });
-    }
     try {
       let jsonData = JSON.parse(data);
 
@@ -474,13 +464,8 @@ app.get(`/api/notice/list`, (req, res) => {
         data: sliceData,
         searchQuery: req.query.search || '',
       });
-    } catch (parseErr) {
-      console.error('Error parsing JSON file:', parseErr);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: parseErr.message,
-        data: null,
-      });
+    } 
+    catch (parseErr) {
     }
   });
 });
