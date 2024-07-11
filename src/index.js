@@ -71,6 +71,8 @@ const route = async () => {
         Login(wrap, route);
         break;
       default:
+        history.pushState(null, null, '/');
+        route();
         break;
     }
   } else {
