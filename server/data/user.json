@@ -1298,7 +1298,7 @@
       "dept": "인사팀",
       "leftVaca": 13,
       "admin": false,
-      "img": "/server/images/profile/100.jpg"
+      "img": null
     },
     {
       "userId": 101,
