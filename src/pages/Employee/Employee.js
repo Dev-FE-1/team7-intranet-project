@@ -101,6 +101,7 @@ export default function Employee(root) {
           .insertAdjacentHTML('beforeend', employeeModal.render());
 
         // 테이블 클릭 이벤트 추가
+        addTableRowClickEvents(employeeList);
         function addTableRowClickEvents(currentPageData) {
           document
             .querySelectorAll('.table_employee .employee_detail')
