@@ -377,37 +377,43 @@ app.get('/api/notice/info', async (req, res) => {
 });
 
 // 공지사항 삭제 API
-app.delete('/api/notice/delete', (req, res)=>{
+app.delete('/api/notice/delete', (req, res) => {
   const filepath = './server/data/notice.json';
-  const noticeId = req.query['data-id']
-  
-  fs.readFile(filepath, 'utf8', (err, data)=>{
-    let notices=[]
-    try{
+  const noticeId = req.query['data-id'];
+
+  fs.readFile(filepath, 'utf8', (err, data) => {
+    let notices = [];
+    try {
       const jsonData = JSON.parse(data);
-      notices = jsonData.data
-      const filteredNotice = notices.filter((item)=>Number(item.noticeId)!==Number(noticeId))
-      
-      if(notices.length === filteredNotice.length){
-      return res.json({status: 'not found notice id'})
+      notices = jsonData.data;
+      const filteredNotice = notices.filter(
+        (item) => Number(item.noticeId) !== Number(noticeId)
+      );
+
+      if (notices.length === filteredNotice.length) {
+        return res.json({ status: 'not found notice id' });
       }
 
-      filteredNotice.forEach((item, idx)=>{
-      item.noticeId = idx+1
-      })
+      filteredNotice.forEach((item, idx) => {
+        item.noticeId = idx + 1;
+      });
 
       jsonData.data = filteredNotice;
 
-      fs.writeFile(filepath, JSON.stringify(jsonData, null, 2), 'utf8', (err)=>{
-        if(err){
-          return res.status(500).json({ error: err.message });
+      fs.writeFile(
+        filepath,
+        JSON.stringify(jsonData, null, 2),
+        'utf8',
+        (err) => {
+          if (err) {
+            return res.status(500).json({ error: err.message });
+          }
+          res.json({ status: 'notice deleted success' });
         }
-      res.json({status:'notice deleted success'})
-      })
-    }catch(parseErr){
-    }
-  })
-})
+      );
+    } catch (parseErr) {}
+  });
+});
 
 // 특정 페이지의 공지사항 목록 정보 요청 API
 app.get(`/api/notice/list`, (req, res) => {
@@ -464,9 +470,7 @@ app.get(`/api/notice/list`, (req, res) => {
         data: sliceData,
         searchQuery: req.query.search || '',
       });
-    } 
-    catch (parseErr) {
-    }
+    } catch (parseErr) {}
   });
 });
 
@@ -527,93 +531,103 @@ app.get('/api/employee/list', (req, res) => {
   }
 });
 
-// 임직원 프로필사진 수정 요청 API
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const profilePath = path.join(__dirname, 'server/images/profile');
-    if (!fs.existsSync(profilePath)) {
-      fs.mkdirSync(profilePath, { recursive: true });
-    }
-    cb(null, profilePath);
-  },
-  filename: function (req, file, cb) {
-    const fileExtension = path.extname(file.originalname); // 파일 확장자 추출
-    const fileName = `${Date.now()}-${Math.random()
-      .toString(36)
-      .substring(2, 15)}${fileExtension}`; // 안전한 파일명 생성
-    cb(null, fileName);
-  },
-});
+// // 임직원 프로필 이미지 업로드 API 엔드포인트
+// app.post('/api/employee/uploadImage', (req, res) => {
+//   // const storage = multer.diskStorage({
+//   //   destination: function (req, file, cb) {
+//   //     const profilePath = path.join(__dirname, 'server/images/profile');
+//   //     if (!fs.existsSync(profilePath)) {
+//   //       fs.mkdirSync(profilePath, { recursive: true });
+//   //     }
+//   //     cb(null, profilePath);
+//   //   },
+//   //   filename: function (req, file, cb) {
+//   //     const fileExtension = path.extname(file.originalname); // 파일 확장자 추출
+//   //     const fileName = `${Date.now()}-${Math.random()
+//   //       .toString(36)
+//   //       .substring(2, 15)}${fileExtension}`; // 안전한 파일명 생성
+//   //     cb(null, fileName);
+//   //   },
+//   // });
 
-const upload = multer({ storage: storage });
+//   // const upload = multer({ storage: storage });
+//   console.log(req.body);
 
-// 임직원 프로필 이미지 업로드 API 엔드포인트
-app.post('/api/employee/uploadImage', upload.single('profile'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).send('No file uploaded.');
-  }
-  res.send({
-    status: 'Success',
-    message: 'File uploaded successfully',
-    filePath: req.file.path,
-  });
-});
-
-// // 임직원 프로필 이미지 삭제 API
-// app.put('/api/employee/deleteImage', (req, res) => {
-//   const { userId } = req.body;
-//   const filePath = '/server/data/user.json';
-
-//   fs.readFile(filePath, 'utf8', (err, data) => {
-//     if (err) {
-//       console.error('Error reading JSON file:', err);
-//       return res.status(500).send({
-//         status: 'Internal Server Error',
-//         message: err,
-//         data: null,
-//       });
-//     }
-
-//     try {
-//       const jsonData = JSON.parse(data);
-//       const user = jsonData.find((user) => user.userId === userId);
-
-//       if (!user) {
-//         return res.status(404).send({
-//           status: 'User not found',
-//           message: 'User not found',
-//           data: null,
-//         });
-//       }
-
-//       user.img = null;
-
-//       fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
-//         if (err) {
-//           console.error('Error writing JSON file:', err);
-//           return res.status(500).send({
-//             status: 'Internal Server Error',
-//             message: err,
-//             data: null,
-//           });
-//         }
-
-//         res.status(200).send({
-//           status: 'Image deleted successfully',
-//           message: 'Image deleted successfully',
-//           data: null,
-//         });
-//       });
-//     } catch (parseErr) {
-//       console.error('Error parsing JSON file:', parseErr);
-//       return res.status(500).send({
-//         status: 'Internal Server Error',
-//         message: parseErr,
-//         data: null,
-//       });
-//     }
-//   });
+//   // if (!req.file) {
+//   //   return res.status(400).send('No file uploaded.');
+//   // }
+//   // res.send({
+//   //   status: 'Success',
+//   //   message: 'File uploaded successfully',
+//   //   filePath: req.file.path,
+//   // });
 // });
+
+// 공지사항 게시물 등록 API
+app.post(
+  '/api/notice/employeeUpload',
+  noticeUpload.single('file'),
+  (req, res) => {
+    const filepath = './server/data/user.json';
+    const file = req.file;
+    fs.readFile(filepath, 'utf8', async (err, data) => {
+      if (err) {
+        console.error('Error reading JSON file:', err);
+        return res.status(500).send({
+          status: 'Internal Server Error',
+          message: err.message,
+          data: null,
+        });
+      }
+      const jsonData = JSON.parse(data);
+      const userId = +req.body.userId;
+      const userData = await getJsonData('./server/data/user.json');
+      const newFileName = `${userId}.jpg`;
+      const newFilePath = `server/images/profile/${newFileName}`;
+      console.log(file);
+
+      if (file) {
+        fs.rename(file.path, newFilePath, (err) => {
+          if (err) {
+            console.error('Error renaming file:', err);
+            return res.status(500).json({ message: 'File Rename Error' });
+          }
+          fs.writeFile(filepath, JSON.stringify(jsonData, null, 2), (err) => {
+            if (err) {
+              console.error('Error notice writing: ', err);
+              return res.status(500).json({ message: 'server Error' });
+            }
+            res.status(200).json({
+              status: 'upload success',
+              message: 'Notice uploaded successfully',
+            });
+
+            const [user] = findKeyValue(userData, 'userId', userId);
+            user.img = newFilePath;
+            userData[userId - 1] = user;
+            setJsonData('./server/data/user.json', userData);
+          });
+        });
+      } else {
+        const [user] = findKeyValue(userData, 'userId', userId);
+        const oldImgPath = '.' + user.img;
+        user.img = null;
+        userData[userId - 1] = user;
+        setJsonData('./server/data/user.json', userData);
+        fs.unlink(oldImgPath, (err) => {
+          if (err) {
+            console.error('Error deleting file:', err);
+            return res.status(500).json({ message: 'File Deletion Error' });
+          }
+          res.status(200).json({
+            status: 'image update success',
+            message: 'Image uploaded successfully',
+          });
+        });
+      }
+    });
+  }
+);
 
 app.listen(port, () => {
   console.log(`ready to ${port}`);

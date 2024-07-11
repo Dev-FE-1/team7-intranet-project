@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Card from '../../components/Card/Card.js';
 import Table from '../../components/Table/Table.js';
 import Pagination from '../../components/Pagination/Pagination.js';
@@ -19,7 +20,6 @@ export default function Employee(root) {
       .then((response) => response.json())
       .then((data) => {
         const employeeList = data['data'];
-        console.log(employeeList);
         dataPerPage = data['dataPerPage'];
         total = data['total'];
 
@@ -185,9 +185,13 @@ export default function Employee(root) {
                         ? employee.img
                         : 'public/assets/images/profile-default.png'
                     } class="employeeImage uploadImage" />
-                        <div class="imageOverlay">
+                        ${
+                          employee.img
+                            ? `<div class="imageOverlay">
                           <button class="deleteImage">삭제</button>
-                    </div>
+                    </div>`
+                            : ``
+                        } 
                   </div>    
                 </div>
                 <form class="employeeForm">
@@ -213,8 +217,6 @@ export default function Employee(root) {
                       reader.onload = (e) => {
                         uploadImage.src = e.target.result;
                         uploadImage.style.objectFit = 'cover';
-                        uploadImage.style.width = '300px';
-                        uploadImage.style.height = '300px';
                       };
                       reader.readAsDataURL(file);
                     }
@@ -223,52 +225,49 @@ export default function Employee(root) {
                 });
 
                 // 이미지 삭제 버튼 클릭 시
-                document
-                  .querySelector('.deleteImage')
-                  .addEventListener('click', () => {
-                    uploadedFile = null; // uploadedFile을 null로 설정하여 이미지 선택을 취소합니다.
-                    uploadImage.src =
-                      '/public/assets/images/profile-default.png '; // 기본 이미지로 변경하거나 초기화할 URL을 설정하세요.
-                  });
+                employee.img
+                  ? document
+                      .querySelector('.deleteImage')
+                      .addEventListener('click', () => {
+                        uploadedFile = null;
+                        uploadImage.src =
+                          '/public/assets/images/profile-default.png';
+                      })
+                  : '';
 
                 // 수정 버튼 클릭 시 이미지 업로드
                 document
                   .querySelector('.modalEdit')
                   .addEventListener('click', () => {
-                    if (!uploadedFile) {
-                      alert('파일을 선택해주세요.');
-                      return;
-                    }
-
-                    // 파일 크기 제한 검사 (예: 5MB)
-                    if (uploadedFile.size > 5 * 1024 * 1024) {
-                      alert('파일 크기는 5MB를 초과할 수 없습니다.');
-                      return;
-                    }
-
                     if (
                       confirm('프로필 사진이 수정됩니다. 계속하시겠습니까?')
                     ) {
                       const formData = new FormData();
-                      formData.append('image', uploadedFile);
-
+                      if (uploadedFile) {
+                        formData.append('file', uploadedFile);
+                      } else {
+                        if (employee.img) {
+                          const imgPath = employee.img.substring(1);
+                          const imgFile = fs.readFileSync(imgPath);
+                          formData.append('file', imgFile);
+                        } else {
+                          formData.append('file', null);
+                        }
+                      }
+                      formData.append('userId', employee.userId);
                       axios
-                        .post('/api/employee/uploadImage', formData, {
+                        .post('/api/notice/employeeUpload', formData, {
                           headers: {
                             'Content-Type': 'multipart/form-data',
                           },
                         })
                         .then((response) => {
-                          console.log('Image uploaded successfully');
-                          alert('이미지가 성공적으로 업로드되었습니다.');
-                          employeeModal.closeModal();
+                          if (response.status === 200) {
+                            employeeModal.hide();
+                            window.location.reload();
+                          }
                         })
-                        .catch((error) => {
-                          console.error('Error uploading image:', error);
-                          alert(
-                            '이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.'
-                          );
-                        });
+                        .catch((error) => {});
                     }
                   });
 
