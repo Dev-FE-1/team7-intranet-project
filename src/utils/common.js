@@ -23,6 +23,7 @@ export function renderLayout(userInfo) {
   // 헤더에 위치한 메뉴 버튼에 로직 추가
   document.querySelector('.header_menu').addEventListener('click', () => {
     document.querySelector('.navbar').classList.add('navbar_view');
+    document.querySelector('.navbar').classList.remove('navbar_none');
     document
       .querySelector('.navbar_arrow')
       .classList.remove('navbar_arrow_none');
@@ -30,6 +31,7 @@ export function renderLayout(userInfo) {
 
   // 네비게이션바에 위치한 화살표 버튼에 로직 추가
   document.querySelector('.navbar_arrow').addEventListener('click', () => {
+    document.querySelector('.navbar').classList.add('navbar_none');
     document.querySelector('.navbar').classList.remove('navbar_view');
     document.querySelector('.navbar_arrow').classList.add('navbar_arrow_none');
   });
