@@ -450,29 +450,61 @@ app.get(`/api/notice/list`, (req, res) => {
   });
 });
 
-// 특정 페이지의 임직원 목록 정보 요청 API
+// // 특정 페이지의 임직원 목록 정보 요청 API
+// app.get('/api/employee/list', (req, res) => {
+//   fs.readFile('./server/data/user.json', 'utf8', (err, data) => {
+//     if (err) {
+//       console.error('Error reading JSON file:', err);
+//       return res.status(500).send({
+//         status: 'Internal Server Error',
+//         message: err,
+//         data: null,
+//       });
+//     }
+//     try {
+//       const jsonData = JSON.parse(data);
+//       res.json(jsonData);
+//     } catch (parseErr) {
+//       console.error('Error parsing JSON file:', parseErr);
+//       return res.status(500).send({
+//         status: 'Internal Server Error',
+//         message: parseErr,
+//         data: null,
+//       });
+//     }
+//   });
+// });
+
+// 임직원 목록 정보 요청 API - 페이지네이션 적용
 app.get('/api/employee/list', (req, res) => {
-  fs.readFile('./server/data/user.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: err,
-        data: null,
-      });
+  try {
+    const filePath = './server/data/user.json';
+    const rawData = fs.readFileSync(filePath);
+    const jsonData = JSON.parse(rawData).data;
+    const dataPerPage = 10;
+    const currentPage = Number(req.query.page) || 1;
+    const total = jsonData.length;
+    let sliceData = [...jsonData].slice(0, dataPerPage);
+    if (currentPage !== 1) {
+      sliceData = [...jsonData].slice(
+        (currentPage - 1) * dataPerPage,
+        currentPage * dataPerPage
+      );
     }
-    try {
-      const jsonData = JSON.parse(data);
-      res.json(jsonData);
-    } catch (parseErr) {
-      console.error('Error parsing JSON file:', parseErr);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: parseErr,
-        data: null,
-      });
-    }
-  });
+    res.json({
+      data: sliceData,
+      dataPerPage,
+      currentPage,
+      total,
+    });
+  } catch (parseErr) {
+    console.error('Error parsing JSON file:', parseErr);
+    return res.status(500).send({
+      status: 'Internal Server Error',
+      message: parseErr,
+      data: null,
+    });
+  }
 });
 
 // 임직원 프로필사진 수정 요청 API
@@ -485,37 +517,25 @@ const storage = multer.diskStorage({
     cb(null, profilePath);
   },
   filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`); // 파일명에 타임스탬프 추가
+    const fileExtension = path.extname(file.originalname); // 파일 확장자 추출
+    const fileName = `${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2, 15)}${fileExtension}`; // 안전한 파일명 생성
+    cb(null, fileName);
   },
 });
 
 const upload = multer({ storage: storage });
 
 // 임직원 프로필 이미지 업로드 API 엔드포인트
-app.post('/api/employee/uploadImage', upload.single('image'), (req, res) => {
+app.post('/api/employee/uploadImage', upload.single('profile'), (req, res) => {
   if (!req.file) {
-    return res.status(400).send({ status: 'file empty' });
+    return res.status(400).send('No file uploaded.');
   }
-
-  const filePath = path.join(
-    __dirname,
-    'server/images/profile',
-    req.file.filename
-  );
-
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      console.error('File not found after upload:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: 'File not found after upload',
-        data: null,
-      });
-    }
-    res.send({
-      status: 'upload success',
-      path: req.file.path,
-    });
+  res.send({
+    status: 'Success',
+    message: 'File uploaded successfully',
+    filePath: req.file.path,
   });
 });
 
