@@ -1,0 +1,108 @@
+/* font */
+@font-face {
+  font-family: 'pretendard-regular';
+  src: url(/src/assets/fonts/pretendard-regular.woff);
+}
+
+* {
+  font-size: 16px;
+}
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+img {
+  display: block;
+  width: 100%;
+}
+input[type='radio'] {
+  cursor: inherit;
+  margin: 0;
+}
+label {
+  cursor: inherit;
+}
+input[disabled] {
+  cursor: initial;
+}
+html,
+body,
+#wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  min-height: 600px;
+  font-family: 'pretendard-regular';
+}
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 350px;
+}
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 30px;
+  width: 100%;
+  max-width: 1400px;
+  box-sizing: border-box;
+}
+
+/* 빨간색 테두리 + 흔들림 효과 적용 CSS */
+#red_vibration {
+  border: 1px solid #cc0000;
+  animation: vibration 0.1s infinite;
+}
+@keyframes vibration {
+  from {
+    transform: rotate(0.5deg);
+  }
+  to {
+    transform: rotate(-0.5deg);
+  }
+}
+
+/*공지사항 모달 content 글자 간격*/
+.notice__modalContent,
+.home_noticeContent {
+  margin-top: 20px;
+  line-height: 170%;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+}
+
+/* 반응형 웹 처리 */
+@media (min-width: 1201px) {
+  .header_menu {
+    display: none;
+  }
+  .navbar_arrow {
+    display: none;
+  }
+}
+@media (max-width: 1200px) {
+  .header_menu {
+    display: flex;
+  }
+
+  .navbar_none {
+    left: -350px;
+    transition: left 0.7s;
+  }
+  .navbar_view {
+    left: 0px;
+    transition: left 0.7s;
+  }
+  .navbar_arrow {
+    display: flex;
+  }
+
+  .container {
+    margin-left: 0px;
+  }
+}

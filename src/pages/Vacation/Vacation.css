@@ -1,0 +1,131 @@
+.vacation {
+  width: 100%;
+}
+.vacation .page_content {
+  overflow-x: auto;
+}
+
+.vacation .search_type {
+  width: 150px;
+}
+
+.vacation .pagination {
+  margin: 40px auto;
+}
+
+.vacation_category,
+.vacation_sDate,
+.vacation_eDate,
+.vacation_outingTime,
+.vacation_reason {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 30px;
+}
+
+.vacation_reason {
+  align-items: flex-start;
+}
+
+.vacation_categoryTitle,
+.vacation_sDateTitle,
+.vacation_eDateTitle,
+.vacation_outingTimeTitle,
+.vacation_reasonTitle {
+  min-width: 100px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.vacation_reasonTitle {
+  margin-top: 10px;
+}
+
+.vacation_categoryItem label {
+  margin-right: 20px;
+  cursor: pointer;
+}
+.vacation_categoryItem label:has(input[disabled]) {
+  cursor: initial;
+}
+
+.vacation_outingStimeSelect,
+.vacation_outingEtimeSelect {
+  width: 150px;
+}
+.vacation_inputTextarea {
+  width: 330px;
+  height: 80px;
+  padding: 10px;
+  resize: none;
+}
+
+.vacation_applyModal.shake .modal_inner {
+  transform: translate(-50%, -50%);
+  animation: shake 0.5s;
+}
+
+.vacation_applyModal .form_alert {
+  color: red;
+  display: none;
+}
+.vacation_applyModal .form_alert.show {
+  display: block;
+}
+
+.vacation .modal_content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 330px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.vacation .vacation_doneModal .modal_content {
+  min-height: 200px;
+  align-items: center;
+  justify-content: center;
+}
+
+.vacation .table {
+  min-width: 500px;
+}
+
+@media (max-width: 1100px) {
+  .vacation .modal_md .modal_inner,
+  .vacation .modal_sm .modal_inner {
+    width: 80%;
+  }
+}
+@media (max-width: 700px) {
+  .vacation .modal_md .modal_inner {
+    width: 100%;
+  }
+  .vacation .input_bigText {
+    width: 100%;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(-50%, -50%) translate(-1px, -2px) rotate(-1deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate(-50%, -50%) translate(1px, 1px) rotate(1deg);
+  }
+}

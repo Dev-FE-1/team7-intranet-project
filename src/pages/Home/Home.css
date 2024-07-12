@@ -1,0 +1,361 @@
+/*  font */
+@font-face {
+  font-family: 'cafe24-ohsquare-air';
+  src: url('/public/assets/fonts/cafe24-ohsquare-air.woff');
+}
+
+/* home */
+.home {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: auto;
+  gap: 30px;
+}
+
+.home .card {
+  width: 100%;
+}
+
+/* profileCard */
+.home_profileCard {
+  grid-column: 1 / 2;
+  grid-row: 1;
+  display: flex;
+  overflow: hidden;
+  font-family: 'cafe24-ohsquare-air';
+  color: #012e33;
+}
+.home_textBox {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home_today {
+  font-weight: bold;
+}
+.home_week {
+  font-size: 55px;
+}
+.home_date {
+  margin-top: 20px;
+  font-size: 30px;
+}
+.home_welcome {
+  margin-top: 30px;
+  font-size: 22px;
+}
+.home_goodDay {
+  margin-top: 10px;
+  color: #67cdcc;
+}
+.home_profileBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.home_profileImg {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: #edf6f5;
+}
+.home_dept {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+/* workCard */
+.home_workCard {
+  grid-column: 2 / 3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #012e33;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.home_timeBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.home_time {
+  margin-left: 10px;
+  font-size: 50px;
+  letter-spacing: 10px;
+}
+.home_timeText {
+  width: 70px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 3px;
+}
+.home_now {
+  display: flex;
+  justify-content: center;
+}
+.home_second {
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+.home_workBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home_ingWorkInfo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home_doneWorkInfo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+}
+.home_workStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+.home_workEmoji {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #69d0cf;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.home_workText {
+  letter-spacing: 1px;
+  padding-bottom: 40px;
+  margin-top: 10px;
+}
+.home_workBtn {
+  width: 300px;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  justify-content: center;
+  font-weight: bold;
+}
+.home_workBtn:hover .home_workIcon {
+  color: #fff;
+}
+
+/* noticeListCard */
+.home_noticeListCard {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.home_moreNotice {
+  position: absolute;
+  right: 20px;
+  top: 40px;
+  margin-right: 10px;
+  font-weight: bold;
+  color: #012e33;
+}
+.home_noticeList {
+  display: flex;
+  flex: 1;
+  gap: 25px;
+  margin-top: 30px;
+}
+.home_noticeCard {
+  height: 330px;
+  flex: 1;
+  margin: 0;
+}
+.home_noticeCard:hover {
+  cursor: pointer;
+}
+
+/* workModal */
+.home_workModal .modal_inner {
+  display: flex;
+  align-items: center;
+}
+.home_workModal .modal_title {
+  width: 100%;
+}
+.home_workModal .modal_content {
+  margin: 50px 0;
+}
+
+/* noticeModal */
+/*notice-modal*/
+.home_noticeModal .modal_inner {
+  max-height: calc(100vh - 30px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.home_noticeTitle {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+.home_noticeDate {
+  font-size: 16px;
+  text-align: right;
+  padding: 0px 0px 10px;
+  border-bottom: 1px solid #dfdfdf;
+}
+.home_noticeContent {
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+/* 반응형 웹 처리 */
+@media (max-width: 1200px) {
+  .home_week {
+    font-size: 40px;
+  }
+  .home_date {
+    font-size: 25px;
+  }
+  .home_welcome {
+    font-size: 18px;
+  }
+  .home_profileImg {
+    width: 130px;
+    height: 130px;
+  }
+  .home_dept {
+    font-size: 17px;
+  }
+  .home_time {
+    font-size: 40px;
+    letter-spacing: 8px;
+  }
+  .home_now {
+    justify-content: flex-start;
+    font-size: 14px;
+  }
+  .home_second {
+    font-size: 25px;
+    letter-spacing: 4px;
+  }
+  .home_workText {
+    font-size: 14px;
+  }
+  .home_workStatus {
+    font-size: 18px;
+  }
+  .home_workEmoji {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #69d0cf;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+  .home_workBtn {
+    width: 220px;
+    font-size: 14px;
+  }
+  .home_workModal .modal_inner {
+    min-width: 350px;
+  }
+  .home_noticeModal .modal_inner {
+    width: 70%;
+  }
+}
+@media (max-width: 767px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+  }
+  .home_week {
+    font-size: 55px;
+  }
+  .home_date {
+    margin-top: 20px;
+    font-size: 30px;
+  }
+  .home_welcome {
+    margin-top: 30px;
+    font-size: 22px;
+  }
+  .home_profileImg {
+    width: 150px;
+    height: 150px;
+  }
+  .home_dept {
+    font-size: 18px;
+  }
+  .home_time {
+    font-size: 50px;
+    letter-spacing: 10px;
+  }
+  .home_now {
+    font-size: 16px;
+  }
+  .home_second {
+    font-size: 30px;
+    letter-spacing: 5px;
+  }
+  .home_workStatus {
+    font-size: 22px;
+  }
+  .home_workEmoji {
+    width: 35px;
+    height: 35px;
+  }
+  .home_workText {
+    font-size: 16px;
+  }
+  .home_workBtn {
+    width: 300px;
+    font-size: 16px;
+  }
+  .home_noticeList {
+    display: flex;
+    flex-direction: column;
+  }
+  .home_noticeCard {
+    flex: none;
+    height: 250px;
+  }
+  .home_workModal .modal_inner {
+    width: 70%;
+    padding: 25px 0;
+  }
+  .home_noticeModal .modal_inner {
+    width: 90%;
+  }
+}
